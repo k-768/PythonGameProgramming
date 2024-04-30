@@ -1,0 +1,12 @@
+from: markdown
+to: html
+template: template.html
+html-math-method:
+  method: mathjax
+number-sections: true
+table-of-contents: true
+toc-depth: 2
+standalone: true
+shift-heading-level-by: -1
+variables:
+  base-url: "https://k768.github.io/OnlineText/"
