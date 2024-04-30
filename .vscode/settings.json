@@ -1,0 +1,7 @@
+{
+  "cSpell.words": ["pandoc"],
+  "pasteImage.namePrefix": "${currentFileNameWithoutExt}_",
+  "pasteImage.showFilePathConfirmInputBox": true,
+  "pasteImage.filePathConfirmInputBoxMode": "onlyName",
+  "liveServer.settings.port": 5501
+}

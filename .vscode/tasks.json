@@ -1,0 +1,25 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  // Ctrl + Shift + B to run the task
+
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "pandoc",
+      "type": "shell",
+      "command": "pandoc ${file} -o ${workspaceFolder}${/}docs${/}${fileBasenameNoExtension}.html -d ${workspaceFolder}${/}pandoc-make.yaml",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    }
+  ]
+}
+
+// pandoc .\docs\lecture00.md -o .\docs\lecture00.html -d pandoc-make.yaml
