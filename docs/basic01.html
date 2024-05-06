@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>基礎編1　変数</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#もくじ" id="toc-もくじ"><span
+class="toc-section-number">1</span> もくじ</a></li>
+<li><a href="#文字列" id="toc-文字列"><span
+class="toc-section-number">2</span> 文字列</a>
+<ul>
+<li><a href="#random.randint" id="toc-random.randint"><span
+class="toc-section-number">2.1</span> random.randint()</a></li>
+</ul></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>Pythonで釣りゲームを作ろう 基礎編1　変数</p>
+      <p>2024年04月23日（月)</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="もくじ"><span
+      class="header-section-number">1</span> もくじ</h1>
+      <ul>
+      <li><a href="basic01.html#文字列">文字列</a></li>
+      <li><a href="basic01.html#整数と小数">整数と小数</a></li>
+      <li><a href="basic01.html#四則演算">四則演算</a></li>
+      </ul>
+      <h1 data-number="2" id="文字列"><span
+      class="header-section-number">2</span> 文字列</h1>
+      <p><code>print()</code>を用いて、コマンドプロンプトに文字を表示することが出来ます。
+      <code>()</code>の中に表示したいものを記述するのですが、日本語や英語など、<strong>文字列を表示する時には<code>"(ダブルクォーテーション)</code>で囲み</strong>ます。<code>Shift + 2</code>で入力できます。試しに、「Hello
+      World!!」と表示させてみましょう。</p>
+      <p></br></p>
+      <div class="sourceCode" id="cb1" data-caption="HelloWorld.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">print</span>(<span class="st">&quot;Hello World!!&quot;</span>)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>Hello World!!</code></pre>
+      <p></br></p>
+      <h2 data-number="2.1" id="random.randint"><span
+      class="header-section-number">2.1</span> random.randint()</h2>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://k768.github.io/PythonGameProgramming/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
