@@ -1,16 +1,37 @@
 ---
 var:
-  header-title: "オンラインテキストテンプレート"
+  header-title: "Pythonで釣りゲームを作ろう"
   header-date: "2024/04/23"
 ---
 
 # Pythonで釣りゲームを作ろう
 
-## 資料 INDEX
+## Pythonの基本編
 
-- 第01回 04月19日(金) [資料](lecture01.html) <font size="-1">PyGame, クラス </font>
+###  [はじめに](basic00.html)
 
-## 参考資料
+###  [構文](basic01.html)
+
+###  [変数](basic02.html) 
+
+-  [整数](basic02.html) 
+-  [文字列](basic02.html) 
+-  [四則演算](basic02.html) 
+
+###  [配列](basic03.html) 
+
+###  [変数](lecture01.html) 
+
+
+めも。番号付きリスト
+
+#.  [変数](lecture01.html) 
+#.  [四則演算](lecture01.html) 
+#.  [配列](lecture01.html) 
+#.  [乱数](lecture01.html) 
+
+
+## Pythonでゲーム作り編
 
 - [2023年度 2I プログラミング1 講義資料](https://takeshiwada1980.github.io/Programming1-2023/)
 

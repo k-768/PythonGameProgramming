@@ -14,6 +14,7 @@ html {
 
   --main-foreground: #222831;
   --main-theme-color: #00ADB5;
+  --main-theme-sub-color: #393E46;
   --main-theme-lt-color: #00ADB5;
 
   --main-background: #ebebeb;
@@ -128,8 +129,18 @@ footer.markdown-body p {
   color: var(--main-theme-color);
 }
 
+
 .markdown-body h2 {
-  border-bottom: 2px solid;
+  border-bottom: 2px solid var(--main-theme-sub-color);
+}
+
+.markdown-body h2::after {
+  position: absolute;
+  content: "";
+  display: block;
+  border-bottom: 2px solid ;
+  color: var(--main-theme-color);
+  width: 50px;                      
 }
 
 .markdown-body h3 {
@@ -473,24 +484,24 @@ div.note > pre {
 
 .markdown-body div.type-tips {
   border: 2px solid #bd9f00; /* 3 */
-  background: #ffffbc; /* 1 */
+  background: #FFFBDB; /* 1 */
 }
 
 .type-tips p:first-child::before {
   content: "\f56b";
-  color: #887100; /* 4 */
+  color: #8E6D1A; /* 4 */
 }
 
 .type-tips strong {
-  color: #887100; /* 4 */
+  color: #8E6D1A; /* 4 */
 }
 
 .type-tips code {
-  background: #f4d002; /* 2 */
+  background: #F5CF6F; /* 2 */
 }
 
 .type-tips ul li::before {
-  color: #887100;
+  color: #8E6D1A;
 }
 
 /* ------- プログラムコードの装飾 ------- */
