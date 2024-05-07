@@ -31,19 +31,22 @@ var:
 
 ###  [モジュールのimport](basic04.html) 
 
-###  [変数](lecture01.html) 
+###  [乱数](lecture01.html) 
 
-
-めも。番号付きリスト
-
-#.  [変数](lecture01.html) 
-#.  [四則演算](lecture01.html) 
-#.  [配列](lecture01.html) 
-#.  [乱数](lecture01.html) 
 
 
 ## Pythonでゲーム作り編
 
-- [2023年度 2I プログラミング1 講義資料](https://takeshiwada1980.github.io/Programming1-2023/)
+###  [AAA](basic00.html)
 
-- [2024年度 2I プログラミング1 講義資料](https://takeshiwada1980.github.io/Programming1-2024/)
+-  [abc](basic00.html#このテキストで学べる事) 
+-  [def](basic00.html#Pythonについて) 
+-  [ghi](basic00.html#環境設定) 
+-  [jkl](basic00.html#helloworld!!) 
+
+###  [BBB](basic01.html) 
+
+-  [abc](basic00.html#このテキストで学べる事) 
+-  [def](basic00.html#Pythonについて) 
+-  [ghi](basic00.html#環境設定) 
+-  [jkl](basic00.html#helloworld!!) 
