@@ -33,7 +33,7 @@
     />
     <link rel="stylesheet" href="style.css" />
 
-    <title>基礎編2　構文</title>
+    <title>基礎編2　変数</title>
   </head>
 
   <body>
@@ -44,15 +44,17 @@
          <ul>
 <li><a href="#もくじ" id="toc-もくじ"><span
 class="toc-section-number">1</span> もくじ</a></li>
-<li><a href="#print文" id="toc-print文"><span
-class="toc-section-number">2</span> print文</a></li>
+<li><a href="#変数とは" id="toc-変数とは"><span
+class="toc-section-number">2</span> 変数とは</a></li>
+<li><a href="#変数の値を変更する" id="toc-変数の値を変更する"><span
+class="toc-section-number">3</span> 変数の値を変更する</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
     </nav>
 
     <header class="markdown-body">
-      <p>Pythonで釣りゲームを作ろう 基礎編2　構文</p>
+      <p>Pythonで釣りゲームを作ろう 基礎編2　変数</p>
       <p>2024年04月23日（月)</p>
     </header>
 
@@ -61,21 +63,92 @@ class="toc-section-number">2</span> print文</a></li>
       <h1 data-number="1" id="もくじ"><span
       class="header-section-number">1</span> もくじ</h1>
       <ul>
-      <li><a href="basic02.html#print文">print文</a></li>
-      <li><a href="basic02.html#文と式">文と式</a></li>
-      <li><a href="basic02.html#インデント">インデント</a></li>
-      <li><a href="basic02.html#コメント文">コメント文</a></li>
+      <li><a href="basic02.html#変数とは">変数とは</a></li>
+      <li><a
+      href="basic02.html#変数の値を変更する">変数の値を変更する</a></li>
+      <li><a href="basic02.html#変数の命名">変数の命名</a></li>
       </ul>
-      <h1 data-number="2" id="print文"><span
-      class="header-section-number">2</span> print文</h1>
-      <p><code>print()</code>を用いて、コマンドプロンプトに文字を表示することが出来ます。
-      </br></p>
-      <div class="sourceCode" id="cb1" data-caption="HelloWorld.py"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">print</span>(<span class="st">&quot;Hello World!!&quot;</span>)</span></code></pre></div>
+      <h1 data-number="2" id="変数とは"><span
+      class="header-section-number">2</span> 変数とは</h1>
+      <figure>
+      <img src="figs/02/var.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>変数とは、<strong>データを入れておく箱</strong>のようなもので、箱の中身は<strong>いつでも確認したり変更することができます</strong>。
+      変数<code>a</code>に値<code>10</code>を入れるときは、以下のように書きます。</p>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">10</span></span></code></pre></div>
+      <p>この変数に値を入れる<code>=</code>は、<strong>代入演算子</strong>と呼ばれます。</p>
+      <p></br></p>
+      <hr />
+      <p>変数に入れた値は、<strong>簡単に</strong>取り出すことができます。print文の<code>()</code>の中に変数名を記述するだけです。</p>
+      <div class="sourceCode" id="cb2" data-caption="test2-1.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="bu">print</span>(a)</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
-      <pre><code>Hello World!!</code></pre>
+      <pre><code>10</code></pre>
+      <p>1行目で変数<code>a</code>に10を代入しています。そのため、2行目のprint文の<code>()</code>の中の<code>a</code>は10と読み替えられました。</p>
+      <br>
+      <div class="note type-tips">
+      <p><strong>「=」の使い方に注意!!</strong></p>
+      <p>代入演算子<code>=</code>は、<strong>数学で使うものとは意味が異なり、左の変数に右の値を代入するはたらき</strong>を持ちます。
+      そのため、以下のプログラムを実行するとエラーが起きます。</p>
+      <div class="sourceCode" id="cb4" data-caption="test.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="dv">10</span> <span class="op">=</span> a</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="bu">print</span>(a)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>PS C:\******&gt; &amp; C:/******/python.exe c:/******/test.py
+  File &quot;c:\******\test.py&quot;, line 1
+    10 = a
+    ^^
+SyntaxError: cannot assign to literal here. Maybe you meant &#39;==&#39; instead of &#39;=&#39;?</code></pre>
+      <p>「<code>10</code>は<strong>変数ではないので代入できません</strong>」と言われてしまいます。</p>
+      </div>
+      <hr />
+      <figure>
+      <img src="figs/02/str.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>もちろん、変数には<strong>文字列も代入できます</strong>。文字列の場合は、<strong><code>"</code>で囲う</strong>のでしたね。
+      これは「hello」と書くと<strong>変数とみなされてしまう</strong>ので、<strong>変数と区別するため</strong>だったわけです。</p>
       <p></br></p>
+      <div class="sourceCode" id="cb6" data-caption="test2-2.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>b <span class="op">=</span> <span class="st">&quot;hello!&quot;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="bu">print</span>(b)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>hello!</code></pre>
+      <p></br></p>
+      <h1 data-number="3" id="変数の値を変更する"><span
+      class="header-section-number">3</span> 変数の値を変更する</h1>
+      <p>変数に代入し直せば、変数の値を変更することができます。</p>
+      <div class="sourceCode" id="cb8" data-caption="test2-3.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="bu">print</span>(a)</span>
+<span id="cb8-3"><a href="#cb8-3"></a>a <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="bu">print</span>(a)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>10
+20</code></pre>
+      <p><br></p>
+      <hr />
+      <p><strong><code>a = a + 2</code>と書けば、<code>a</code>の値を2だけ増やすことができます</strong>。</p>
+      <div class="sourceCode" id="cb10" data-caption="test2-3.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="bu">print</span>(a)</span>
+<span id="cb10-3"><a href="#cb10-3"></a>a <span class="op">=</span> a <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="bu">print</span>(a)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>10
+12</code></pre>
+      <ul>
+      <li><strong>演習2-1</strong>　上のプログラムの1行目を書き換えて、<code>a</code>の値を<code>123</code>に変更しましょう。</li>
+      <li><strong>演習2-1</strong>　3行目を書き換えて、<code>a</code>の値を<strong>2倍</strong>にするよう変更しましょう。</li>
+      </ul>
       <!-- ---------------------------------------- -->
     </main>
 

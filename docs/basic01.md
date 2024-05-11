@@ -1,16 +1,34 @@
 ---
 var:
-  header-title: "Pythonで釣りゲームを作ろう 基礎編1　変数"
+  header-title: "Pythonで釣りゲームを作ろう 基礎編1　文字の出力"
   header-date: "2024年04月23日（月)"
 ---
 
-# 基礎編1　変数 
+# 基礎編1　文字の出力 
 
 ## もくじ
--  [文字列](basic01.html#文字列) 
+-  [print文](basic01.html#print文) 
 -  [整数と小数](basic01.html#整数と小数) 
 -  [四則演算](basic01.html#四則演算) 
+-  [文字列](basic01.html#文字列) 
 
+## print文
+`print()`を用いて、コマンドプロンプトに文字を表示することが出来ます。
+`()`の中に表示したいものを記述します。試しに、`1`と表示させてみましょう。
+
+</br>
+
+```python{.numberLines}
+print( 1 )
+```
+
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+1
+```
+
+</br>
 
 ## 文字列
 `print()`を用いて、コマンドプロンプトに文字を表示することが出来ます。
