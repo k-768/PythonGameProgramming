@@ -33,7 +33,7 @@
     />
     <link rel="stylesheet" href="style.css" />
 
-    <title>第1回</title>
+    <title>Pythonで釣りゲームを作ろう 基礎編5</title>
   </head>
 
   <body>
@@ -42,17 +42,21 @@
       <div id="g-nav-list">
         <!-- ---------------------------------------- -->
          <ul>
+<li><a href="#もくじ" id="toc-もくじ"><span
+class="toc-section-number">1</span> もくじ</a></li>
+<li><a href="#モジュール" id="toc-モジュール"><span
+class="toc-section-number">2</span> モジュール</a></li>
 <li><a href="#乱数" id="toc-乱数"><span
-class="toc-section-number">1</span> 乱数</a>
+class="toc-section-number">3</span> 乱数</a>
 <ul>
 <li><a href="#random.randint" id="toc-random.randint"><span
-class="toc-section-number">1.1</span> random.randint()</a></li>
+class="toc-section-number">3.1</span> random.randint()</a></li>
 <li><a href="#random.choice" id="toc-random.choice"><span
-class="toc-section-number">1.2</span> random.choice()</a></li>
+class="toc-section-number">3.2</span> random.choice()</a></li>
 <li><a href="#random.choices" id="toc-random.choices"><span
-class="toc-section-number">1.3</span> random.choices()</a></li>
+class="toc-section-number">3.3</span> random.choices()</a></li>
 <li><a href="#応用" id="toc-応用"><span
-class="toc-section-number">1.4</span> 応用</a></li>
+class="toc-section-number">3.4</span> 応用</a></li>
 </ul></li>
 </ul> 
         <!-- ---------------------------------------- -->
@@ -60,17 +64,30 @@ class="toc-section-number">1.4</span> 応用</a></li>
     </nav>
 
     <header class="markdown-body">
-      <p>Pythonで釣りゲームを作ろう 第01回</p>
+      <p>Pythonで釣りゲームを作ろう 基礎編5</p>
       <p>2024年04月23日（月)</p>
     </header>
 
     <main class="markdown-body">
       <!-- ---------------------------------------- -->
-      <h1 data-number="1" id="乱数"><span
-      class="header-section-number">1</span> 乱数</h1>
+      <h1 data-number="1" id="もくじ"><span
+      class="header-section-number">1</span> もくじ</h1>
+      <ul>
+      <li><a href="basic02.html#モジュール">モジュール</a></li>
+      <li><a href="basic02.html#乱数">乱数</a></li>
+      </ul>
+      <h1 data-number="2" id="モジュール"><span
+      class="header-section-number">2</span> モジュール</h1>
+      <p>複雑なプログラムを作成するとき、1から自分で作成するのは大変です。そこで、</p>
+      <h1 data-number="3" id="乱数"><span
+      class="header-section-number">3</span> 乱数</h1>
       <p><code>random</code>モジュールを用いると、ランダムな数を生成したり、リストからランダムに抽出することができます。</p>
-      <h2 data-number="1.1" id="random.randint"><span
-      class="header-section-number">1.1</span> random.randint()</h2>
+      <h2 data-number="3.1" id="random.randint"><span
+      class="header-section-number">3.1</span> random.randint()</h2>
+      <figure>
+      <img src="figs/05/dice.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
       <p><code>random.randint(a,b)</code>を使って<strong>a~b</strong>までの整数を生成します。</p>
       <p>以下のコードを実行してみてください。さいころと同じふるまいをします。</p>
       <div class="sourceCode" id="cb1"><pre
@@ -95,8 +112,8 @@ class="toc-section-number">1.4</span> 応用</a></li>
       <p>Challenge1-2: <span
       class="masked"><code>print(random.randint(1,50) * 2)</code></span></p>
       <p></br></p>
-      <h2 data-number="1.2" id="random.choice"><span
-      class="header-section-number">1.2</span> random.choice()</h2>
+      <h2 data-number="3.2" id="random.choice"><span
+      class="header-section-number">3.2</span> random.choice()</h2>
       <p><code>random.choice(list)</code>を使って<code>list</code>からランダムに要素を選択します。</p>
       <p>以下のコードを実行してみてください。魚の名前が入ったリストからランダムに選択して表示します。</p>
       <div class="sourceCode" id="cb3"><pre
@@ -108,8 +125,8 @@ class="toc-section-number">1.4</span> 応用</a></li>
       実行結果</strong></p>
       <pre><code>アジ</code></pre>
       <p></br></p>
-      <h2 data-number="1.3" id="random.choices"><span
-      class="header-section-number">1.3</span> random.choices()</h2>
+      <h2 data-number="3.3" id="random.choices"><span
+      class="header-section-number">3.3</span> random.choices()</h2>
       <p><code>random.choices(list,k,weights)</code>を使って<code>list</code>からランダムに複数の要素を選択します。</p>
       <p><code>random.choices()</code>で選択された要素は<strong>重複することがあります。</strong>重複させたくない場合は<code>random.sample()</code>が用意されています。</p>
       <p>以下のコードを実行してみてください。魚の名前が入ったリストからランダムに3つ選択して表示します。</p>
@@ -161,8 +178,12 @@ class="toc-section-number">1.4</span> 応用</a></li>
       <pre><code>イワシ</code></pre>
       <p></br></p>
       </div>
-      <h2 data-number="1.4" id="応用"><span
-      class="header-section-number">1.4</span> 応用</h2>
+      <h2 data-number="3.4" id="応用"><span
+      class="header-section-number">3.4</span> 応用</h2>
+      <figure>
+      <img src="figs/05/sample.gif" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
       <p>以下の要件を満たすプログラムを作成していきましょう。</p>
       <ul>
       <li><p>レア度は★1~★3まであり、排出率は以下の通りです。</p>
