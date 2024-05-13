@@ -30,15 +30,18 @@ var:
 
 ###  [構文](basic03.html)
 
--  [文と式](basic02.html#文と式) 
--  [インデント](basic02.html#インデント) 
--  [コメント文](basic02.html#コメント文) 
+-  [コメント文](basic03.html#コメント文) 
+-  [式の構造](basic03.html#式の構造) 
 
-###  [配列](basic04.html) 
+###  [リスト](basic04.html) 
 
-###  [モジュールのimport](basic05.html) 
+-  [リストとは](basic04.html#リストとは) 
+-  [2次元リスト](basic04.html#2次元リスト)
 
-###  [乱数](lecture01.html) 
+###  [モジュールと乱数](lecture01.html) 
+
+-  [モジュール](lecture01.html#モジュール) 
+-  [乱数](lecture01.html#乱数) 
 
 
 

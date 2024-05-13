@@ -44,8 +44,18 @@
          <ul>
 <li><a href="#もくじ" id="toc-もくじ"><span
 class="toc-section-number">1</span> もくじ</a></li>
-<li><a href="#print文" id="toc-print文"><span
-class="toc-section-number">2</span> print文</a></li>
+<li><a href="#コメント文" id="toc-コメント文"><span
+class="toc-section-number">2</span> コメント文</a></li>
+<li><a href="#式の構造" id="toc-式の構造"><span
+class="toc-section-number">3</span> 式の構造</a>
+<ul>
+<li><a href="#改行" id="toc-改行"><span
+class="toc-section-number">3.1</span> 改行</a></li>
+<li><a href="#インデント" id="toc-インデント"><span
+class="toc-section-number">3.2</span> インデント</a></li>
+<li><a href="#文中のスペース" id="toc-文中のスペース"><span
+class="toc-section-number">3.3</span> 文中のスペース</a></li>
+</ul></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -61,21 +71,87 @@ class="toc-section-number">2</span> print文</a></li>
       <h1 data-number="1" id="もくじ"><span
       class="header-section-number">1</span> もくじ</h1>
       <ul>
-      <li><a href="basic02.html#print文">print文</a></li>
-      <li><a href="basic02.html#文と式">文と式</a></li>
-      <li><a href="basic02.html#インデント">インデント</a></li>
-      <li><a href="basic02.html#コメント文">コメント文</a></li>
+      <li><a href="basic03.html#コメント文">コメント文</a></li>
+      <li><a href="basic03.html#式の構造">式の構造</a></li>
       </ul>
-      <h1 data-number="2" id="print文"><span
-      class="header-section-number">2</span> print文</h1>
-      <p><code>print()</code>を用いて、コマンドプロンプトに文字を表示することが出来ます。
-      </br></p>
-      <div class="sourceCode" id="cb1" data-caption="HelloWorld.py"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">print</span>(<span class="st">&quot;Hello World!!&quot;</span>)</span></code></pre></div>
+      <h1 data-number="2" id="コメント文"><span
+      class="header-section-number">2</span> コメント文</h1>
+      <p>文頭に<code>#</code>をつけることで、<strong>コードに注釈をつける</strong>ことができます。
+      これを<strong>コメント文</strong>と言い、プログラムには<strong>全く影響しません</strong>が、見やすいコードにすることができます。</p>
+      <p></br></p>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#挨拶をする</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="bu">print</span>(<span class="st">&quot;Hello World!!&quot;</span>)</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
       <pre><code>Hello World!!</code></pre>
+      <p></br> 1行の途中からコメント文を始めることもできます。 </br></p>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>name <span class="op">=</span> <span class="st">&quot;Kosen Taro&quot;</span> <span class="co">#プレイヤー名</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="bu">print</span>(<span class="st">&quot;Hello!&quot;</span><span class="op">+</span>name<span class="op">+</span><span class="st">&quot;!&quot;</span>)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>Hello!Kosen Taro!</code></pre>
       <p></br></p>
+      <p>このように、プログラムを実行したときに<code>#</code>より後ろは<strong>すべて無視</strong>されます。
+      そのため、以下のようにいらなくなった行を<strong>一時的に無効化</strong>することができます。</p>
+      <p></br></p>
+      <div class="sourceCode" id="cb5"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>name <span class="op">=</span> <span class="st">&quot;Kosen Taro&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#print(&quot;Hello!&quot;+name+&quot;!&quot;)</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="bu">print</span>(<span class="st">&quot;Hey!&quot;</span><span class="op">+</span>name<span class="op">+</span><span class="st">&quot;!&quot;</span>)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>Hey!Kosen Taro!</code></pre>
+      <p></br></p>
+      <p>これを<strong>コメントアウト</strong>と言います。</p>
+      <div class="note type-tips">
+      <p><strong>コメントアウトの使い過ぎに注意!!</strong></p>
+      <p>大きなプログラムを書く時など、命令を消すことなく残しておけるのでついつい多用しがちですが、可読性が下がるので使い過ぎには注意しましょう。</p>
+      </div>
+      <p>複数行にわたってコメントを書きたい場合は、以下のように<code>"</code>(ダブルクォーテーション)3つの間に書きます。</p>
+      <div class="sourceCode" id="cb7"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">これはnameに入っている名前を取得し、</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">挨拶をするプログラムです。</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>name <span class="op">=</span> <span class="st">&quot;Kosen Taro&quot;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="bu">print</span>(<span class="st">&quot;Hey!&quot;</span><span class="op">+</span>name<span class="op">+</span><span class="st">&quot;!&quot;</span>)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>Hey!Kosen Taro!</code></pre>
+      <p><br></p>
+      <h1 data-number="3" id="式の構造"><span
+      class="header-section-number">3</span> 式の構造</h1>
+      <p>プログラムの書き方にはいくつかの決まりがあります。</p>
+      <h2 data-number="3.1" id="改行"><span
+      class="header-section-number">3.1</span> 改行</h2>
+      <p>プログラムに記載されたそれぞれの命令は、<strong>改行ごとに1文とみなされます</strong>。そのため、正しくない改行をするとエラーになります。</p>
+      <div class="sourceCode" id="cb9" data-caption="⭕良い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="bu">print</span>(<span class="st">&quot;OK&quot;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="bu">print</span>(<span class="st">&quot;GOOD&quot;</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb10" data-caption="❌悪い例1"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="bu">print</span>(<span class="st">&quot;NG&quot;</span>)<span class="bu">print</span>(<span class="st">&quot;BAD&quot;</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb11" data-caption="❌悪い例2"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>pri</span>
+<span id="cb11-2"><a href="#cb11-2"></a>nt(<span class="st">&quot;NG&quot;</span>)</span></code></pre></div>
+      <h2 data-number="3.2" id="インデント"><span
+      class="header-section-number">3.2</span> インデント</h2>
+      <p>Pythonでは、<strong>インデント</strong>(行頭のスペース)は大きな意味を持ちます。
+      基礎編6、7で紹介する<code>for文</code>や<code>if文</code>では、インデントが必要になります。
+      逆に、今までのプログラムの行頭に空白を入れると、エラーになります。</p>
+      <div class="sourceCode" id="cb12" data-caption="⭕良い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="bu">print</span>(<span class="st">&quot;OK&quot;</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb13" data-caption="❌悪い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a> <span class="bu">print</span>(<span class="st">&quot;NG&quot;</span>)</span></code></pre></div>
+      <h2 data-number="3.3" id="文中のスペース"><span
+      class="header-section-number">3.3</span> 文中のスペース</h2>
+      <p>変数の宣言や命令の()内のスペースは、<strong>あってもなくてもかまいません</strong>。</p>
+      <div class="sourceCode" id="cb14" data-caption="⭕良い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="bu">print</span>(<span class="st">&quot;OK&quot;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="bu">print</span>( <span class="st">&quot;OK&quot;</span> )</span>
+<span id="cb14-3"><a href="#cb14-3"></a>n<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>n <span class="op">=</span> <span class="dv">1</span></span></code></pre></div>
       <!-- ---------------------------------------- -->
     </main>
 
