@@ -33,6 +33,18 @@ var:
 -  [コメント文](basic03.html#コメント文) 
 -  [式の構造](basic03.html#式の構造) 
 
+###  [if文](basic04.html)
+
+-  [論理演算子](basic03.html#コメント文) 
+-  [if文](basic03.html#式の構造) 
+-  [if-else文](basic03.html#式の構造) 
+-  [if-elif文](basic03.html#式の構造) 
+
+###  [関数](basic05.html)
+
+-  [コメント文](basic03.html#コメント文) 
+-  [式の構造](basic03.html#式の構造) 
+
 ###  [リスト](basic04.html) 
 
 -  [リストとは](basic04.html#リストとは) 
