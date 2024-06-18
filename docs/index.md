@@ -24,9 +24,9 @@ var:
 
 ###  [変数](basic02.html) 
 
--  [文字列](basic01.html#文字列) 
--  [整数と小数](basic01.html#整数と小数) 
--  [四則演算](basic01.html#四則演算) 
+-  [文字列](basic02.html#文字列) 
+-  [整数と小数](basic02.html#整数と小数) 
+-  [四則演算](basic02.html#四則演算) 
 
 ###  [構文](basic03.html)
 
@@ -35,20 +35,20 @@ var:
 
 ###  [if文](basic04.html)
 
--  [論理演算子](basic03.html#コメント文) 
--  [if文](basic03.html#式の構造) 
--  [if-else文](basic03.html#式の構造) 
--  [if-elif文](basic03.html#式の構造) 
+-  [論理演算子](basic04.html#コメント文) 
+-  [if文](basic04.html#式の構造) 
+-  [if-else文](basic04.html#式の構造) 
+-  [if-elif文](basic04.html#式の構造) 
 
 ###  [関数](basic05.html)
 
--  [コメント文](basic03.html#コメント文) 
--  [式の構造](basic03.html#式の構造) 
+-  [コメント文](basic05.html#コメント文) 
+-  [式の構造](basic05.html#式の構造) 
 
-###  [リスト](basic04.html) 
+###  [リスト](basic06.html) 
 
--  [リストとは](basic04.html#リストとは) 
--  [2次元リスト](basic04.html#2次元リスト)
+-  [リストとは](basic06.html#リストとは) 
+-  [2次元リスト](basic06.html#2次元リスト)
 
 ###  [モジュールと乱数](lecture01.html) 
 
