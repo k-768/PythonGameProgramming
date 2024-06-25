@@ -55,11 +55,11 @@ if 条件:
 ```python{.numberLines caption="test5-1.py"}
 a = 1
 b = -1
-if a > 0: # a>0なのでここは実行される
+if a > 0: # a>0であれば
   print("aは正の値です")
   print("a:"+str(a))
 
-if b > 0: # b>0でないのでここは実行されない
+if b > 0: # b>0であれば
   print("bは正の値です")
   print("b:"+str(b))
 ```
@@ -98,9 +98,9 @@ a:1
 `else`を用いて、**条件が満たされなかったときの処理を設定する**ことができます。
 
 ```python{.numberLines caption="if-else文の構造"}
-if a > 0:
+if a > 0: # a>0であれば
   print("aは正の値です")
-else:
+else: # a>0でなければ
   print("aは正の値ではありません")
 ```
 
@@ -112,10 +112,24 @@ else:
 `elif`を用いて、**細かく条件を設定する**ことができます。
 
 ```python{.numberLines caption="if-elif文の構造"}
-if a > 0:
+if a > 0:　#a>0であれば
   print("aは正の値です")
-elif a == 0:
+elif a == 0: #a>0でなく、a==0であれば
   print("aは0です")
-else:
+else: #どちらでもなければ
   print("aは負の値です")
+```
+
+```python{.numberLines caption="move.py"}
+key = "w"
+if key == "w":　
+  print("奥に進みます")
+elif key == "a":
+  print("左に進みます")
+elif key == "s":
+  print("手前に進みます")
+elif key == "d":
+  print("右に進みます")
+else: 
+  print("不正な入力です")
 ```
