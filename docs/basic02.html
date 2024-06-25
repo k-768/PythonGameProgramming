@@ -33,7 +33,7 @@
     />
     <link rel="stylesheet" href="style.css" />
 
-    <title>基礎編2　変数</title>
+    <title>基礎編2　文字の出力</title>
   </head>
 
   <body>
@@ -44,40 +44,19 @@
          <ul>
 <li><a href="#もくじ" id="toc-もくじ"><span
 class="toc-section-number">1</span> もくじ</a></li>
-<li><a href="#変数とは" id="toc-変数とは"><span
-class="toc-section-number">2</span> 変数とは</a></li>
-<li><a href="#変数の値を変更する" id="toc-変数の値を変更する"><span
-class="toc-section-number">3</span> 変数の値を変更する</a></li>
-<li><a href="#変数の命名規則" id="toc-変数の命名規則"><span
-class="toc-section-number">4</span> 変数の命名規則</a>
-<ul>
-<li><a href="#半角のアルファベット数字_アンダースコアを組み合わせる"
-id="toc-半角のアルファベット数字_アンダースコアを組み合わせる"><span
-class="toc-section-number">4.1</span>
-半角のアルファベット、数字、<code>_</code>(アンダースコア)を組み合わせる</a></li>
-<li><a href="#最初の文字には数字を使わない"
-id="toc-最初の文字には数字を使わない"><span
-class="toc-section-number">4.2</span>
-最初の文字には数字を使わない</a></li>
-<li><a href="#予約語を使わない" id="toc-予約語を使わない"><span
-class="toc-section-number">4.3</span> 予約語を使わない</a></li>
-<li><a href="#大文字は使わない" id="toc-大文字は使わない"><span
-class="toc-section-number">4.4</span> 大文字は使わない</a></li>
-<li><a href="#単語間は_でつなぐ" id="toc-単語間は_でつなぐ"><span
-class="toc-section-number">4.5</span>
-単語間は<code>_</code>でつなぐ</a></li>
-<li><a href="#極端に長い短い名前は避ける"
-id="toc-極端に長い短い名前は避ける"><span
-class="toc-section-number">4.6</span>
-極端に長い・短い名前は避ける</a></li>
-</ul></li>
+<li><a href="#print文" id="toc-print文"><span
+class="toc-section-number">2</span> print文</a></li>
+<li><a href="#文字列" id="toc-文字列"><span
+class="toc-section-number">3</span> 文字列</a></li>
+<li><a href="#文字列-1" id="toc-文字列-1"><span
+class="toc-section-number">4</span> 文字列</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
     </nav>
 
     <header class="markdown-body">
-      <p>Pythonで釣りゲームを作ろう 基礎編2　変数</p>
+      <p>Pythonで釣りゲームを作ろう 基礎編2　文字の出力</p>
       <p>2024年04月23日（月)</p>
     </header>
 
@@ -86,180 +65,39 @@ class="toc-section-number">4.6</span>
       <h1 data-number="1" id="もくじ"><span
       class="header-section-number">1</span> もくじ</h1>
       <ul>
-      <li><a href="basic02.html#変数とは">変数とは</a></li>
-      <li><a
-      href="basic02.html#変数の値を変更する">変数の値を変更する</a></li>
-      <li><a href="basic02.html#変数の命名">変数の命名</a></li>
+      <li><a href="basic02.html#Print文">Print文</a></li>
+      <li><a href="basic02.html#print文">print文</a></li>
+      <li><a href="basic02.html#整数と小数">整数と小数</a></li>
+      <li><a href="basic02.html#四則演算">四則演算</a></li>
+      <li><a href="basic02.html#文字列">文字列</a></li>
       </ul>
-      <h1 data-number="2" id="変数とは"><span
-      class="header-section-number">2</span> 変数とは</h1>
-      <figure>
-      <img src="figs/02/var.png" alt="img" />
-      <figcaption aria-hidden="true">img</figcaption>
-      </figure>
-      <p>変数とは、<strong>データを入れておく箱</strong>のようなもので、箱の中身は<strong>いつでも確認したり変更することができます</strong>。
-      変数<code>a</code>に値<code>10</code>を入れるときは、以下のように書きます。</p>
+      <h1 data-number="2" id="print文"><span
+      class="header-section-number">2</span> print文</h1>
+      <p><code>print()</code>を用いて、コマンドプロンプトに文字を表示することが出来ます。
+      <code>()</code>の中に表示したいものを記述します。試しに、<code>1</code>と表示させてみましょう。</p>
+      <p></br></p>
       <div class="sourceCode" id="cb1"><pre
-      class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">10</span></span></code></pre></div>
-      <p>この変数に値を入れる<code>=</code>は、<strong>代入演算子</strong>と呼ばれます。</p>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">print</span>( <span class="dv">1</span> )</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>1</code></pre>
       <p></br></p>
-      <hr />
-      <p>変数に入れた値は、<strong>簡単に</strong>取り出すことができます。print文の<code>()</code>の中に変数名を記述するだけです。</p>
-      <div class="sourceCode" id="cb2" data-caption="test2-1.py"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="bu">print</span>(a)</span></code></pre></div>
-      <p><strong><i class="fa-solid fa-terminal"></i>
-      実行結果</strong></p>
-      <pre><code>10</code></pre>
-      <p>1行目で変数<code>a</code>に10を代入しています。そのため、2行目のprint文の<code>()</code>の中の<code>a</code>は10と読み替えられました。</p>
-      <br>
-      <div class="note type-tips">
-      <p><strong>「=」の使い方に注意!!</strong></p>
-      <p>代入演算子<code>=</code>は、<strong>数学で使うものとは意味が異なり、左の変数に右の値を代入するはたらき</strong>を持ちます。
-      そのため、以下のプログラムを実行するとエラーが起きます。</p>
-      <div class="sourceCode" id="cb4" data-caption="test.py"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="dv">10</span> <span class="op">=</span> a</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="bu">print</span>(a)</span></code></pre></div>
-      <p><strong><i class="fa-solid fa-terminal"></i>
-      実行結果</strong></p>
-      <pre><code>PS C:\******&gt; &amp; C:/******/python.exe c:/******/test.py
-  File &quot;c:\******\test.py&quot;, line 1
-    10 = a
-    ^^
-SyntaxError: cannot assign to literal here. Maybe you meant &#39;==&#39; instead of &#39;=&#39;?</code></pre>
-      <p>「<code>10</code>は<strong>変数ではないので代入できません</strong>」と言われてしまいます。</p>
-      </div>
-      <hr />
-      <figure>
-      <img src="figs/02/str.png" alt="img" />
-      <figcaption aria-hidden="true">img</figcaption>
-      </figure>
-      <p>もちろん、変数には<strong>文字列も代入できます</strong>。文字列の場合は、<strong><code>"</code>で囲う</strong>のでしたね。
-      これは「hello」と書くと<strong>変数とみなされてしまう</strong>ので、<strong>変数と区別するため</strong>だったわけです。</p>
+      <h1 data-number="3" id="文字列"><span
+      class="header-section-number">3</span> 文字列</h1>
+      <p>日本語や英語など、<strong>文字列を表示する時には<code>"(ダブルクォーテーション)</code>で囲み</strong>ます。<code>Shift + 2</code>で入力できます。試しに、「Hello
+      World!!」と表示させてみましょう。</p>
       <p></br></p>
-      <div class="sourceCode" id="cb6" data-caption="test2-2.py"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>b <span class="op">=</span> <span class="st">&quot;hello!&quot;</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="bu">print</span>(b)</span></code></pre></div>
+      <div class="sourceCode" id="cb3" data-caption="HelloWorld.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="bu">print</span>(<span class="st">&quot;Hello World!!&quot;</span>)</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
-      <pre><code>hello!</code></pre>
+      <pre><code>Hello World!!</code></pre>
       <p></br></p>
-      <h1 data-number="3" id="変数の値を変更する"><span
-      class="header-section-number">3</span> 変数の値を変更する</h1>
-      <p>変数に代入し直せば、変数の値を変更することができます。</p>
-      <div class="sourceCode" id="cb8" data-caption="test2-3.py"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="bu">print</span>(a)</span>
-<span id="cb8-3"><a href="#cb8-3"></a>a <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="bu">print</span>(a)</span></code></pre></div>
-      <p><strong><i class="fa-solid fa-terminal"></i>
-      実行結果</strong></p>
-      <pre><code>10
-20</code></pre>
-      <p><br></p>
-      <hr />
-      <p><strong><code>a = a + 2</code>と書けば、<code>a</code>の値を2だけ増やすことができます</strong>。</p>
-      <div class="sourceCode" id="cb10" data-caption="test2-3.py"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="bu">print</span>(a)</span>
-<span id="cb10-3"><a href="#cb10-3"></a>a <span class="op">=</span> a <span class="op">+</span> <span class="dv">2</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="bu">print</span>(a)</span></code></pre></div>
-      <p><strong><i class="fa-solid fa-terminal"></i>
-      実行結果</strong></p>
-      <pre><code>10
-12</code></pre>
-      <ul>
-      <li><strong>Challenge2-1</strong>　上のプログラムの1行目を書き換えて、<code>a</code>の値を<code>123</code>に変更しましょう。</li>
-      <li><strong>Challenge2-2</strong>　3行目を書き換えて、<code>a</code>の値を<strong>2倍</strong>にするよう変更しましょう。</li>
-      </ul>
-      <p><strong><i class="fa-solid fa-check"></i>解答</strong></p>
-      <p>Challenge2-1: <span
-      class="masked"><code>a = 123</code></span></p>
-      <p>Challenge2-2: <span
-      class="masked"><code>a = a * 2</code></span></p>
-      <p></br></p>
-      <hr />
-      <h1 data-number="4" id="変数の命名規則"><span
-      class="header-section-number">4</span> 変数の命名規則</h1>
-      <p>変数名のつけ方には以下の決まりがあります。</p>
-      <h2 data-number="4.1"
-      id="半角のアルファベット数字_アンダースコアを組み合わせる"><span
-      class="header-section-number">4.1</span>
-      半角のアルファベット、数字、<code>_</code>(アンダースコア)を組み合わせる</h2>
-      <p>日本語やその他の記号は使わないようにしましょう。</p>
-      <div class="sourceCode" id="cb12" data-caption="⭕良い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>player1 <span class="op">=</span> <span class="st">&quot;Taro&quot;</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>stage_name <span class="op">=</span> <span class="st">&quot;Island&quot;</span></span></code></pre></div>
-      <div class="sourceCode" id="cb13" data-caption="❌悪い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>ｓｃｏｒｅ <span class="op">=</span> <span class="dv">99</span>    <span class="op">&lt;-</span>全角</span>
-<span id="cb13-2"><a href="#cb13-2"></a>曜日 <span class="op">=</span> <span class="st">&quot;sunday&quot;</span>    <span class="op">&lt;-</span>変数名が日本語</span>
-<span id="cb13-3"><a href="#cb13-3"></a>stage2<span class="op">-</span><span class="dv">1</span> <span class="op">=</span> <span class="st">&quot;Ocean&quot;</span> <span class="op">&lt;-</span>「<span class="op">-</span>」は引き算の記号として認識される</span></code></pre></div>
-      <h2 data-number="4.2" id="最初の文字には数字を使わない"><span
-      class="header-section-number">4.2</span>
-      最初の文字には数字を使わない</h2>
-      <p>2文字目以降は自由に使えます。</p>
-      <div class="sourceCode" id="cb14" data-caption="⭕良い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>player1 <span class="op">=</span> <span class="st">&quot;Taro&quot;</span></span></code></pre></div>
-      <div class="sourceCode" id="cb15" data-caption="❌悪い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="dv">1</span><span class="er">st_player</span> <span class="op">=</span> <span class="st">&quot;Tom&quot;</span></span></code></pre></div>
-      <h2 data-number="4.3" id="予約語を使わない"><span
-      class="header-section-number">4.3</span> 予約語を使わない</h2>
-      <p>たとえば<code>print</code>のような、Pythonへの命令として決まっている単語をそのまま使うことはできません。</p>
-      <div class="sourceCode" id="cb16" data-caption="❌悪い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="bu">print</span> <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="bu">print</span>(<span class="bu">print</span>)</span></code></pre></div>
-      <p><strong><i class="fa-solid fa-terminal"></i>
-      実行結果</strong></p>
-      <pre><code>PS C:\******&gt; &amp; C:/******/python.exe c:/******/test.py
-  File &quot;c:\******\test.py&quot;, line 2, in &lt;module&gt;
-    print(print)
-TypeError: &#39;int&#39; object is not callable</code></pre>
-      <p>1行目でprintに値が上書きされてしまったので、その後ろではprint文が使えなくなってしまいます。</p>
-      <hr />
-      <p>ここからは読みやすいコードにするためのマナーです。(絶対に守る必要はありませんが、一般的な規則です)</p>
-      <h2 data-number="4.4" id="大文字は使わない"><span
-      class="header-section-number">4.4</span> 大文字は使わない</h2>
-      <p>変数の名前は<strong>全て小文字</strong>にするのが一般的です。</p>
-      <div class="sourceCode" id="cb18" data-caption="⭕良い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>player1 <span class="op">=</span> <span class="st">&quot;Taro&quot;</span></span></code></pre></div>
-      <div class="sourceCode" id="cb19" data-caption="❌悪い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>Player1 <span class="op">=</span> <span class="st">&quot;Taro&quot;</span></span></code></pre></div>
-      <h2 data-number="4.5" id="単語間は_でつなぐ"><span
-      class="header-section-number">4.5</span>
-      単語間は<code>_</code>でつなぐ</h2>
-      <div class="sourceCode" id="cb20" data-caption="⭕良い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>player_name <span class="op">=</span> <span class="st">&quot;Taro&quot;</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>max_size <span class="op">=</span> <span class="dv">12</span></span></code></pre></div>
-      <h2 data-number="4.6" id="極端に長い短い名前は避ける"><span
-      class="header-section-number">4.6</span>
-      極端に長い・短い名前は避ける</h2>
-      <p>長すぎると読みにくく、短すぎると何を示す変数かわからなくなるので避けましょう。</p>
-      <div class="sourceCode" id="cb21" data-caption="⭕良い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>max_mapsize_x <span class="op">=</span> <span class="dv">64</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>score <span class="op">=</span> <span class="dv">1100</span></span></code></pre></div>
-      <div class="sourceCode" id="cb22" data-caption="❌悪い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a>maximum_value_in_the_x_direction_on_the_map_screen <span class="op">=</span> <span class="dv">64</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>s <span class="op">=</span> <span class="dv">1100</span></span></code></pre></div>
-      <h3 data-number="4.6.1"
-      id="charenge2-3-次の変数名は適切か判断しましょう"><span
-      class="header-section-number">4.6.1</span>
-      <strong>charenge2-3</strong>
-      次の変数名は適切か判断しましょう。</h3>
-      <ul>
-      <li><code>tmp</code> ・・・ <span
-      class="masked">⭕　　　　　　　　　　　　　　</span></li>
-      <li><code>Name</code> ・・・ <span
-      class="masked">❌全て小文字にするべきです</span></li>
-      <li><code>24th_anniversary</code> ・・・ <span
-      class="masked">❌最初の文字は数字ではいけません</span></li>
-      <li><code>g20</code> ・・・ <span
-      class="masked">⭕　　　　　　　　　　　　　　</span></li>
-      <li><code>ともだち</code> ・・・ <span
-      class="masked">❌変数名を日本語にすることは避けましょう</span></li>
-      <li><code>high-school</code> ・・・ <span
-      class="masked">❌<code>-</code>(ハイフン)は引き算として認識されてしまいます</span></li>
-      </ul>
+      <h1 data-number="4" id="文字列-1"><span
+      class="header-section-number">4</span> 文字列</h1>
+      <p><code>print()</code>を用いて、コマンドプロンプトに文字を表示することが出来ます。
+      <code>()</code>の中に表示したいものを記述するのですが、日本語や英語など、<strong>文字列を表示する時には<code>"(ダブルクォーテーション)</code>で囲み</strong>ます。<code>Shift + 2</code>で入力できます。試しに、「Hello
+      World!!」と表示させてみましょう。</p>
       <!-- ---------------------------------------- -->
     </main>
 
