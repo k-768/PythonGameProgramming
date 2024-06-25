@@ -8,10 +8,33 @@ var:
 
 ## もくじ
 
--  [比較演算子](basic05.html#比較演算子) 
--  [2次元リスト](basic05.html#2次元リスト) 
+-  [if文](basic05.html#if文) 
+-  [関係演算子](basic05.html#関係演算子)
+-  [if-else文](basic05.html#if-else文) 
+-  [if-elif文](basic05.html#if-elif文) 
 
-## 比較演算子
+## 条件分岐とは
+
+![img](figs/05/walk.png)
+
+RPGのマップ移動を例に考えてみましょう。キーボード入力によって進む方向が変わります。
+
+
+- Wキー　→　上に進む
+- Aキー　→　左に進む
+- Sキー　→　下に進む
+- Dキー　→　右に進む
+
+このようにゲームでは様々な条件によって処理を変更しています。Pythonでは、`if文`を用いて条件分岐を記述します。
+
+## if文
+
+```python{.numberLines　caption="i文の構造"}
+if a > 0:
+  print(a + "は正の値です")
+```
+
+## 関係演算子
 
 
 

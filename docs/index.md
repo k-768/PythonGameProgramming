@@ -35,10 +35,10 @@ var:
 
 ###  [if文](basic05.html)
 
--  [論理演算子](basic05.html#コメント文) 
--  [if文](basic05.html#式の構造) 
--  [if-else文](basic05.html#式の構造) 
--  [if-elif文](basic05.html#式の構造) 
+-  [if文](basic05.html#if文) 
+-  [関係演算子](basic05.html#関係演算子)
+-  [if-else文](basic05.html#if-else文) 
+-  [if-elif文](basic05.html#if-elif文) 
 
 ###  [関数](basic06.html)
 

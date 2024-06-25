@@ -160,6 +160,44 @@ Hello! Kosen Taro!
 ```
 ---
 
+<br>
+<div class="note type-tips">
+
+**数値と文字列の結合**
+
+数値同士、文字列同士は`+`を用いて結合できますが、数値と文字列はそのまま結合できません。
+そのため、以下のプログラムを実行するとエラーが起きます。
+
+```python{.numberLines caption="test.py"}
+score = 100
+print("あなたのスコア:" + score)
+```
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+PS C:\******> & C:/******/python.exe c:/******/test.py
+  File "c:\******\test.py", line 2 in <module>  
+    print("あなたのスコア:" + score)
+          ~~~~~~~~~~~^~~~~~~
+TypeError: can only concatenate str (not "int") to str
+```
+
+「**文字列には文字列しか結合できません**」と言われてしまいます。
+そのため、数値を文字列に変換する操作が必要です。`str()`を用いて変換できます。
+
+```python{.numberLines caption="test.py"}
+score = 100
+print("あなたのスコア:" + str(score))
+```
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+あなたのスコア:100
+```
+
+</div>
+
+
 ## 変数の命名規則
 
 変数名のつけ方には以下の決まりがあります。
