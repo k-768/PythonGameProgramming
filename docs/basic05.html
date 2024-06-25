@@ -76,9 +76,46 @@ class="toc-section-number">4</span> 関係演算子</a></li>
       <img src="figs/05/walk.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>「もし」</p>
+      <p>RPGのマップ移動を例に考えてみましょう。キーボード入力によって進む方向が変わります。</p>
+      <ul>
+      <li>Wキー　→　上に進む</li>
+      <li>Aキー　→　左に進む</li>
+      <li>Sキー　→　下に進む</li>
+      <li>Dキー　→　右に進む</li>
+      </ul>
+      <p>このようにゲームでは様々な条件によって処理を変更しています。Pythonでは、<code>if文</code>を用いて条件分岐を記述します。</p>
       <h1 data-number="3" id="if文"><span
       class="header-section-number">3</span> if文</h1>
+      <p><code>if文</code>の構造を見ていきましょう。</p>
+      <div class="sourceCode" id="cb1" data-caption="if文の構造"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="bu">print</span>(<span class="st">&quot;aは正の値です&quot;</span>)</span></code></pre></div>
+      <p>1行目<code>if</code>と<code>:</code>に囲まれた部分が<strong>条件を示す部分</strong>です。この例では、「aが0以上」になります。</p>
+      <p>そして、2行目は、<strong>1行目の条件を満たした時実行される部分</strong>です。<strong>インデント</strong>(<a
+      href="basic04.html#インデント">参照</a>)する必要があります。</p>
+      <p>インデントした部分を<strong>ブロック</strong>と言い、条件を満たした時、すぐ後ろのブロックが<strong>全て実行されます</strong>。</p>
+      <div class="sourceCode" id="cb2" data-caption="ブロック"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="cf">if</span> 条件:</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  処理A</span>
+<span id="cb2-3"><a href="#cb2-3"></a>  処理B</span>
+<span id="cb2-4"><a href="#cb2-4"></a>  処理C</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  ...</span></code></pre></div>
+      <p>以下のプログラムを実行してみましょう。</p>
+      <div class="sourceCode" id="cb3" data-caption="test5-1.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>a <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>b <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="bu">print</span>(<span class="st">&quot;aは正の値です&quot;</span>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="bu">print</span>(<span class="st">&quot;a:&quot;</span><span class="op">+</span><span class="bu">str</span>(a))</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="cf">if</span> b <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="bu">print</span>(<span class="st">&quot;bは正の値です&quot;</span>)</span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="bu">print</span>(<span class="st">&quot;b:&quot;</span><span class="op">+</span><span class="bu">str</span>(b))</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>aは正の値です
+a:1</code></pre>
+      <p>3行目</p>
       <h1 data-number="4" id="関係演算子"><span
       class="header-section-number">4</span> 関係演算子</h1>
       <p>リストは、<strong>変数をセットで管理できる便利なもの</strong>です。
