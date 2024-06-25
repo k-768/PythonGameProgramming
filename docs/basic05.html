@@ -50,6 +50,10 @@ class="toc-section-number">2</span> 条件分岐とは</a></li>
 class="toc-section-number">3</span> if文</a></li>
 <li><a href="#関係演算子" id="toc-関係演算子"><span
 class="toc-section-number">4</span> 関係演算子</a></li>
+<li><a href="#if-else文" id="toc-if-else文"><span
+class="toc-section-number">5</span> if-else文</a></li>
+<li><a href="#if-elif文" id="toc-if-elif文"><span
+class="toc-section-number">6</span> if-elif文</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -65,6 +69,7 @@ class="toc-section-number">4</span> 関係演算子</a></li>
       <h1 data-number="1" id="もくじ"><span
       class="header-section-number">1</span> もくじ</h1>
       <ul>
+      <li><a href="basic05.html#条件分岐とは">条件分岐とは</a></li>
       <li><a href="basic05.html#if文">if文</a></li>
       <li><a href="basic05.html#関係演算子">関係演算子</a></li>
       <li><a href="basic05.html#if-else文">if-else文</a></li>
@@ -104,22 +109,48 @@ class="toc-section-number">4</span> 関係演算子</a></li>
       <div class="sourceCode" id="cb3" data-caption="test5-1.py"><pre
       class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>a <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>b <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">0</span>: <span class="co"># a&gt;0なのでここは実行される</span></span>
 <span id="cb3-4"><a href="#cb3-4"></a>  <span class="bu">print</span>(<span class="st">&quot;aは正の値です&quot;</span>)</span>
 <span id="cb3-5"><a href="#cb3-5"></a>  <span class="bu">print</span>(<span class="st">&quot;a:&quot;</span><span class="op">+</span><span class="bu">str</span>(a))</span>
 <span id="cb3-6"><a href="#cb3-6"></a></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="cf">if</span> b <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="cf">if</span> b <span class="op">&gt;</span> <span class="dv">0</span>: <span class="co"># b&gt;0でないのでここは実行されない</span></span>
 <span id="cb3-8"><a href="#cb3-8"></a>  <span class="bu">print</span>(<span class="st">&quot;bは正の値です&quot;</span>)</span>
 <span id="cb3-9"><a href="#cb3-9"></a>  <span class="bu">print</span>(<span class="st">&quot;b:&quot;</span><span class="op">+</span><span class="bu">str</span>(b))</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
       <pre><code>aは正の値です
 a:1</code></pre>
-      <p>3行目</p>
       <h1 data-number="4" id="関係演算子"><span
       class="header-section-number">4</span> 関係演算子</h1>
-      <p>リストは、<strong>変数をセットで管理できる便利なもの</strong>です。
-      例えば、以下のようにキャラクターの持ち物を表すことを考えましょう。</p>
+      <p>関係演算子は以下のような種類があります。</p>
+      <p>|演算子|記述例|意味| |==|a == b|aとbが等しい| |!=|a !=
+      b|aとbが等しくない(≠)| |&gt;|a &gt; b|aがbより大きい| |&lt;|a &lt;
+      b|aがbより小さい| |&gt;=|a &gt;= b|aがb以上| |&lt;=|a &lt;=
+      b|aがb以下|</p>
+      <h1 data-number="5" id="if-else文"><span
+      class="header-section-number">5</span> if-else文</h1>
+      <p><code>else</code>を用いて、<strong>条件が満たされなかったときの処理を設定する</strong>ことができます。</p>
+      <div class="sourceCode" id="cb5"
+      data-caption="if-else文の構造"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="bu">print</span>(<span class="st">&quot;aは正の値です&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="cf">else</span>:</span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="bu">print</span>(<span class="st">&quot;aは正の値ではありません&quot;</span>)</span></code></pre></div>
+      <ul>
+      <li><code>a</code>が0より大きいとき、条件を満たすので、「aは正の値です」と出力されます。</li>
+      <li><code>a</code>が0以下のとき、条件を満たさないので、「aは正の値ではありません」と出力されます。</li>
+      </ul>
+      <h1 data-number="6" id="if-elif文"><span
+      class="header-section-number">6</span> if-elif文</h1>
+      <p><code>elif</code>を用いて、<strong>細かく条件を設定する</strong>ことができます。</p>
+      <div class="sourceCode" id="cb6"
+      data-caption="if-elif文の構造"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="bu">print</span>(<span class="st">&quot;aは正の値です&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="cf">elif</span> a <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="bu">print</span>(<span class="st">&quot;aは0です&quot;</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="cf">else</span>:</span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="bu">print</span>(<span class="st">&quot;aは負の値です&quot;</span>)</span></code></pre></div>
       <!-- ---------------------------------------- -->
     </main>
 
