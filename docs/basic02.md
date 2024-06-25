@@ -224,11 +224,12 @@ max_size = 12
 
 ```python{.numberLines caption="⭕良い例"}
 max_mapsize_x = 64
-s = 1100
+score = 1100
 ```
 ```python{.numberLines caption="❌悪い例"}
 maximum_value_in_the_x_direction_on_the_map_screen = 64
-score = 1100
+s = 1100
+
 ```
 
 #### **charenge2-3** 次の変数名は適切か判断しましょう。
@@ -238,4 +239,4 @@ score = 1100
 - `24th_anniversary` ・・・ <span class="masked">❌最初の文字は数字ではいけません</span>
 - `g20` ・・・ <span class="masked">⭕　　　　　　　　　　　　　　</span>
 - `ともだち` ・・・ <span class="masked">❌変数名を日本語にすることは避けましょう</span>
-- `high-school` ・・・ <span class="masked">❌`-`(ハイフン)は記号として認識されてしまいます</span>
+- `high-school` ・・・ <span class="masked">❌`-`(ハイフン)は引き算として認識されてしまいます</span>

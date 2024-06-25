@@ -33,7 +33,7 @@
     />
     <link rel="stylesheet" href="style.css" />
 
-    <title>基礎編4　リスト</title>
+    <title>基礎編4　構文</title>
   </head>
 
   <body>
@@ -44,17 +44,25 @@
          <ul>
 <li><a href="#もくじ" id="toc-もくじ"><span
 class="toc-section-number">1</span> もくじ</a></li>
-<li><a href="#リストとは" id="toc-リストとは"><span
-class="toc-section-number">2</span> リストとは</a></li>
-<li><a href="#次元リスト" id="toc-次元リスト"><span
-class="toc-section-number">3</span> 2次元リスト</a></li>
+<li><a href="#コメント文" id="toc-コメント文"><span
+class="toc-section-number">2</span> コメント文</a></li>
+<li><a href="#式の構造" id="toc-式の構造"><span
+class="toc-section-number">3</span> 式の構造</a>
+<ul>
+<li><a href="#改行" id="toc-改行"><span
+class="toc-section-number">3.1</span> 改行</a></li>
+<li><a href="#インデント" id="toc-インデント"><span
+class="toc-section-number">3.2</span> インデント</a></li>
+<li><a href="#文中のスペース" id="toc-文中のスペース"><span
+class="toc-section-number">3.3</span> 文中のスペース</a></li>
+</ul></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
     </nav>
 
     <header class="markdown-body">
-      <p>Pythonで釣りゲームを作ろう 基礎編4　リスト</p>
+      <p>Pythonで釣りゲームを作ろう 基礎編4　構文</p>
       <p>2024年04月23日（月)</p>
     </header>
 
@@ -63,142 +71,87 @@ class="toc-section-number">3</span> 2次元リスト</a></li>
       <h1 data-number="1" id="もくじ"><span
       class="header-section-number">1</span> もくじ</h1>
       <ul>
-      <li><a href="basic04.html#リストとは">リストとは</a></li>
-      <li><a href="basic04.html#2次元リスト">2次元リスト</a></li>
+      <li><a href="basic04.html#コメント文">コメント文</a></li>
+      <li><a href="basic04.html#式の構造">式の構造</a></li>
       </ul>
-      <h1 data-number="2" id="リストとは"><span
-      class="header-section-number">2</span> リストとは</h1>
-      <figure>
-      <img src="figs/04/arr.png" alt="img" />
-      <figcaption aria-hidden="true">img</figcaption>
-      </figure>
-      <p>リストは、<strong>変数をセットで管理できる便利なもの</strong>です。
-      例えば、以下のようにキャラクターの持ち物を表すことを考えましょう。</p>
+      <h1 data-number="2" id="コメント文"><span
+      class="header-section-number">2</span> コメント文</h1>
+      <p>文頭に<code>#</code>をつけることで、<strong>コードに注釈をつける</strong>ことができます。
+      これを<strong>コメント文</strong>と言い、プログラムには<strong>全く影響しません</strong>が、見やすいコードにすることができます。</p>
+      <p></br></p>
       <div class="sourceCode" id="cb1"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>item1 <span class="op">=</span> <span class="st">&quot;伝説の釣り竿&quot;</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>item2 <span class="op">=</span> <span class="st">&quot;大容量のバケツ&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>item3 <span class="op">=</span> <span class="st">&quot;丈夫な釣り糸&quot;</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>item4 <span class="op">=</span> <span class="st">&quot;大きな釣り針&quot;</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>item5 <span class="op">=</span> <span class="st">&quot;高級な釣り餌&quot;</span></span></code></pre></div>
-      <p>これを、リストを使うとスマートに記述できます。</p>
-      <div class="sourceCode" id="cb2"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>items <span class="op">=</span> [<span class="st">&quot;伝説の釣り竿&quot;</span>,<span class="st">&quot;大容量のバケツ&quot;</span>,<span class="st">&quot;丈夫な釣り糸&quot;</span>,<span class="st">&quot;大きな釣り針&quot;</span>,<span class="st">&quot;高級な釣り餌&quot;</span>]</span></code></pre></div>
-      <p><br></p>
-      <p>ここで、<code>items</code>がリストであり、<code>,</code>で区切られた一つ一つを<strong>要素</strong>と言います。</p>
-      <hr />
-      <figure>
-      <img src="figs/04/arr.png" alt="img" />
-      <figcaption aria-hidden="true">img</figcaption>
-      </figure>
-      <p>図の<code>[0]</code>や<code>[1]</code>の番号を<strong>インデックス</strong>と呼び、<strong>住所でいえば番地のようなもの</strong>です。
-      リストの各要素を取り出したいときは、以下のようにインデックスで指定します。</p>
-      <p><br></p>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#挨拶をする</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="bu">print</span>(<span class="st">&quot;Hello World!!&quot;</span>)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>Hello World!!</code></pre>
+      <p></br> 1行の途中からコメント文を始めることもできます。 </br></p>
       <div class="sourceCode" id="cb3"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>items <span class="op">=</span> [<span class="st">&quot;伝説の釣り竿&quot;</span>,<span class="st">&quot;大容量のバケツ&quot;</span>,<span class="st">&quot;丈夫な釣り糸&quot;</span>,<span class="st">&quot;大きな釣り針&quot;</span>,<span class="st">&quot;高級な釣り餌&quot;</span>]</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="bu">print</span>(items[<span class="dv">0</span>])</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="bu">print</span>(items[<span class="dv">1</span>])</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="bu">print</span>(items[<span class="dv">2</span>])</span></code></pre></div>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>name <span class="op">=</span> <span class="st">&quot;Kosen Taro&quot;</span> <span class="co">#プレイヤー名</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="bu">print</span>(<span class="st">&quot;Hello!&quot;</span><span class="op">+</span>name<span class="op">+</span><span class="st">&quot;!&quot;</span>)</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
-      <pre><code>伝説の釣り竿
-大容量のバケツ
-丈夫な釣り糸</code></pre>
-      <p><br></p>
-      <div class="note type-tips">
-      <p><strong>いちばん初めの要素のインデックスは、<code>1ではなく0</code>である点に注意!!</strong></p>
-      </div>
-      <p><br></p>
-      <hr />
-      <p>また、リストに含まれる要素の数を<strong>要素数</strong>と言い、<code>len()</code>を使ってその長さを取得できます。</p>
-      <p><br></p>
+      <pre><code>Hello!Kosen Taro!</code></pre>
+      <p></br></p>
+      <p>このように、プログラムを実行したときに<code>#</code>より後ろは<strong>すべて無視</strong>されます。
+      そのため、以下のようにいらなくなった行を<strong>一時的に無効化</strong>することができます。</p>
+      <p></br></p>
       <div class="sourceCode" id="cb5"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>items <span class="op">=</span> [<span class="st">&quot;伝説の釣り竿&quot;</span>,<span class="st">&quot;大容量のバケツ&quot;</span>,<span class="st">&quot;丈夫な釣り糸&quot;</span>,<span class="st">&quot;大きな釣り針&quot;</span>,<span class="st">&quot;高級な釣り餌&quot;</span>]</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="bu">print</span>(<span class="bu">len</span>(items))</span></code></pre></div>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>name <span class="op">=</span> <span class="st">&quot;Kosen Taro&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#print(&quot;Hello!&quot;+name+&quot;!&quot;)</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="bu">print</span>(<span class="st">&quot;Hey!&quot;</span><span class="op">+</span>name<span class="op">+</span><span class="st">&quot;!&quot;</span>)</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
-      <pre><code>5</code></pre>
-      <p><br></p>
-      <hr />
-      <ul>
-      <li><strong>Challenge4-1</strong>　要素が食べ物の名前である要素数6のリスト「foods」を作成しましょう。</li>
-      <li><strong>Challenge4-2</strong>　foodsから、4番目の要素を<code>print文</code>で出力しましょう。</li>
-      </ul>
-      <p><strong><i class="fa-solid fa-check"></i>解答例</strong></p>
-      <p>Challenge4-1: <span
-      class="masked"><code>foods = ["すし","てんぷら","すきやき","やきにく","だしまき","ラーメン"]</code></span></p>
-      <p>Challenge4-2: <span
-      class="masked"><code>print(foods[3]) #0始まりなので4番目は[4]ではなく[3]</code></span></p>
-      <p><br></p>
-      <h1 data-number="3" id="次元リスト"><span
-      class="header-section-number">3</span> 2次元リスト</h1>
-      <p>リストの中に<strong>リストを入れ子にする</strong>こともできます。これを、<strong>2次元リスト</strong>といいます。</p>
-      <p><br></p>
-      <div class="sourceCode" id="cb7"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>nums <span class="op">=</span> [[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],[<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>],[<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>]]</span></code></pre></div>
-      <p><br></p>
-      <p>見づらいので、以下のように改行することもできます。</p>
-      <div class="sourceCode" id="cb8"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>nums <span class="op">=</span> [</span>
-<span id="cb8-2"><a href="#cb8-2"></a>    [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],</span>
-<span id="cb8-3"><a href="#cb8-3"></a>    [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>],</span>
-<span id="cb8-4"><a href="#cb8-4"></a>    [<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>]</span>
-<span id="cb8-5"><a href="#cb8-5"></a>]</span></code></pre></div>
-      <p>このとき、<code>2行目</code>~<code>4行目</code>は<a
-      href="basic03.html#インデント">インデント</a>を用いて見やすく書くのが一般的です。</p>
-      <p>先ほどと同様にインデックスを指定して取り出すと、中のリストが取り出せます。</p>
-      <div class="sourceCode" id="cb9"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>nums <span class="op">=</span> [</span>
-<span id="cb9-2"><a href="#cb9-2"></a>    [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],</span>
-<span id="cb9-3"><a href="#cb9-3"></a>    [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>],</span>
-<span id="cb9-4"><a href="#cb9-4"></a>    [<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>]</span>
-<span id="cb9-5"><a href="#cb9-5"></a>]</span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="bu">print</span>(nums[<span class="dv">0</span>])</span></code></pre></div>
-      <p><strong><i class="fa-solid fa-terminal"></i>
-      実行結果</strong></p>
-      <pre><code>[1,2,3]</code></pre>
-      <p><br></p>
-      <p>これをさらにインデックスで指定すれば、要素を取り出せます。</p>
-      <div class="sourceCode" id="cb11"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>nums <span class="op">=</span> [</span>
-<span id="cb11-2"><a href="#cb11-2"></a>    [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],</span>
-<span id="cb11-3"><a href="#cb11-3"></a>    [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>],</span>
-<span id="cb11-4"><a href="#cb11-4"></a>    [<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>]</span>
-<span id="cb11-5"><a href="#cb11-5"></a>]</span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="bu">print</span>(nums[<span class="dv">0</span>][<span class="dv">2</span>])</span></code></pre></div>
-      <p><strong><i class="fa-solid fa-terminal"></i>
-      実行結果</strong></p>
-      <pre><code>3</code></pre>
-      <p><br></p>
-      <p>このように、<code>arr[n][m]</code>の形で、2次元リストの要素を取り出すことができます。</p>
-      <div class="note type-senior">
-      <p><strong>2次元リストの使いみち</strong></p>
-      <p>2次元リストはさまざまな場面で活用されていますが、そのひとつにこのような<strong>rpgのマップ</strong>があります。</p>
-      <figure>
-      <img src="figs/04/map.png" alt="img" />
-      <figcaption aria-hidden="true">img</figcaption>
-      </figure>
-      <p>このマップは、<strong>マップチップ</strong>と呼ばれる小さなパーツの組み合わせでできています。</p>
-      <figure>
-      <img src="figs/04/chip.png" alt="img" />
-      <figcaption aria-hidden="true">img</figcaption>
-      </figure>
-      <p>そこで、どの場所にどのチップを置くかのデータを2次元リストで管理します。
-      例えば、0なら草原、1なら砂、3なら水というふうに対応しています。</p>
-      <div class="sourceCode" id="cb13"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>map_data <span class="op">=</span> [</span>
-<span id="cb13-2"><a href="#cb13-2"></a>    [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>],</span>
-<span id="cb13-3"><a href="#cb13-3"></a>    [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>],</span>
-<span id="cb13-4"><a href="#cb13-4"></a>    [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>],</span>
-<span id="cb13-5"><a href="#cb13-5"></a>    [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>],</span>
-<span id="cb13-6"><a href="#cb13-6"></a>    [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>],</span>
-<span id="cb13-7"><a href="#cb13-7"></a>    [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>],</span>
-<span id="cb13-8"><a href="#cb13-8"></a>    [<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>],</span>
-<span id="cb13-9"><a href="#cb13-9"></a>    [<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>],</span>
-<span id="cb13-10"><a href="#cb13-10"></a>    [<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>],</span>
-<span id="cb13-11"><a href="#cb13-11"></a>    [<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>],</span>
-<span id="cb13-12"><a href="#cb13-12"></a>]</span></code></pre></div>
-      <p>このプログラムは、<strong>ゲームづくり編で実際に制作する</strong>予定です。</p>
+      <pre><code>Hey!Kosen Taro!</code></pre>
+      <p></br></p>
+      <p>これを<strong>コメントアウト</strong>と言います。</p>
+      <div class="note type-tips">
+      <p><strong>コメントアウトの使い過ぎに注意!!</strong></p>
+      <p>大きなプログラムを書く時など、命令を消すことなく残しておけるのでついつい多用しがちですが、可読性が下がるので使い過ぎには注意しましょう。</p>
       </div>
+      <p>複数行にわたってコメントを書きたい場合は、以下のように<code>"</code>(ダブルクォーテーション)3つの間に書きます。</p>
+      <div class="sourceCode" id="cb7"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">これはnameに入っている名前を取得し、</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">挨拶をするプログラムです。</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>name <span class="op">=</span> <span class="st">&quot;Kosen Taro&quot;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="bu">print</span>(<span class="st">&quot;Hey!&quot;</span><span class="op">+</span>name<span class="op">+</span><span class="st">&quot;!&quot;</span>)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>Hey!Kosen Taro!</code></pre>
+      <p><br></p>
+      <h1 data-number="3" id="式の構造"><span
+      class="header-section-number">3</span> 式の構造</h1>
+      <p>プログラムの書き方にはいくつかの決まりがあります。</p>
+      <h2 data-number="3.1" id="改行"><span
+      class="header-section-number">3.1</span> 改行</h2>
+      <p>プログラムに記載されたそれぞれの命令は、<strong>改行ごとに1文とみなされます</strong>。そのため、正しくない改行をするとエラーになります。</p>
+      <div class="sourceCode" id="cb9" data-caption="⭕良い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="bu">print</span>(<span class="st">&quot;OK&quot;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="bu">print</span>(<span class="st">&quot;GOOD&quot;</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb10" data-caption="❌悪い例1"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="bu">print</span>(<span class="st">&quot;NG&quot;</span>)<span class="bu">print</span>(<span class="st">&quot;BAD&quot;</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb11" data-caption="❌悪い例2"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>pri</span>
+<span id="cb11-2"><a href="#cb11-2"></a>nt(<span class="st">&quot;NG&quot;</span>)</span></code></pre></div>
+      <h2 data-number="3.2" id="インデント"><span
+      class="header-section-number">3.2</span> インデント</h2>
+      <p>Pythonでは、<strong>インデント</strong>(行頭のスペース)は大きな意味を持ちます。
+      基礎編6、7で紹介する<code>for文</code>や<code>if文</code>では、インデントが必要になります。
+      逆に、今までのプログラムの行頭に空白を入れると、エラーになります。</p>
+      <div class="sourceCode" id="cb12" data-caption="⭕良い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="bu">print</span>(<span class="st">&quot;OK&quot;</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb13" data-caption="❌悪い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a> <span class="bu">print</span>(<span class="st">&quot;NG&quot;</span>)</span></code></pre></div>
+      <h2 data-number="3.3" id="文中のスペース"><span
+      class="header-section-number">3.3</span> 文中のスペース</h2>
+      <p>変数の宣言や命令の()内のスペースは、<strong>あってもなくてもかまいません</strong>。</p>
+      <div class="sourceCode" id="cb14" data-caption="⭕良い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="bu">print</span>(<span class="st">&quot;OK&quot;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="bu">print</span>( <span class="st">&quot;OK&quot;</span> )</span>
+<span id="cb14-3"><a href="#cb14-3"></a>n<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>n <span class="op">=</span> <span class="dv">1</span></span></code></pre></div>
       <!-- ---------------------------------------- -->
     </main>
 
