@@ -32,7 +32,7 @@ a = 10
 
 変数に入れた値は、**簡単に**取り出すことができます。print文の`()`の中に変数名を記述するだけです。
 
-```python{.numberLines caption="test2-1.py"}
+```python{.numberLines caption="test3-1.py"}
 a = 10
 print(a)
 ```
@@ -81,7 +81,7 @@ SyntaxError: cannot assign to literal here. Maybe you meant '==' instead of '='?
 
 </br>
 
-```python{.numberLines caption="test2-2.py"}
+```python{.numberLines caption="test3-2.py"}
 b = "hello!"
 print(b)
 ```
@@ -98,7 +98,7 @@ hello!
 
 変数に代入し直せば、変数の値を変更することができます。
 
-```python{.numberLines caption="test2-3.py"}
+```python{.numberLines caption="test3-3.py"}
 a = 10
 print(a)
 a = 20
@@ -118,7 +118,7 @@ print(a)
 **`a = a + 2`と書けば、`a`の値を2だけ増やすことができます**。
 
 
-```python{.numberLines caption="test2-3.py"}
+```python{.numberLines caption="test3-4.py"}
 a = 10
 print(a)
 a = a + 2
@@ -131,6 +131,7 @@ print(a)
 12
 ```
 
+---
 
 - **Challenge2-1**　上のプログラムの1行目を書き換えて、`a`の値を`123`に変更しましょう。
 - **Challenge2-2**　3行目を書き換えて、`a`の値を**2倍**にするよう変更しましょう。
@@ -143,6 +144,20 @@ Challenge2-2: <span class="masked">`a = a * 2`</span>
 
 </br>
 
+---
+
+**複数の文字列も、`+`を用いてつなぐことができます**。
+```python{.numberLines caption="test3-5.py"}
+name = "Kosen Taro"
+print(name)
+print("Hello! "+name+"!")
+```
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+Kosen Taro
+Hello! Kosen Taro!
+```
 ---
 
 ## 変数の命名規則
