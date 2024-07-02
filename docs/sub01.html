@@ -51,6 +51,10 @@ class="toc-section-number">2</span> キーボードの入力を判定する</a><
 id="toc-if文を使って上下左右を判定する"><span
 class="toc-section-number">3</span>
 if文を使って上下左右を判定する</a></li>
+<li><a href="#判定をもとに図形を移動させる"
+id="toc-判定をもとに図形を移動させる"><span
+class="toc-section-number">4</span>
+判定をもとに図形を移動させる</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -202,6 +206,52 @@ Key pressed: d</code></pre>
 <span id="cb7-27"><a href="#cb7-27"></a>        <span class="bu">print</span>(<span class="st">&quot;↓&quot;</span>)</span>
 <span id="cb7-28"><a href="#cb7-28"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;d&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Right&quot;</span>):</span>
 <span id="cb7-29"><a href="#cb7-29"></a>        <span class="bu">print</span>(<span class="st">&quot;→&quot;</span>)</span></code></pre></div>
+      <p><br></p>
+      <hr />
+      <h1 data-number="4" id="判定をもとに図形を移動させる"><span
+      class="header-section-number">4</span>
+      判定をもとに図形を移動させる</h1>
+      <p>図形を一度消して、少し移動させ再描写することで、動いているように見せることができます。</p>
+      <div class="sourceCode" id="cb8" data-caption="move-1.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="im">import</span> os</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># ディレクトリ</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>cwd <span class="op">=</span> os.getcwd()</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co"># ウィンドウ設置</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb8-9"><a href="#cb8-9"></a>root.title(<span class="st">&quot;tkinter test&quot;</span>)</span>
+<span id="cb8-10"><a href="#cb8-10"></a>root.geometry(<span class="st">&quot;600x300&quot;</span>)</span>
+<span id="cb8-11"><a href="#cb8-11"></a></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co"># キャンバス設置</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>canvas <span class="op">=</span> tk.Canvas(root,width <span class="op">=</span> <span class="dv">600</span>,height <span class="op">=</span> <span class="dv">300</span>,bg <span class="op">=</span> <span class="st">&quot;skyblue&quot;</span>)</span>
+<span id="cb8-14"><a href="#cb8-14"></a>canvas.pack()</span>
+<span id="cb8-15"><a href="#cb8-15"></a></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="co"># 四角形を配置</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a>canvas.create_rectangle(<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">60</span>,<span class="dv">60</span>,fill<span class="op">=</span><span class="st">&quot;blue&quot;</span>,tag<span class="op">=</span><span class="st">&quot;rect&quot;</span>)</span>
+<span id="cb8-18"><a href="#cb8-18"></a></span>
+<span id="cb8-19"><a href="#cb8-19"></a><span class="kw">def</span> on_key_press(event):</span>
+<span id="cb8-20"><a href="#cb8-20"></a>    <span class="kw">global</span> x,y</span>
+<span id="cb8-21"><a href="#cb8-21"></a>    key <span class="op">=</span> event.keysym <span class="co"># 変数keyに「w」や「a」など、押したキーの名前が格納される</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a>    <span class="cf">if</span>(key <span class="op">==</span> <span class="st">&quot;w&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Up&quot;</span>):</span>
+<span id="cb8-23"><a href="#cb8-23"></a>        <span class="bu">print</span>(<span class="st">&quot;↑&quot;</span>)</span>
+<span id="cb8-24"><a href="#cb8-24"></a>        y <span class="op">=</span> y <span class="op">-</span> <span class="dv">5</span></span>
+<span id="cb8-25"><a href="#cb8-25"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;a&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Left&quot;</span>):</span>
+<span id="cb8-26"><a href="#cb8-26"></a>        x <span class="op">=</span> x <span class="op">-</span> <span class="dv">5</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;s&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Down&quot;</span>):</span>
+<span id="cb8-28"><a href="#cb8-28"></a>        <span class="bu">print</span>(<span class="st">&quot;↓&quot;</span>)</span>
+<span id="cb8-29"><a href="#cb8-29"></a>        y <span class="op">=</span> y <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb8-30"><a href="#cb8-30"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;d&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Right&quot;</span>):</span>
+<span id="cb8-31"><a href="#cb8-31"></a>        <span class="bu">print</span>(<span class="st">&quot;→&quot;</span>)</span>
+<span id="cb8-32"><a href="#cb8-32"></a>        x <span class="op">=</span> x <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb8-33"><a href="#cb8-33"></a>    </span>
+<span id="cb8-34"><a href="#cb8-34"></a>    canvas.delete(<span class="st">&quot;rect&quot;</span>)</span>
+<span id="cb8-35"><a href="#cb8-35"></a>    canvas.create_rectangle(x,y,x <span class="op">+</span> <span class="dv">50</span>,y <span class="op">+</span> <span class="dv">50</span>,fill<span class="op">=</span><span class="st">&quot;blue&quot;</span>,tag<span class="op">=</span><span class="st">&quot;rect&quot;</span>)</span>
+<span id="cb8-36"><a href="#cb8-36"></a></span>
+<span id="cb8-37"><a href="#cb8-37"></a><span class="co"># メインループ</span></span>
+<span id="cb8-38"><a href="#cb8-38"></a>root.bind(<span class="st">&quot;&lt;KeyPress&gt;&quot;</span>, on_key_press)</span>
+<span id="cb8-39"><a href="#cb8-39"></a>root.mainloop()</span></code></pre></div>
       <!-- ---------------------------------------- -->
     </main>
 
