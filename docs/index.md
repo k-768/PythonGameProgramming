@@ -45,6 +45,16 @@ var:
 -  [コメント文](basic06.html#コメント文) 
 -  [式の構造](basic06.html#式の構造) 
 
+###  [Tkinter-1](basic06.html)　ゲームの画面を表示しよう
+
+-  [コメント文](basic06.html#コメント文) 
+-  [式の構造](basic06.html#式の構造) 
+
+###  [Tkinter-2](basic06.html)　キーボードで画像を動かそう
+
+-  [コメント文](basic06.html#コメント文) 
+-  [式の構造](basic06.html#式の構造) 
+
 ###  [リスト](basic07.html) 変数をまとめて管理しよう
 
 -  [リストとは](basic07.html#リストとは) 
