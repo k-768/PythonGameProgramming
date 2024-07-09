@@ -73,6 +73,7 @@ class="toc-section-number">4</span>
       <li><a
       href="basic02.html#キーボードの入力を判定する">キーボードの入力を判定する</a></li>
       </ul>
+      <p></br></p>
       <h1 data-number="2" id="キーボードの入力を判定する"><span
       class="header-section-number">2</span>
       キーボードの入力を判定する</h1>
@@ -87,7 +88,7 @@ class="toc-section-number">4</span>
 <span id="cb1-6"><a href="#cb1-6"></a></span>
 <span id="cb1-7"><a href="#cb1-7"></a><span class="co"># ウィンドウ設置</span></span>
 <span id="cb1-8"><a href="#cb1-8"></a>root <span class="op">=</span> tk.Tk()</span>
-<span id="cb1-9"><a href="#cb1-9"></a>root.title(<span class="st">&quot;tkinter test&quot;</span>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>root.title(<span class="st">&quot;move-0&quot;</span>)</span>
 <span id="cb1-10"><a href="#cb1-10"></a>root.geometry(<span class="st">&quot;600x300&quot;</span>)</span>
 <span id="cb1-11"><a href="#cb1-11"></a></span>
 <span id="cb1-12"><a href="#cb1-12"></a><span class="co"># キャンバス設置</span></span>
@@ -126,6 +127,7 @@ Key pressed: d</code></pre>
       <p><code>20行目</code>では、<strong>キーボードが押されたときに実行される関数</strong>を設定しています。今回は、print文で押されたキーを出力します。</p>
       <p><code>24行目</code>では、<strong>キーボードが押されたとき先ほどの関数が実行されるように</strong>設定しています。bindメゾットによるトリガーを使えば、今回のようにキーを押したときだけでなく、キーを離したとき、マウスを動かしたときなど、様々なことを検出できます。<a
       href="https://denno-sekai.com/tkinter-bind/">この記事</a>に詳しく説明があります。</p>
+      <p></br></p>
       <h1 data-number="3" id="if文を使って上下左右を判定する"><span
       class="header-section-number">3</span>
       if文を使って上下左右を判定する</h1>
@@ -161,7 +163,7 @@ Key pressed: d</code></pre>
 <span id="cb6-6"><a href="#cb6-6"></a></span>
 <span id="cb6-7"><a href="#cb6-7"></a><span class="co"># ウィンドウ設置</span></span>
 <span id="cb6-8"><a href="#cb6-8"></a>root <span class="op">=</span> tk.Tk()</span>
-<span id="cb6-9"><a href="#cb6-9"></a>root.title(<span class="st">&quot;tkinter test&quot;</span>)</span>
+<span id="cb6-9"><a href="#cb6-9"></a>root.title(<span class="st">&quot;move-1&quot;</span>)</span>
 <span id="cb6-10"><a href="#cb6-10"></a>root.geometry(<span class="st">&quot;600x300&quot;</span>)</span>
 <span id="cb6-11"><a href="#cb6-11"></a></span>
 <span id="cb6-12"><a href="#cb6-12"></a><span class="co"># キャンバス設置</span></span>
@@ -208,11 +210,16 @@ Key pressed: d</code></pre>
 <span id="cb7-29"><a href="#cb7-29"></a>        <span class="bu">print</span>(<span class="st">&quot;→&quot;</span>)</span></code></pre></div>
       <p><br></p>
       <hr />
+      <p></br></p>
       <h1 data-number="4" id="判定をもとに図形を移動させる"><span
       class="header-section-number">4</span>
       判定をもとに図形を移動させる</h1>
       <p>図形を一度消して、少し移動させ再描写することで、動いているように見せることができます。</p>
-      <div class="sourceCode" id="cb8" data-caption="move-1.py"><pre
+      <figure>
+      <img src="figs/sub/move-rect.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <div class="sourceCode" id="cb8" data-caption="move-rect.py"><pre
       class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="im">import</span> os</span>
 <span id="cb8-3"><a href="#cb8-3"></a></span>
@@ -221,7 +228,7 @@ Key pressed: d</code></pre>
 <span id="cb8-6"><a href="#cb8-6"></a></span>
 <span id="cb8-7"><a href="#cb8-7"></a><span class="co"># ウィンドウ設置</span></span>
 <span id="cb8-8"><a href="#cb8-8"></a>root <span class="op">=</span> tk.Tk()</span>
-<span id="cb8-9"><a href="#cb8-9"></a>root.title(<span class="st">&quot;tkinter test&quot;</span>)</span>
+<span id="cb8-9"><a href="#cb8-9"></a>root.title(<span class="st">&quot;move-rect&quot;</span>)</span>
 <span id="cb8-10"><a href="#cb8-10"></a>root.geometry(<span class="st">&quot;600x300&quot;</span>)</span>
 <span id="cb8-11"><a href="#cb8-11"></a></span>
 <span id="cb8-12"><a href="#cb8-12"></a><span class="co"># キャンバス設置</span></span>

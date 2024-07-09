@@ -10,6 +10,8 @@ var:
 
 -  [キーボードの入力を判定する](basic02.html#キーボードの入力を判定する) 
 
+</br>
+
 ## キーボードの入力を判定する
 
 Tkinterでは、キーボードの入力を判定することができます。以下の**プログラムを実行し、適当なキーボードを押してみてください**。
@@ -25,7 +27,7 @@ cwd = os.getcwd()
 
 # ウィンドウ設置
 root = tk.Tk()
-root.title("tkinter test")
+root.title("move-0")
 root.geometry("600x300")
 
 # キャンバス設置
@@ -72,6 +74,8 @@ root.bind("<KeyPress>", on_key_press)
 
 `24行目`では、**キーボードが押されたとき先ほどの関数が実行されるように**設定しています。bindメゾットによるトリガーを使えば、今回のようにキーを押したときだけでなく、キーを離したとき、マウスを動かしたときなど、様々なことを検出できます。[この記事](https://denno-sekai.com/tkinter-bind/)に詳しく説明があります。
 
+</br>
+
 ## if文を使って上下左右を判定する
 
 先ほどのプログラムに手を加えて、移動方向を判定するプログラムを作成してみましょう。
@@ -114,7 +118,7 @@ cwd = os.getcwd()
 
 # ウィンドウ設置
 root = tk.Tk()
-root.title("tkinter test")
+root.title("move-1")
 root.geometry("600x300")
 
 # キャンバス設置
@@ -167,12 +171,15 @@ def on_key_press(event):
 
 ---
 
+</br>
+
 ## 判定をもとに図形を移動させる
 
 図形を一度消して、少し移動させ再描写することで、動いているように見せることができます。
 
+![img](figs/sub/move-rect.png)
 
-```python{.numberLines caption="move-1.py"}
+```python{.numberLines caption="move-rect.py"}
 import tkinter as tk
 import os
 
@@ -181,7 +188,7 @@ cwd = os.getcwd()
 
 # ウィンドウ設置
 root = tk.Tk()
-root.title("tkinter test")
+root.title("move-rect")
 root.geometry("600x300")
 
 # キャンバス設置
