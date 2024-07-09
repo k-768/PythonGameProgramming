@@ -102,14 +102,16 @@ a:1
 `else`を用いて、**条件が満たされなかったときの処理を設定する**ことができます。
 
 ```python{.numberLines caption="if-else文の構造"}
-if a > 0: # a>0であれば
-  print("aは正の値です")
-else: # a>0でなければ
-  print("aは正の値ではありません")
+import random
+weight = random.randint(50,150) #50から150までの乱数
+if weight > 100: # weight>100であれば
+  print(str(weight)+"gの大物が釣れた！")
+else: # weight>100でなければ
+  print(str(weight)+"gの魚が釣れた！")
 ```
 
-- `a`が0より大きいとき、条件を満たすので、「aは正の値です」と出力されます。
-- `a`が0以下のとき、条件を満たさないので、「aは正の値ではありません」と出力されます。
+- `weight`が100より大きいとき、条件を満たすので、「XXgの大物が釣れた！」と出力されます。
+- `weight`が0以下のとき、条件を満たさないので、「XXgの魚が釣れた！」と出力されます。
 
 ## if-elif文
 
@@ -124,6 +126,8 @@ else: #どちらでもなければ
   print("aは負の値です")
 ```
 
+`if-elif文`が用いられる代表的な例としては、**キーボードによるキャラクター移動**が挙げられます。
+
 ```python{.numberLines caption="move.py"}
 key = "w"
 if key == "w":　
@@ -137,3 +141,11 @@ elif key == "d":
 else: 
   print("不正な入力です")
 ```
+
+<div class="note type-tips">
+
+**if文とif-elif文の違い**
+
+下の二つのプログラムを実行して、違いを確認しましょう。
+
+</div>
