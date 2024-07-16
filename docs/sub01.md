@@ -205,6 +205,7 @@ def on_key_press(event):
         print("↑")
         y = y - 5
     elif(key == "a" or key == "Left"):
+        print("←")
         x = x - 5
     elif(key == "s" or key == "Down"):
         print("↓")
