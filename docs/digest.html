@@ -46,8 +46,8 @@
 class="toc-section-number">1</span> 今回の趣旨について</a></li>
 <li><a href="#はじめに" id="toc-はじめに"><span
 class="toc-section-number">2</span> はじめに</a></li>
-<li><a href="#もくじ" id="toc-もくじ"><span
-class="toc-section-number">3</span> もくじ</a></li>
+<li><a href="#もくじ-要編集" id="toc-もくじ-要編集"><span
+class="toc-section-number">3</span> もくじ　※要編集</a></li>
 <li><a href="#環境構築" id="toc-環境構築"><span
 class="toc-section-number">4</span> 環境構築</a>
 <ul>
@@ -94,11 +94,12 @@ class="toc-section-number">5.2</span>
       class="header-section-number">2</span> はじめに</h1>
       <p>このオンラインテキストでは、<strong>ゲームづくりを通じて、Pythonプログラミングを学ぶことができます</strong>。
       本来は<strong>90分x8回</strong>の講義で、テキストを進めると<strong>最終的にゲームが完成する</strong>形式ですが、今回は短い時間のため、<strong>サンプルを改造しながら、Pythonについて学ぶ</strong>形式になっています。</p>
-      <h1 data-number="3" id="もくじ"><span
-      class="header-section-number">3</span> もくじ</h1>
+      <h1 data-number="3" id="もくじ-要編集"><span
+      class="header-section-number">3</span> もくじ　※要編集</h1>
       <ul>
-      <li><a href="basic05.html#条件分岐とは">条件分岐とは</a></li>
-      <li><a href="basic05.html#if文">if文</a></li>
+      <li><a href="basic05.html#条件分岐とは">環境構築</a></li>
+      <li><a
+      href="basic05.html#if文">キーボードでキャラクターを操作</a></li>
       <li><a href="basic05.html#関係演算子">関係演算子</a></li>
       <li><a href="basic05.html#if-else文">if-else文</a></li>
       <li><a href="basic05.html#if-elif文">if-elif文</a></li>
@@ -113,7 +114,8 @@ class="toc-section-number">5.2</span>
       <p>以下のページから、VSCodeをインストールしてください。</p>
       <p><a
       href="https://code.visualstudio.com/download">https://code.visualstudio.com/download</a></p>
-      <p>… (インストーラの起動とインスト)</p>
+      <p>… (インストーラの起動とインスト) <a
+      href="https://note.com/yuuuu_tech/n/nf7d25a6a74d9">参考資料</a></p>
       <h2 data-number="4.2" id="pythonのインストール"><span
       class="header-section-number">4.2</span> Pythonのインストール</h2>
       <h2 data-number="4.3" id="vscodeでpythonを使う設定"><span
@@ -123,6 +125,7 @@ class="toc-section-number">5.2</span>
       class="header-section-number">4.4</span>
       初めてのプログラミング</h2>
       <p>（ファイルの作り方、プログラムの記述、実行）</p>
+      <p><br></p>
       <h1 data-number="5" id="キーボードでキャラクターを操作"><span
       class="header-section-number">5</span>
       キーボードでキャラクターを操作</h1>
@@ -177,9 +180,35 @@ class="toc-section-number">5.2</span>
 <span id="cb1-39"><a href="#cb1-39"></a><span class="co"># メインループ</span></span>
 <span id="cb1-40"><a href="#cb1-40"></a>root.bind(<span class="st">&quot;&lt;KeyPress&gt;&quot;</span>, on_key_press)</span>
 <span id="cb1-41"><a href="#cb1-41"></a>root.mainloop()</span></code></pre></div>
+      <p><strong>ウィンドウの×ボタンを押すとプログラムが終了します。</strong>
+      <br></p>
       <h2 data-number="5.2" id="ウィンドウの大きさを変更する"><span
       class="header-section-number">5.2</span>
       ウィンドウの大きさを変更する</h2>
+      <p><code>6行目</code>の<code>"600x300"</code>の部分で、<strong>表示するウィンドウのサイズを指定</strong>しています。試しに、<code>"600x300"</code>を<code>"400x600"</code>に変更してみてください。</p>
+      <div class="sourceCode" id="cb2" data-startFrom="3"
+      data-caption="move-rect.py(抜粋)"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 2;"><span id="cb2-3"><a href="#cb2-3"></a><span class="co"># ウィンドウ設置</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb2-5"><a href="#cb2-5"></a>root.title(<span class="st">&quot;move-rect&quot;</span>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>root.geometry(<span class="st">&quot;400x600&quot;</span>) <span class="op">&lt;-</span>ここを変更</span></code></pre></div>
+      <p>実行すると、ウィンドウが縦長に変わります。このように、ウィンドウのサイズを<code>"幅x高さ"</code>で指定できます。<code>600</code>や<code>400</code>といった数字は<strong>ピクセル数</strong>を表しています。</p>
+      <figure>
+      <img src="figs/digest/400x600.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><br></p>
+      <div class="note type-tips">
+      <p><strong>ディスプレイの解像度を調べる</strong></p>
+      <p>モニターのピクセル数は設定から調べることができます。</p>
+      <p><strong>設定　＞　システム　＞　ディスプレイ　＞　ディスプレイの詳細設定</strong></p>
+      <figure>
+      <img src="figs/digest/ディスプレイサイズ.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>この場合、<code>1920x1080</code>がディスプレイ全体のサイズになります。</p>
+      </div>
+      <p><br></p>
       <!-- ---------------------------------------- -->
     </main>
 
