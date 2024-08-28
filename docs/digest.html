@@ -80,6 +80,8 @@ class="toc-section-number">5.3</span>
 ウィンドウの大きさを変更する</a></li>
 <li><a href="#キャンバスを変更する" id="toc-キャンバスを変更する"><span
 class="toc-section-number">5.4</span> キャンバスを変更する</a></li>
+<li><a href="#四角形を配置する" id="toc-四角形を配置する"><span
+class="toc-section-number">5.5</span> 四角形を配置する</a></li>
 </ul></li>
 </ul> 
         <!-- ---------------------------------------- -->
@@ -260,6 +262,52 @@ class="toc-section-number">5.4</span> キャンバスを変更する</a></li>
       <img src="figs/digest/orange.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p><br></p>
+      <h2 data-number="5.5" id="四角形を配置する"><span
+      class="header-section-number">5.5</span> 四角形を配置する</h2>
+      <p>以下の部分で、用意したキャンバスに四角形を配置しています。</p>
+      <p><code>14行目</code>の数字を変更することで、四角形の大きさを変更できます。試しに<code>100</code>に変更して、四角形が大きくなることを確認してください。</p>
+      <div class="sourceCode" id="cb6" data-startFrom="13"
+      data-caption="move-rect.py(抜粋)"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 12;"><span id="cb6-13"><a href="#cb6-13"></a><span class="co"># 四角形を配置</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>rect_size <span class="op">=</span> <span class="dv">100</span> <span class="op">&lt;-</span>ここを変更</span>
+<span id="cb6-15"><a href="#cb6-15"></a>x <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>y <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>canvas.create_rectangle(x,y,x<span class="op">+</span>rect_size,y<span class="op">+</span>rect_size,fill<span class="op">=</span><span class="st">&quot;blue&quot;</span>,tag<span class="op">=</span><span class="st">&quot;rect&quot;</span>)</span></code></pre></div>
+      <p><code>15～16行目</code>の数字を変更することで、四角形の初期位置を変更できます。</p>
+      <p>ただし、プログラミングで用いられる座標軸は、<strong>数学で用いられるものと向きが違う</strong>ので<strong>注意が必要です</strong>。</p>
+      <figure>
+      <img src="figs/digest/座標系.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>モニターの<strong>左上が原点</strong>で、<strong>Y軸が反転</strong>しています。</p>
+      <p><strong>xやyの値を変えて、それぞれが四角形の位置にどのように対応しているか確認してください</strong>。</p>
+      <div class="sourceCode" id="cb7" data-startFrom="13"
+      data-caption="move-rect.py(抜粋)"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 12;"><span id="cb7-13"><a href="#cb7-13"></a><span class="co"># 四角形を配置</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>rect_size <span class="op">=</span> <span class="dv">100</span> </span>
+<span id="cb7-15"><a href="#cb7-15"></a>x <span class="op">=</span> <span class="dv">10</span>　<span class="op">&lt;-</span>ここを変更</span>
+<span id="cb7-16"><a href="#cb7-16"></a>y <span class="op">=</span> <span class="dv">10</span> <span class="op">&lt;-</span>ここを変更</span>
+<span id="cb7-17"><a href="#cb7-17"></a>canvas.create_rectangle(x,y,x<span class="op">+</span>rect_size,y<span class="op">+</span>rect_size,fill<span class="op">=</span><span class="st">&quot;blue&quot;</span>,tag<span class="op">=</span><span class="st">&quot;rect&quot;</span>)</span></code></pre></div>
+      <div class="note type-tips">
+      <p><strong>このプログラムのしくみ</strong></p>
+      <p><code>14行目</code>から<code>16行目</code>
+      では<strong>変数</strong>というものを使用しています。</p>
+      <div class="sourceCode" id="cb8" data-startFrom="13"
+      data-caption="move-rect.py(抜粋)"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 12;"><span id="cb8-13"><a href="#cb8-13"></a><span class="co"># 四角形を配置</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>rect_size <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a>x <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a>y <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a>canvas.create_rectangle(x,y,x<span class="op">+</span>rect_size,y<span class="op">+</span>rect_size,fill<span class="op">=</span><span class="st">&quot;blue&quot;</span>,tag<span class="op">=</span><span class="st">&quot;rect&quot;</span>)</span></code></pre></div>
+      <p><code>14行目</code>の<code>rect_size = 50</code>は、<strong>「今後<code>rect_size</code>という名前が出てきたらそれを50と読み替えてください」</strong>という意味です。</p>
+      <p>そして、<code>canvas.create_rectangle</code>という命令で四角形を配置しています。
+      以下のように四角形の<strong>左上と右下の座標</strong>、<strong>色</strong>、<strong>名前</strong>を指定しています。</p>
+      <figure>
+      <img src="figs/digest/create_rectangle.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      </div>
       <!-- ---------------------------------------- -->
     </main>
 

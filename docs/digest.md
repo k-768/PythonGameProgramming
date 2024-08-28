@@ -183,3 +183,63 @@ canvas.pack()
 ```
 
 ![img](figs/digest/orange.png)
+
+<br>
+
+### 四角形を配置する
+
+以下の部分で、用意したキャンバスに四角形を配置しています。
+
+`14行目`の数字を変更することで、四角形の大きさを変更できます。試しに`100`に変更して、四角形が大きくなることを確認してください。
+
+```python{.numberLines startFrom="13" caption="move-rect.py(抜粋)"}
+# 四角形を配置
+rect_size = 100 <-ここを変更
+x = 10
+y = 10
+canvas.create_rectangle(x,y,x+rect_size,y+rect_size,fill="blue",tag="rect")
+```
+
+`15～16行目`の数字を変更することで、四角形の初期位置を変更できます。
+
+ただし、プログラミングで用いられる座標軸は、**数学で用いられるものと向きが違う**ので**注意が必要です**。
+
+![img](figs/digest/座標系.png)
+
+モニターの**左上が原点**で、**Y軸が反転**しています。
+
+**xやyの値を変えて、それぞれが四角形の位置にどのように対応しているか確認してください**。
+
+```python{.numberLines startFrom="13" caption="move-rect.py(抜粋)"}
+# 四角形を配置
+rect_size = 100 
+x = 10　<-ここを変更
+y = 10 <-ここを変更
+canvas.create_rectangle(x,y,x+rect_size,y+rect_size,fill="blue",tag="rect")
+```
+
+<div class="note type-tips">
+
+**このプログラムのしくみ**
+
+`14行目`から`16行目` では**変数**というものを使用しています。
+
+```python{.numberLines startFrom="13" caption="move-rect.py(抜粋)"}
+# 四角形を配置
+rect_size = 50
+x = 10
+y = 10
+canvas.create_rectangle(x,y,x+rect_size,y+rect_size,fill="blue",tag="rect")
+```
+
+`14行目`の`rect_size = 50`は、**「今後`rect_size`という名前が出てきたらそれを50と読み替えてください」**という意味です。
+
+
+そして、`canvas.create_rectangle`という命令で四角形を配置しています。
+以下のように四角形の**左上と右下の座標**、**色**、**名前**を指定しています。
+
+![img](figs/digest/create_rectangle.png)
+
+</div>
+
+
