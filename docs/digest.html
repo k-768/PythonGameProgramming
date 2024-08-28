@@ -46,22 +46,10 @@
 class="toc-section-number">1</span> 今回の趣旨について</a></li>
 <li><a href="#はじめに" id="toc-はじめに"><span
 class="toc-section-number">2</span> はじめに</a></li>
-<li><a href="#もくじ-要編集" id="toc-もくじ-要編集"><span
-class="toc-section-number">3</span> もくじ　※要編集</a></li>
+<li><a href="#もくじ" id="toc-もくじ"><span
+class="toc-section-number">3</span> もくじ</a></li>
 <li><a href="#環境構築" id="toc-環境構築"><span
-class="toc-section-number">4</span> 環境構築</a>
-<ul>
-<li><a href="#vscodeのインストール" id="toc-vscodeのインストール"><span
-class="toc-section-number">4.1</span> VSCodeのインストール</a></li>
-<li><a href="#pythonのインストール" id="toc-pythonのインストール"><span
-class="toc-section-number">4.2</span> Pythonのインストール</a></li>
-<li><a href="#vscodeでpythonを使う設定"
-id="toc-vscodeでpythonを使う設定"><span
-class="toc-section-number">4.3</span> VSCodeでPythonを使う設定</a></li>
-<li><a href="#初めてのプログラミング"
-id="toc-初めてのプログラミング"><span
-class="toc-section-number">4.4</span> 初めてのプログラミング</a></li>
-</ul></li>
+class="toc-section-number">4</span> 環境構築</a></li>
 <li><a href="#キーボードでキャラクターを操作"
 id="toc-キーボードでキャラクターを操作"><span
 class="toc-section-number">5</span> キーボードでキャラクターを操作</a>
@@ -82,6 +70,43 @@ class="toc-section-number">5.3</span>
 class="toc-section-number">5.4</span> キャンバスを変更する</a></li>
 <li><a href="#四角形を配置する" id="toc-四角形を配置する"><span
 class="toc-section-number">5.5</span> 四角形を配置する</a></li>
+<li><a href="#キーボードが押されたときの処理を設定する"
+id="toc-キーボードが押されたときの処理を設定する"><span
+class="toc-section-number">5.6</span>
+キーボードが押されたときの処理を設定する</a></li>
+<li><a href="#キーボードが押されたか判定する"
+id="toc-キーボードが押されたか判定する"><span
+class="toc-section-number">5.7</span>
+キーボードが押されたか判定する</a></li>
+<li><a href="#まとめ" id="toc-まとめ"><span
+class="toc-section-number">5.8</span> まとめ</a></li>
+</ul></li>
+<li><a href="#変数とは" id="toc-変数とは"><span
+class="toc-section-number">6</span> 変数とは</a></li>
+<li><a href="#変数の値を変更する" id="toc-変数の値を変更する"><span
+class="toc-section-number">7</span> 変数の値を変更する</a></li>
+<li><a href="#変数の命名規則" id="toc-変数の命名規則"><span
+class="toc-section-number">8</span> 変数の命名規則</a>
+<ul>
+<li><a href="#半角のアルファベット数字_アンダースコアを組み合わせる"
+id="toc-半角のアルファベット数字_アンダースコアを組み合わせる"><span
+class="toc-section-number">8.1</span>
+半角のアルファベット、数字、<code>_</code>(アンダースコア)を組み合わせる</a></li>
+<li><a href="#最初の文字には数字を使わない"
+id="toc-最初の文字には数字を使わない"><span
+class="toc-section-number">8.2</span>
+最初の文字には数字を使わない</a></li>
+<li><a href="#予約語を使わない" id="toc-予約語を使わない"><span
+class="toc-section-number">8.3</span> 予約語を使わない</a></li>
+<li><a href="#大文字は使わない" id="toc-大文字は使わない"><span
+class="toc-section-number">8.4</span> 大文字は使わない</a></li>
+<li><a href="#単語間は_でつなぐ" id="toc-単語間は_でつなぐ"><span
+class="toc-section-number">8.5</span>
+単語間は<code>_</code>でつなぐ</a></li>
+<li><a href="#極端に長い短い名前は避ける"
+id="toc-極端に長い短い名前は避ける"><span
+class="toc-section-number">8.6</span>
+極端に長い・短い名前は避ける</a></li>
 </ul></li>
 </ul> 
         <!-- ---------------------------------------- -->
@@ -90,7 +115,7 @@ class="toc-section-number">5.5</span> 四角形を配置する</a></li>
 
     <header class="markdown-body">
       <p>Pythonで釣りゲームを作ろう プロトタイプ版</p>
-      <p>2024年08月28日</p>
+      <p>2024年08月29日</p>
     </header>
 
     <main class="markdown-body">
@@ -102,36 +127,23 @@ class="toc-section-number">5.5</span> 四角形を配置する</a></li>
       class="header-section-number">2</span> はじめに</h1>
       <p>このオンラインテキストでは、<strong>ゲームづくりを通じて、Pythonプログラミングを学ぶことができます</strong>。
       本来は<strong>90分x8回</strong>の講義で、テキストを進めると<strong>最終的にゲームが完成する</strong>形式ですが、今回は短い時間のため、<strong>サンプルを改造しながら、Pythonについて学ぶ</strong>形式になっています。</p>
-      <h1 data-number="3" id="もくじ-要編集"><span
-      class="header-section-number">3</span> もくじ　※要編集</h1>
+      <h1 data-number="3" id="もくじ"><span
+      class="header-section-number">3</span> もくじ</h1>
       <ul>
-      <li><a href="basic05.html#条件分岐とは">環境構築</a></li>
-      <li><a href="basic05.html#条件分岐とは">プログラムの実行</a></li>
+      <li><a href="digest.html#環境構築">環境構築</a></li>
       <li><a
-      href="basic05.html#if文">キーボードでキャラクターを操作</a></li>
-      <li><a href="basic05.html#関係演算子">ガチャを作ろう！</a></li>
+      href="digest.html#キーボードでキャラクターを操作">キーボードでキャラクターを操作</a></li>
+      <li><a href="digest.html#変数とは">変数とは</a></li>
+      <li><a
+      href="digest.html#ガチャを作ろう！">ガチャを作ろう！</a></li>
       </ul>
       <h1 data-number="4" id="環境構築"><span
       class="header-section-number">4</span> 環境構築</h1>
       <p>Pythonでプログラミングをするためには、環境の構築が必要です。レポートを書くためにWordやGoogleDocumentといったテキストエディタが必要であるのと同じように、<strong>プログラミングにはソースコードエディタが必要</strong>です。今回は、<strong>Visual
       Studio
       Code</strong>(VSCode)とよばれるソースコードエディタを用います。</p>
-      <h2 data-number="4.1" id="vscodeのインストール"><span
-      class="header-section-number">4.1</span> VSCodeのインストール</h2>
-      <p>以下のページから、VSCodeをインストールしてください。</p>
       <p><a
-      href="https://code.visualstudio.com/download">https://code.visualstudio.com/download</a></p>
-      <p>… (インストーラの起動とインスト) <a
-      href="https://note.com/yuuuu_tech/n/nf7d25a6a74d9">参考資料</a></p>
-      <h2 data-number="4.2" id="pythonのインストール"><span
-      class="header-section-number">4.2</span> Pythonのインストール</h2>
-      <h2 data-number="4.3" id="vscodeでpythonを使う設定"><span
-      class="header-section-number">4.3</span>
-      VSCodeでPythonを使う設定</h2>
-      <h2 data-number="4.4" id="初めてのプログラミング"><span
-      class="header-section-number">4.4</span>
-      初めてのプログラミング</h2>
-      <p>（ファイルの作り方、プログラムの記述、実行）</p>
+      href="https://gammasoft.jp/blog/how-to-start-visual-studio-code-for-python/">このページ</a>に従って、環境構築を行ってください。</p>
       <p><br></p>
       <h1 data-number="5" id="キーボードでキャラクターを操作"><span
       class="header-section-number">5</span>
@@ -139,7 +151,7 @@ class="toc-section-number">5.5</span> 四角形を配置する</a></li>
       <h2 data-number="5.1" id="まずはサンプルを触ってみる"><span
       class="header-section-number">5.1</span>
       まずはサンプルを触ってみる</h2>
-      <p>以下のプログラムをコピー＆ペーストして実行してみてください。すると、画像のような画面が表示されると思います。</p>
+      <p><code>move-rect.py</code>を新規作成し、以下のプログラムをコピー＆ペーストして実行してみてください。すると、画像のような画面が表示されると思います。</p>
       <figure>
       <img src="figs/sub/move-rect.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -192,7 +204,7 @@ class="toc-section-number">5.5</span> 四角形を配置する</a></li>
       <h2 data-number="5.2" id="ウィンドウのタイトルを変更する"><span
       class="header-section-number">5.2</span>
       ウィンドウのタイトルを変更する</h2>
-      <p><code>3行目</code>の<code>"move-rect"</code>の部分で、<strong>ウィンドウのタイトルを指定</strong>しています。試しに、<code>"test"</code>に変更してみてください。</p>
+      <p><code>3行目</code>の<code>root.title("move-rect")</code>でウィンドウのタイトルを<strong>move-rect</strong>に設定しています。試しに、<code>"test"</code>に変更してみてください。</p>
       <div class="sourceCode" id="cb2" data-startFrom="3"
       data-caption="move-rect.py(抜粋)"><pre
       class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 2;"><span id="cb2-3"><a href="#cb2-3"></a><span class="co"># ウィンドウ設置</span></span>
@@ -266,7 +278,7 @@ class="toc-section-number">5.5</span> 四角形を配置する</a></li>
       <h2 data-number="5.5" id="四角形を配置する"><span
       class="header-section-number">5.5</span> 四角形を配置する</h2>
       <p>以下の部分で、用意したキャンバスに四角形を配置しています。</p>
-      <p><code>14行目</code>の数字を変更することで、四角形の大きさを変更できます。試しに<code>100</code>に変更して、四角形が大きくなることを確認してください。</p>
+      <p><code>14行目</code>の<code>rect_size = 50</code>で四角形の大きさを設定しています。試しに<code>100</code>に変更して、四角形が大きくなることを確認してください。</p>
       <div class="sourceCode" id="cb6" data-startFrom="13"
       data-caption="move-rect.py(抜粋)"><pre
       class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 12;"><span id="cb6-13"><a href="#cb6-13"></a><span class="co"># 四角形を配置</span></span>
@@ -274,7 +286,7 @@ class="toc-section-number">5.5</span> 四角形を配置する</a></li>
 <span id="cb6-15"><a href="#cb6-15"></a>x <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb6-16"><a href="#cb6-16"></a>y <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb6-17"><a href="#cb6-17"></a>canvas.create_rectangle(x,y,x<span class="op">+</span>rect_size,y<span class="op">+</span>rect_size,fill<span class="op">=</span><span class="st">&quot;blue&quot;</span>,tag<span class="op">=</span><span class="st">&quot;rect&quot;</span>)</span></code></pre></div>
-      <p><code>15～16行目</code>の数字を変更することで、四角形の初期位置を変更できます。</p>
+      <p><code>15～16行目</code>の<code>x = 10</code>、<code>y = 10</code>の部分で、四角形の左上の角の座標を指定しています。数字を変更することで、四角形の初期位置を変更できます。</p>
       <p>ただし、プログラミングで用いられる座標軸は、<strong>数学で用いられるものと向きが違う</strong>ので<strong>注意が必要です</strong>。</p>
       <figure>
       <img src="figs/digest/座標系.png" alt="img" />
@@ -301,6 +313,8 @@ class="toc-section-number">5.5</span> 四角形を配置する</a></li>
 <span id="cb8-16"><a href="#cb8-16"></a>y <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb8-17"><a href="#cb8-17"></a>canvas.create_rectangle(x,y,x<span class="op">+</span>rect_size,y<span class="op">+</span>rect_size,fill<span class="op">=</span><span class="st">&quot;blue&quot;</span>,tag<span class="op">=</span><span class="st">&quot;rect&quot;</span>)</span></code></pre></div>
       <p><code>14行目</code>の<code>rect_size = 50</code>は、<strong>「今後<code>rect_size</code>という名前が出てきたらそれを50と読み替えてください」</strong>という意味です。</p>
+      <p><a href="digest.html#変数とは">変数</a>
+      については後ほど<strong>詳しく解説します</strong>。</p>
       <p>そして、<code>canvas.create_rectangle</code>という命令で四角形を配置しています。
       以下のように四角形の<strong>左上と右下の座標</strong>、<strong>色</strong>、<strong>名前</strong>を指定しています。</p>
       <figure>
@@ -308,6 +322,204 @@ class="toc-section-number">5.5</span> 四角形を配置する</a></li>
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       </div>
+      <h2 data-number="5.6"
+      id="キーボードが押されたときの処理を設定する"><span
+      class="header-section-number">5.6</span>
+      キーボードが押されたときの処理を設定する</h2>
+      <p><code>19行目</code>からはキーボードが押されたときの処理が記述されています。</p>
+      <p><code>22行目</code>の<code>speed = 10</code>で四角形が移動する速度を設定しています。
+      数値を変更して、<strong>移動速度が変わることを確認</strong>してください。</p>
+      <div class="sourceCode" id="cb9" data-startFrom="19"
+      data-caption="move-rect.py(抜粋)"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 18;"><span id="cb9-19"><a href="#cb9-19"></a><span class="co"># 何かのキーが押されたときに実行される関数</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="kw">def</span> on_key_press(event):</span>
+<span id="cb9-21"><a href="#cb9-21"></a>    <span class="kw">global</span> x,y</span>
+<span id="cb9-22"><a href="#cb9-22"></a>    speed <span class="op">=</span> <span class="dv">10</span> <span class="op">&lt;-</span>ここを変更</span>
+<span id="cb9-23"><a href="#cb9-23"></a>    key <span class="op">=</span> event.keysym <span class="co"># 変数keyに「w」や「a」など、押したキーの名前が格納される</span></span></code></pre></div>
+      <h2 data-number="5.7" id="キーボードが押されたか判定する"><span
+      class="header-section-number">5.7</span>
+      キーボードが押されたか判定する</h2>
+      <p><code>23行目</code>の<code>key = event.keysym</code>では、変数keyに「w」や「a」など、押したキーの名前を代入しています。</p>
+      <p><code>24行目</code>からは<code>if文</code>と呼ばれる、<strong>条件分岐</strong>をおこなう部分です。後に詳しく解説するので、今は飛ばしてOKです。</p>
+      <div class="sourceCode" id="cb10" data-startFrom="23"
+      data-caption="move-rect.py(抜粋)"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 22;"><span id="cb10-23"><a href="#cb10-23"></a>    key <span class="op">=</span> event.keysym <span class="co"># 変数keyに「w」や「a」など、押したキーの名前が格納される</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a>    <span class="cf">if</span>(key <span class="op">==</span> <span class="st">&quot;w&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Up&quot;</span>):</span>
+<span id="cb10-25"><a href="#cb10-25"></a>        <span class="bu">print</span>(<span class="st">&quot;↑&quot;</span>)</span>
+<span id="cb10-26"><a href="#cb10-26"></a>        y <span class="op">=</span> y <span class="op">-</span> speed</span>
+<span id="cb10-27"><a href="#cb10-27"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;a&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Left&quot;</span>):</span>
+<span id="cb10-28"><a href="#cb10-28"></a>        <span class="bu">print</span>(<span class="st">&quot;←&quot;</span>)</span>
+<span id="cb10-29"><a href="#cb10-29"></a>        x <span class="op">=</span> x <span class="op">-</span> speed</span>
+<span id="cb10-30"><a href="#cb10-30"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;s&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Down&quot;</span>):</span>
+<span id="cb10-31"><a href="#cb10-31"></a>        <span class="bu">print</span>(<span class="st">&quot;↓&quot;</span>)</span>
+<span id="cb10-32"><a href="#cb10-32"></a>        y <span class="op">=</span> y <span class="op">+</span> speed</span>
+<span id="cb10-33"><a href="#cb10-33"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;d&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Right&quot;</span>):</span>
+<span id="cb10-34"><a href="#cb10-34"></a>        <span class="bu">print</span>(<span class="st">&quot;→&quot;</span>)</span>
+<span id="cb10-35"><a href="#cb10-35"></a>        x <span class="op">=</span> x <span class="op">+</span> speed</span></code></pre></div>
+      <h2 data-number="5.8" id="まとめ"><span
+      class="header-section-number">5.8</span> まとめ</h2>
+      <p>ここまでキーボードで四角形を操作するプログラムの簡単な説明を行いました。
+      このようにプログラムでは、<strong>1つ1つの命令を組み合わせて</strong>複雑な動作を実現しています。
+      自分でプログラムを書くためには、この<strong>1つ1つの命令文を知る</strong>ことが大事になります。今回は、特に基本となる命令について学びましょう。</p>
+      <hr />
+      <h1 data-number="6" id="変数とは"><span
+      class="header-section-number">6</span> 変数とは</h1>
+      <figure>
+      <img src="figs/03/var.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>変数とは、<strong>データを入れておく箱</strong>のようなもので、箱の中身は<strong>いつでも確認したり変更することができます</strong>。
+      変数<code>a</code>に値<code>10</code>を入れるときは、以下のように書きます。</p>
+      <div class="sourceCode" id="cb11"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">10</span></span></code></pre></div>
+      <p>この変数に値を入れる<code>=</code>は、<strong>代入演算子</strong>と呼ばれます。</p>
+      <p></br></p>
+      <hr />
+      <p>変数に入れた値は、<strong>簡単に</strong>取り出すことができます。print文の<code>()</code>の中に変数名を記述するだけです。新しいファイル<code>test3-1.py</code>を作成してください。（方法は<a
+      href="https://gammasoft.jp/blog/how-to-start-visual-studio-code-for-python/">環境構築で参考にしたページ</a>の最後の方を確認してください。）</p>
+      <div class="sourceCode" id="cb12" data-caption="test3-1.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="bu">print</span>(a)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>10</code></pre>
+      <p>1行目で変数<code>a</code>に10を代入しています。そのため、2行目のprint文の<code>()</code>の中の<code>a</code>は10と読み替えられました。</p>
+      <br>
+      <div class="note type-tips">
+      <p><strong>「=」の使い方に注意!!</strong></p>
+      <p>代入演算子<code>=</code>は、<strong>数学で使うものとは意味が異なり、左の変数に右の値を代入するはたらき</strong>を持ちます。
+      そのため、以下のプログラムを実行するとエラーが起きます。</p>
+      <div class="sourceCode" id="cb14" data-caption="test.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="dv">10</span> <span class="op">=</span> a</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="bu">print</span>(a)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>PS C:\******&gt; &amp; C:/******/python.exe c:/******/test.py
+  File &quot;c:\******\test.py&quot;, line 1
+    10 = a
+    ^^
+SyntaxError: cannot assign to literal here. Maybe you meant &#39;==&#39; instead of &#39;=&#39;?</code></pre>
+      <p>「<code>10</code>は<strong>変数ではないので代入できません</strong>」と言われてしまいます。</p>
+      </div>
+      <hr />
+      <h1 data-number="7" id="変数の値を変更する"><span
+      class="header-section-number">7</span> 変数の値を変更する</h1>
+      <p>変数に代入し直せば、変数の値を変更することができます。</p>
+      <div class="sourceCode" id="cb16" data-caption="test3-3.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="bu">print</span>(a)</span>
+<span id="cb16-3"><a href="#cb16-3"></a>a <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="bu">print</span>(a)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>10
+20</code></pre>
+      <p><br></p>
+      <hr />
+      <p><strong><code>a = a + 2</code>と書けば、<code>a</code>の値を2だけ増やすことができます</strong>。</p>
+      <div class="sourceCode" id="cb18" data-caption="test3-4.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="bu">print</span>(a)</span>
+<span id="cb18-3"><a href="#cb18-3"></a>a <span class="op">=</span> a <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="bu">print</span>(a)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>10
+12</code></pre>
+      <hr />
+      <ul>
+      <li><strong>Challenge2-1</strong>　上のプログラムの1行目を書き換えて、<code>a</code>の値を<code>123</code>に変更しましょう。</li>
+      <li><strong>Challenge2-2</strong>　3行目を書き換えて、<code>a</code>の値を<strong>2倍</strong>にするよう変更しましょう。</li>
+      </ul>
+      <p><strong><i class="fa-solid fa-check"></i>解答</strong></p>
+      <p>Challenge2-1: <span
+      class="masked"><code>a = 123</code></span></p>
+      <p>Challenge2-2: <span
+      class="masked"><code>a = a * 2</code></span></p>
+      <p></br></p>
+      <hr />
+      <p><strong>複数の文字列も、<code>+</code>を用いてつなぐことができます</strong>。</p>
+      <h1 data-number="8" id="変数の命名規則"><span
+      class="header-section-number">8</span> 変数の命名規則</h1>
+      <p>変数名のつけ方には以下の決まりがあります。</p>
+      <h2 data-number="8.1"
+      id="半角のアルファベット数字_アンダースコアを組み合わせる"><span
+      class="header-section-number">8.1</span>
+      半角のアルファベット、数字、<code>_</code>(アンダースコア)を組み合わせる</h2>
+      <p>日本語やその他の記号は使わないようにしましょう。</p>
+      <div class="sourceCode" id="cb20" data-caption="⭕良い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>player1 <span class="op">=</span> <span class="st">&quot;Taro&quot;</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>stage_name <span class="op">=</span> <span class="st">&quot;Island&quot;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb21" data-caption="❌悪い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>ｓｃｏｒｅ <span class="op">=</span> <span class="dv">99</span>    <span class="op">&lt;-</span>全角</span>
+<span id="cb21-2"><a href="#cb21-2"></a>曜日 <span class="op">=</span> <span class="st">&quot;sunday&quot;</span>    <span class="op">&lt;-</span>変数名が日本語</span>
+<span id="cb21-3"><a href="#cb21-3"></a>stage2<span class="op">-</span><span class="dv">1</span> <span class="op">=</span> <span class="st">&quot;Ocean&quot;</span> <span class="op">&lt;-</span>「<span class="op">-</span>」は引き算の記号として認識される</span></code></pre></div>
+      <h2 data-number="8.2" id="最初の文字には数字を使わない"><span
+      class="header-section-number">8.2</span>
+      最初の文字には数字を使わない</h2>
+      <p>2文字目以降は自由に使えます。</p>
+      <div class="sourceCode" id="cb22" data-caption="⭕良い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a>player1 <span class="op">=</span> <span class="st">&quot;Taro&quot;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb23" data-caption="❌悪い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a><span class="dv">1</span><span class="er">st_player</span> <span class="op">=</span> <span class="st">&quot;Tom&quot;</span></span></code></pre></div>
+      <h2 data-number="8.3" id="予約語を使わない"><span
+      class="header-section-number">8.3</span> 予約語を使わない</h2>
+      <p>たとえば<code>print</code>のような、Pythonへの命令として決まっている単語をそのまま使うことはできません。</p>
+      <div class="sourceCode" id="cb24" data-caption="❌悪い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a><span class="bu">print</span> <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="bu">print</span>(<span class="bu">print</span>)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>PS C:\******&gt; &amp; C:/******/python.exe c:/******/test.py
+  File &quot;c:\******\test.py&quot;, line 2, in &lt;module&gt;
+    print(print)
+TypeError: &#39;int&#39; object is not callable</code></pre>
+      <p>1行目でprintに値が上書きされてしまったので、その後ろではprint文が使えなくなってしまいます。</p>
+      <hr />
+      <p>ここからは読みやすいコードにするためのマナーです。(絶対に守る必要はありませんが、一般的な規則です)</p>
+      <h2 data-number="8.4" id="大文字は使わない"><span
+      class="header-section-number">8.4</span> 大文字は使わない</h2>
+      <p>変数の名前は<strong>全て小文字</strong>にするのが一般的です。</p>
+      <div class="sourceCode" id="cb26" data-caption="⭕良い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a>player1 <span class="op">=</span> <span class="st">&quot;Taro&quot;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb27" data-caption="❌悪い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a>Player1 <span class="op">=</span> <span class="st">&quot;Taro&quot;</span></span></code></pre></div>
+      <h2 data-number="8.5" id="単語間は_でつなぐ"><span
+      class="header-section-number">8.5</span>
+      単語間は<code>_</code>でつなぐ</h2>
+      <div class="sourceCode" id="cb28" data-caption="⭕良い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a>player_name <span class="op">=</span> <span class="st">&quot;Taro&quot;</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>max_size <span class="op">=</span> <span class="dv">12</span></span></code></pre></div>
+      <h2 data-number="8.6" id="極端に長い短い名前は避ける"><span
+      class="header-section-number">8.6</span>
+      極端に長い・短い名前は避ける</h2>
+      <p>長すぎると読みにくく、短すぎると何を示す変数かわからなくなるので避けましょう。</p>
+      <div class="sourceCode" id="cb29" data-caption="⭕良い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>max_mapsize_x <span class="op">=</span> <span class="dv">64</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>score <span class="op">=</span> <span class="dv">1100</span></span></code></pre></div>
+      <div class="sourceCode" id="cb30" data-caption="❌悪い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a>maximum_value_in_the_x_direction_on_the_map_screen <span class="op">=</span> <span class="dv">64</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>s <span class="op">=</span> <span class="dv">1100</span></span></code></pre></div>
+      <h3 data-number="8.6.1"
+      id="charenge2-3-次の変数名は適切か判断しましょう"><span
+      class="header-section-number">8.6.1</span>
+      <strong>charenge2-3</strong>
+      次の変数名は適切か判断しましょう。</h3>
+      <ul>
+      <li><code>tmp</code> ・・・ <span
+      class="masked">⭕　　　　　　　　　　　　　　</span></li>
+      <li><code>Name</code> ・・・ <span
+      class="masked">❌全て小文字にするべきです</span></li>
+      <li><code>24th_anniversary</code> ・・・ <span
+      class="masked">❌最初の文字は数字ではいけません</span></li>
+      <li><code>g20</code> ・・・ <span
+      class="masked">⭕　　　　　　　　　　　　　　</span></li>
+      <li><code>ともだち</code> ・・・ <span
+      class="masked">❌変数名を日本語にすることは避けましょう</span></li>
+      <li><code>high-school</code> ・・・ <span
+      class="masked">❌<code>-</code>(ハイフン)は引き算として認識されてしまいます</span></li>
+      </ul>
       <!-- ---------------------------------------- -->
     </main>
 

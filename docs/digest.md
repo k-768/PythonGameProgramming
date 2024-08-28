@@ -1,7 +1,7 @@
 ---
 var:
   header-title: "Pythonで釣りゲームを作ろう プロトタイプ版"
-  header-date: "2024年08月28日"
+  header-date: "2024年08月29日"
 ---
 
 # Pythonで釣りゲームを作ろう プロトタイプ版
@@ -15,35 +15,20 @@ var:
 このオンラインテキストでは、**ゲームづくりを通じて、Pythonプログラミングを学ぶことができます**。
 本来は**90分x8回**の講義で、テキストを進めると**最終的にゲームが完成する**形式ですが、今回は短い時間のため、**サンプルを改造しながら、Pythonについて学ぶ**形式になっています。
 
-## もくじ　※要編集
+## もくじ
 
--  [環境構築](basic05.html#条件分岐とは) 
--  [プログラムの実行](basic05.html#条件分岐とは) 
--  [キーボードでキャラクターを操作](basic05.html#if文) 
--  [ガチャを作ろう！](basic05.html#関係演算子)
+-  [環境構築](digest.html#環境構築) 
+-  [キーボードでキャラクターを操作](digest.html#キーボードでキャラクターを操作) 
+-  [変数とは](digest.html#変数とは)
+-  [ガチャを作ろう！](digest.html#ガチャを作ろう！) 
 
 
 ## 環境構築
 
 Pythonでプログラミングをするためには、環境の構築が必要です。レポートを書くためにWordやGoogleDocumentといったテキストエディタが必要であるのと同じように、**プログラミングにはソースコードエディタが必要**です。今回は、**Visual Studio Code**(VSCode)とよばれるソースコードエディタを用います。
 
+[このページ](https://gammasoft.jp/blog/how-to-start-visual-studio-code-for-python/)に従って、環境構築を行ってください。
 
-### VSCodeのインストール
-
-以下のページから、VSCodeをインストールしてください。
-
-[https://code.visualstudio.com/download](https://code.visualstudio.com/download)
-
-... (インストーラの起動とインスト)
-[参考資料](https://note.com/yuuuu_tech/n/nf7d25a6a74d9)
-
-### Pythonのインストール
-
-### VSCodeでPythonを使う設定
-
-### 初めてのプログラミング
-
-（ファイルの作り方、プログラムの記述、実行）
 
 <br>
 
@@ -51,7 +36,7 @@ Pythonでプログラミングをするためには、環境の構築が必要�
 
 ### まずはサンプルを触ってみる
 
-以下のプログラムをコピー＆ペーストして実行してみてください。すると、画像のような画面が表示されると思います。
+`move-rect.py`を新規作成し、以下のプログラムをコピー＆ペーストして実行してみてください。すると、画像のような画面が表示されると思います。
 
 ![img](figs/sub/move-rect.png)
 
@@ -106,7 +91,7 @@ root.mainloop()
 
 ### ウィンドウのタイトルを変更する
 
-`3行目`の`"move-rect"`の部分で、**ウィンドウのタイトルを指定**しています。試しに、`"test"`に変更してみてください。
+`3行目`の`root.title("move-rect")`でウィンドウのタイトルを**move-rect**に設定しています。試しに、`"test"`に変更してみてください。
 
 ```python{.numberLines startFrom="3" caption="move-rect.py(抜粋)"}
 # ウィンドウ設置
@@ -190,7 +175,7 @@ canvas.pack()
 
 以下の部分で、用意したキャンバスに四角形を配置しています。
 
-`14行目`の数字を変更することで、四角形の大きさを変更できます。試しに`100`に変更して、四角形が大きくなることを確認してください。
+`14行目`の`rect_size = 50`で四角形の大きさを設定しています。試しに`100`に変更して、四角形が大きくなることを確認してください。
 
 ```python{.numberLines startFrom="13" caption="move-rect.py(抜粋)"}
 # 四角形を配置
@@ -200,7 +185,7 @@ y = 10
 canvas.create_rectangle(x,y,x+rect_size,y+rect_size,fill="blue",tag="rect")
 ```
 
-`15～16行目`の数字を変更することで、四角形の初期位置を変更できます。
+`15～16行目`の`x = 10`、`y = 10`の部分で、四角形の左上の角の座標を指定しています。数字を変更することで、四角形の初期位置を変更できます。
 
 ただし、プログラミングで用いられる座標軸は、**数学で用いられるものと向きが違う**ので**注意が必要です**。
 
@@ -234,6 +219,8 @@ canvas.create_rectangle(x,y,x+rect_size,y+rect_size,fill="blue",tag="rect")
 
 `14行目`の`rect_size = 50`は、**「今後`rect_size`という名前が出てきたらそれを50と読み替えてください」**という意味です。
 
+[変数](digest.html#変数とは) については後ほど**詳しく解説します**。
+
 
 そして、`canvas.create_rectangle`という命令で四角形を配置しています。
 以下のように四角形の**左上と右下の座標**、**色**、**名前**を指定しています。
@@ -242,4 +229,256 @@ canvas.create_rectangle(x,y,x+rect_size,y+rect_size,fill="blue",tag="rect")
 
 </div>
 
+### キーボードが押されたときの処理を設定する
 
+`19行目`からはキーボードが押されたときの処理が記述されています。
+
+`22行目`の`speed = 10`で四角形が移動する速度を設定しています。
+数値を変更して、**移動速度が変わることを確認**してください。
+
+```python{.numberLines startFrom="19" caption="move-rect.py(抜粋)"}
+# 何かのキーが押されたときに実行される関数
+def on_key_press(event):
+    global x,y
+    speed = 10 <-ここを変更
+    key = event.keysym # 変数keyに「w」や「a」など、押したキーの名前が格納される
+```
+
+### キーボードが押されたか判定する
+
+`23行目`の`key = event.keysym`では、変数keyに「w」や「a」など、押したキーの名前を代入しています。
+
+`24行目`からは`if文`と呼ばれる、**条件分岐**をおこなう部分です。後に詳しく解説するので、今は飛ばしてOKです。
+
+```python{.numberLines startFrom="23" caption="move-rect.py(抜粋)"}
+    key = event.keysym # 変数keyに「w」や「a」など、押したキーの名前が格納される
+    if(key == "w" or key == "Up"):
+        print("↑")
+        y = y - speed
+    elif(key == "a" or key == "Left"):
+        print("←")
+        x = x - speed
+    elif(key == "s" or key == "Down"):
+        print("↓")
+        y = y + speed
+    elif(key == "d" or key == "Right"):
+        print("→")
+        x = x + speed
+```
+### まとめ
+
+ここまでキーボードで四角形を操作するプログラムの簡単な説明を行いました。
+このようにプログラムでは、**1つ1つの命令を組み合わせて**複雑な動作を実現しています。
+自分でプログラムを書くためには、この**1つ1つの命令文を知る**ことが大事になります。今回は、特に基本となる命令について学びましょう。
+
+---
+
+## 変数とは
+
+![img](figs/03/var.png)
+
+変数とは、**データを入れておく箱**のようなもので、箱の中身は**いつでも確認したり変更することができます**。
+変数`a`に値`10`を入れるときは、以下のように書きます。
+
+
+```python
+a = 10
+```
+この変数に値を入れる`=`は、**代入演算子**と呼ばれます。
+
+</br>
+
+---
+
+変数に入れた値は、**簡単に**取り出すことができます。print文の`()`の中に変数名を記述するだけです。新しいファイル`test3-1.py`を作成してください。（方法は[環境構築で参考にしたページ](https://gammasoft.jp/blog/how-to-start-visual-studio-code-for-python/)の最後の方を確認してください。）
+
+```python{.numberLines caption="test3-1.py"}
+a = 10
+print(a)
+```
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+10
+```
+
+1行目で変数`a`に10を代入しています。そのため、2行目のprint文の`()`の中の`a`は10と読み替えられました。
+
+<br>
+<div class="note type-tips">
+
+**「=」の使い方に注意!!**
+
+代入演算子`=`は、**数学で使うものとは意味が異なり、左の変数に右の値を代入するはたらき**を持ちます。
+そのため、以下のプログラムを実行するとエラーが起きます。
+
+```python{.numberLines caption="test.py"}
+10 = a
+print(a)
+```
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+PS C:\******> & C:/******/python.exe c:/******/test.py
+  File "c:\******\test.py", line 1
+    10 = a
+    ^^
+SyntaxError: cannot assign to literal here. Maybe you meant '==' instead of '='?
+```
+
+「`10`は**変数ではないので代入できません**」と言われてしまいます。
+
+
+</div>
+
+---
+
+## 変数の値を変更する
+
+変数に代入し直せば、変数の値を変更することができます。
+
+```python{.numberLines caption="test3-3.py"}
+a = 10
+print(a)
+a = 20
+print(a)
+```
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+10
+20
+```
+
+<br>
+
+---
+
+**`a = a + 2`と書けば、`a`の値を2だけ増やすことができます**。
+
+
+```python{.numberLines caption="test3-4.py"}
+a = 10
+print(a)
+a = a + 2
+print(a)
+```
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+10
+12
+```
+
+---
+
+- **Challenge2-1**　上のプログラムの1行目を書き換えて、`a`の値を`123`に変更しましょう。
+- **Challenge2-2**　3行目を書き換えて、`a`の値を**2倍**にするよう変更しましょう。
+
+**<i class="fa-solid fa-check"></i>解答**
+
+Challenge2-1: <span class="masked">`a = 123`</span>
+
+Challenge2-2: <span class="masked">`a = a * 2`</span>
+
+</br>
+
+---
+
+**複数の文字列も、`+`を用いてつなぐことができます**。
+
+## 変数の命名規則
+
+変数名のつけ方には以下の決まりがあります。
+
+### 半角のアルファベット、数字、`_`(アンダースコア)を組み合わせる
+
+日本語やその他の記号は使わないようにしましょう。
+
+```python{.numberLines caption="⭕良い例"}
+a = 10
+player1 = "Taro"
+stage_name = "Island"
+```
+```python{.numberLines caption="❌悪い例"}
+ｓｃｏｒｅ = 99    <-全角
+曜日 = "sunday"    <-変数名が日本語
+stage2-1 = "Ocean" <-「-」は引き算の記号として認識される
+```
+
+### 最初の文字には数字を使わない
+
+2文字目以降は自由に使えます。
+
+```python{.numberLines caption="⭕良い例"}
+player1 = "Taro"
+```
+```python{.numberLines caption="❌悪い例"}
+1st_player = "Tom"
+```
+
+### 予約語を使わない
+
+たとえば`print`のような、Pythonへの命令として決まっている単語をそのまま使うことはできません。
+
+```python{.numberLines caption="❌悪い例"}
+print = 5
+print(print)
+```
+
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+PS C:\******> & C:/******/python.exe c:/******/test.py
+  File "c:\******\test.py", line 2, in <module>
+    print(print)
+TypeError: 'int' object is not callable
+```
+
+1行目でprintに値が上書きされてしまったので、その後ろではprint文が使えなくなってしまいます。
+
+---
+
+ここからは読みやすいコードにするためのマナーです。(絶対に守る必要はありませんが、一般的な規則です)
+
+
+### 大文字は使わない
+
+変数の名前は**全て小文字**にするのが一般的です。
+
+```python{.numberLines caption="⭕良い例"}
+player1 = "Taro"
+```
+```python{.numberLines caption="❌悪い例"}
+Player1 = "Taro"
+```
+
+### 単語間は`_`でつなぐ
+
+```python{.numberLines caption="⭕良い例"}
+player_name = "Taro"
+max_size = 12
+```
+
+### 極端に長い・短い名前は避ける
+
+長すぎると読みにくく、短すぎると何を示す変数かわからなくなるので避けましょう。
+
+```python{.numberLines caption="⭕良い例"}
+max_mapsize_x = 64
+score = 1100
+```
+```python{.numberLines caption="❌悪い例"}
+maximum_value_in_the_x_direction_on_the_map_screen = 64
+s = 1100
+
+```
+
+#### **charenge2-3** 次の変数名は適切か判断しましょう。
+
+- `tmp` ・・・ <span class="masked">⭕　　　　　　　　　　　　　　</span>
+- `Name` ・・・ <span class="masked">❌全て小文字にするべきです</span>
+- `24th_anniversary` ・・・ <span class="masked">❌最初の文字は数字ではいけません</span>
+- `g20` ・・・ <span class="masked">⭕　　　　　　　　　　　　　　</span>
+- `ともだち` ・・・ <span class="masked">❌変数名を日本語にすることは避けましょう</span>
+- `high-school` ・・・ <span class="masked">❌`-`(ハイフン)は引き算として認識されてしまいます</span>
