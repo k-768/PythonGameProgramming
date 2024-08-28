@@ -70,10 +70,16 @@ class="toc-section-number">5</span> キーボードでキャラクターを操�
 id="toc-まずはサンプルを触ってみる"><span
 class="toc-section-number">5.1</span>
 まずはサンプルを触ってみる</a></li>
+<li><a href="#ウィンドウのタイトルを変更する"
+id="toc-ウィンドウのタイトルを変更する"><span
+class="toc-section-number">5.2</span>
+ウィンドウのタイトルを変更する</a></li>
 <li><a href="#ウィンドウの大きさを変更する"
 id="toc-ウィンドウの大きさを変更する"><span
-class="toc-section-number">5.2</span>
+class="toc-section-number">5.3</span>
 ウィンドウの大きさを変更する</a></li>
+<li><a href="#キャンバスを変更する" id="toc-キャンバスを変更する"><span
+class="toc-section-number">5.4</span> キャンバスを変更する</a></li>
 </ul></li>
 </ul> 
         <!-- ---------------------------------------- -->
@@ -98,11 +104,10 @@ class="toc-section-number">5.2</span>
       class="header-section-number">3</span> もくじ　※要編集</h1>
       <ul>
       <li><a href="basic05.html#条件分岐とは">環境構築</a></li>
+      <li><a href="basic05.html#条件分岐とは">プログラムの実行</a></li>
       <li><a
       href="basic05.html#if文">キーボードでキャラクターを操作</a></li>
-      <li><a href="basic05.html#関係演算子">関係演算子</a></li>
-      <li><a href="basic05.html#if-else文">if-else文</a></li>
-      <li><a href="basic05.html#if-elif文">if-elif文</a></li>
+      <li><a href="basic05.html#関係演算子">ガチャを作ろう！</a></li>
       </ul>
       <h1 data-number="4" id="環境構築"><span
       class="header-section-number">4</span> 環境構築</h1>
@@ -182,16 +187,28 @@ class="toc-section-number">5.2</span>
 <span id="cb1-41"><a href="#cb1-41"></a>root.mainloop()</span></code></pre></div>
       <p><strong>ウィンドウの×ボタンを押すとプログラムが終了します。</strong>
       <br></p>
-      <h2 data-number="5.2" id="ウィンドウの大きさを変更する"><span
+      <h2 data-number="5.2" id="ウィンドウのタイトルを変更する"><span
       class="header-section-number">5.2</span>
-      ウィンドウの大きさを変更する</h2>
-      <p><code>6行目</code>の<code>"600x300"</code>の部分で、<strong>表示するウィンドウのサイズを指定</strong>しています。試しに、<code>"600x300"</code>を<code>"400x600"</code>に変更してみてください。</p>
+      ウィンドウのタイトルを変更する</h2>
+      <p><code>3行目</code>の<code>"move-rect"</code>の部分で、<strong>ウィンドウのタイトルを指定</strong>しています。試しに、<code>"test"</code>に変更してみてください。</p>
       <div class="sourceCode" id="cb2" data-startFrom="3"
       data-caption="move-rect.py(抜粋)"><pre
       class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 2;"><span id="cb2-3"><a href="#cb2-3"></a><span class="co"># ウィンドウ設置</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a>root <span class="op">=</span> tk.Tk()</span>
-<span id="cb2-5"><a href="#cb2-5"></a>root.title(<span class="st">&quot;move-rect&quot;</span>)</span>
-<span id="cb2-6"><a href="#cb2-6"></a>root.geometry(<span class="st">&quot;400x600&quot;</span>) <span class="op">&lt;-</span>ここを変更</span></code></pre></div>
+<span id="cb2-5"><a href="#cb2-5"></a>root.title(<span class="st">&quot;test&quot;</span>)　<span class="op">&lt;-</span>ここを変更</span>
+<span id="cb2-6"><a href="#cb2-6"></a>root.geometry(<span class="st">&quot;400x600&quot;</span>) </span></code></pre></div>
+      <p>プログラムを実行して、タイトルが変わっていることを確認してください。</p>
+      <p><br></p>
+      <h2 data-number="5.3" id="ウィンドウの大きさを変更する"><span
+      class="header-section-number">5.3</span>
+      ウィンドウの大きさを変更する</h2>
+      <p><code>6行目</code>の<code>"600x300"</code>の部分で、<strong>表示するウィンドウのサイズを指定</strong>しています。試しに、<code>"600x300"</code>を<code>"400x600"</code>に変更してみてください。</p>
+      <div class="sourceCode" id="cb3" data-startFrom="3"
+      data-caption="move-rect.py(抜粋)"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 2;"><span id="cb3-3"><a href="#cb3-3"></a><span class="co"># ウィンドウ設置</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb3-5"><a href="#cb3-5"></a>root.title(<span class="st">&quot;move-rect&quot;</span>)</span>
+<span id="cb3-6"><a href="#cb3-6"></a>root.geometry(<span class="st">&quot;400x600&quot;</span>) <span class="op">&lt;-</span>ここを変更</span></code></pre></div>
       <p>実行すると、ウィンドウが縦長に変わります。このように、ウィンドウのサイズを<code>"幅x高さ"</code>で指定できます。<code>600</code>や<code>400</code>といった数字は<strong>ピクセル数</strong>を表しています。</p>
       <figure>
       <img src="figs/digest/400x600.png" alt="img" />
@@ -209,6 +226,40 @@ class="toc-section-number">5.2</span>
       <p>この場合、<code>1920x1080</code>がディスプレイ全体のサイズになります。</p>
       </div>
       <p><br></p>
+      <ul>
+      <li><strong>Challenge</strong>　ディスプレイの解像度を参考にして、ウィンドウが<strong>画面に大きく表示されるように</strong>、適当なサイズに変更してください。</li>
+      </ul>
+      <p><br></p>
+      <h2 data-number="5.4" id="キャンバスを変更する"><span
+      class="header-section-number">5.4</span> キャンバスを変更する</h2>
+      <p>キャンバスは、<strong>図形や画像を設置するために必要な下地</strong>です。</p>
+      <p><code>10行目</code>ではキャンバスの大きさや色を指定しています。
+      <code>width</code>が<strong>幅</strong>、<code>height</code>が<strong>高さ</strong>、<code>bg</code>が<strong>背景色</strong>に対応しています。
+      幅と高さを<strong>上で設定したウィンドウと同じ数値に変更</strong>してみてください。</p>
+      <div class="sourceCode" id="cb4" data-startFrom="9"
+      data-caption="move-rect.py(抜粋)"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 8;"><span id="cb4-9"><a href="#cb4-9"></a><span class="co"># キャンバス設置</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>canvas <span class="op">=</span> tk.Canvas(root,width <span class="op">=</span> xxx,height <span class="op">=</span> yyy,bg <span class="op">=</span> <span class="st">&quot;skyblue&quot;</span>) <span class="op">&lt;-</span>ここを変更</span>
+<span id="cb4-11"><a href="#cb4-11"></a>canvas.pack()</span></code></pre></div>
+      <p>以下の画像を参考に、色も変更してみましょう。<code>skyblue</code>を好きな色の名前に書き換えることで変更できます。</p>
+      <figure>
+      <img src="figs/digest/color.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <blockquote>
+      <p>出典:
+      https://stackoverflow.com/questions/4969543/colour-chart-for-tkinter-and-tix-using-python</p>
+      </blockquote>
+      <p>例えば<code>orange</code>に変更することで、<strong>背景色がオレンジ</strong>になります。</p>
+      <div class="sourceCode" id="cb5" data-startFrom="9"
+      data-caption="move-rect.py(抜粋)"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 8;"><span id="cb5-9"><a href="#cb5-9"></a><span class="co"># キャンバス設置</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>canvas <span class="op">=</span> tk.Canvas(root,width <span class="op">=</span> <span class="dv">800</span>,height <span class="op">=</span> <span class="dv">600</span>,bg <span class="op">=</span> <span class="st">&quot;orange&quot;</span>) <span class="op">&lt;-</span>ここを変更</span>
+<span id="cb5-11"><a href="#cb5-11"></a>canvas.pack()</span></code></pre></div>
+      <figure>
+      <img src="figs/digest/orange.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
       <!-- ---------------------------------------- -->
     </main>
 

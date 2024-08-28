@@ -18,10 +18,10 @@ var:
 ## もくじ　※要編集
 
 -  [環境構築](basic05.html#条件分岐とは) 
+-  [プログラムの実行](basic05.html#条件分岐とは) 
 -  [キーボードでキャラクターを操作](basic05.html#if文) 
--  [関係演算子](basic05.html#関係演算子)
--  [if-else文](basic05.html#if-else文) 
--  [if-elif文](basic05.html#if-elif文) 
+-  [ガチャを作ろう！](basic05.html#関係演算子)
+
 
 ## 環境構築
 
@@ -104,6 +104,21 @@ root.mainloop()
 **ウィンドウの×ボタンを押すとプログラムが終了します。**
 <br>
 
+### ウィンドウのタイトルを変更する
+
+`3行目`の`"move-rect"`の部分で、**ウィンドウのタイトルを指定**しています。試しに、`"test"`に変更してみてください。
+
+```python{.numberLines startFrom="3" caption="move-rect.py(抜粋)"}
+# ウィンドウ設置
+root = tk.Tk()
+root.title("test")　<-ここを変更
+root.geometry("400x600") 
+```
+
+プログラムを実行して、タイトルが変わっていることを確認してください。
+
+<br>
+
 ### ウィンドウの大きさを変更する
 
 `6行目`の`"600x300"`の部分で、**表示するウィンドウのサイズを指定**しています。試しに、`"600x300"`を`"400x600"`に変更してみてください。
@@ -134,3 +149,37 @@ root.geometry("400x600") <-ここを変更
 この場合、`1920x1080`がディスプレイ全体のサイズになります。
 </div>
 <br>
+
+- **Challenge**　ディスプレイの解像度を参考にして、ウィンドウが**画面に大きく表示されるように**、適当なサイズに変更してください。
+
+<br>
+
+### キャンバスを変更する
+
+キャンバスは、**図形や画像を設置するために必要な下地**です。
+
+`10行目`ではキャンバスの大きさや色を指定しています。
+`width`が**幅**、`height`が**高さ**、`bg`が**背景色**に対応しています。
+幅と高さを**上で設定したウィンドウと同じ数値に変更**してみてください。
+
+```python{.numberLines startFrom="9" caption="move-rect.py(抜粋)"}
+# キャンバス設置
+canvas = tk.Canvas(root,width = xxx,height = yyy,bg = "skyblue") <-ここを変更
+canvas.pack()
+```
+
+以下の画像を参考に、色も変更してみましょう。`skyblue`を好きな色の名前に書き換えることで変更できます。
+
+![img](figs/digest/color.png)
+
+> 出典: https://stackoverflow.com/questions/4969543/colour-chart-for-tkinter-and-tix-using-python
+
+例えば`orange`に変更することで、**背景色がオレンジ**になります。
+
+```python{.numberLines startFrom="9" caption="move-rect.py(抜粋)"}
+# キャンバス設置
+canvas = tk.Canvas(root,width = 800,height = 600,bg = "orange") <-ここを変更
+canvas.pack()
+```
+
+![img](figs/digest/orange.png)
