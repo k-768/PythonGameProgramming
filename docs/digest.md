@@ -19,8 +19,9 @@ var:
 
 -  [環境構築](digest.html#環境構築) 
 -  [キーボードでキャラクターを操作](digest.html#キーボードでキャラクターを操作) 
--  [変数とは](digest.html#変数とは)
--  [ガチャを作ろう！](digest.html#ガチャを作ろう！) 
+-  [変数](digest.html#変数)
+-  [リスト](digest.html#リスト)
+-  [ガチャを作ろう](digest.html#ガチャを作ろう) 
 
 
 ## 環境構築
@@ -281,7 +282,8 @@ def on_key_press(event):
 
 <br>
 
-## 変数とは
+## 変数
+### 変数とは
 
 ![img](figs/03/var.png)
 
@@ -341,11 +343,11 @@ SyntaxError: cannot assign to literal here. Maybe you meant '==' instead of '='?
 
 ---
 
-## 変数の値を変更する
+### 変数の値を変更する
 
 変数に代入し直せば、変数の値を変更することができます。
 
-```python{.numberLines caption="test3-3.py"}
+```python{.numberLines caption="test3-2.py"}
 a = 10
 print(a)
 a = 20
@@ -378,7 +380,7 @@ d = 4 / 2 #割り算
 **`a = a + 2`と書けば、`a`の値を2だけ増やすことができます**。
 
 
-```python{.numberLines caption="test3-4.py"}
+```python{.numberLines caption="test3-3.py"}
 a = 10
 print(a)
 a = a + 2
@@ -406,13 +408,34 @@ Challenge2: <span class="masked">`a = a * 2`</span>
 
 ---
 
+![img](figs/03/str.png)
+
+変数には**文字列も代入できます**。文字列の場合は、**`"`（shift+2）で囲います**。
+これは「hello」と書くと**変数とみなされてしまう**ので、「"hello"」と書いて**変数と区別しています**。
 
 
-## 変数の命名規則
+</br>
+
+```python{.numberLines caption="test3-4.py"}
+b = "hello!"
+print(b)
+```
+
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+hello!
+```
+
+---
+
+</br>
+
+### 変数の命名規則
 
 変数名のつけ方には以下の決まりがあります。
 
-### 半角のアルファベット、数字、`_`(アンダースコア)を組み合わせる
+#### 半角のアルファベット、数字、`_`(アンダースコア)を組み合わせる
 
 日本語やその他の記号は使わないようにしましょう。
 
@@ -425,7 +448,7 @@ a = 10
 stage2-1 = 99 <-「-」は引き算の記号として認識される
 ```
 
-### 最初の文字には数字を使わない
+#### 最初の文字には数字を使わない
 
 2文字目以降は自由に使えます。
 
@@ -436,7 +459,7 @@ sum = 7
 1st_sum = 7
 ```
 
-### 予約語を使わない
+#### 予約語を使わない
 
 たとえば`print`のような、Pythonへの命令として決まっている単語をそのまま使うことはできません。
 
@@ -458,7 +481,7 @@ TypeError: 'int' object is not callable
 
 ---
 
-#### **charenge2-3** 次の変数名は適切か判断しましょう。
+#### **charenge** 次の変数名は適切か判断しましょう。
 
 - `tmp` ・・・ <span class="masked">⭕　　　　　　　　　　　　　　</span>
 - `Name` ・・・ <span class="masked">❌全て小文字にするべきです</span>
@@ -469,7 +492,84 @@ TypeError: 'int' object is not callable
 
 <br>
 
-## 乱数
+## リスト
+### リストとは
+
+![img](figs/07/arr.png)
+
+リストは、**変数をセットで管理できる便利なもの**です。
+例えば、以下のようにキャラクターの持ち物を表すことを考えましょう。
+
+```python{.numberLines}
+item1 = "伝説の釣り竿"
+item2 = "大容量のバケツ"
+item3 = "丈夫な釣り糸"
+item4 = "大きな釣り針"
+item5 = "高級な釣り餌"
+```
+
+これを、リストを使うとスマートに記述できます。
+
+```python{.numberLines}
+items = ["伝説の釣り竿","大容量のバケツ","丈夫な釣り糸","大きな釣り針","高級な釣り餌"]
+```
+<br>
+
+ここで、`items`がリストであり、`,`で区切られた一つ一つを**要素**と言います。
+
+---
+
+![img](figs/07/arr.png)
+
+図の`[0]`や`[1]`の番号を**インデックス**と呼び、**住所でいえば番地のようなもの**です。
+リストの各要素を取り出したいときは、以下のようにインデックスで指定します。
+
+<br>
+
+```python{.numberLines}
+items = ["伝説の釣り竿","大容量のバケツ","丈夫な釣り糸","大きな釣り針","高級な釣り餌"]
+print(items[0])
+print(items[1])
+print(items[2])
+```
+
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+伝説の釣り竿
+大容量のバケツ
+丈夫な釣り糸
+```
+<br>
+
+<div class="note type-tips">
+
+**いちばん初めの要素のインデックスは、`1ではなく0`である点に注意!!**
+
+</div>
+
+<br>
+
+---
+
+新しいファイルを作成して、次の課題に挑戦してください。
+
+- **Challenge1**　要素が食べ物の名前である要素数6のリスト「foods」を作成しましょう。
+- **Challenge2**　foodsから、4番目の要素を`print文`で出力しましょう。
+
+**<i class="fa-solid fa-check"></i>解答例**
+
+Challenge1: <span class="masked">`foods = ["すし","てんぷら","すきやき","やきにく","だしまき","ラーメン"]`</span>
+
+Challenge2: <span class="masked">`print(foods[3]) #0始まりなので4番目は[4]ではなく[3]`</span>
+
+<br>
+
+
+## ガチャを作ろう
+
+### 乱数
+
 `random`モジュールを用いると、ランダムな数を生成したり、リストからランダムに抽出することができます。
 
 ### random.randint()
@@ -498,17 +598,17 @@ print(random.randint(1,6))
 
 ---
 
-- **Challenge1-1**　上のプログラムを改造して、1~50までの乱数を表示するプログラムを作成しましょう。
-- **Challenge1-2**　さらに改造して、2~100までのランダムな**偶数**を表示するプログラムを作成しましょう。
+- **Challenge1**　上のプログラムを改造して、1~50までの乱数を表示するプログラムを作成しましょう。
+- **Challenge2**　さらに改造して、2~100までのランダムな**偶数**を表示するプログラムを作成しましょう。
 
 ヒント: <span class="masked">`2から100までの偶数を数学的に書くと`2n (1 <= n <= 50)`となります。`</span>
 
 
 **<i class="fa-solid fa-check"></i>解答**
 
-Challenge1-1: <span class="masked">`print(random.randint(1,50))`</span>
+Challenge1: <span class="masked">`print(random.randint(1,50))`</span>
 
-Challenge1-2: <span class="masked">`print(random.randint(1,50) * 2)`</span>
+Challenge2: <span class="masked">`print(random.randint(1,50) * 2)`</span>
 
 </br>
 
@@ -620,7 +720,8 @@ print(random.choices(fishes,k=1,weights = fish_weights)[0])
 
 ![img](figs/05/sample.gif)
 
-以下の要件を満たすプログラムを作成していきましょう。
+いままでのことを応用すれば、ガチャを作成できます。
+次に示すサンプルプログラムは、以下の要件に従っています。
 
 - レア度は★1~★3まであり、排出率は以下の通りです。
 
@@ -638,66 +739,7 @@ STAR_3 = ["タイ","スズキ","カサゴ"]
 
 </br>
 
-先ほどの例をそのまま使えば以下のようになりますが、これではあまりよくありません。
-
-```python{.numberLines caption="良くない例"}
-import random
-
-FISH_LIST = ["アジ","サバ","イワシ","カワハギ","タチウオ","メバル","タイ","スズキ","カサゴ"]
-FISH_WEIGHT = [25,25,25,20/3,20/3,20/3,5/3,5/3,5/3] #それぞれの排出率
-print(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0])
-```
-
-要件通りには動くのですが、他人や未来の自分にとって読みにくく、何か改良しようとすると大変なコードです。具体的には以下の欠点が挙げられます。
-
-- どの魚がどのランクなのかわかりにくい
-- それぞれのランクの排出率がわかりにくい
-- 魚の種類を追加したとき、`FISH_WEIGHT`を何か所も変更する必要がある。
-
-</br>
-
-これらを解決するためにはどうすれば良いでしょうか。
-
-今回は**初めにレア度を排出率に従って決定し、次にその中からランダムに魚を選ぶ方法**を取りましょう。まずは排出率に従って「★n」と表示するプログラムを作成します。
-
-```python{.numberLines caption="レア度を排出率に従って決定する"}
-import random
-
-FISH_LIST = ["★1","★2","★3"] 
-FISH_WEIGHT = [75,20,5] #★1～3の排出率
-print(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0])
-```
-
-**<i class="fa-solid fa-terminal"></i> 実行結果**
-
-```
-★1
-```
-</br>
-
-次に、「★n」の部分をそれぞれの魚のリストに置き換えます。
-
-```python{.numberLines caption="レア度を排出率に従って決定する"}
-import random
-
-STAR_1 = ["アジ","サバ","イワシ"]
-STAR_2 = ["カワハギ","タチウオ","メバル"]
-STAR_3 = ["タイ","スズキ","カサゴ"]
-
-FISH_LIST = [STAR_1,STAR_2,STAR_3] #2次元配列であることに注意！
-FISH_WEIGHT = [75,20,5] #★1～3の排出率
-print(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0])
-```
-
-**<i class="fa-solid fa-terminal"></i> 実行結果**
-
-```
-['アジ', 'サバ', 'イワシ']
-```
-
-</br>
-
-リストが出力されているので、さらにこれを`random.choice()`で選択すれば良いですね。
+コピー＆ペーストして実行してみてください。
 
 ```python{.numberLines caption="randomfish.py"}
 import random
@@ -706,7 +748,7 @@ STAR_1 = ["アジ","サバ","イワシ"]
 STAR_2 = ["カワハギ","タチウオ","メバル"]
 STAR_3 = ["タイ","スズキ","カサゴ"]
 
-FISH_LIST = [STAR_1,STAR_2,STAR_3] #2次元配列であることに注意！
+FISH_LIST = [STAR_1,STAR_2,STAR_3]
 FISH_WEIGHT = [75,20,5] #★1～3の排出率
 
 print(random.choice(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0]))
@@ -721,9 +763,6 @@ print(random.choice(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0]))
 </br>
 
 
-**うまくいきました！これは釣りゲームの部品になるので、後で再利用できるように適当な名前を付けて保存しておきましょう。**
-これはよくない例と比較して格段に修正、改造しやすくなっています。次のChallengeで確認してください。
-
 ---
-- **Challenge2-1**　上のプログラムを改造して、★2に「コイ」を追加しましょう。
-- **Challenge2-2**　**★4**の魚を追加してみましょう。排出率も適当に調節してください。
+- **Challenge1**　上のプログラムを改造して、★2に「コイ」を追加しましょう。
+- **Challenge2**　あなたの好みに合わせて好きなガチャを作成してみましょう。

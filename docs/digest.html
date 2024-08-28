@@ -81,35 +81,35 @@ class="toc-section-number">5.7</span>
 <li><a href="#まとめ" id="toc-まとめ"><span
 class="toc-section-number">5.8</span> まとめ</a></li>
 </ul></li>
+<li><a href="#変数" id="toc-変数"><span
+class="toc-section-number">6</span> 変数</a>
+<ul>
 <li><a href="#変数とは" id="toc-変数とは"><span
-class="toc-section-number">6</span> 変数とは</a></li>
+class="toc-section-number">6.1</span> 変数とは</a></li>
 <li><a href="#変数の値を変更する" id="toc-変数の値を変更する"><span
-class="toc-section-number">7</span> 変数の値を変更する</a></li>
+class="toc-section-number">6.2</span> 変数の値を変更する</a></li>
 <li><a href="#変数の命名規則" id="toc-変数の命名規則"><span
-class="toc-section-number">8</span> 変数の命名規則</a>
-<ul>
-<li><a href="#半角のアルファベット数字_アンダースコアを組み合わせる"
-id="toc-半角のアルファベット数字_アンダースコアを組み合わせる"><span
-class="toc-section-number">8.1</span>
-半角のアルファベット、数字、<code>_</code>(アンダースコア)を組み合わせる</a></li>
-<li><a href="#最初の文字には数字を使わない"
-id="toc-最初の文字には数字を使わない"><span
-class="toc-section-number">8.2</span>
-最初の文字には数字を使わない</a></li>
-<li><a href="#予約語を使わない" id="toc-予約語を使わない"><span
-class="toc-section-number">8.3</span> 予約語を使わない</a></li>
+class="toc-section-number">6.3</span> 変数の命名規則</a></li>
 </ul></li>
-<li><a href="#乱数" id="toc-乱数"><span
-class="toc-section-number">9</span> 乱数</a>
+<li><a href="#リスト" id="toc-リスト"><span
+class="toc-section-number">7</span> リスト</a>
 <ul>
+<li><a href="#リストとは" id="toc-リストとは"><span
+class="toc-section-number">7.1</span> リストとは</a></li>
+</ul></li>
+<li><a href="#ガチャを作ろう" id="toc-ガチャを作ろう"><span
+class="toc-section-number">8</span> ガチャを作ろう</a>
+<ul>
+<li><a href="#乱数" id="toc-乱数"><span
+class="toc-section-number">8.1</span> 乱数</a></li>
 <li><a href="#random.randint" id="toc-random.randint"><span
-class="toc-section-number">9.1</span> random.randint()</a></li>
+class="toc-section-number">8.2</span> random.randint()</a></li>
 <li><a href="#random.choice" id="toc-random.choice"><span
-class="toc-section-number">9.2</span> random.choice()</a></li>
+class="toc-section-number">8.3</span> random.choice()</a></li>
 <li><a href="#random.choices" id="toc-random.choices"><span
-class="toc-section-number">9.3</span> random.choices()</a></li>
+class="toc-section-number">8.4</span> random.choices()</a></li>
 <li><a href="#応用" id="toc-応用"><span
-class="toc-section-number">9.4</span> 応用</a></li>
+class="toc-section-number">8.5</span> 応用</a></li>
 </ul></li>
 </ul> 
         <!-- ---------------------------------------- -->
@@ -136,9 +136,9 @@ class="toc-section-number">9.4</span> 応用</a></li>
       <li><a href="digest.html#環境構築">環境構築</a></li>
       <li><a
       href="digest.html#キーボードでキャラクターを操作">キーボードでキャラクターを操作</a></li>
-      <li><a href="digest.html#変数とは">変数とは</a></li>
-      <li><a
-      href="digest.html#ガチャを作ろう！">ガチャを作ろう！</a></li>
+      <li><a href="digest.html#変数">変数</a></li>
+      <li><a href="digest.html#リスト">リスト</a></li>
+      <li><a href="digest.html#ガチャを作ろう">ガチャを作ろう</a></li>
       </ul>
       <h1 data-number="4" id="環境構築"><span
       class="header-section-number">4</span> 環境構築</h1>
@@ -369,8 +369,10 @@ class="toc-section-number">9.4</span> 応用</a></li>
       自分でプログラムを書くためには、この<strong>1つ1つの命令文を知る</strong>ことが大事になります。今回は、特に基本となる命令について学びましょう。</p>
       <hr />
       <p><br></p>
-      <h1 data-number="6" id="変数とは"><span
-      class="header-section-number">6</span> 変数とは</h1>
+      <h1 data-number="6" id="変数"><span
+      class="header-section-number">6</span> 変数</h1>
+      <h2 data-number="6.1" id="変数とは"><span
+      class="header-section-number">6.1</span> 変数とは</h2>
       <figure>
       <img src="figs/03/var.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -409,10 +411,10 @@ SyntaxError: cannot assign to literal here. Maybe you meant &#39;==&#39; instead
       <p>「<code>10</code>は<strong>変数ではないので代入できません</strong>」と言われてしまいます。</p>
       </div>
       <hr />
-      <h1 data-number="7" id="変数の値を変更する"><span
-      class="header-section-number">7</span> 変数の値を変更する</h1>
+      <h2 data-number="6.2" id="変数の値を変更する"><span
+      class="header-section-number">6.2</span> 変数の値を変更する</h2>
       <p>変数に代入し直せば、変数の値を変更することができます。</p>
-      <div class="sourceCode" id="cb16" data-caption="test3-3.py"><pre
+      <div class="sourceCode" id="cb16" data-caption="test3-2.py"><pre
       class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="bu">print</span>(a)</span>
 <span id="cb16-3"><a href="#cb16-3"></a>a <span class="op">=</span> <span class="dv">20</span></span>
@@ -432,7 +434,7 @@ SyntaxError: cannot assign to literal here. Maybe you meant &#39;==&#39; instead
       <p>掛け算には<code>*</code>(アスタリスク)を、割り算には<code>/</code>(スラッシュ)を用いるのが数学とは異なる点です。</p>
       <hr />
       <p><strong><code>a = a + 2</code>と書けば、<code>a</code>の値を2だけ増やすことができます</strong>。</p>
-      <div class="sourceCode" id="cb19" data-caption="test3-4.py"><pre
+      <div class="sourceCode" id="cb19" data-caption="test3-3.py"><pre
       class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="bu">print</span>(a)</span>
 <span id="cb19-3"><a href="#cb19-3"></a>a <span class="op">=</span> a <span class="op">+</span> <span class="dv">2</span></span>
@@ -453,34 +455,49 @@ SyntaxError: cannot assign to literal here. Maybe you meant &#39;==&#39; instead
       class="masked"><code>a = a * 2</code></span></p>
       <p></br></p>
       <hr />
-      <h1 data-number="8" id="変数の命名規則"><span
-      class="header-section-number">8</span> 変数の命名規則</h1>
+      <figure>
+      <img src="figs/03/str.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>変数には<strong>文字列も代入できます</strong>。文字列の場合は、<strong><code>"</code>（shift+2）で囲います</strong>。
+      これは「hello」と書くと<strong>変数とみなされてしまう</strong>ので、「“hello”」と書いて<strong>変数と区別しています</strong>。</p>
+      <p></br></p>
+      <div class="sourceCode" id="cb21" data-caption="test3-4.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>b <span class="op">=</span> <span class="st">&quot;hello!&quot;</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="bu">print</span>(b)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>hello!</code></pre>
+      <hr />
+      <p></br></p>
+      <h2 data-number="6.3" id="変数の命名規則"><span
+      class="header-section-number">6.3</span> 変数の命名規則</h2>
       <p>変数名のつけ方には以下の決まりがあります。</p>
-      <h2 data-number="8.1"
+      <h3 data-number="6.3.1"
       id="半角のアルファベット数字_アンダースコアを組み合わせる"><span
-      class="header-section-number">8.1</span>
-      半角のアルファベット、数字、<code>_</code>(アンダースコア)を組み合わせる</h2>
+      class="header-section-number">6.3.1</span>
+      半角のアルファベット、数字、<code>_</code>(アンダースコア)を組み合わせる</h3>
       <p>日本語やその他の記号は使わないようにしましょう。</p>
-      <div class="sourceCode" id="cb21" data-caption="⭕良い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>a <span class="op">=</span> <span class="dv">10</span></span></code></pre></div>
-      <div class="sourceCode" id="cb22" data-caption="❌悪い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a>ｓｃｏｒｅ <span class="op">=</span> <span class="dv">99</span>    <span class="op">&lt;-</span>全角</span>
-<span id="cb22-2"><a href="#cb22-2"></a>スコア <span class="op">=</span> <span class="dv">99</span>    <span class="op">&lt;-</span>変数名が日本語</span>
-<span id="cb22-3"><a href="#cb22-3"></a>stage2<span class="op">-</span><span class="dv">1</span> <span class="op">=</span> <span class="dv">99</span> <span class="op">&lt;-</span>「<span class="op">-</span>」は引き算の記号として認識される</span></code></pre></div>
-      <h2 data-number="8.2" id="最初の文字には数字を使わない"><span
-      class="header-section-number">8.2</span>
-      最初の文字には数字を使わない</h2>
-      <p>2文字目以降は自由に使えます。</p>
       <div class="sourceCode" id="cb23" data-caption="⭕良い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="dv">7</span></span></code></pre></div>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>a <span class="op">=</span> <span class="dv">10</span></span></code></pre></div>
       <div class="sourceCode" id="cb24" data-caption="❌悪い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a><span class="dv">1</span><span class="er">st_sum</span> <span class="op">=</span> <span class="dv">7</span></span></code></pre></div>
-      <h2 data-number="8.3" id="予約語を使わない"><span
-      class="header-section-number">8.3</span> 予約語を使わない</h2>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a>ｓｃｏｒｅ <span class="op">=</span> <span class="dv">99</span>    <span class="op">&lt;-</span>全角</span>
+<span id="cb24-2"><a href="#cb24-2"></a>スコア <span class="op">=</span> <span class="dv">99</span>    <span class="op">&lt;-</span>変数名が日本語</span>
+<span id="cb24-3"><a href="#cb24-3"></a>stage2<span class="op">-</span><span class="dv">1</span> <span class="op">=</span> <span class="dv">99</span> <span class="op">&lt;-</span>「<span class="op">-</span>」は引き算の記号として認識される</span></code></pre></div>
+      <h3 data-number="6.3.2" id="最初の文字には数字を使わない"><span
+      class="header-section-number">6.3.2</span>
+      最初の文字には数字を使わない</h3>
+      <p>2文字目以降は自由に使えます。</p>
+      <div class="sourceCode" id="cb25" data-caption="⭕良い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="dv">7</span></span></code></pre></div>
+      <div class="sourceCode" id="cb26" data-caption="❌悪い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="dv">1</span><span class="er">st_sum</span> <span class="op">=</span> <span class="dv">7</span></span></code></pre></div>
+      <h3 data-number="6.3.3" id="予約語を使わない"><span
+      class="header-section-number">6.3.3</span> 予約語を使わない</h3>
       <p>たとえば<code>print</code>のような、Pythonへの命令として決まっている単語をそのまま使うことはできません。</p>
-      <div class="sourceCode" id="cb25" data-caption="❌悪い例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a><span class="bu">print</span> <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="bu">print</span>(<span class="bu">print</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb27" data-caption="❌悪い例"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="bu">print</span> <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="bu">print</span>(<span class="bu">print</span>)</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
       <pre><code>PS C:\******&gt; &amp; C:/******/python.exe c:/******/test.py
@@ -489,11 +506,10 @@ SyntaxError: cannot assign to literal here. Maybe you meant &#39;==&#39; instead
 TypeError: &#39;int&#39; object is not callable</code></pre>
       <p>1行目でprintに値が上書きされてしまったので、その後ろではprint文が使えなくなってしまいます。</p>
       <hr />
-      <h3 data-number="8.3.1"
-      id="charenge2-3-次の変数名は適切か判断しましょう"><span
-      class="header-section-number">8.3.1</span>
-      <strong>charenge2-3</strong>
-      次の変数名は適切か判断しましょう。</h3>
+      <h3 data-number="6.3.4"
+      id="charenge-次の変数名は適切か判断しましょう"><span
+      class="header-section-number">6.3.4</span>
+      <strong>charenge</strong> 次の変数名は適切か判断しましょう。</h3>
       <ul>
       <li><code>tmp</code> ・・・ <span
       class="masked">⭕　　　　　　　　　　　　　　</span></li>
@@ -507,11 +523,69 @@ TypeError: &#39;int&#39; object is not callable</code></pre>
       class="masked">❌<code>-</code>(ハイフン)は引き算として認識されてしまいます</span></li>
       </ul>
       <p><br></p>
-      <h1 data-number="9" id="乱数"><span
-      class="header-section-number">9</span> 乱数</h1>
+      <h1 data-number="7" id="リスト"><span
+      class="header-section-number">7</span> リスト</h1>
+      <h2 data-number="7.1" id="リストとは"><span
+      class="header-section-number">7.1</span> リストとは</h2>
+      <figure>
+      <img src="figs/07/arr.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>リストは、<strong>変数をセットで管理できる便利なもの</strong>です。
+      例えば、以下のようにキャラクターの持ち物を表すことを考えましょう。</p>
+      <div class="sourceCode" id="cb29"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>item1 <span class="op">=</span> <span class="st">&quot;伝説の釣り竿&quot;</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>item2 <span class="op">=</span> <span class="st">&quot;大容量のバケツ&quot;</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>item3 <span class="op">=</span> <span class="st">&quot;丈夫な釣り糸&quot;</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>item4 <span class="op">=</span> <span class="st">&quot;大きな釣り針&quot;</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a>item5 <span class="op">=</span> <span class="st">&quot;高級な釣り餌&quot;</span></span></code></pre></div>
+      <p>これを、リストを使うとスマートに記述できます。</p>
+      <div class="sourceCode" id="cb30"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a>items <span class="op">=</span> [<span class="st">&quot;伝説の釣り竿&quot;</span>,<span class="st">&quot;大容量のバケツ&quot;</span>,<span class="st">&quot;丈夫な釣り糸&quot;</span>,<span class="st">&quot;大きな釣り針&quot;</span>,<span class="st">&quot;高級な釣り餌&quot;</span>]</span></code></pre></div>
+      <p><br></p>
+      <p>ここで、<code>items</code>がリストであり、<code>,</code>で区切られた一つ一つを<strong>要素</strong>と言います。</p>
+      <hr />
+      <figure>
+      <img src="figs/07/arr.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>図の<code>[0]</code>や<code>[1]</code>の番号を<strong>インデックス</strong>と呼び、<strong>住所でいえば番地のようなもの</strong>です。
+      リストの各要素を取り出したいときは、以下のようにインデックスで指定します。</p>
+      <p><br></p>
+      <div class="sourceCode" id="cb31"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a>items <span class="op">=</span> [<span class="st">&quot;伝説の釣り竿&quot;</span>,<span class="st">&quot;大容量のバケツ&quot;</span>,<span class="st">&quot;丈夫な釣り糸&quot;</span>,<span class="st">&quot;大きな釣り針&quot;</span>,<span class="st">&quot;高級な釣り餌&quot;</span>]</span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="bu">print</span>(items[<span class="dv">0</span>])</span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="bu">print</span>(items[<span class="dv">1</span>])</span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="bu">print</span>(items[<span class="dv">2</span>])</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>伝説の釣り竿
+大容量のバケツ
+丈夫な釣り糸</code></pre>
+      <p><br></p>
+      <div class="note type-tips">
+      <p><strong>いちばん初めの要素のインデックスは、<code>1ではなく0</code>である点に注意!!</strong></p>
+      </div>
+      <p><br></p>
+      <hr />
+      <p>新しいファイルを作成して、次の課題に挑戦してください。</p>
+      <ul>
+      <li><strong>Challenge1</strong>　要素が食べ物の名前である要素数6のリスト「foods」を作成しましょう。</li>
+      <li><strong>Challenge2</strong>　foodsから、4番目の要素を<code>print文</code>で出力しましょう。</li>
+      </ul>
+      <p><strong><i class="fa-solid fa-check"></i>解答例</strong></p>
+      <p>Challenge1: <span
+      class="masked"><code>foods = ["すし","てんぷら","すきやき","やきにく","だしまき","ラーメン"]</code></span></p>
+      <p>Challenge2: <span
+      class="masked"><code>print(foods[3]) #0始まりなので4番目は[4]ではなく[3]</code></span></p>
+      <p><br></p>
+      <h1 data-number="8" id="ガチャを作ろう"><span
+      class="header-section-number">8</span> ガチャを作ろう</h1>
+      <h2 data-number="8.1" id="乱数"><span
+      class="header-section-number">8.1</span> 乱数</h2>
       <p><code>random</code>モジュールを用いると、ランダムな数を生成したり、リストからランダムに抽出することができます。</p>
-      <h2 data-number="9.1" id="random.randint"><span
-      class="header-section-number">9.1</span> random.randint()</h2>
+      <h2 data-number="8.2" id="random.randint"><span
+      class="header-section-number">8.2</span> random.randint()</h2>
       <figure>
       <img src="figs/05/dice.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
@@ -519,62 +593,62 @@ TypeError: &#39;int&#39; object is not callable</code></pre>
       <p><code>random.randint(a,b)</code>を使って<strong>a~b</strong>までの整数を生成します。</p>
       <p>以下のコードを実行してみてください。さいころと同じふるまいをします。
       1行目の<code>import random</code>で、<code>random</code>モジュールを読み込み、使用できるようにしています。</p>
-      <div class="sourceCode" id="cb27"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="im">import</span> random</span>
-<span id="cb27-2"><a href="#cb27-2"></a></span>
-<span id="cb27-3"><a href="#cb27-3"></a><span class="bu">print</span>(random.randint(<span class="dv">1</span>,<span class="dv">6</span>))</span></code></pre></div>
+      <div class="sourceCode" id="cb33"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a><span class="im">import</span> random</span>
+<span id="cb33-2"><a href="#cb33-2"></a></span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="bu">print</span>(random.randint(<span class="dv">1</span>,<span class="dv">6</span>))</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
       <pre><code>3</code></pre>
       <p></br></p>
       <hr />
       <ul>
-      <li><strong>Challenge1-1</strong>　上のプログラムを改造して、1~50までの乱数を表示するプログラムを作成しましょう。</li>
-      <li><strong>Challenge1-2</strong>　さらに改造して、2~100までのランダムな<strong>偶数</strong>を表示するプログラムを作成しましょう。</li>
+      <li><strong>Challenge1</strong>　上のプログラムを改造して、1~50までの乱数を表示するプログラムを作成しましょう。</li>
+      <li><strong>Challenge2</strong>　さらに改造して、2~100までのランダムな<strong>偶数</strong>を表示するプログラムを作成しましょう。</li>
       </ul>
       <p>ヒント: <span
       class="masked"><code>2から100までの偶数を数学的に書くと</code>2n
       (1 &lt;= n &lt;= 50)<code>となります。</code></span></p>
       <p><strong><i class="fa-solid fa-check"></i>解答</strong></p>
-      <p>Challenge1-1: <span
+      <p>Challenge1: <span
       class="masked"><code>print(random.randint(1,50))</code></span></p>
-      <p>Challenge1-2: <span
+      <p>Challenge2: <span
       class="masked"><code>print(random.randint(1,50) * 2)</code></span></p>
       <p></br></p>
-      <h2 data-number="9.2" id="random.choice"><span
-      class="header-section-number">9.2</span> random.choice()</h2>
+      <h2 data-number="8.3" id="random.choice"><span
+      class="header-section-number">8.3</span> random.choice()</h2>
       <p><code>random.choice(list)</code>を使って<code>list</code>からランダムに要素を選択します。</p>
       <p>以下のコードを実行してみてください。魚の名前が入ったリストからランダムに選択して表示します。</p>
-      <div class="sourceCode" id="cb29"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a><span class="im">import</span> random</span>
-<span id="cb29-2"><a href="#cb29-2"></a></span>
-<span id="cb29-3"><a href="#cb29-3"></a>fishes <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>,<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;サメ&quot;</span>]</span>
-<span id="cb29-4"><a href="#cb29-4"></a><span class="bu">print</span>(random.choice(fishes))</span></code></pre></div>
+      <div class="sourceCode" id="cb35"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a><span class="im">import</span> random</span>
+<span id="cb35-2"><a href="#cb35-2"></a></span>
+<span id="cb35-3"><a href="#cb35-3"></a>fishes <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>,<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;サメ&quot;</span>]</span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="bu">print</span>(random.choice(fishes))</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
       <pre><code>アジ</code></pre>
       <p></br></p>
-      <h2 data-number="9.3" id="random.choices"><span
-      class="header-section-number">9.3</span> random.choices()</h2>
+      <h2 data-number="8.4" id="random.choices"><span
+      class="header-section-number">8.4</span> random.choices()</h2>
       <p><code>random.choices(list,k,weights)</code>を使って<code>list</code>からランダムに複数の要素を選択します。</p>
       <p><code>random.choices()</code>で選択された要素は<strong>重複することがあります。</strong>重複させたくない場合は<code>random.sample()</code>が用意されています。</p>
       <p>以下のコードを実行してみてください。魚の名前が入ったリストからランダムに3つ選択して表示します。</p>
-      <div class="sourceCode" id="cb31"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a><span class="im">import</span> random</span>
-<span id="cb31-2"><a href="#cb31-2"></a></span>
-<span id="cb31-3"><a href="#cb31-3"></a>fishes <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>,<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;サメ&quot;</span>]</span>
-<span id="cb31-4"><a href="#cb31-4"></a><span class="bu">print</span>(random.choices(fishes,k<span class="op">=</span><span class="dv">3</span>))</span></code></pre></div>
+      <div class="sourceCode" id="cb37"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="im">import</span> random</span>
+<span id="cb37-2"><a href="#cb37-2"></a></span>
+<span id="cb37-3"><a href="#cb37-3"></a>fishes <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>,<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;サメ&quot;</span>]</span>
+<span id="cb37-4"><a href="#cb37-4"></a><span class="bu">print</span>(random.choices(fishes,k<span class="op">=</span><span class="dv">3</span>))</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
       <pre><code>[&#39;タイ&#39;, &#39;イワシ&#39;, &#39;イワシ&#39;]</code></pre>
       <p></br></p>
       <p>さらには重みをつけることもできます。引数<code>weights</code>で確率を指定します。</p>
-      <div class="sourceCode" id="cb33"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a><span class="im">import</span> random</span>
-<span id="cb33-2"><a href="#cb33-2"></a></span>
-<span id="cb33-3"><a href="#cb33-3"></a>fishes <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>,<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;サメ&quot;</span>]</span>
-<span id="cb33-4"><a href="#cb33-4"></a>fish_weights <span class="op">=</span>[<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">8</span>,<span class="dv">2</span>] <span class="co">#アジ,サバ,イワシ30%、タイ8%、サメ2%</span></span>
-<span id="cb33-5"><a href="#cb33-5"></a><span class="bu">print</span>(random.choices(fishes,k<span class="op">=</span><span class="dv">10</span>,weights <span class="op">=</span> fish_weights))</span></code></pre></div>
+      <div class="sourceCode" id="cb39"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a><span class="im">import</span> random</span>
+<span id="cb39-2"><a href="#cb39-2"></a></span>
+<span id="cb39-3"><a href="#cb39-3"></a>fishes <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>,<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;サメ&quot;</span>]</span>
+<span id="cb39-4"><a href="#cb39-4"></a>fish_weights <span class="op">=</span>[<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">8</span>,<span class="dv">2</span>] <span class="co">#アジ,サバ,イワシ30%、タイ8%、サメ2%</span></span>
+<span id="cb39-5"><a href="#cb39-5"></a><span class="bu">print</span>(random.choices(fishes,k<span class="op">=</span><span class="dv">10</span>,weights <span class="op">=</span> fish_weights))</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
       <pre><code>[&#39;サバ&#39;, &#39;イワシ&#39;, &#39;アジ&#39;, &#39;サメ&#39;, &#39;アジ&#39;, &#39;サバ&#39;, &#39;イワシ&#39;, &#39;アジ&#39;, &#39;イワシ&#39;, &#39;イワシ&#39;]</code></pre>
@@ -584,113 +658,69 @@ TypeError: &#39;int&#39; object is not callable</code></pre>
       <p><code>random.choices()</code>を使えば、<code>random.choice()</code>ではできなかった、重みをつけて要素を取り出す操作ができました。
       では、<strong>魚の名前のリストではなく魚の名前そのものが欲しいとき、どうすれば良い</strong>でしょうか。</p>
       <p>まずは、先ほどのコードを<code>k=1</code>と書き換えて実行してみましょう。</p>
-      <div class="sourceCode" id="cb35"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a><span class="im">import</span> random</span>
-<span id="cb35-2"><a href="#cb35-2"></a></span>
-<span id="cb35-3"><a href="#cb35-3"></a>fishes <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>,<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;サメ&quot;</span>]</span>
-<span id="cb35-4"><a href="#cb35-4"></a>fish_weights <span class="op">=</span>[<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">8</span>,<span class="dv">2</span>] <span class="co">#アジ,サバ,イワシ30%、タイ8%、サメ2%</span></span>
-<span id="cb35-5"><a href="#cb35-5"></a><span class="bu">print</span>(random.choices(fishes,k<span class="op">=</span><span class="dv">1</span>,weights <span class="op">=</span> fish_weights))</span></code></pre></div>
+      <div class="sourceCode" id="cb41"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a><span class="im">import</span> random</span>
+<span id="cb41-2"><a href="#cb41-2"></a></span>
+<span id="cb41-3"><a href="#cb41-3"></a>fishes <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>,<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;サメ&quot;</span>]</span>
+<span id="cb41-4"><a href="#cb41-4"></a>fish_weights <span class="op">=</span>[<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">8</span>,<span class="dv">2</span>] <span class="co">#アジ,サバ,イワシ30%、タイ8%、サメ2%</span></span>
+<span id="cb41-5"><a href="#cb41-5"></a><span class="bu">print</span>(random.choices(fishes,k<span class="op">=</span><span class="dv">1</span>,weights <span class="op">=</span> fish_weights))</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
       <pre><code>[&#39;イワシ&#39;]</code></pre>
       <p></br></p>
       <p>ここで注意したいのは、<strong><code>k=1</code>と指定しても、要素数1の配列が返ってくる</strong>ことです。配列の要素を取り出すには、<code>list[0]</code>のように<strong>インデックスで指定</strong>します。</p>
       <p><code>random.choices(・・・)[0]</code>と指定することで、配列からランダムな要素を重み付きで取り出せます。</p>
-      <div class="sourceCode" id="cb37"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="im">import</span> random</span>
-<span id="cb37-2"><a href="#cb37-2"></a></span>
-<span id="cb37-3"><a href="#cb37-3"></a>fishes <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>,<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;サメ&quot;</span>]</span>
-<span id="cb37-4"><a href="#cb37-4"></a>fish_weights <span class="op">=</span>[<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">8</span>,<span class="dv">2</span>] <span class="co">#アジ,サバ,イワシ30%、タイ8%、サメ2%</span></span>
-<span id="cb37-5"><a href="#cb37-5"></a><span class="bu">print</span>(random.choices(fishes,k<span class="op">=</span><span class="dv">1</span>,weights <span class="op">=</span> fish_weights)[<span class="dv">0</span>])</span></code></pre></div>
+      <div class="sourceCode" id="cb43"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a><span class="im">import</span> random</span>
+<span id="cb43-2"><a href="#cb43-2"></a></span>
+<span id="cb43-3"><a href="#cb43-3"></a>fishes <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>,<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;サメ&quot;</span>]</span>
+<span id="cb43-4"><a href="#cb43-4"></a>fish_weights <span class="op">=</span>[<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">30</span>,<span class="dv">8</span>,<span class="dv">2</span>] <span class="co">#アジ,サバ,イワシ30%、タイ8%、サメ2%</span></span>
+<span id="cb43-5"><a href="#cb43-5"></a><span class="bu">print</span>(random.choices(fishes,k<span class="op">=</span><span class="dv">1</span>,weights <span class="op">=</span> fish_weights)[<span class="dv">0</span>])</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
       <pre><code>イワシ</code></pre>
       <p></br></p>
       </div>
-      <h2 data-number="9.4" id="応用"><span
-      class="header-section-number">9.4</span> 応用</h2>
+      <h2 data-number="8.5" id="応用"><span
+      class="header-section-number">8.5</span> 応用</h2>
       <figure>
       <img src="figs/05/sample.gif" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>以下の要件を満たすプログラムを作成していきましょう。</p>
+      <p>いままでのことを応用すれば、ガチャを作成できます。
+      次に示すサンプルプログラムは、以下の要件に従っています。</p>
       <ul>
       <li><p>レア度は★1~★3まであり、排出率は以下の通りです。</p>
       <p><strong>★1</strong>: 75% <strong>★2</strong>: 20%
       <strong>★3</strong>: 5%</p></li>
       <li><p>それぞれのレア度には3種類の魚があり、以下のリストの通りです。同じレア度の中で何が選ばれるかはランダムです。</p></li>
       </ul>
-      <div class="sourceCode" id="cb39" data-caption="魚のランク"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a>STAR_1 <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>]</span>
-<span id="cb39-2"><a href="#cb39-2"></a>STAR_2 <span class="op">=</span> [<span class="st">&quot;カワハギ&quot;</span>,<span class="st">&quot;タチウオ&quot;</span>,<span class="st">&quot;メバル&quot;</span>]</span>
-<span id="cb39-3"><a href="#cb39-3"></a>STAR_3 <span class="op">=</span> [<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;スズキ&quot;</span>,<span class="st">&quot;カサゴ&quot;</span>]</span></code></pre></div>
+      <div class="sourceCode" id="cb45" data-caption="魚のランク"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a>STAR_1 <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>]</span>
+<span id="cb45-2"><a href="#cb45-2"></a>STAR_2 <span class="op">=</span> [<span class="st">&quot;カワハギ&quot;</span>,<span class="st">&quot;タチウオ&quot;</span>,<span class="st">&quot;メバル&quot;</span>]</span>
+<span id="cb45-3"><a href="#cb45-3"></a>STAR_3 <span class="op">=</span> [<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;スズキ&quot;</span>,<span class="st">&quot;カサゴ&quot;</span>]</span></code></pre></div>
       <p></br></p>
-      <p>先ほどの例をそのまま使えば以下のようになりますが、これではあまりよくありません。</p>
-      <div class="sourceCode" id="cb40" data-caption="良くない例"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1"></a><span class="im">import</span> random</span>
-<span id="cb40-2"><a href="#cb40-2"></a></span>
-<span id="cb40-3"><a href="#cb40-3"></a>FISH_LIST <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>,<span class="st">&quot;カワハギ&quot;</span>,<span class="st">&quot;タチウオ&quot;</span>,<span class="st">&quot;メバル&quot;</span>,<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;スズキ&quot;</span>,<span class="st">&quot;カサゴ&quot;</span>]</span>
-<span id="cb40-4"><a href="#cb40-4"></a>FISH_WEIGHT <span class="op">=</span> [<span class="dv">25</span>,<span class="dv">25</span>,<span class="dv">25</span>,<span class="dv">20</span><span class="op">/</span><span class="dv">3</span>,<span class="dv">20</span><span class="op">/</span><span class="dv">3</span>,<span class="dv">20</span><span class="op">/</span><span class="dv">3</span>,<span class="dv">5</span><span class="op">/</span><span class="dv">3</span>,<span class="dv">5</span><span class="op">/</span><span class="dv">3</span>,<span class="dv">5</span><span class="op">/</span><span class="dv">3</span>] <span class="co">#それぞれの排出率</span></span>
-<span id="cb40-5"><a href="#cb40-5"></a><span class="bu">print</span>(random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights<span class="op">=</span>FISH_WEIGHT)[<span class="dv">0</span>])</span></code></pre></div>
-      <p>要件通りには動くのですが、他人や未来の自分にとって読みにくく、何か改良しようとすると大変なコードです。具体的には以下の欠点が挙げられます。</p>
-      <ul>
-      <li>どの魚がどのランクなのかわかりにくい</li>
-      <li>それぞれのランクの排出率がわかりにくい</li>
-      <li>魚の種類を追加したとき、<code>FISH_WEIGHT</code>を何か所も変更する必要がある。</li>
-      </ul>
-      <p></br></p>
-      <p>これらを解決するためにはどうすれば良いでしょうか。</p>
-      <p>今回は<strong>初めにレア度を排出率に従って決定し、次にその中からランダムに魚を選ぶ方法</strong>を取りましょう。まずは排出率に従って「★n」と表示するプログラムを作成します。</p>
-      <div class="sourceCode" id="cb41"
-      data-caption="レア度を排出率に従って決定する"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a><span class="im">import</span> random</span>
-<span id="cb41-2"><a href="#cb41-2"></a></span>
-<span id="cb41-3"><a href="#cb41-3"></a>FISH_LIST <span class="op">=</span> [<span class="st">&quot;★1&quot;</span>,<span class="st">&quot;★2&quot;</span>,<span class="st">&quot;★3&quot;</span>] </span>
-<span id="cb41-4"><a href="#cb41-4"></a>FISH_WEIGHT <span class="op">=</span> [<span class="dv">75</span>,<span class="dv">20</span>,<span class="dv">5</span>] <span class="co">#★1～3の排出率</span></span>
-<span id="cb41-5"><a href="#cb41-5"></a><span class="bu">print</span>(random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights<span class="op">=</span>FISH_WEIGHT)[<span class="dv">0</span>])</span></code></pre></div>
-      <p><strong><i class="fa-solid fa-terminal"></i>
-      実行結果</strong></p>
-      <pre><code>★1</code></pre>
-      <p></br></p>
-      <p>次に、「★n」の部分をそれぞれの魚のリストに置き換えます。</p>
-      <div class="sourceCode" id="cb43"
-      data-caption="レア度を排出率に従って決定する"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a><span class="im">import</span> random</span>
-<span id="cb43-2"><a href="#cb43-2"></a></span>
-<span id="cb43-3"><a href="#cb43-3"></a>STAR_1 <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>]</span>
-<span id="cb43-4"><a href="#cb43-4"></a>STAR_2 <span class="op">=</span> [<span class="st">&quot;カワハギ&quot;</span>,<span class="st">&quot;タチウオ&quot;</span>,<span class="st">&quot;メバル&quot;</span>]</span>
-<span id="cb43-5"><a href="#cb43-5"></a>STAR_3 <span class="op">=</span> [<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;スズキ&quot;</span>,<span class="st">&quot;カサゴ&quot;</span>]</span>
-<span id="cb43-6"><a href="#cb43-6"></a></span>
-<span id="cb43-7"><a href="#cb43-7"></a>FISH_LIST <span class="op">=</span> [STAR_1,STAR_2,STAR_3] <span class="co">#2次元配列であることに注意！</span></span>
-<span id="cb43-8"><a href="#cb43-8"></a>FISH_WEIGHT <span class="op">=</span> [<span class="dv">75</span>,<span class="dv">20</span>,<span class="dv">5</span>] <span class="co">#★1～3の排出率</span></span>
-<span id="cb43-9"><a href="#cb43-9"></a><span class="bu">print</span>(random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights<span class="op">=</span>FISH_WEIGHT)[<span class="dv">0</span>])</span></code></pre></div>
-      <p><strong><i class="fa-solid fa-terminal"></i>
-      実行結果</strong></p>
-      <pre><code>[&#39;アジ&#39;, &#39;サバ&#39;, &#39;イワシ&#39;]</code></pre>
-      <p></br></p>
-      <p>リストが出力されているので、さらにこれを<code>random.choice()</code>で選択すれば良いですね。</p>
-      <div class="sourceCode" id="cb45"
+      <p>コピー＆ペーストして実行してみてください。</p>
+      <div class="sourceCode" id="cb46"
       data-caption="randomfish.py"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a><span class="im">import</span> random</span>
-<span id="cb45-2"><a href="#cb45-2"></a></span>
-<span id="cb45-3"><a href="#cb45-3"></a>STAR_1 <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>]</span>
-<span id="cb45-4"><a href="#cb45-4"></a>STAR_2 <span class="op">=</span> [<span class="st">&quot;カワハギ&quot;</span>,<span class="st">&quot;タチウオ&quot;</span>,<span class="st">&quot;メバル&quot;</span>]</span>
-<span id="cb45-5"><a href="#cb45-5"></a>STAR_3 <span class="op">=</span> [<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;スズキ&quot;</span>,<span class="st">&quot;カサゴ&quot;</span>]</span>
-<span id="cb45-6"><a href="#cb45-6"></a></span>
-<span id="cb45-7"><a href="#cb45-7"></a>FISH_LIST <span class="op">=</span> [STAR_1,STAR_2,STAR_3] <span class="co">#2次元配列であることに注意！</span></span>
-<span id="cb45-8"><a href="#cb45-8"></a>FISH_WEIGHT <span class="op">=</span> [<span class="dv">75</span>,<span class="dv">20</span>,<span class="dv">5</span>] <span class="co">#★1～3の排出率</span></span>
-<span id="cb45-9"><a href="#cb45-9"></a></span>
-<span id="cb45-10"><a href="#cb45-10"></a><span class="bu">print</span>(random.choice(random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights<span class="op">=</span>FISH_WEIGHT)[<span class="dv">0</span>]))</span></code></pre></div>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1"></a><span class="im">import</span> random</span>
+<span id="cb46-2"><a href="#cb46-2"></a></span>
+<span id="cb46-3"><a href="#cb46-3"></a>STAR_1 <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>]</span>
+<span id="cb46-4"><a href="#cb46-4"></a>STAR_2 <span class="op">=</span> [<span class="st">&quot;カワハギ&quot;</span>,<span class="st">&quot;タチウオ&quot;</span>,<span class="st">&quot;メバル&quot;</span>]</span>
+<span id="cb46-5"><a href="#cb46-5"></a>STAR_3 <span class="op">=</span> [<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;スズキ&quot;</span>,<span class="st">&quot;カサゴ&quot;</span>]</span>
+<span id="cb46-6"><a href="#cb46-6"></a></span>
+<span id="cb46-7"><a href="#cb46-7"></a>FISH_LIST <span class="op">=</span> [STAR_1,STAR_2,STAR_3]</span>
+<span id="cb46-8"><a href="#cb46-8"></a>FISH_WEIGHT <span class="op">=</span> [<span class="dv">75</span>,<span class="dv">20</span>,<span class="dv">5</span>] <span class="co">#★1～3の排出率</span></span>
+<span id="cb46-9"><a href="#cb46-9"></a></span>
+<span id="cb46-10"><a href="#cb46-10"></a><span class="bu">print</span>(random.choice(random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights<span class="op">=</span>FISH_WEIGHT)[<span class="dv">0</span>]))</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
       <pre><code>サバ</code></pre>
       <p></br></p>
-      <p><strong>うまくいきました！これは釣りゲームの部品になるので、後で再利用できるように適当な名前を付けて保存しておきましょう。</strong>
-      これはよくない例と比較して格段に修正、改造しやすくなっています。次のChallengeで確認してください。</p>
       <hr />
       <ul>
-      <li><strong>Challenge2-1</strong>　上のプログラムを改造して、★2に「コイ」を追加しましょう。</li>
-      <li><strong>Challenge2-2</strong>　<strong>★4</strong>の魚を追加してみましょう。排出率も適当に調節してください。</li>
+      <li><strong>Challenge1</strong>　上のプログラムを改造して、★2に「コイ」を追加しましょう。</li>
+      <li><strong>Challenge2</strong>　あなたの好みに合わせて好きなガチャを作成してみましょう。</li>
       </ul>
       <!-- ---------------------------------------- -->
     </main>
