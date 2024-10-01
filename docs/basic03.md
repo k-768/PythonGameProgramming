@@ -1,138 +1,298 @@
 ---
 var:
-  header-title: "Pythonで釣りゲームを作ろう 基礎編3　構文"
+  header-title: "Pythonで釣りゲームを作ろう 基礎編3　変数"
   header-date: "2024年04月23日（月)"
 ---
 
-# 基礎編3　構文 
+# 基礎編3　変数 
+
+変数は、ゲームを作るうえで欠かせない存在です。変数を用いることで、**プレイヤー名や所持金、レベルや持ち物**といった、**状況に応じて変化するもの**を扱うことができます。
+ここでは、変数の使い方や命名規則について学ぶことができます。
 
 ## もくじ
 
--  [コメント文](basic03.html#コメント文) 
--  [式の構造](basic03.html#式の構造) 
+-  [変数とは](basic03.html#変数とは) 
+-  [変数の値を変更する](basic03.html#変数の値を変更する) 
+-  [変数の命名](basic03.html#変数の命名) 
 
-## コメント文
-文頭に`#`をつけることで、**コードに注釈をつける**ことができます。
-これを**コメント文**と言い、プログラムには**全く影響しません**が、見やすいコードにすることができます。
+
+## 変数とは
+
+![img](figs/03/var.png)
+
+変数とは、**データを入れておく箱**のようなもので、箱の中身は**いつでも確認したり変更することができます**。
+変数`a`に値`10`を入れるときは、以下のように書きます。
+
+
+```python
+a = 10
+```
+この変数に値を入れる`=`は、**代入演算子**と呼ばれます。
 
 </br>
 
-```python{.numberLines}
-#挨拶をする
-print("Hello World!!")
-```
+---
 
+変数に入れた値は、**簡単に**取り出すことができます。print文の`()`の中に変数名を記述するだけです。
+
+```python{.numberLines caption="test3-1.py"}
+a = 10
+print(a)
+```
 **<i class="fa-solid fa-terminal"></i> 実行結果**
 
 ```
-Hello World!!
+10
 ```
 
-</br>
-1行の途中からコメント文を始めることもできます。
-</br>
+1行目で変数`a`に10を代入しています。そのため、2行目のprint文の`()`の中の`a`は10と読み替えられました。
 
-```python{.numberLines}
-name = "Kosen Taro" #プレイヤー名
-print("Hello!"+name+"!")
-```
-
-**<i class="fa-solid fa-terminal"></i> 実行結果**
-
-```
-Hello!Kosen Taro!
-```
-
-</br>
-
-このように、プログラムを実行したときに`#`より後ろは**すべて無視**されます。
-そのため、以下のようにいらなくなった行を**一時的に無効化**することができます。
-
-</br>
-
-```python{.numberLines}
-name = "Kosen Taro"
-#print("Hello!"+name+"!")
-print("Hey!"+name+"!")
-```
-
-**<i class="fa-solid fa-terminal"></i> 実行結果**
-
-```
-Hey!Kosen Taro!
-```
-
-</br>
-
-これを**コメントアウト**と言います。
-
+<br>
 <div class="note type-tips">
 
-**コメントアウトの使い過ぎに注意!!**
+**「=」の使い方に注意!!**
 
-大きなプログラムを書く時など、命令を消すことなく残しておけるのでついつい多用しがちですが、可読性が下がるので使い過ぎには注意しましょう。
+代入演算子`=`は、**数学で使うものとは意味が異なり、左の変数に右の値を代入するはたらき**を持ちます。
+そのため、以下のプログラムを実行するとエラーが起きます。
+
+```python{.numberLines caption="test.py"}
+10 = a
+print(a)
+```
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+PS C:\******> & C:/******/python.exe c:/******/test.py
+  File "c:\******\test.py", line 1
+    10 = a
+    ^^
+SyntaxError: cannot assign to literal here. Maybe you meant '==' instead of '='?
+```
+
+「`10`は**変数ではないので代入できません**」と言われてしまいます。
+
 
 </div>
 
-複数行にわたってコメントを書きたい場合は、以下のように`"`(ダブルクォーテーション)3つの間に書きます。
+---
 
-```python{.numberLines}
-"""
-これはnameに入っている名前を取得し、
-挨拶をするプログラムです。
-"""
-name = "Kosen Taro"
-print("Hey!"+name+"!")
+![img](figs/03/str.png)
+
+もちろん、変数には**文字列も代入できます**。文字列の場合は、**`"`で囲う**のでしたね。
+これは「hello」と書くと**変数とみなされてしまう**ので、**変数と区別するため**だったわけです。
+
+
+</br>
+
+```python{.numberLines caption="test3-2.py"}
+b = "hello!"
+print(b)
 ```
 
 **<i class="fa-solid fa-terminal"></i> 実行結果**
 
 ```
-Hey!Kosen Taro!
+hello!
 ```
+
+</br>
+
+## 変数の値を変更する
+
+変数に代入し直せば、変数の値を変更することができます。
+
+```python{.numberLines caption="test3-3.py"}
+a = 10
+print(a)
+a = 20
+print(a)
+```
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+10
+20
+```
+
 <br>
 
-## 式の構造
+---
 
-プログラムの書き方にはいくつかの決まりがあります。
+**`a = a + 2`と書けば、`a`の値を2だけ増やすことができます**。
 
-### 改行
 
-プログラムに記載されたそれぞれの命令は、**改行ごとに1文とみなされます**。そのため、正しくない改行をするとエラーになります。
+```python{.numberLines caption="test3-4.py"}
+a = 10
+print(a)
+a = a + 2
+print(a)
+```
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+10
+12
+```
+
+---
+
+- **Challenge2-1**　上のプログラムの1行目を書き換えて、`a`の値を`123`に変更しましょう。
+- **Challenge2-2**　3行目を書き換えて、`a`の値を**2倍**にするよう変更しましょう。
+
+**<i class="fa-solid fa-check"></i>解答**
+
+Challenge2-1: <span class="masked">`a = 123`</span>
+
+Challenge2-2: <span class="masked">`a = a * 2`</span>
+
+</br>
+
+---
+
+**複数の文字列も、`+`を用いてつなぐことができます**。
+```python{.numberLines caption="test3-5.py"}
+name = "Kosen Taro"
+print(name)
+print("Hello! "+name+"!")
+```
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+Kosen Taro
+Hello! Kosen Taro!
+```
+---
+
+<br>
+<div class="note type-tips">
+
+**数値と文字列の結合**
+
+数値同士、文字列同士は`+`を用いて結合できますが、数値と文字列はそのまま結合できません。
+そのため、以下のプログラムを実行するとエラーが起きます。
+
+```python{.numberLines caption="test.py"}
+score = 100
+print("あなたのスコア:" + score)
+```
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+PS C:\******> & C:/******/python.exe c:/******/test.py
+  File "c:\******\test.py", line 2 in <module>  
+    print("あなたのスコア:" + score)
+          ~~~~~~~~~~~^~~~~~~
+TypeError: can only concatenate str (not "int") to str
+```
+
+「**文字列には文字列しか結合できません**」と言われてしまいます。
+そのため、数値を文字列に変換する操作が必要です。`str()`を用いて変換できます。
+
+```python{.numberLines caption="test.py"}
+score = 100
+print("あなたのスコア:" + str(score))
+```
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+あなたのスコア:100
+```
+
+</div>
+
+
+## 変数の命名規則
+
+変数名のつけ方には以下の決まりがあります。
+
+### 半角のアルファベット、数字、`_`(アンダースコア)を組み合わせる
+
+日本語やその他の記号は使わないようにしましょう。
 
 ```python{.numberLines caption="⭕良い例"}
-print("OK")
-print("GOOD")
-```
-```python{.numberLines caption="❌悪い例1"}
-print("NG")print("BAD")
-```
-```python{.numberLines caption="❌悪い例2"}
-pri
-nt("NG")
-```
-
-### インデント
-
-Pythonでは、**インデント**(行頭のスペース)は大きな意味を持ちます。
-基礎編6、7で紹介する`for文`や`if文`では、インデントが必要になります。
-逆に、今までのプログラムの行頭に空白を入れると、エラーになります。
-
-```python{.numberLines caption="⭕良い例"}
-print("OK")
+a = 10
+player1 = "Taro"
+stage_name = "Island"
 ```
 ```python{.numberLines caption="❌悪い例"}
- print("NG")
+ｓｃｏｒｅ = 99    <-全角
+曜日 = "sunday"    <-変数名が日本語
+stage2-1 = "Ocean" <-「-」は引き算の記号として認識される
 ```
 
-### 文中のスペース
+### 最初の文字には数字を使わない
 
-変数の宣言や命令の()内のスペースは、**あってもなくてもかまいません**。
+2文字目以降は自由に使えます。
 
 ```python{.numberLines caption="⭕良い例"}
-print("OK")
-print( "OK" )
-n=1
-n = 1
+player1 = "Taro"
+```
+```python{.numberLines caption="❌悪い例"}
+1st_player = "Tom"
 ```
 
+### 予約語を使わない
+
+たとえば`print`のような、Pythonへの命令として決まっている単語をそのまま使うことはできません。
+
+```python{.numberLines caption="❌悪い例"}
+print = 5
+print(print)
+```
+
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+PS C:\******> & C:/******/python.exe c:/******/test.py
+  File "c:\******\test.py", line 2, in <module>
+    print(print)
+TypeError: 'int' object is not callable
+```
+
+1行目でprintに値が上書きされてしまったので、その後ろではprint文が使えなくなってしまいます。
+
+---
+
+ここからは読みやすいコードにするためのマナーです。(絶対に守る必要はありませんが、一般的な規則です)
+
+
+### 大文字は使わない
+
+変数の名前は**全て小文字**にするのが一般的です。
+
+```python{.numberLines caption="⭕良い例"}
+player1 = "Taro"
+```
+```python{.numberLines caption="❌悪い例"}
+Player1 = "Taro"
+```
+
+### 単語間は`_`でつなぐ
+
+```python{.numberLines caption="⭕良い例"}
+player_name = "Taro"
+max_size = 12
+```
+
+### 極端に長い・短い名前は避ける
+
+長すぎると読みにくく、短すぎると何を示す変数かわからなくなるので避けましょう。
+
+```python{.numberLines caption="⭕良い例"}
+max_mapsize_x = 64
+score = 1100
+```
+```python{.numberLines caption="❌悪い例"}
+maximum_value_in_the_x_direction_on_the_map_screen = 64
+s = 1100
+
+```
+
+#### **charenge2-3** 次の変数名は適切か判断しましょう。
+
+- `tmp` ・・・ <span class="masked">⭕　　　　　　　　　　　　　　</span>
+- `Name` ・・・ <span class="masked">❌全て小文字にするべきです</span>
+- `24th_anniversary` ・・・ <span class="masked">❌最初の文字は数字ではいけません</span>
+- `g20` ・・・ <span class="masked">⭕　　　　　　　　　　　　　　</span>
+- `ともだち` ・・・ <span class="masked">❌変数名を日本語にすることは避けましょう</span>
+- `high-school` ・・・ <span class="masked">❌`-`(ハイフン)は引き算として認識されてしまいます</span>

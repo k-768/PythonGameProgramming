@@ -2,7 +2,7 @@ import tkinter as tk
 
 # ウィンドウ設置　#? Tkinterの基礎(これで学ぶ)
 root = tk.Tk()
-root.title("tkinter test")
+root.title("move-0")
 root.geometry("600x300")
 
 # キャンバス設置
@@ -47,5 +47,9 @@ def press(e): #? 関数の定義と実行
 #キー入力をトリガーに関数を呼び出すよう設定する
 root.bind("<KeyPress>", press)#? キー入力監視(これで学ぶ)
 
+def on_key_press(event):
+    print(f"Key pressed: {event.keysym}")
+    
 # メインループ
+root.bind("<KeyPress>", on_key_press)
 root.mainloop()

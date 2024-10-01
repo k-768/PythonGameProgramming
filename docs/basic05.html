@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon2.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>基礎編5　if文</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#もくじ" id="toc-もくじ"><span
+class="toc-section-number">1</span> もくじ</a></li>
+<li><a href="#条件分岐とは" id="toc-条件分岐とは"><span
+class="toc-section-number">2</span> 条件分岐とは</a></li>
+<li><a href="#if文" id="toc-if文"><span
+class="toc-section-number">3</span> if文</a></li>
+<li><a href="#関係演算子" id="toc-関係演算子"><span
+class="toc-section-number">4</span> 関係演算子</a></li>
+<li><a href="#if-else文" id="toc-if-else文"><span
+class="toc-section-number">5</span> if-else文</a></li>
+<li><a href="#if-elif文" id="toc-if-elif文"><span
+class="toc-section-number">6</span> if-elif文</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>Pythonで釣りゲームを作ろう 基礎編5　if文</p>
+      <p>2024年04月23日（月)</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <p>if文を使えば、条件分岐をつくることができます。条件分岐なしにはゲームはつくれません。
+      たとえば、RPGでは押したボタンによって攻撃したり、技を使ったり、逃げたりと、様々な分岐があります。
+      プレイヤーが行動を選択できなければ、ただのアニメーションですからね。</p>
+      <h1 data-number="1" id="もくじ"><span
+      class="header-section-number">1</span> もくじ</h1>
+      <ul>
+      <li><a href="basic05.html#条件分岐とは">条件分岐とは</a></li>
+      <li><a href="basic05.html#if文">if文</a></li>
+      <li><a href="basic05.html#関係演算子">関係演算子</a></li>
+      <li><a href="basic05.html#if-else文">if-else文</a></li>
+      <li><a href="basic05.html#if-elif文">if-elif文</a></li>
+      </ul>
+      <h1 data-number="2" id="条件分岐とは"><span
+      class="header-section-number">2</span> 条件分岐とは</h1>
+      <figure>
+      <img src="figs/05/walk.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>RPGのマップ移動を例に考えてみましょう。キーボード入力によって進む方向が変わります。</p>
+      <ul>
+      <li>Wキー　→　上に進む</li>
+      <li>Aキー　→　左に進む</li>
+      <li>Sキー　→　下に進む</li>
+      <li>Dキー　→　右に進む</li>
+      </ul>
+      <p>このようにゲームでは様々な条件によって処理を変更しています。Pythonでは、<code>if文</code>を用いて条件分岐を記述します。</p>
+      <h1 data-number="3" id="if文"><span
+      class="header-section-number">3</span> if文</h1>
+      <p><code>if文</code>の構造を見ていきましょう。</p>
+      <div class="sourceCode" id="cb1" data-caption="if文の構造"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="bu">print</span>(<span class="st">&quot;aは正の値です&quot;</span>)</span></code></pre></div>
+      <p>1行目<code>if</code>と<code>:</code>に囲まれた部分が<strong>条件を示す部分</strong>です。この例では、「aが0以上」になります。</p>
+      <p>そして、2行目は、<strong>1行目の条件を満たした時実行される部分</strong>です。<strong>インデント</strong>(<a
+      href="basic04.html#インデント">参照</a>)する必要があります。</p>
+      <p>インデントした部分を<strong>ブロック</strong>と言い、条件を満たした時、すぐ後ろのブロックが<strong>全て実行されます</strong>。</p>
+      <div class="sourceCode" id="cb2" data-caption="ブロック"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="cf">if</span> 条件:</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  処理A</span>
+<span id="cb2-3"><a href="#cb2-3"></a>  処理B</span>
+<span id="cb2-4"><a href="#cb2-4"></a>  処理C</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  ...</span></code></pre></div>
+      <p>以下のプログラムを実行してみましょう。</p>
+      <div class="sourceCode" id="cb3" data-caption="test5-1.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>a <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>b <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">0</span>: <span class="co"># a&gt;0であれば</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="bu">print</span>(<span class="st">&quot;aは正の値です&quot;</span>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="bu">print</span>(<span class="st">&quot;a:&quot;</span><span class="op">+</span><span class="bu">str</span>(a))</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="cf">if</span> b <span class="op">&gt;</span> <span class="dv">0</span>: <span class="co"># b&gt;0であれば</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="bu">print</span>(<span class="st">&quot;bは正の値です&quot;</span>)</span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="bu">print</span>(<span class="st">&quot;b:&quot;</span><span class="op">+</span><span class="bu">str</span>(b))</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>aは正の値です
+a:1</code></pre>
+      <h1 data-number="4" id="関係演算子"><span
+      class="header-section-number">4</span> 関係演算子</h1>
+      <p>関係演算子は以下のような種類があります。</p>
+      <table style="width:38%;">
+      <colgroup>
+      <col style="width: 6%" />
+      <col style="width: 9%" />
+      <col style="width: 20%" />
+      </colgroup>
+      <thead>
+      <tr class="header">
+      <th style="text-align: left;">演算子</th>
+      <th style="text-align: center;">記述例</th>
+      <th style="text-align: center;">意味</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td style="text-align: left;">==</td>
+      <td style="text-align: center;">a==b</td>
+      <td style="text-align: center;">aとbが等しい</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: left;">!=</td>
+      <td style="text-align: center;">a!=b</td>
+      <td style="text-align: center;">aとbが等しくない(≠)</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: left;">&gt;</td>
+      <td style="text-align: center;">a&gt;b</td>
+      <td style="text-align: center;">aがbより大きい</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: left;">&lt;</td>
+      <td style="text-align: center;">a&lt;b</td>
+      <td style="text-align: center;">aがbより小さい</td>
+      </tr>
+      <tr class="odd">
+      <td style="text-align: left;">&gt;=</td>
+      <td style="text-align: center;">a&gt;=b</td>
+      <td style="text-align: center;">aがb以上</td>
+      </tr>
+      <tr class="even">
+      <td style="text-align: left;">&lt;=</td>
+      <td style="text-align: center;">a&lt;=b</td>
+      <td style="text-align: center;">aがb以下</td>
+      </tr>
+      </tbody>
+      </table>
+      <h1 data-number="5" id="if-else文"><span
+      class="header-section-number">5</span> if-else文</h1>
+      <p><code>else</code>を用いて、<strong>条件が満たされなかったときの処理を設定する</strong>ことができます。</p>
+      <div class="sourceCode" id="cb5"
+      data-caption="if-else文の構造"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> random</span>
+<span id="cb5-2"><a href="#cb5-2"></a>weight <span class="op">=</span> random.randint(<span class="dv">50</span>,<span class="dv">150</span>) <span class="co">#50から150までの乱数</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">100</span>: <span class="co"># weight&gt;100であれば</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;gの大物が釣れた！&quot;</span>)</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="cf">else</span>: <span class="co"># weight&gt;100でなければ</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;gの魚が釣れた！&quot;</span>)</span></code></pre></div>
+      <ul>
+      <li><code>weight</code>が100より大きいとき、条件を満たすので、「XXgの大物が釣れた！」と出力されます。</li>
+      <li><code>weight</code>が0以下のとき、条件を満たさないので、「XXgの魚が釣れた！」と出力されます。</li>
+      </ul>
+      <h1 data-number="6" id="if-elif文"><span
+      class="header-section-number">6</span> if-elif文</h1>
+      <p><code>elif</code>を用いて、<strong>細かく条件を設定する</strong>ことができます。</p>
+      <div class="sourceCode" id="cb6"
+      data-caption="if-elif文の構造"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="cf">if</span> a <span class="op">&gt;</span> <span class="dv">0</span>:　<span class="co">#a&gt;0であれば</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="bu">print</span>(<span class="st">&quot;aは正の値です&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="cf">elif</span> a <span class="op">==</span> <span class="dv">0</span>: <span class="co">#a&gt;0でなく、a==0であれば</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="bu">print</span>(<span class="st">&quot;aは0です&quot;</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="cf">else</span>: <span class="co">#どちらでもなければ</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="bu">print</span>(<span class="st">&quot;aは負の値です&quot;</span>)</span></code></pre></div>
+      <p><code>if-elif文</code>が用いられる代表的な例としては、<strong>キーボードによるキャラクター移動</strong>が挙げられます。</p>
+      <div class="sourceCode" id="cb7" data-caption="move.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>key <span class="op">=</span> <span class="st">&quot;w&quot;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="cf">if</span> key <span class="op">==</span> <span class="st">&quot;w&quot;</span>:　</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="bu">print</span>(<span class="st">&quot;奥に進みます&quot;</span>)</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;a&quot;</span>:</span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="bu">print</span>(<span class="st">&quot;左に進みます&quot;</span>)</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;s&quot;</span>:</span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="bu">print</span>(<span class="st">&quot;手前に進みます&quot;</span>)</span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;d&quot;</span>:</span>
+<span id="cb7-9"><a href="#cb7-9"></a>  <span class="bu">print</span>(<span class="st">&quot;右に進みます&quot;</span>)</span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="cf">else</span>: </span>
+<span id="cb7-11"><a href="#cb7-11"></a>  <span class="bu">print</span>(<span class="st">&quot;不正な入力です&quot;</span>)</span></code></pre></div>
+      <div class="note type-tips">
+      <p><strong>if文とif-elif文の違い</strong></p>
+      <p>下の二つのプログラムを実行して、違いを確認しましょう。</p>
+      </div>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://k-768.github.io/PythonGameProgramming/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
