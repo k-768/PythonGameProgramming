@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon2.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>基礎編8　tkinter (1)</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#もくじ" id="toc-もくじ"><span
+class="toc-section-number">1</span> もくじ</a></li>
+<li><a href="#モジュール" id="toc-モジュール"><span
+class="toc-section-number">2</span> モジュール</a></li>
+<li><a href="#ウィンドウを表示する" id="toc-ウィンドウを表示する"><span
+class="toc-section-number">3</span> ウィンドウを表示する</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>Pythonで釣りゲームを作ろう 基礎編8　tkinter(1)</p>
+      <p>最終更新日：2024年10月01日（火)</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <p>グラフィック（見た目）は、ゲームにおいて非常な重要な部分です。
+      今回は、Pythonを用いて画面を表示してみましょう。</p>
+      <h1 data-number="1" id="もくじ"><span
+      class="header-section-number">1</span> もくじ</h1>
+      <ul>
+      <li><a href="basic07.html#リストとは">リストとは</a></li>
+      <li><a href="basic07.html#2次元リスト">2次元リスト</a></li>
+      </ul>
+      <h1 data-number="2" id="モジュール"><span
+      class="header-section-number">2</span> モジュール</h1>
+      <p>モジュールを<code>import</code>することで、簡単に新たな機能を追加することができます。
+      今回は、ランダムな数を生成することが出来る、<code>tkinter</code>モジュールを追加してみましょう。
+      プログラムの最初の行にこの文を記述するだけで準備完了です。</p>
+      <pre><code>import tkinter as tk</code></pre>
+      <p><strong>tkinterを利用するたびに、毎回毎回
+      tkinter.・・・と書くのは面倒なので省略できます</strong>。
+      <code>import tkinter</code>の後ろに<code>as tk</code>と記述することで、<strong><code>tk</code>と書くだけで良くなります</strong>。</p>
+      <h1 data-number="3" id="ウィンドウを表示する"><span
+      class="header-section-number">3</span> ウィンドウを表示する</h1>
+      <p>以下のコードを実行してみてください。</p>
+      <div class="sourceCode" id="cb2" data-startFrom="1"
+      data-caption="tk.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># ウィンドウを表示する</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb2-3"><a href="#cb2-3"></a>root.title(<span class="st">&quot;test&quot;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>root.geometry(<span class="st">&quot;400x600&quot;</span>) </span></code></pre></div>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://k-768.github.io/PythonGameProgramming/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
