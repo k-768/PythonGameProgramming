@@ -9,4 +9,4 @@ toc-depth: 2
 standalone: true
 shift-heading-level-by: -1
 variables:
-  base-url: "https://k768.github.io/PythonGameProgramming/"
+  base-url: "https://k-768.github.io/PythonGameProgramming/"
