@@ -19,7 +19,7 @@
 
     
 
-    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" href="favicon2.ico" sizes="any" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -48,8 +48,8 @@ class="toc-section-number">1</span> もくじ</a></li>
 class="toc-section-number">2</span> print文</a></li>
 <li><a href="#文字列" id="toc-文字列"><span
 class="toc-section-number">3</span> 文字列</a></li>
-<li><a href="#文字列-1" id="toc-文字列-1"><span
-class="toc-section-number">4</span> 文字列</a></li>
+<li><a href="#四則演算" id="toc-四則演算"><span
+class="toc-section-number">4</span> 四則演算</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -66,10 +66,9 @@ class="toc-section-number">4</span> 文字列</a></li>
       class="header-section-number">1</span> もくじ</h1>
       <ul>
       <li><a href="basic02.html#Print文">Print文</a></li>
-      <li><a href="basic02.html#print文">print文</a></li>
+      <li><a href="basic02.html#文字列">文字列</a></li>
       <li><a href="basic02.html#整数と小数">整数と小数</a></li>
       <li><a href="basic02.html#四則演算">四則演算</a></li>
-      <li><a href="basic02.html#文字列">文字列</a></li>
       </ul>
       <h1 data-number="2" id="print文"><span
       class="header-section-number">2</span> print文</h1>
@@ -84,7 +83,8 @@ class="toc-section-number">4</span> 文字列</a></li>
       <p></br></p>
       <h1 data-number="3" id="文字列"><span
       class="header-section-number">3</span> 文字列</h1>
-      <p>日本語や英語など、<strong>文字列を表示する時には<code>"(ダブルクォーテーション)</code>で囲み</strong>ます。<code>Shift + 2</code>で入力できます。試しに、「Hello
+      <p><code>print()</code>を用いて、コマンドプロンプトに文字を表示することが出来ます。
+      <code>()</code>の中に表示したいものを記述するのですが、日本語や英語など、<strong>文字列を表示する時には<code>"(ダブルクォーテーション)</code>で囲み</strong>ます。<code>Shift + 2</code>で入力できます。試しに、「Hello
       World!!」と表示させてみましょう。</p>
       <p></br></p>
       <div class="sourceCode" id="cb3" data-caption="HelloWorld.py"><pre
@@ -93,11 +93,67 @@ class="toc-section-number">4</span> 文字列</a></li>
       実行結果</strong></p>
       <pre><code>Hello World!!</code></pre>
       <p></br></p>
-      <h1 data-number="4" id="文字列-1"><span
-      class="header-section-number">4</span> 文字列</h1>
-      <p><code>print()</code>を用いて、コマンドプロンプトに文字を表示することが出来ます。
-      <code>()</code>の中に表示したいものを記述するのですが、日本語や英語など、<strong>文字列を表示する時には<code>"(ダブルクォーテーション)</code>で囲み</strong>ます。<code>Shift + 2</code>で入力できます。試しに、「Hello
-      World!!」と表示させてみましょう。</p>
+      <h1 data-number="4" id="四則演算"><span
+      class="header-section-number">4</span> 四則演算</h1>
+      <p>Pythonを用いて、簡単な計算をしてみましょう。</p>
+      <p></br></p>
+      <div class="sourceCode" id="cb5" data-caption="sum.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="bu">print</span>(<span class="dv">2</span><span class="op">+</span><span class="dv">3</span>)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>5</code></pre>
+      <p></br></p>
+      <p>カッコの中に<code>2+3</code>と記述すれば、それを計算して結果が出力されます。
+      四則演算を行う際には以下の<strong>演算記号</strong>を用います。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>演算　</th>
+      <th>記号</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>足し算</td>
+      <td>　+</td>
+      </tr>
+      <tr class="even">
+      <td>引き算</td>
+      <td>　-</td>
+      </tr>
+      <tr class="odd">
+      <td>掛け算</td>
+      <td>　*</td>
+      </tr>
+      <tr class="even">
+      <td>割り算</td>
+      <td>　/</td>
+      </tr>
+      </tbody>
+      </table>
+      <div class="note type-tips">
+      <p><strong>記号は半角!</strong></p>
+      <p>掛け算や割り算は、普段使用する「×」「÷」とは<strong>異なる記号を使用</strong>するため要注意です。
+      いずれも、<strong>全角ではなく半角</strong>であることに注意してください。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>全角</th>
+      <th>　半角</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>＋</td>
+      <td>　+</td>
+      </tr>
+      <tr class="even">
+      <td>ー</td>
+      <td>　-</td>
+      </tr>
+      </tbody>
+      </table>
+      </div>
       <!-- ---------------------------------------- -->
     </main>
 
