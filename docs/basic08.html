@@ -48,6 +48,8 @@ class="toc-section-number">1</span> もくじ</a></li>
 class="toc-section-number">2</span> モジュール</a></li>
 <li><a href="#ウィンドウを表示する" id="toc-ウィンドウを表示する"><span
 class="toc-section-number">3</span> ウィンドウを表示する</a></li>
+<li><a href="#キャンバスを設置する" id="toc-キャンバスを設置する"><span
+class="toc-section-number">4</span> キャンバスを設置する</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -71,21 +73,33 @@ class="toc-section-number">3</span> ウィンドウを表示する</a></li>
       <h1 data-number="2" id="モジュール"><span
       class="header-section-number">2</span> モジュール</h1>
       <p>モジュールを<code>import</code>することで、簡単に新たな機能を追加することができます。
-      今回は、ランダムな数を生成することが出来る、<code>tkinter</code>モジュールを追加してみましょう。
+      今回は、<code>tkinter</code>モジュールを追加してみましょう。これを使うと、ウィンドウや図形などの<strong>グラフィカルな要素を簡単に作成</strong>することができます。
       プログラムの最初の行にこの文を記述するだけで準備完了です。</p>
       <pre><code>import tkinter as tk</code></pre>
       <p><strong>tkinterを利用するたびに、毎回毎回
       tkinter.・・・と書くのは面倒なので省略できます</strong>。
-      <code>import tkinter</code>の後ろに<code>as tk</code>と記述することで、<strong><code>tk</code>と書くだけで良くなります</strong>。</p>
+      <code>import tkinter</code>の後ろに<code>as tk</code>と記述することで、<strong><code>tk</code>と書くだけで良くなり</strong>コードが簡潔で読みやすくなります。</p>
       <h1 data-number="3" id="ウィンドウを表示する"><span
       class="header-section-number">3</span> ウィンドウを表示する</h1>
       <p>以下のコードを実行してみてください。</p>
       <div class="sourceCode" id="cb2" data-startFrom="1"
       data-caption="tk.py"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># ウィンドウを表示する</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>root <span class="op">=</span> tk.Tk()</span>
-<span id="cb2-3"><a href="#cb2-3"></a>root.title(<span class="st">&quot;test&quot;</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a>root.geometry(<span class="st">&quot;400x600&quot;</span>) </span></code></pre></div>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># ウィンドウを表示する</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb2-4"><a href="#cb2-4"></a>root.title(<span class="st">&quot;test&quot;</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>root.geometry(<span class="st">&quot;600x400&quot;</span>) </span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a>root.mainloop()</span></code></pre></div>
+      <p>実行すると、ウィンドウが表示されます。</p>
+      <ul>
+      <li><code>4行目</code>の<code>"test"</code>と書かれた部分を変更することで、ウィンドウの名前を変更できます。</li>
+      <li><code>5行目</code>の<code>"600x400"</code>はウィンドウのサイズを<code>"幅x高さ"</code>で指定しています。書き換えればサイズを変更できます。</li>
+      </ul>
+      <hr />
+      <h1 data-number="4" id="キャンバスを設置する"><span
+      class="header-section-number">4</span> キャンバスを設置する</h1>
+      <p>図形や画像を描画するためには、土台となるキャンバスが必要です。</p>
       <!-- ---------------------------------------- -->
     </main>
 
