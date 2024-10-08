@@ -6,7 +6,9 @@ var:
 
 # 基礎編5　if文 
 
-if文を使えば、条件分岐をつくることができます。条件分岐なしにはゲームはつくれません。
+---
+
+if文を使えば、条件分岐をつくることができます。**条件分岐なしにはゲームはつくれません**。
 たとえば、RPGでは押したボタンによって攻撃したり、技を使ったり、逃げたりと、様々な分岐があります。
 プレイヤーが行動を選択できなければ、ただのアニメーションですからね。
 
@@ -103,34 +105,113 @@ a:1
 
 ```python{.numberLines caption="if-else文の構造"}
 import random
-weight = random.randint(50,150) #50から150までの乱数
-if weight > 100: # weight>100であれば
-  print(str(weight)+"gの大物が釣れた！")
-else: # weight>100でなければ
-  print(str(weight)+"gの魚が釣れた！")
+weight = random.randint(10,50)/10 #1.0から5.0までの乱数
+if weight > 3: # weight>3であれば
+  print(str(weight)+"kgの大物が釣れた！")
+else: # weight>3でなければ
+  print(str(weight)+"kgの魚が釣れた！")
 ```
 
-- `weight`が100より大きいとき、条件を満たすので、「XXgの大物が釣れた！」と出力されます。
-- `weight`が0以下のとき、条件を満たさないので、「XXgの魚が釣れた！」と出力されます。
+- `weight`が10より大きいとき、条件を満たすので、「XXkgの大物が釣れた！」と出力されます。
+- `weight`が10以下のとき、条件を満たさないので、「XXkgの魚が釣れた！」と出力されます。
+
+---
+
+`if-else文`を入れ子にすることで、**細かく条件を設定する**ことができます。
+
+```python{.numberLines caption="if-else文の入れ子"}
+import random
+weight = random.randint(10,50)/10 #1.0から5.0までの乱数
+if weight > 4: # weight>4であれば
+  print(str(weight)+"kgの超大物が釣れた！")
+else: # weight>4でなければ
+  if weight > 3: # weight>3であれば
+    print(str(weight)+"kgの大物が釣れた！")
+  else: # weight>3でなければ
+    print(str(weight)+"kgの魚が釣れた！")
+```
+
+もっと細かく条件を分けたければ、もっと**if文を入れ子にすれば良い**わけです。
+しかし、それではどんどんプログラムが複雑になってしまいます。
+入れ子が増えた構造は**ネスト**とよばれ、わかりやすいプログラムにするためには**なるべくネストを避ける工夫が必要**です。
+このような処理を行いたい際には次の**if-elif文**を用います。
 
 ## if-elif文
 
-`elif`を用いて、**細かく条件を設定する**ことができます。
+`elif`を用いて上のプログラムをもっとスマートに書くことができます。
 
 ```python{.numberLines caption="if-elif文の構造"}
-if a > 0:　#a>0であれば
-  print("aは正の値です")
-elif a == 0: #a>0でなく、a==0であれば
-  print("aは0です")
-else: #どちらでもなければ
-  print("aは負の値です")
+import random
+weight = random.randint(10,50)/10 #1.0から5.0までの乱数
+if weight > 4: # weight>4であれば
+  print(str(weight)+"kgの超大物が釣れた！")
+elif weight > 3: # weight>3であれば
+  print(str(weight)+"kgの大物が釣れた！")
+else: # weight>3でなければ
+  print(str(weight)+"kgの魚が釣れた！")
 ```
+
+
+<div class="note type-tips">
+
+**if文とif-elif文の違い**
+
+下の二つのプログラムを実行して、違いを確認しましょう。
+```python{.numberLines caption="if文"}
+weight = 4.5 
+if weight > 4: # weight>4であれば
+  print(str(weight)+"kgの超大物が釣れた！")
+if weight > 3: # weight>3であれば
+  print(str(weight)+"kgの大物が釣れた！")
+```
+
+```python{.numberLines caption="elif文"}
+weight = 4.5
+if weight > 4: # weight>4であれば
+  print(str(weight)+"kgの超大物が釣れた！")
+elif weight > 3: # weight>3であれば
+  print(str(weight)+"kgの大物が釣れた！")
+```
+
+---
+
+**<i class="fa-solid fa-terminal"></i> 実行結果(if文)**
+
+```
+4.5kgの超大物が釣れた！
+4.5kgの大物が釣れた
+```
+
+**<i class="fa-solid fa-terminal"></i> 実行結果(elif文)**
+
+```
+4.5kgの超大物が釣れた！
+```
+
+
+**if文**の場合、条件が複数満たされると、**それぞれの処理が実行**されます。
+
+一方で**if-elif文**の場合、**最初に満たされた条件の処理だけが実行され、その後の条件は無視**されます。
+
+これらの動作を図解すると以下のようになります。
+
+**if文の場合**
+![img](figs/05/if文.svg)
+
+**elif文の場合**
+![img](figs/05/elif文.svg)
+
+この図は**状態遷移図**と呼ばれ、**プログラムの構造を理解する際に役に立ち**ます。
+
+</div>
+
+<br>
 
 `if-elif文`が用いられる代表的な例としては、**キーボードによるキャラクター移動**が挙げられます。
 
 ```python{.numberLines caption="move.py"}
 key = "w"
-if key == "w":　
+if key == "w":
   print("奥に進みます")
 elif key == "a":
   print("左に進みます")
@@ -142,10 +223,35 @@ else:
   print("不正な入力です")
 ```
 
-<div class="note type-tips">
+## 論理演算子
 
-**if文とif-elif文の違い**
+条件分岐をする際に、もう一つ重要になるのが論理演算子です。複数の条件を記述する際に用います。
+論理演算子は以下のような種類があります。
 
-下の二つのプログラムを実行して、違いを確認しましょう。
 
-</div>
+<table>
+<thead>
+    <tr>
+      <th scope="col">演算子</th>
+      <th scope="col">記述例</th>
+      <th scope="col">意味</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">and</th>
+      <td>a>b and a>c</td>
+      <td>　a>b **かつ** a>c </td>
+    </tr>
+    <tr>
+      <th scope="row">or</th>
+      <td>a>b or a>c</td>
+      <td>　a>b **または** a>c </td>
+    </tr>
+    <tr>
+      <th scope="row">not</th>
+      <td>not a>b</td>
+      <td> 　a>b **でない**</td>
+    </tr>
+  </tbody>
+</table>
