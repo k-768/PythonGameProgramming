@@ -50,6 +50,10 @@ class="toc-section-number">2</span> print文</a></li>
 class="toc-section-number">3</span> 文字列</a></li>
 <li><a href="#四則演算" id="toc-四則演算"><span
 class="toc-section-number">4</span> 四則演算</a></li>
+<li><a href="#その他の演算" id="toc-その他の演算"><span
+class="toc-section-number">5</span> その他の演算</a></li>
+<li><a href="#演算の順序" id="toc-演算の順序"><span
+class="toc-section-number">6</span> 演算の順序</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -67,8 +71,8 @@ class="toc-section-number">4</span> 四則演算</a></li>
       <ul>
       <li><a href="basic02.html#Print文">Print文</a></li>
       <li><a href="basic02.html#文字列">文字列</a></li>
-      <li><a href="basic02.html#整数と小数">整数と小数</a></li>
       <li><a href="basic02.html#四則演算">四則演算</a></li>
+      <li><a href="basic02.html#その他の演算">その他の演算</a></li>
       </ul>
       <h1 data-number="2" id="print文"><span
       class="header-section-number">2</span> print文</h1>
@@ -154,6 +158,71 @@ class="toc-section-number">4</span> 四則演算</a></li>
       </tbody>
       </table>
       </div>
+      <h3 data-number="4.0.1"
+      id="charenge2-1-次の計算をpythonでしてみましょう"><span
+      class="header-section-number">4.0.1</span>
+      <strong>charenge2-1</strong>
+      次の計算をPythonでしてみましょう。</h3>
+      <ul>
+      <li>4+6 ・・・ <span class="masked"><code>4+6</code></span></li>
+      <li>5-2 ・・・ <span class="masked"><code>5-2</code></span></li>
+      <li>6×3 ・・・ <span class="masked"><code>6*3</code></span></li>
+      <li>12÷4 ・・・ <span class="masked"><code>12/4</code></span></li>
+      </ul>
+      <h1 data-number="5" id="その他の演算"><span
+      class="header-section-number">5</span> その他の演算</h1>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>演算　</th>
+      <th>記号</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>商の整数値</td>
+      <td>　//</td>
+      </tr>
+      <tr class="even">
+      <td>余り</td>
+      <td>　%</td>
+      </tr>
+      <tr class="odd">
+      <td>べき乗</td>
+      <td>　**</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>例えば7÷3=2あまり1を計算したいとき、<code>//</code>を用いて割り切れた数を、<code>%</code>を用いてあまりを求めることができます。</p>
+      <h3 data-number="5.0.1"
+      id="charenge2-2-次の計算をpythonでしてみましょう"><span
+      class="header-section-number">5.0.1</span>
+      <strong>charenge2-2</strong>
+      次の計算をPythonでしてみましょう。</h3>
+      <ul>
+      <li>7÷3の商の整数値 ・・・ <span
+      class="masked"><code>7//3</code></span></li>
+      <li>7÷3の余り ・・・ <span
+      class="masked"><code>7%3</code></span></li>
+      <li>2の8乗 ・・・ <span
+      class="masked"><code>2**8</code></span></li>
+      </ul>
+      <p><br></p>
+      <h1 data-number="6" id="演算の順序"><span
+      class="header-section-number">6</span> 演算の順序</h1>
+      <p>計算の順序は数学と同じです。</p>
+      <ul>
+      <li>基本的に<strong>前から</strong>計算される</li>
+      <li>加減算より<strong>乗除算</strong>が優先される</li>
+      <li><strong>()</strong>を用いて優先順位をつけることができる</li>
+      </ul>
+      <div class="sourceCode" id="cb7" data-caption="sum.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">print</span>(<span class="dv">2</span><span class="op">+</span><span class="dv">3</span><span class="op">*</span><span class="dv">4</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="bu">print</span>((<span class="dv">2</span><span class="op">+</span><span class="dv">3</span>)<span class="op">*</span><span class="dv">4</span>)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>14
+20</code></pre>
       <!-- ---------------------------------------- -->
     </main>
 

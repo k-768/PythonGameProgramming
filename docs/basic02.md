@@ -10,8 +10,8 @@ var:
 
 -  [Print文](basic02.html#Print文) 
 -  [文字列](basic02.html#文字列) 
--  [整数と小数](basic02.html#整数と小数) 
 -  [四則演算](basic02.html#四則演算) 
+-  [その他の演算](basic02.html#その他の演算) 
 
 ## print文
 `print()`を用いて、コマンドプロンプトに文字を表示することが出来ます。
@@ -91,3 +91,49 @@ print(2+3)
 | ー | 　-   |
 
 </div>
+
+
+#### **charenge2-1** 次の計算をPythonでしてみましょう。
+
+- 4+6 ・・・ <span class="masked">`4+6`</span>
+- 5-2 ・・・ <span class="masked">`5-2`</span>
+- 6×3 ・・・ <span class="masked">`6*3`</span>
+- 12÷4 ・・・ <span class="masked">`12/4`</span>
+
+## その他の演算
+
+| 演算　 | 記号 |
+--------+-------
+| 商の整数値 | 　//   |
+| 余り | 　%   |
+| べき乗 | 　**   |
+
+例えば7÷3=2あまり1を計算したいとき、`//`を用いて割り切れた数を、`%`を用いてあまりを求めることができます。
+
+#### **charenge2-2** 次の計算をPythonでしてみましょう。
+
+- 7÷3の商の整数値 ・・・ <span class="masked">`7//3`</span>
+- 7÷3の余り ・・・ <span class="masked">`7%3`</span>
+- 2の8乗 ・・・ <span class="masked">`2**8`</span>
+
+<br>
+
+## 演算の順序
+
+計算の順序は数学と同じです。
+
+- 基本的に**前から**計算される
+- 加減算より**乗除算**が優先される
+- **()**を用いて優先順位をつけることができる
+
+```python{.numberLines caption="sum.py"}
+print(2+3*4)
+print((2+3)*4)
+```
+
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+14
+20
+```
