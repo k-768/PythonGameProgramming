@@ -52,6 +52,21 @@ root.mainloop()
 
 図形や画像を描画するためには、土台となるキャンバスが必要です。
 
+```python{.numberLines startFrom="1" caption="tk.py"}
+import tkinter as tk
+# ウィンドウを表示する
+root = tk.Tk()
+root.title("test")
+root.geometry("600x400") 
+
+# キャンバス設置
+canvas = tk.Canvas(root,width = 600,height = 400,bg = "skyblue")
+canvas.pack()
+
+root.mainloop()
+```
+
+
 
 
 
