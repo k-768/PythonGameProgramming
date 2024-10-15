@@ -30,6 +30,13 @@ var:
 
 - ダウンロードしたファイルを開く
 
+- 一つ目の選択肢にチェックを入れて実行
+
+[img](./figs/01/pyInsSetup.png)
+
+- Closeを押して終了
+
+[img](./figs/01/pyInsFin.png)
 
 ### Mac の場合
 
