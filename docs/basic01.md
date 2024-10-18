@@ -26,17 +26,17 @@ var:
 
 - [公式サイト](https://www.python.org/downloads/)から、インストーラをダウンロードする
 
-[img](./figs/01/python.PNG)
+![img](./figs/01/python.PNG)
 
 - ダウンロードしたファイルを開く
 
 - 一つ目の選択肢にチェックを入れて実行
 
-[img](./figs/01/pyInsSetup.png)
+![img](./figs/01/pyInsSetup.png)
 
 - Closeを押して終了
 
-[img](./figs/01/pyInsFin.png)
+![img](./figs/01/pyInsFin.png)
 
 ### Mac の場合
 
@@ -47,7 +47,13 @@ Macの場合は[このサイト](https://gammasoft.jp/blog/python-install-and-co
 
 レポートを書くためにWordやGoogleDocumentといったテキストエディタが必要であるのと同じように、**プログラミングにはソースコードエディタが必要**です。今回は、**Visual Studio Code**(VSCode)とよばれるソースコードエディタを用います。
 
-- [公式サイト](https://www.python.org/downloads/)から、インストーラをダウンロードする
+- [公式サイト](https://code.visualstudio.com/)から、インストーラをダウンロードする
+
+- ダウンロードしたファイルを開く
+
+- この画面が出るまで次へを押す
+
+- 
 
 
 ## 参考文献
