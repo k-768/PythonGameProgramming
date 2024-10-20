@@ -1,7 +1,7 @@
 ---
 var:
   header-title: "Pythonで釣りゲームを作ろう 基礎編1　環境構築"
-  header-date: "2024年10月15日（火）"
+  header-date: "2024年10月20日（日）"
 ---
 
 # 基礎編1　環境構築 
@@ -18,7 +18,7 @@ var:
 -  [Pythonのインストール](basic01.html#Pythonのインストール) 
 -  [VS Codeのインストール](basic01.html#VSCodeのインストール) 
 -  [プログラムの実行](basic01.html#プログラムの実行) 
--  [プログラムの実行](basic01.html#プログラムの実行) 
+-  [基礎編でできること](basic01.html#基礎編でできること) 
 
 ## Pythonのインストール
 

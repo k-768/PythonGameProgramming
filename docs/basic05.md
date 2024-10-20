@@ -256,3 +256,18 @@ else:
   </tbody>
 </table>
 
+これを用いて、キーボードによるキャラクター移動を**WASDと矢印キー**両方に対応できます。
+
+```python{.numberLines caption="move.py"}
+key = "w"
+if key == "w" or key =="Up":
+  print("奥に進みます")
+elif key == "a" or key =="Left":
+  print("左に進みます")
+elif key == "s" or key =="Down":
+  print("手前に進みます")
+elif key == "d" or key =="Right":
+  print("右に進みます")
+else: 
+  print("不正な入力です")
+```
