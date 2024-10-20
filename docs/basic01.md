@@ -18,6 +18,7 @@ var:
 -  [Pythonのインストール](basic01.html#Pythonのインストール) 
 -  [VS Codeのインストール](basic01.html#VSCodeのインストール) 
 -  [プログラムの実行](basic01.html#プログラムの実行) 
+-  [プログラムの実行](basic01.html#プログラムの実行) 
 
 ## Pythonのインストール
 
@@ -177,6 +178,66 @@ print("Hello World!!")
 
 図のように、`Hello World!!`と表示されていたら成功です!
 
+
+## 基礎編でできること
+
+今回を含めて数回で、Pythonの基礎を学んでいきます。**基礎編を通してできるようになることを紹介します**。
+
+`move-rect.py`を新規作成し、以下のプログラムをコピー＆ペーストして実行してみてください。
+
+```python{.numberLines caption="move-rect.py"}
+import tkinter as tk
+
+# ウィンドウ設置
+root = tk.Tk()
+root.title("move-rect")
+root.geometry("600x300")
+
+# キャンバス設置
+canvas = tk.Canvas(root,width = 600,height = 300,bg = "skyblue")
+canvas.pack()
+
+# 四角形を配置
+rect_size = 50
+x = 10
+y = 10
+canvas.create_rectangle(x,y,x+rect_size,y+rect_size,fill="blue",tag="rect")
+
+# 何かのキーが押されたときに実行される関数
+def on_key_press(event):
+    global x,y
+    speed = 5
+    key = event.keysym # 変数keyに「w」や「a」など、押したキーの名前が格納される
+    if(key == "w" or key == "Up"):
+        print("↑")
+        y = y - speed
+    elif(key == "a" or key == "Left"):
+        print("←")
+        x = x - speed
+    elif(key == "s" or key == "Down"):
+        print("↓")
+        y = y + speed
+    elif(key == "d" or key == "Right"):
+        print("→")
+        x = x + speed
+    
+    canvas.delete("rect")
+    canvas.create_rectangle(x,y,x+rect_size,y+rect_size,fill="blue",tag="rect")
+
+# メインループ
+root.bind("<KeyPress>", on_key_press)
+root.mainloop()
+```
+
+すると、画像のような画面が表示されると思います。
+
+![img](figs/01/move-rect.png)
+
+**矢印キーもしくはWASDで四角形を操作**できます。
+
+
+**ウィンドウの×ボタンを押すとプログラムが終了します。**
+<br>
 
 
 これで**環境構築は完了**です。少し休憩して次のステップに進みましょう。
