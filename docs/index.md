@@ -8,25 +8,26 @@ var:
 
 ## Pythonの基本編
 
-###  [はじめに](basic01.html)
+###  [はじめに](basic01.html) プログラミングの環境を整えよう
 
--  [このテキストで学べる事](basic01.html#このテキストで学べる事) 
--  [Pythonについて](basic01.html#Pythonについて) 
--  [環境設定](basic01.html#環境設定) 
--  [hello world!!](basic01.html#helloworld!!) 
+-  [Pythonのインストール](basic01.html#Pythonのインストール) 
+-  [VS Codeのインストール](basic01.html#VSCodeのインストール) 
+-  [プログラムの実行](basic01.html#プログラムの実行) 
+-  [基礎編でできること](basic01.html#基礎編でできること)  
 
-###  [文字の出力](basic02.html) 
+###  [文字の出力](basic02.html) プログラムで計算してみよう
 
--  [print文](basic02.html#print文) 
--  [整数と小数](basic02.html#整数と小数) 
--  [四則演算](basic02.html#四則演算) 
+-  [Print文](basic02.html#Print文) 
 -  [文字列](basic02.html#文字列) 
+-  [四則演算](basic02.html#四則演算) 
+-  [その他の演算](basic02.html#その他の演算) 
+-  [演算の順序](basic02.html#演算の順序) 
 
 ###  [変数](basic03.html) 
 
--  [文字列](basic03.html#文字列) 
--  [整数と小数](basic03.html#整数と小数) 
--  [四則演算](basic03.html#四則演算) 
+-  [変数とは](basic03.html#変数とは) 
+-  [変数の値を変更する](basic03.html#変数の値を変更する) 
+-  [変数の命名](basic03.html#変数の命名) 
 
 ###  [構文](basic04.html)　プログラムの「文法」を学ぼう
 
@@ -35,6 +36,7 @@ var:
 
 ###  [if文](basic05.html)　条件に応じて処理を変えよう
 
+-  [条件分岐とは](basic05.html#条件分岐とは) 
 -  [if文](basic05.html#if文) 
 -  [関係演算子](basic05.html#関係演算子)
 -  [if-else文](basic05.html#if-else文) 
@@ -45,22 +47,27 @@ var:
 -  [コメント文](basic06.html#コメント文) 
 -  [式の構造](basic06.html#式の構造) 
 
-###  [Tkinter-1](basic06.html)　ゲームの画面を表示しよう
+###  [for文](basic07.html)　プログラムを繰り返し動かそう
 
 -  [コメント文](basic06.html#コメント文) 
 -  [式の構造](basic06.html#式の構造) 
 
-###  [Tkinter-2](basic06.html)　キーボードで画像を動かそう
+###  [Tkinter-1](basic08.html)　ゲームの画面を表示しよう
 
 -  [コメント文](basic06.html#コメント文) 
 -  [式の構造](basic06.html#式の構造) 
 
-###  [リスト](basic07.html) 変数をまとめて管理しよう
+###  [Tkinter-2](basic09.html)　キーボードで画像を動かそう
+
+-  [コメント文](basic06.html#コメント文) 
+-  [式の構造](basic06.html#式の構造) 
+
+###  [リスト](basic10.html) 変数をまとめて管理しよう
 
 -  [リストとは](basic07.html#リストとは) 
 -  [2次元リスト](basic07.html#2次元リスト)
 
-###  [モジュールと乱数](lecture01.html) 　乱数を使ってガチャをつくろう
+###  [モジュールと乱数](basic11.html) 　乱数を使ってガチャをつくろう
 
 -  [モジュール](lecture01.html#モジュール) 
 -  [乱数](lecture01.html#乱数) 
