@@ -42,8 +42,22 @@ var:
 
 ![img](/docs/figs/101/ImgFolder.png)
 
+<br>
+
+- ファイルの作成
+
+エクスプローラを右クリックして、`game01.py`ファイルを作成
+
+---
+
+
 ## ゲーム画面を表示する
 
 まずはtkinterを用いて、ゲーム画面を表示します。背景として、以下の画像を使用します。[こちらから画像をダウンロードしてください。](https://github.com/k-768/python_game/blob/master/img/fishing_map.png)
 
 ![img](/docs/figs/101/fishing_map.png)
+
+ファイルをダウンロードしたら、画像を先ほど作成した`img`フォルダの**中に移動してください**。
+
+
+### ウィンドウを表示する
