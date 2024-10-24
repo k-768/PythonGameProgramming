@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon2.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>ゲームづくり編1　魚を釣るシステムを作ろう</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#はじめに" id="toc-はじめに"><span
+class="toc-section-number">1</span> はじめに</a></li>
+<li><a href="#もくじ" id="toc-もくじ"><span
+class="toc-section-number">2</span> もくじ</a></li>
+<li><a href="#環境を整える" id="toc-環境を整える"><span
+class="toc-section-number">3</span> 環境を整える</a></li>
+<li><a href="#ゲーム画面を表示する" id="toc-ゲーム画面を表示する"><span
+class="toc-section-number">4</span> ゲーム画面を表示する</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>Pythonで釣りゲームを作ろう
+ゲームづくり編1　魚を釣るシステムを作ろう</p>
+      <p>2024年10月24日（木）</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="はじめに"><span
+      class="header-section-number">1</span> はじめに</h1>
+      <p>ここからは実際に<strong>ゲームを製作していきましょう！</strong></p>
+      <h1 data-number="2" id="もくじ"><span
+      class="header-section-number">2</span> もくじ</h1>
+      <ul>
+      <li><a href="advance01.html#環境を整える">環境を整える</a></li>
+      <li><a
+      href="advance01.html#ゲーム画面を表示する">ゲーム画面を表示する</a></li>
+      </ul>
+      <h1 data-number="3" id="環境を整える"><span
+      class="header-section-number">3</span> 環境を整える</h1>
+      <ul>
+      <li>新しいフォルダの作成</li>
+      </ul>
+      <p>ファイル→ファイルを開くを選択</p>
+      <figure>
+      <img src="/docs/figs/101/openFolder.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><br></p>
+      <p><code>Fishing game</code>という名前で新しいフォルダを作成して開く</p>
+      <figure>
+      <img src="/docs/figs/101/NewFolder.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><br></p>
+      <figure>
+      <img src="/docs/figs/101/MakeFolder.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><br></p>
+      <ul>
+      <li>画像フォルダの作成</li>
+      </ul>
+      <p>エクスプローラを右クリックして、<code>img</code>フォルダを作成</p>
+      <figure>
+      <img src="/docs/figs/101/ImgFolder.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h1 data-number="4" id="ゲーム画面を表示する"><span
+      class="header-section-number">4</span> ゲーム画面を表示する</h1>
+      <p>まずはtkinterを用いて、ゲーム画面を表示します。背景として、以下の画像を使用します。<a
+      href="https://github.com/k-768/python_game/blob/master/img/fishing_map.png">こちらから画像をダウンロードしてください。</a></p>
+      <figure>
+      <img src="/docs/figs/101/fishing_map.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://k-768.github.io/PythonGameProgramming/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
