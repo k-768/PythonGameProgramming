@@ -256,9 +256,34 @@ else:
   </tbody>
 </table>
 
-これを用いて、キーボードによるキャラクター移動を**WASDと矢印キー**両方に対応できます。
+### andを用いる例
 
-```python{.numberLines caption="move.py"}
+ゲームにおける買い物を例に考えます。
+
+**アイテム**：丈夫な釣り竿
+**価格**：500
+**プレイヤーのレベル制限**：20
+
+この場合、以下の条件を**どちらも**満たす必要があります。
+
+- 所持金が500以上
+- プレイヤーのレベルが20以上
+
+すなわち、以下のようになります。
+
+```python{.numberLines caption="ex_and.py"}
+level = 25 #プレイヤーのレベル
+money = 999 #所持金
+
+if money >= 500 and level >= 20:
+  print("丈夫な釣り竿を手に入れた！")
+```
+
+### orを用いる例
+
+キーボードによるキャラクター移動を**WASDと矢印キー**両方に対応できます。
+
+```python{.numberLines caption="ex_or.py"}
 key = "w"
 if key == "w" or key =="Up":
   print("奥に進みます")
@@ -270,4 +295,59 @@ elif key == "d" or key =="Right":
   print("右に進みます")
 else: 
   print("不正な入力です")
+```
+
+
+#### **charenge5** 
+
+先ほどのプログラムを改造してみましょう。新しいファイル`charenge5.py`を作成してください。
+
+**アイテム**：丈夫な釣り竿
+**価格**：500
+**プレイヤーのレベル制限**：20
+
+```python{.numberLines caption="charenge5.py"}
+level = 25 #プレイヤーのレベル
+money = 999 #所持金
+
+if money >= 500 and level >= 20:
+  print("丈夫な釣り竿を手に入れた！")
+# ここに条件を追加する
+```
+
+次の課題に挑戦してください。できたと思ったら**所持金を200に変えて実行してみて**正しく動作するか確認してください。
+
+- **5-1** elifを用いて、所持金が足りなければ`所持金が足りません`というメッセージを表示させる。
+
+- **5-2** 所持金が足りなければ、足りない金額を計算して、`所持金がxx円足りません`というメッセージを表示させる
+　**ヒント1**不足金額の計算方法:　<span class="masked">不足金額 = 500 - money</span>
+　**ヒント2**メッセージの結合:　<span class="masked">文字列は`+`を用いて結合できます</span>
+　**ヒント3**数値を文字列に変換:　<span class="masked">str()関数で数値を文字列に変換できます</span>
+
+**スクロールして答えを確認してください**
+
+---
+
+<br><br><br><br><br><br><br>
+
+---
+
+```python{.numberLines caption="5-1答え"}
+level = 25 #プレイヤーのレベル
+money = 200 #所持金
+
+if money >= 500 and level >= 20:
+  print("丈夫な釣り竿を手に入れた！")
+elif money < 500:
+  print("所持金が足りません")
+```
+
+```python{.numberLines caption="5-2答え"}
+level = 25 #プレイヤーのレベル
+money = 200 #所持金
+
+if money >= 500 and level >= 20:
+  print("丈夫な釣り竿を手に入れた！")
+elif money < 500:
+  print("所持金が"+str(500-money)+"円足りません")
 ```

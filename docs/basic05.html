@@ -55,7 +55,13 @@ class="toc-section-number">5</span> if-else文</a></li>
 <li><a href="#if-elif文" id="toc-if-elif文"><span
 class="toc-section-number">6</span> if-elif文</a></li>
 <li><a href="#論理演算子" id="toc-論理演算子"><span
-class="toc-section-number">7</span> 論理演算子</a></li>
+class="toc-section-number">7</span> 論理演算子</a>
+<ul>
+<li><a href="#andを用いる例" id="toc-andを用いる例"><span
+class="toc-section-number">7.1</span> andを用いる例</a></li>
+<li><a href="#orを用いる例" id="toc-orを用いる例"><span
+class="toc-section-number">7.2</span> orを用いる例</a></li>
+</ul></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -320,19 +326,86 @@ a:1</code></pre>
       </tr>
       </tbody>
       </table>
-      <p>これを用いて、キーボードによるキャラクター移動を<strong>WASDと矢印キー</strong>両方に対応できます。</p>
-      <div class="sourceCode" id="cb13" data-caption="move.py"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>key <span class="op">=</span> <span class="st">&quot;w&quot;</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="cf">if</span> key <span class="op">==</span> <span class="st">&quot;w&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Up&quot;</span>:</span>
-<span id="cb13-3"><a href="#cb13-3"></a>  <span class="bu">print</span>(<span class="st">&quot;奥に進みます&quot;</span>)</span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;a&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Left&quot;</span>:</span>
-<span id="cb13-5"><a href="#cb13-5"></a>  <span class="bu">print</span>(<span class="st">&quot;左に進みます&quot;</span>)</span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;s&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Down&quot;</span>:</span>
-<span id="cb13-7"><a href="#cb13-7"></a>  <span class="bu">print</span>(<span class="st">&quot;手前に進みます&quot;</span>)</span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;d&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Right&quot;</span>:</span>
-<span id="cb13-9"><a href="#cb13-9"></a>  <span class="bu">print</span>(<span class="st">&quot;右に進みます&quot;</span>)</span>
-<span id="cb13-10"><a href="#cb13-10"></a><span class="cf">else</span>: </span>
-<span id="cb13-11"><a href="#cb13-11"></a>  <span class="bu">print</span>(<span class="st">&quot;不正な入力です&quot;</span>)</span></code></pre></div>
+      <h2 data-number="7.1" id="andを用いる例"><span
+      class="header-section-number">7.1</span> andを用いる例</h2>
+      <p>ゲームにおける買い物を例に考えます。</p>
+      <p><strong>アイテム</strong>：丈夫な釣り竿
+      <strong>価格</strong>：500
+      <strong>プレイヤーのレベル制限</strong>：20</p>
+      <p>この場合、以下の条件を<strong>どちらも</strong>満たす必要があります。</p>
+      <ul>
+      <li>所持金が500以上</li>
+      <li>プレイヤーのレベルが20以上</li>
+      </ul>
+      <p>すなわち、以下のようになります。</p>
+      <div class="sourceCode" id="cb13" data-caption="ex_and.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>level <span class="op">=</span> <span class="dv">25</span> <span class="co">#プレイヤーのレベル</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>money <span class="op">=</span> <span class="dv">999</span> <span class="co">#所持金</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="cf">if</span> money <span class="op">&gt;=</span> <span class="dv">500</span> <span class="kw">and</span> level <span class="op">&gt;=</span> <span class="dv">20</span>:</span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="bu">print</span>(<span class="st">&quot;丈夫な釣り竿を手に入れた！&quot;</span>)</span></code></pre></div>
+      <h2 data-number="7.2" id="orを用いる例"><span
+      class="header-section-number">7.2</span> orを用いる例</h2>
+      <p>キーボードによるキャラクター移動を<strong>WASDと矢印キー</strong>両方に対応できます。</p>
+      <div class="sourceCode" id="cb14" data-caption="ex_or.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>key <span class="op">=</span> <span class="st">&quot;w&quot;</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="cf">if</span> key <span class="op">==</span> <span class="st">&quot;w&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Up&quot;</span>:</span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="bu">print</span>(<span class="st">&quot;奥に進みます&quot;</span>)</span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;a&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Left&quot;</span>:</span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="bu">print</span>(<span class="st">&quot;左に進みます&quot;</span>)</span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;s&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Down&quot;</span>:</span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="bu">print</span>(<span class="st">&quot;手前に進みます&quot;</span>)</span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;d&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Right&quot;</span>:</span>
+<span id="cb14-9"><a href="#cb14-9"></a>  <span class="bu">print</span>(<span class="st">&quot;右に進みます&quot;</span>)</span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="cf">else</span>: </span>
+<span id="cb14-11"><a href="#cb14-11"></a>  <span class="bu">print</span>(<span class="st">&quot;不正な入力です&quot;</span>)</span></code></pre></div>
+      <h3 data-number="7.2.1" id="charenge5"><span
+      class="header-section-number">7.2.1</span>
+      <strong>charenge5</strong></h3>
+      <p>先ほどのプログラムを改造してみましょう。新しいファイル<code>charenge5.py</code>を作成してください。</p>
+      <p><strong>アイテム</strong>：丈夫な釣り竿
+      <strong>価格</strong>：500
+      <strong>プレイヤーのレベル制限</strong>：20</p>
+      <div class="sourceCode" id="cb15" data-caption="charenge5.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>level <span class="op">=</span> <span class="dv">25</span> <span class="co">#プレイヤーのレベル</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>money <span class="op">=</span> <span class="dv">999</span> <span class="co">#所持金</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="cf">if</span> money <span class="op">&gt;=</span> <span class="dv">500</span> <span class="kw">and</span> level <span class="op">&gt;=</span> <span class="dv">20</span>:</span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="bu">print</span>(<span class="st">&quot;丈夫な釣り竿を手に入れた！&quot;</span>)</span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="co"># ここに条件を追加する</span></span></code></pre></div>
+      <p>次の課題に挑戦してください。できたと思ったら<strong>所持金を200に変えて実行してみて</strong>正しく動作するか確認してください。</p>
+      <ul>
+      <li><p><strong>5-1</strong>
+      elifを用いて、所持金が足りなければ<code>所持金が足りません</code>というメッセージを表示させる。</p></li>
+      <li><p><strong>5-2</strong>
+      所持金が足りなければ、足りない金額を計算して、<code>所持金がxx円足りません</code>というメッセージを表示させる
+      　<strong>ヒント1</strong>不足金額の計算方法:　<span
+      class="masked">不足金額 = 500 - money</span>
+      　<strong>ヒント2</strong>メッセージの結合:　<span
+      class="masked">文字列は<code>+</code>を用いて結合できます</span>
+      　<strong>ヒント3</strong>数値を文字列に変換:　<span
+      class="masked">str()関数で数値を文字列に変換できます</span></p></li>
+      </ul>
+      <p><strong>スクロールして答えを確認してください</strong></p>
+      <hr />
+      <p><br><br><br><br><br><br><br></p>
+      <hr />
+      <div class="sourceCode" id="cb16" data-caption="5-1答え"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>level <span class="op">=</span> <span class="dv">25</span> <span class="co">#プレイヤーのレベル</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>money <span class="op">=</span> <span class="dv">200</span> <span class="co">#所持金</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="cf">if</span> money <span class="op">&gt;=</span> <span class="dv">500</span> <span class="kw">and</span> level <span class="op">&gt;=</span> <span class="dv">20</span>:</span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="bu">print</span>(<span class="st">&quot;丈夫な釣り竿を手に入れた！&quot;</span>)</span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="cf">elif</span> money <span class="op">&lt;</span> <span class="dv">500</span>:</span>
+<span id="cb16-7"><a href="#cb16-7"></a>  <span class="bu">print</span>(<span class="st">&quot;所持金が足りません&quot;</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb17" data-caption="5-2答え"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>level <span class="op">=</span> <span class="dv">25</span> <span class="co">#プレイヤーのレベル</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>money <span class="op">=</span> <span class="dv">200</span> <span class="co">#所持金</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="cf">if</span> money <span class="op">&gt;=</span> <span class="dv">500</span> <span class="kw">and</span> level <span class="op">&gt;=</span> <span class="dv">20</span>:</span>
+<span id="cb17-5"><a href="#cb17-5"></a>  <span class="bu">print</span>(<span class="st">&quot;丈夫な釣り竿を手に入れた！&quot;</span>)</span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="cf">elif</span> money <span class="op">&lt;</span> <span class="dv">500</span>:</span>
+<span id="cb17-7"><a href="#cb17-7"></a>  <span class="bu">print</span>(<span class="st">&quot;所持金が&quot;</span><span class="op">+</span><span class="bu">str</span>(<span class="dv">500</span><span class="op">-</span>money)<span class="op">+</span><span class="st">&quot;円足りません&quot;</span>)</span></code></pre></div>
       <!-- ---------------------------------------- -->
     </main>
 

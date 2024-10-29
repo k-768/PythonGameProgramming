@@ -46,18 +46,30 @@ root.mainloop()
 - `4行目`の`"test"`と書かれた部分を変更することで、ウィンドウの名前を変更できます。
 - `5行目`の`"600x400"`はウィンドウのサイズを`"幅x高さ"`で指定しています。書き換えればサイズを変更できます。
 
+
+
+#### **charenge8-1** 
+
+- ウィンドウの名前を`tk`に変更してください
+- ウィンドウのサイズを`800x600`に変更してください
+
+答えは次のコードを参照して確認してください。
+
+
 ---
 
 ## キャンバスを設置する
 
-図形や画像を描画するためには、土台となるキャンバスが必要です。
+キャンバスは、**図形や画像を設置するために必要な下地**です。
+
+
 
 ```python{.numberLines startFrom="1" caption="tk.py"}
 import tkinter as tk
 # ウィンドウを表示する
 root = tk.Tk()
-root.title("test")
-root.geometry("600x400") 
+root.title("tk")
+root.geometry("800x600") 
 
 # キャンバス設置
 canvas = tk.Canvas(root,width = 600,height = 400,bg = "skyblue")
@@ -65,6 +77,9 @@ canvas.pack()
 
 root.mainloop()
 ```
+
+`8行目`でキャンバスの大きさや色を指定しています。
+`width`が**幅**、`height`が**高さ**、`bg`が**背景色**に対応しています。
 
 
 

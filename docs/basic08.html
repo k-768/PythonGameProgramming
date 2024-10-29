@@ -96,10 +96,33 @@ class="toc-section-number">4</span> キャンバスを設置する</a></li>
       <li><code>4行目</code>の<code>"test"</code>と書かれた部分を変更することで、ウィンドウの名前を変更できます。</li>
       <li><code>5行目</code>の<code>"600x400"</code>はウィンドウのサイズを<code>"幅x高さ"</code>で指定しています。書き換えればサイズを変更できます。</li>
       </ul>
+      <h3 data-number="3.0.1" id="charenge8-1"><span
+      class="header-section-number">3.0.1</span>
+      <strong>charenge8-1</strong></h3>
+      <ul>
+      <li>ウィンドウの名前を<code>tk</code>に変更してください</li>
+      <li>ウィンドウのサイズを<code>800x600</code>に変更してください</li>
+      </ul>
+      <p>答えは次のコードを参照して確認してください。</p>
       <hr />
       <h1 data-number="4" id="キャンバスを設置する"><span
       class="header-section-number">4</span> キャンバスを設置する</h1>
-      <p>図形や画像を描画するためには、土台となるキャンバスが必要です。</p>
+      <p>キャンバスは、<strong>図形や画像を設置するために必要な下地</strong>です。</p>
+      <div class="sourceCode" id="cb3" data-startFrom="1"
+      data-caption="tk.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># ウィンドウを表示する</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb3-4"><a href="#cb3-4"></a>root.title(<span class="st">&quot;tk&quot;</span>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>root.geometry(<span class="st">&quot;800x600&quot;</span>) </span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co"># キャンバス設置</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>canvas <span class="op">=</span> tk.Canvas(root,width <span class="op">=</span> <span class="dv">600</span>,height <span class="op">=</span> <span class="dv">400</span>,bg <span class="op">=</span> <span class="st">&quot;skyblue&quot;</span>)</span>
+<span id="cb3-9"><a href="#cb3-9"></a>canvas.pack()</span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a>root.mainloop()</span></code></pre></div>
+      <p><code>8行目</code>でキャンバスの大きさや色を指定しています。
+      <code>width</code>が<strong>幅</strong>、<code>height</code>が<strong>高さ</strong>、<code>bg</code>が<strong>背景色</strong>に対応しています。</p>
       <!-- ---------------------------------------- -->
     </main>
 
