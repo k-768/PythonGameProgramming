@@ -5,6 +5,7 @@ n = 36
 player = 1
 cpu = 1
 w = "*"
+count = 0
 
 while True:
     print("-------------------------")

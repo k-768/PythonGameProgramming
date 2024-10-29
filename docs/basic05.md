@@ -1,7 +1,7 @@
 ---
 var:
   header-title: "Pythonで釣りゲームを作ろう 基礎編5　if文"
-  header-date: "2024年04月23日（月)"
+  header-date: "最終更新日：2024年10月29日（火)"
 ---
 
 # 基礎編5　if文 
@@ -197,6 +197,8 @@ elif weight > 3: # weight>3であれば
 
 **if文の場合**
 ![img](figs/05/if文.svg)
+
+<br>
 
 **elif文の場合**
 ![img](figs/05/elif文.svg)
