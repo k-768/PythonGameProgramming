@@ -1,7 +1,7 @@
 ---
 var:
   header-title: "Pythonで釣りゲームを作ろう 基礎編5　if文"
-  header-date: "最終更新日：2024年10月29日（火)"
+  header-date: "最終更新日：2024年10月29日（火）"
 ---
 
 # 基礎編5　if文 
@@ -19,6 +19,7 @@ if文を使えば、条件分岐をつくることができます。**条件分�
 -  [関係演算子](basic05.html#関係演算子)
 -  [if-else文](basic05.html#if-else文) 
 -  [if-elif文](basic05.html#if-elif文) 
+-  [論理演算子](basic05.html#論理演算子)
 
 ## 条件分岐とは
 

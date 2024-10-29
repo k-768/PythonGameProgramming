@@ -1,7 +1,7 @@
 ---
 var:
   header-title: "Pythonで釣りゲームを作ろう 基礎編4　構文"
-  header-date: "2024年04月23日（月)"
+  header-date: "最終更新日：2024年10月29日（火）"
 ---
 
 # 基礎編4　構文 
