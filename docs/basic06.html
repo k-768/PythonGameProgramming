@@ -46,6 +46,10 @@
 class="toc-section-number">1</span> もくじ</a></li>
 <li><a href="#関数とは" id="toc-関数とは"><span
 class="toc-section-number">2</span> 関数とは</a></li>
+<li><a href="#関数と引数" id="toc-関数と引数"><span
+class="toc-section-number">3</span> 関数と引数</a></li>
+<li><a href="#関数と戻り値" id="toc-関数と戻り値"><span
+class="toc-section-number">4</span> 関数と戻り値</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -62,14 +66,72 @@ class="toc-section-number">2</span> 関数とは</a></li>
       <h1 data-number="1" id="もくじ"><span
       class="header-section-number">1</span> もくじ</h1>
       <ul>
-      <li><a href="basic05.html#条件分岐とは">条件分岐とは</a></li>
-      <li><a href="basic05.html#if文">if文</a></li>
-      <li><a href="basic05.html#関係演算子">関係演算子</a></li>
-      <li><a href="basic05.html#if-else文">if-else文</a></li>
-      <li><a href="basic05.html#if-elif文">if-elif文</a></li>
+      <li><a href="basic05.html#関数とは">関数とは</a></li>
+      <li><a href="basic05.html#関数と引数">関数と引数</a></li>
+      <li><a href="basic05.html#関数と戻り値">関数と戻り値</a></li>
       </ul>
       <h1 data-number="2" id="関数とは"><span
       class="header-section-number">2</span> 関数とは</h1>
+      <p><code>関数</code>の構造を見ていきましょう。</p>
+      <div class="sourceCode" id="cb1" data-caption="関数の構造"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">def</span> lv_up():</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  lv <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="bu">print</span>(<span class="st">&quot;レベルが上がった！！&quot;</span>)</span></code></pre></div>
+      <p><code>1行目</code>の<code>lv_up</code>の部分を<strong>関数名</strong>といい、好きに名前をつけることができます。
+      <code>2～3行目</code>のように、複数の処理を実行するにはそれらの行を<strong>インデント</strong>(<a
+      href="basic04.html#インデント">参照</a>)する必要があります。</p>
+      <p>ここで注意する必要があるのは、上のコードは<strong>あくまで関数を定義しただけ</strong>ということです。先ほどのコードを実行してみてください。<strong>レベルが上がった！！」とは出力されません。</strong></p>
+      <p>定義した関数を実行するには、関数を呼び出す必要があります。次のプログラムをコピー＆ペーストして実行してみてください。</p>
+      <div class="sourceCode" id="cb2" data-caption="関数の実行"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> lv_up():</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  lv <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="bu">print</span>(<span class="st">&quot;レベルが上がった！！&quot;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>lv_up()</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>レベルが上がった！！</code></pre>
+      <h1 data-number="3" id="関数と引数"><span
+      class="header-section-number">3</span> 関数と引数</h1>
+      <p>関数には<strong>引数（ひきすう）</strong>という値を与えることができます。次のプログラムを実行してみてください。</p>
+      <div class="sourceCode" id="cb4" data-caption="関数と引数"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> lv_up(name):</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="bu">print</span>(name<span class="op">+</span><span class="st">&quot;のレベルが上がった！！&quot;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>lv_up(<span class="st">&quot;勇者&quot;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>lv_up(<span class="st">&quot;賢者&quot;</span>)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>勇者のレベルが上がった！！
+賢者のレベルが上がった！！</code></pre>
+      <p>引数を複数指定することもできます。<code>,(カンマ)</code>を用いて記述します。</p>
+      <div class="sourceCode" id="cb6"
+      data-caption="複数の引数はカンマで区切る"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">def</span> division(a,b):</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="bu">print</span>(<span class="bu">str</span>(a)<span class="op">+</span><span class="st">&quot;÷&quot;</span><span class="op">+</span><span class="bu">str</span>(b)<span class="op">+</span><span class="st">&quot;=&quot;</span><span class="op">+</span><span class="bu">str</span>(a<span class="op">//</span>b)<span class="op">+</span><span class="st">&quot;あまり&quot;</span><span class="op">+</span><span class="bu">str</span>(a<span class="op">%</span>b))</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a>division(<span class="dv">13</span>,<span class="dv">3</span>)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>13÷3=4あまり1</code></pre>
+      <p>このように、引数を用いることで同じような処理をひとまとめにできます。</p>
+      <h1 data-number="4" id="関数と戻り値"><span
+      class="header-section-number">4</span> 関数と戻り値</h1>
+      <p>引数は関数に値を与えることができますが、逆に関数から値を受け取ることもできます。それが<strong>戻り値</strong>です。</p>
+      <div class="sourceCode" id="cb8" data-caption="関数と引数"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">def</span> add(a,b):</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="cf">return</span> a<span class="op">+</span>b</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="bu">print</span>(add(<span class="dv">5</span>,<span class="dv">6</span>))</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>11</code></pre>
+      <p>少し難しいですが、プログラムを見ながら動作を確認しましょう。</p>
+      <ul>
+      <li>実行すると、1～2行目は関数の<strong>定義なので</strong>何も処理が行われません。</li>
+      <li>3行目のprint文の中身にある<strong>add(5,6)</strong>によって、関数が呼び出されます。</li>
+      <li>a=5,b=6として関数の中で処理が行われ、戻り値として<code>11</code>が出力されます。</li>
+      <li>print文の中身が<code>11</code>になるので、<code>11</code>が表示されます。</li>
+      </ul>
       <!-- ---------------------------------------- -->
     </main>
 
