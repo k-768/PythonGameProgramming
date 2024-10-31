@@ -16,4 +16,4 @@ var:
 -  [if-else文](basic05.html#if-else文) 
 -  [if-elif文](basic05.html#if-elif文) 
 
-## 条件分岐とは
+## 関数とは
