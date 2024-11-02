@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon2.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>基礎編9 for文</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#もくじ" id="toc-もくじ"><span
+class="toc-section-number">1</span> もくじ</a></li>
+<li><a href="#for文とは" id="toc-for文とは"><span
+class="toc-section-number">2</span> for文とは</a></li>
+<li><a href="#for文の構造" id="toc-for文の構造"><span
+class="toc-section-number">3</span> for文の構造</a></li>
+<li><a href="#二重ループ" id="toc-二重ループ"><span
+class="toc-section-number">4</span> 二重ループ</a></li>
+<li><a href="#マップを表示してみよう"
+id="toc-マップを表示してみよう"><span
+class="toc-section-number">5</span> マップを表示してみよう</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>Pythonで釣りゲームを作ろう 基礎編9　for文</p>
+      <p>最終更新日：2024年11月02日（土）</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="もくじ"><span
+      class="header-section-number">1</span> もくじ</h1>
+      <ul>
+      <li><a href="basic09.html#for文とは">for文とは</a></li>
+      <li><a href="basic09.html#for文の構造">forの構造</a></li>
+      <li><a href="basic09.html#二重ループ">二重ループ</a></li>
+      </ul>
+      <h1 data-number="2" id="for文とは"><span
+      class="header-section-number">2</span> for文とは</h1>
+      <p>今まで学んだプログラムでは、前から順番にコードが実行され、最後まで処理が終わると終了していました。
+      しかし、実際のゲームではどうでしょうか？多くの場合、<strong>プレイヤーが「終了」を選択するまでゲームは動き続けます</strong>。
+      for文を用いることで、同じ処理を繰り返し行うことができます。</p>
+      <h1 data-number="3" id="for文の構造"><span
+      class="header-section-number">3</span> for文の構造</h1>
+      <div class="sourceCode" id="cb1" data-caption="for文の構造"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">5</span>):</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="bu">print</span>(i)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>1
+2
+3
+4</code></pre>
+      <p>繰り返し複数の処理を行う場合は、それらすべてをインデントする必要があります。</p>
+      <p>’i’は繰り返しに使う変数です。慣例的にi,j,kといった文字がよく用いられます。</p>
+      <p>range()の部分が変数の<strong>範囲</strong>です。ただし、<strong>初めの数は含まれるが、終わりの数は含まれない</strong>ことに注意してください。
+      上のコードではiが<strong>1から4</strong>の範囲で処理が繰り返されます。</p>
+      <hr />
+      <p>変数の範囲ではなく、繰り返し回数を指定することもできます。この場合も、<strong>5ではなく4で終わる</strong>ことに注意してください。</p>
+      <div class="sourceCode" id="cb3"
+      data-caption="繰り返し回数の指定"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb3-2"><a href="#cb3-2"></a>    <span class="bu">print</span>(i)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>0
+1
+2
+3
+4</code></pre>
+      <p>変数の増加する幅を3つめの引数で指定することもできます。</p>
+      <div class="sourceCode" id="cb5"
+      data-caption="増加間隔の指定"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">11</span>,<span class="dv">2</span>):</span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="bu">print</span>(i)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>2
+4
+6
+8
+10</code></pre>
+      <h3 data-number="3.0.1" id="charenge9"><span
+      class="header-section-number">3.0.1</span>
+      <strong>charenge9</strong></h3>
+      <p>6の段の九九を出力するプログラムを作成してください。</p>
+      <p><br> <br> <br> —</p>
+      <h3 data-number="3.0.2" id="解答"><span
+      class="header-section-number">3.0.2</span>
+      <strong>解答</strong></h3>
+      <div class="sourceCode" id="cb7" data-caption="9-1解答"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">10</span>):</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="bu">print</span>(<span class="st">&quot;6 x &quot;</span><span class="op">+</span><span class="bu">str</span>(i)<span class="op">+</span><span class="st">&quot; = &quot;</span><span class="op">+</span><span class="bu">str</span>(<span class="dv">6</span><span class="op">*</span>i))</span></code></pre></div>
+      <h1 data-number="4" id="二重ループ"><span
+      class="header-section-number">4</span> 二重ループ</h1>
+      <p>for文を入れ子構造にすることで、より複雑な処理を行うことができます。
+      以下のプログラムを実行してください。</p>
+      <div class="sourceCode" id="cb8" data-caption="二重ループ"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">10</span>):</span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">10</span>):</span>
+<span id="cb8-3"><a href="#cb8-3"></a>        <span class="bu">print</span>(<span class="bu">str</span>(i)<span class="op">+</span><span class="st">&quot; x &quot;</span><span class="op">+</span><span class="bu">str</span>(j)<span class="op">+</span><span class="st">&quot; = &quot;</span><span class="op">+</span><span class="bu">str</span>(i<span class="op">*</span>j))</span></code></pre></div>
+      <p>どのように動作するのか、理解するのが難しいかもしれませんが、順を追って考えましょう。</p>
+      <figure>
+      <img src="figs/09/doubleLoop.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <ol type="1">
+      <li>外側の繰り返し文に入ります。<code>i</code>は<strong>1</strong>です。</li>
+      <li>内側の繰り返し文に入ります。<code>j</code>も<strong>1</strong>です。</li>
+      <li>内側が繰り返されて<code>j</code>が1,2,3,…と増えていきます。つまり、1x1,1x2,1x3と出力されていきます。</li>
+      <li><code>j</code>が9までいくと内側の繰り返しから抜けます。</li>
+      <li>外側が繰り返され、<code>i</code>が1つ増えて<strong>2</strong>になります。</li>
+      <li>再び内側の繰り返し文に入ります。<code>j</code>は<strong>1</strong>から繰り返されて1,2,3,…と増えていきます。つまり、2x1,2x2,2x3と出力されていきます。</li>
+      <li>以上が繰り返され、9の段までいくと終わります。</li>
+      </ol>
+      <h1 data-number="5" id="マップを表示してみよう"><span
+      class="header-section-number">5</span> マップを表示してみよう</h1>
+      <p>今までに学んだことを組み合わせると、簡単なマップ表示ができます。</p>
+      <div class="sourceCode" id="cb9" data-caption="マップ表示"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>map_data <span class="op">=</span> [</span>
+<span id="cb9-2"><a href="#cb9-2"></a>    [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>],</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb9-5"><a href="#cb9-5"></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb9-6"><a href="#cb9-6"></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>],</span>
+<span id="cb9-7"><a href="#cb9-7"></a>]</span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co"># 配列の数字を記号に変換する関数</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="kw">def</span> drawmap(n):</span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb9-12"><a href="#cb9-12"></a>        <span class="cf">return</span> <span class="st">&quot;□&quot;</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>    <span class="cf">elif</span> n <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb9-14"><a href="#cb9-14"></a>        <span class="cf">return</span> <span class="st">&quot;■&quot;</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="cf">else</span>:</span>
+<span id="cb9-16"><a href="#cb9-16"></a>        <span class="cf">return</span> <span class="st">&quot; &quot;</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="co"># 地図を表示する</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb9-20"><a href="#cb9-20"></a>    line <span class="op">=</span> <span class="st">&quot;&quot;</span>  <span class="co"># 各行の文字列を作成</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb9-22"><a href="#cb9-22"></a>        line <span class="op">+=</span> drawmap(map_data[i][j]) <span class="co"># 配列の上からi番目、左からj番目を文字列に加える</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a>    <span class="bu">print</span>(line)  <span class="co"># 行ごとに出力</span></span></code></pre></div>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://k-768.github.io/PythonGameProgramming/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
