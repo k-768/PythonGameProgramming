@@ -177,6 +177,12 @@ class="toc-section-number">5</span> マップを表示してみよう</a></li>
 <span id="cb9-21"><a href="#cb9-21"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
 <span id="cb9-22"><a href="#cb9-22"></a>        line <span class="op">+=</span> drawmap(map_data[i][j]) <span class="co"># 配列の上からi番目、左からj番目を文字列に加える</span></span>
 <span id="cb9-23"><a href="#cb9-23"></a>    <span class="bu">print</span>(line)  <span class="co"># 行ごとに出力</span></span></code></pre></div>
+      <p>コードを読んで仕組みを理解してみてください。配列、関数、if文、for文と今まで学んだ要素が詰まっています。分からないところがあれば、その解説ページに戻って確認してください。</p>
+      <p><code>1行目</code>の<code>map_data</code>はマップのデータを持つ<strong>2次元リスト</strong>です。<strong>1は壁や障害物</strong>を表し、<strong>0は空のスペース</strong>を表しています。</p>
+      <p><code>10行目</code>の<code>drawmap(n)</code>はn が 0
+      なら「□」、1
+      なら「■」を返す<strong>関数</strong>です。0と1以外の値が入った場合はスペースを返すようにしています。</p>
+      <p><code>19行目</code>からが今回学習した<strong>for文</strong>です。変数<code>line</code>を使って、各行を作成しています。</p>
       <!-- ---------------------------------------- -->
     </main>
 
