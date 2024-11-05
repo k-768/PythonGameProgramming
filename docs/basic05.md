@@ -88,14 +88,14 @@ print(len(items))
 
 ---
 
-- **Challenge4-1**　要素が食べ物の名前である要素数6のリスト「foods」を作成しましょう。
-- **Challenge4-2**　foodsから、4番目の要素を`print文`で出力しましょう。
+- **Challenge5-1**　要素が食べ物の名前である要素数6のリスト「foods」を作成しましょう。
+- **Challenge5-2**　foodsから、4番目の要素を`print文`で出力しましょう。
 
 **<i class="fa-solid fa-check"></i>解答例**
 
-Challenge4-1: <span class="masked">`foods = ["すし","てんぷら","すきやき","やきにく","だしまき","ラーメン"]`</span>
+Challenge5-1: <span class="masked">`foods = ["すし","てんぷら","すきやき","やきにく","だしまき","ラーメン"]`</span>
 
-Challenge4-2: <span class="masked">`print(foods[3]) #0始まりなので4番目は[4]ではなく[3]`</span>
+Challenge5-2: <span class="masked">`print(foods[3]) #0始まりなので4番目は[4]ではなく[3]`</span>
 
 <br>
 

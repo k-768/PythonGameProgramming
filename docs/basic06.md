@@ -41,17 +41,17 @@ print(random.randint(1,6))
 
 ---
 
-- **Challenge1-1**　上のプログラムを改造して、1~50までの乱数を表示するプログラムを作成しましょう。
-- **Challenge1-2**　さらに改造して、2~100までのランダムな**偶数**を表示するプログラムを作成しましょう。
+- **Challenge6-1**　上のプログラムを改造して、1~50までの乱数を表示するプログラムを作成しましょう。
+- **Challenge6-2**　さらに改造して、2~100までのランダムな**偶数**を表示するプログラムを作成しましょう。
 
 ヒント: <span class="masked">`2から100までの偶数を数学的に書くと`2n (1 <= n <= 50)`となります。`</span>
 
 
 **<i class="fa-solid fa-check"></i>解答**
 
-Challenge1-1: <span class="masked">`print(random.randint(1,50))`</span>
+Challenge6-1: <span class="masked">`print(random.randint(1,50))`</span>
 
-Challenge1-2: <span class="masked">`print(random.randint(1,50) * 2)`</span>
+Challenge6-2: <span class="masked">`print(random.randint(1,50) * 2)`</span>
 
 </br>
 
@@ -268,5 +268,5 @@ print(random.choice(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0]))
 これはよくない例と比較して格段に修正、改造しやすくなっています。次のChallengeで確認してください。
 
 ---
-- **Challenge2-1**　上のプログラムを改造して、★2に「コイ」を追加しましょう。
-- **Challenge2-2**　**★4**の魚を追加してみましょう。排出率も適当に調節してください。
+- **Challenge6-3**　上のプログラムを改造して、★2に「コイ」を追加しましょう。
+- **Challenge6-4**　**★4**の魚を追加してみましょう。排出率も適当に調節してください。
