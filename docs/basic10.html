@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon2.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>基礎編8　tkinter (1)</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#もくじ" id="toc-もくじ"><span
+class="toc-section-number">1</span> もくじ</a></li>
+<li><a href="#モジュール" id="toc-モジュール"><span
+class="toc-section-number">2</span> モジュール</a></li>
+<li><a href="#ウィンドウを表示する" id="toc-ウィンドウを表示する"><span
+class="toc-section-number">3</span> ウィンドウを表示する</a></li>
+<li><a href="#キャンバスを設置する" id="toc-キャンバスを設置する"><span
+class="toc-section-number">4</span> キャンバスを設置する</a></li>
+<li><a href="#図形を配置する" id="toc-図形を配置する"><span
+class="toc-section-number">5</span> 図形を配置する</a></li>
+<li><a href="#キーボードの入力を受け取る"
+id="toc-キーボードの入力を受け取る"><span
+class="toc-section-number">6</span> キーボードの入力を受け取る</a></li>
+<li><a href="#キーボードの入力を判定する"
+id="toc-キーボードの入力を判定する"><span
+class="toc-section-number">7</span> キーボードの入力を判定する</a></li>
+<li><a href="#キーボードの入力を判定する-1"
+id="toc-キーボードの入力を判定する-1"><span
+class="toc-section-number">8</span> キーボードの入力を判定する</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>Pythonで釣りゲームを作ろう 基礎編10　tkinter(1)</p>
+      <p>最終更新日：2024年11月05日（火）</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <p>グラフィック（見た目）は、ゲームにおいて非常な重要な部分です。
+      今回は、Pythonを用いて画面を表示してみましょう。</p>
+      <h1 data-number="1" id="もくじ"><span
+      class="header-section-number">1</span> もくじ</h1>
+      <ul>
+      <li><a
+      href="basic10.html#リスモジュールトとは">モジュール</a></li>
+      <li><a
+      href="basic10.html#ウィンドウを表示する">ウィンドウを表示する</a></li>
+      </ul>
+      <h1 data-number="2" id="モジュール"><span
+      class="header-section-number">2</span> モジュール</h1>
+      <p>モジュールを<code>import</code>することで、簡単に新たな機能を追加することができます。
+      今回は、<code>tkinter</code>モジュールを追加してみましょう。これを使うと、ウィンドウや図形などの<strong>グラフィカルな要素を簡単に作成</strong>することができます。
+      プログラムの最初の行にこの文を記述するだけで準備完了です。</p>
+      <pre><code>import tkinter as tk</code></pre>
+      <p><strong>tkinterを利用するたびに、毎回毎回
+      tkinter.・・・と書くのは面倒なので省略できます</strong>。
+      <code>import tkinter</code>の後ろに<code>as tk</code>と記述することで、<strong><code>tk</code>と書くだけで良くなり</strong>コードが簡潔で読みやすくなります。</p>
+      <h1 data-number="3" id="ウィンドウを表示する"><span
+      class="header-section-number">3</span> ウィンドウを表示する</h1>
+      <p>以下のコードを実行してみてください。</p>
+      <div class="sourceCode" id="cb2" data-startFrom="1"
+      data-caption="tk.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># ウィンドウを表示する</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb2-4"><a href="#cb2-4"></a>root.title(<span class="st">&quot;test&quot;</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>root.geometry(<span class="st">&quot;600x400&quot;</span>) </span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a>root.mainloop()</span></code></pre></div>
+      <p>実行すると、ウィンドウが表示されます。</p>
+      <ul>
+      <li><code>4行目</code>の<code>"test"</code>と書かれた部分を変更することで、ウィンドウの名前を変更できます。</li>
+      <li><code>5行目</code>の<code>"600x400"</code>はウィンドウのサイズを<code>"幅x高さ"</code>で指定しています。書き換えればサイズを変更できます。</li>
+      </ul>
+      <h3 data-number="3.0.1" id="charenge8-1"><span
+      class="header-section-number">3.0.1</span>
+      <strong>charenge8-1</strong></h3>
+      <ul>
+      <li>ウィンドウの名前を<code>tk</code>に変更してください</li>
+      <li>ウィンドウのサイズを<code>800x600</code>に変更してください</li>
+      </ul>
+      <p>答えは次のコードの該当部分を参照して確認してください。</p>
+      <hr />
+      <h1 data-number="4" id="キャンバスを設置する"><span
+      class="header-section-number">4</span> キャンバスを設置する</h1>
+      <p>キャンバスは、<strong>図形や画像を設置するために必要な下地</strong>です。</p>
+      <div class="sourceCode" id="cb3" data-startFrom="1"
+      data-caption="tk.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># ウィンドウを表示する</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb3-4"><a href="#cb3-4"></a>root.title(<span class="st">&quot;tk&quot;</span>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>root.geometry(<span class="st">&quot;800x600&quot;</span>) </span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co"># キャンバス設置</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>canvas <span class="op">=</span> tk.Canvas(root,width <span class="op">=</span> <span class="dv">600</span>,height <span class="op">=</span> <span class="dv">400</span>,bg <span class="op">=</span> <span class="st">&quot;skyblue&quot;</span>)</span>
+<span id="cb3-9"><a href="#cb3-9"></a>canvas.pack()</span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a>root.mainloop()</span></code></pre></div>
+      <p><code>8行目</code>でキャンバスの大きさや色を指定しています。
+      <code>width</code>が<strong>幅</strong>、<code>height</code>が<strong>高さ</strong>、<code>bg</code>が<strong>背景色</strong>に対応しています。</p>
+      <h3 data-number="4.0.1" id="charenge8-2"><span
+      class="header-section-number">4.0.1</span>
+      <strong>charenge8-2</strong></h3>
+      <ul>
+      <li>キャンバスのサイズをウィンドウと同じ<code>800x600</code>に設定してください。</li>
+      <li>キャンバスの色をオレンジ(<code>orange</code>)に変更してください。</li>
+      </ul>
+      <p>答えは次のコードの該当部分を参照して確認してください。</p>
+      <hr />
+      <h1 data-number="5" id="図形を配置する"><span
+      class="header-section-number">5</span> 図形を配置する</h1>
+      <p><code>create_rectangle</code>という命令を用いて、四角形を画面上に配置できます。</p>
+      <div class="sourceCode" id="cb4" data-startFrom="1"
+      data-caption="tk.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># ウィンドウを表示する</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb4-4"><a href="#cb4-4"></a>root.title(<span class="st">&quot;tk&quot;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>root.geometry(<span class="st">&quot;800x600&quot;</span>) </span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co"># キャンバス設置</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>canvas <span class="op">=</span> tk.Canvas(root,width <span class="op">=</span> <span class="dv">800</span>,height <span class="op">=</span> <span class="dv">600</span>,bg <span class="op">=</span> <span class="st">&quot;orange&quot;</span>)</span>
+<span id="cb4-9"><a href="#cb4-9"></a>canvas.pack()</span>
+<span id="cb4-10"><a href="#cb4-10"></a></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co"># 四角形を配置</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>rect_size <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>x <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>y <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>canvas.create_rectangle(x,y,x<span class="op">+</span>rect_size,y<span class="op">+</span>rect_size,fill<span class="op">=</span><span class="st">&quot;blue&quot;</span>,tag<span class="op">=</span><span class="st">&quot;rect&quot;</span>)</span>
+<span id="cb4-16"><a href="#cb4-16"></a></span>
+<span id="cb4-17"><a href="#cb4-17"></a>root.mainloop()</span></code></pre></div>
+      <p>以下のように四角形の<strong>左上と右下の座標</strong>、<strong>色</strong>、<strong>名前</strong>を指定しています。</p>
+      <figure>
+      <img src="figs/digest/create_rectangle.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ただし、プログラミングで用いられる座標軸は、<strong>数学で用いられるものと向きが違う</strong>ので<strong>注意が必要です</strong>。</p>
+      <figure>
+      <img src="figs/digest/座標系.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>モニターの<strong>左上が原点</strong>で、<strong>Y軸が反転</strong>しています。</p>
+      <h1 data-number="6" id="キーボードの入力を受け取る"><span
+      class="header-section-number">6</span>
+      キーボードの入力を受け取る</h1>
+      <p><code>bind()</code>命令を用いれば、キーボードの入力も簡単に受け取ることができます。以下のプログラムを実行してみてください。
+      キーボードを押すと、押したキーが出力されます。</p>
+      <div class="sourceCode" id="cb5" data-startFrom="1"
+      data-caption="tk.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># ウィンドウを表示する</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb5-4"><a href="#cb5-4"></a>root.title(<span class="st">&quot;tk&quot;</span>)</span>
+<span id="cb5-5"><a href="#cb5-5"></a>root.geometry(<span class="st">&quot;800x600&quot;</span>) </span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># キャンバス設置</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>canvas <span class="op">=</span> tk.Canvas(root,width <span class="op">=</span> <span class="dv">800</span>,height <span class="op">=</span> <span class="dv">600</span>,bg <span class="op">=</span> <span class="st">&quot;orange&quot;</span>)</span>
+<span id="cb5-9"><a href="#cb5-9"></a>canvas.pack()</span>
+<span id="cb5-10"><a href="#cb5-10"></a></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co"># 四角形を配置</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>rect_size <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>x <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>y <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>canvas.create_rectangle(x,y,x<span class="op">+</span>rect_size,y<span class="op">+</span>rect_size,fill<span class="op">=</span><span class="st">&quot;blue&quot;</span>,tag<span class="op">=</span><span class="st">&quot;rect&quot;</span>)</span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co"># 何かのキーが押されたときに実行される関数</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="kw">def</span> on_key_press(event):</span>
+<span id="cb5-19"><a href="#cb5-19"></a>    key <span class="op">=</span> event.keysym <span class="co"># 変数keyに「w」や「a」など、押したキーの名前が格納される</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a>    <span class="bu">print</span>(key)</span>
+<span id="cb5-21"><a href="#cb5-21"></a></span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="co"># メインループ</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>root.bind(<span class="st">&quot;&lt;KeyPress&gt;&quot;</span>, on_key_press)</span>
+<span id="cb5-24"><a href="#cb5-24"></a>root.mainloop()</span></code></pre></div>
+      <p><code>23行目</code>に<code>bind()</code>命令があります。今回の場合は<strong>条件＝ボタンが押されたとき</strong>、<strong>実行する関数＝<code>on_key_press</code></strong>になります。</p>
+      <div class="sourceCode" id="cb6"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>root.bind(条件, 実行する関数の名前)</span></code></pre></div>
+      <p><code>18行目</code>に記述した、ボタンが押されたときに実行する関数を見てください。
+      引数<code>event</code>に、押されたキーボードの情報が渡されます。そして、<code>event.keysym</code>でキーの名前に変更できます。</p>
+      <h1 data-number="7" id="キーボードの入力を判定する"><span
+      class="header-section-number">7</span>
+      キーボードの入力を判定する</h1>
+      <p><code>key</code>の中身をif文で判定します。wキーか↑キーのときは上、aキーか←キーのときは左、…といった具合に場合分けしていきます。</p>
+      <div class="sourceCode" id="cb7" data-startFrom="1"
+      data-caption="tk.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># ウィンドウを表示する</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb7-4"><a href="#cb7-4"></a>root.title(<span class="st">&quot;tk&quot;</span>)</span>
+<span id="cb7-5"><a href="#cb7-5"></a>root.geometry(<span class="st">&quot;800x600&quot;</span>) </span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co"># キャンバス設置</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>canvas <span class="op">=</span> tk.Canvas(root,width <span class="op">=</span> <span class="dv">800</span>,height <span class="op">=</span> <span class="dv">600</span>,bg <span class="op">=</span> <span class="st">&quot;orange&quot;</span>)</span>
+<span id="cb7-9"><a href="#cb7-9"></a>canvas.pack()</span>
+<span id="cb7-10"><a href="#cb7-10"></a></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co"># 四角形を配置</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>rect_size <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>x <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>y <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>canvas.create_rectangle(x,y,x<span class="op">+</span>rect_size,y<span class="op">+</span>rect_size,fill<span class="op">=</span><span class="st">&quot;blue&quot;</span>,tag<span class="op">=</span><span class="st">&quot;rect&quot;</span>)</span>
+<span id="cb7-16"><a href="#cb7-16"></a></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co"># 何かのキーが押されたときに実行される関数</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="kw">def</span> on_key_press(event):</span>
+<span id="cb7-19"><a href="#cb7-19"></a>    key <span class="op">=</span> event.keysym <span class="co"># 変数keyに「w」や「a」など、押したキーの名前が格納される</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a>    <span class="cf">if</span>(key <span class="op">==</span> <span class="st">&quot;w&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Up&quot;</span>):</span>
+<span id="cb7-21"><a href="#cb7-21"></a>        <span class="bu">print</span>(<span class="st">&quot;↑&quot;</span>)</span>
+<span id="cb7-22"><a href="#cb7-22"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;a&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Left&quot;</span>):</span>
+<span id="cb7-23"><a href="#cb7-23"></a>        <span class="bu">print</span>(<span class="st">&quot;←&quot;</span>)</span>
+<span id="cb7-24"><a href="#cb7-24"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;s&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Down&quot;</span>):</span>
+<span id="cb7-25"><a href="#cb7-25"></a>        <span class="bu">print</span>(<span class="st">&quot;↓&quot;</span>)</span>
+<span id="cb7-26"><a href="#cb7-26"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;d&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Right&quot;</span>):</span>
+<span id="cb7-27"><a href="#cb7-27"></a>        <span class="bu">print</span>(<span class="st">&quot;→&quot;</span>)</span>
+<span id="cb7-28"><a href="#cb7-28"></a></span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="co"># メインループ</span></span>
+<span id="cb7-30"><a href="#cb7-30"></a>root.bind(<span class="st">&quot;&lt;KeyPress&gt;&quot;</span>, on_key_press)</span>
+<span id="cb7-31"><a href="#cb7-31"></a>root.mainloop()</span></code></pre></div>
+      <h1 data-number="8" id="キーボードの入力を判定する-1"><span
+      class="header-section-number">8</span>
+      キーボードの入力を判定する</h1>
+      <p>キーボードの入力に合わせて四角形を動かせば、四角形の移動ができるようになります。</p>
+      <div class="sourceCode" id="cb8" data-startFrom="1"
+      data-caption="tk.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co"># ウィンドウを表示する</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb8-4"><a href="#cb8-4"></a>root.title(<span class="st">&quot;tk&quot;</span>)</span>
+<span id="cb8-5"><a href="#cb8-5"></a>root.geometry(<span class="st">&quot;800x600&quot;</span>) </span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co"># キャンバス設置</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>canvas <span class="op">=</span> tk.Canvas(root,width <span class="op">=</span> <span class="dv">800</span>,height <span class="op">=</span> <span class="dv">600</span>,bg <span class="op">=</span> <span class="st">&quot;orange&quot;</span>)</span>
+<span id="cb8-9"><a href="#cb8-9"></a>canvas.pack()</span>
+<span id="cb8-10"><a href="#cb8-10"></a></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co"># 四角形を配置</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>rect_size <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>x <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>y <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a>canvas.create_rectangle(x,y,x<span class="op">+</span>rect_size,y<span class="op">+</span>rect_size,fill<span class="op">=</span><span class="st">&quot;blue&quot;</span>,tag<span class="op">=</span><span class="st">&quot;rect&quot;</span>)</span>
+<span id="cb8-16"><a href="#cb8-16"></a></span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="co"># 何かのキーが押されたときに実行される関数</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="kw">def</span> on_key_press(event):</span>
+<span id="cb8-19"><a href="#cb8-19"></a>    <span class="kw">global</span> x,y</span>
+<span id="cb8-20"><a href="#cb8-20"></a>    speed <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a>    key <span class="op">=</span> event.keysym <span class="co"># 変数keyに「w」や「a」など、押したキーの名前が格納される</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a>    <span class="cf">if</span>(key <span class="op">==</span> <span class="st">&quot;w&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Up&quot;</span>):</span>
+<span id="cb8-23"><a href="#cb8-23"></a>        <span class="bu">print</span>(<span class="st">&quot;↑&quot;</span>)</span>
+<span id="cb8-24"><a href="#cb8-24"></a>        y <span class="op">=</span> y <span class="op">-</span> speed</span>
+<span id="cb8-25"><a href="#cb8-25"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;a&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Left&quot;</span>):</span>
+<span id="cb8-26"><a href="#cb8-26"></a>        <span class="bu">print</span>(<span class="st">&quot;←&quot;</span>)</span>
+<span id="cb8-27"><a href="#cb8-27"></a>        x <span class="op">=</span> x <span class="op">-</span> speed</span>
+<span id="cb8-28"><a href="#cb8-28"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;s&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Down&quot;</span>):</span>
+<span id="cb8-29"><a href="#cb8-29"></a>        <span class="bu">print</span>(<span class="st">&quot;↓&quot;</span>)</span>
+<span id="cb8-30"><a href="#cb8-30"></a>        y <span class="op">=</span> y <span class="op">+</span> speed</span>
+<span id="cb8-31"><a href="#cb8-31"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;d&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Right&quot;</span>):</span>
+<span id="cb8-32"><a href="#cb8-32"></a>        <span class="bu">print</span>(<span class="st">&quot;→&quot;</span>)</span>
+<span id="cb8-33"><a href="#cb8-33"></a>        x <span class="op">=</span> x <span class="op">+</span> speed</span>
+<span id="cb8-34"><a href="#cb8-34"></a>    </span>
+<span id="cb8-35"><a href="#cb8-35"></a>    <span class="co"># 元の四角形を削除して、再配置する</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a>    canvas.delete(<span class="st">&quot;rect&quot;</span>)</span>
+<span id="cb8-37"><a href="#cb8-37"></a>    canvas.create_rectangle(x,y,x<span class="op">+</span>rect_size,y<span class="op">+</span>rect_size,fill<span class="op">=</span><span class="st">&quot;blue&quot;</span>,tag<span class="op">=</span><span class="st">&quot;rect&quot;</span>)</span>
+<span id="cb8-38"><a href="#cb8-38"></a></span>
+<span id="cb8-39"><a href="#cb8-39"></a><span class="co"># メインループ</span></span>
+<span id="cb8-40"><a href="#cb8-40"></a>root.bind(<span class="st">&quot;&lt;KeyPress&gt;&quot;</span>, on_key_press)</span>
+<span id="cb8-41"><a href="#cb8-41"></a>root.mainloop()</span></code></pre></div>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://k-768.github.io/PythonGameProgramming/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>

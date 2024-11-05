@@ -1,115 +1,272 @@
 ---
 var:
-  header-title: "Pythonで釣りゲームを作ろう 基礎編6　関数"
+  header-title: "Pythonで釣りゲームを作ろう 基礎編6"
   header-date: "2024年04月23日（月)"
 ---
 
-# 基礎編6　関数 
+# 基礎編6 乱数
 
-ある処理を「関数」としてひとつにまとめることで、同じ処理を何度も再利用することができます。関数の使い方をマスターすれば、少ない労力で分かりやすいプログラムを書く事ができます。
+乱数を使ったガチャを作成してみましょう。
 
 ## もくじ
-
--  [関数とは](basic05.html#関数とは) 
--  [関数と引数](basic05.html#関数と引数) 
--  [関数と戻り値](basic05.html#関数と戻り値)
+-  [乱数](basic06.html#乱数) 
 
 
-## 関数とは
+## 乱数
+`random`モジュールを用いると、ランダムな数を生成したり、リストからランダムに抽出することができます。
 
+### random.randint()
 
-`関数`の構造を見ていきましょう。
+![img](figs/06/dice.png)
 
-```python{.numberLines caption="関数の構造"}
-def lv_up():
-  lv += 1
-  print("レベルが上がった！！")
+`random.randint(a,b)`を使って**a~b**までの整数を生成します。
+
+以下のコードを実行してみてください。さいころと同じふるまいをします。
+1行目の`import random`で、`random`モジュールを読み込み、使用できるようにしています。
+
+```python{.numberLines}
+import random
+
+print(random.randint(1,6))
 ```
 
-`1行目`の`lv_up`の部分を**関数名**といい、好きに名前をつけることができます。
-`2～3行目`のように、複数の処理を実行するにはそれらの行を**インデント**([参照](basic04.html#インデント))する必要があります。
 
-ここで注意する必要があるのは、上のコードは**あくまで関数を定義しただけ**ということです。先ほどのコードを実行してみてください。**レベルが上がった！！」とは出力されません。**
+**<i class="fa-solid fa-terminal"></i> 実行結果**
 
-定義した関数を実行するには、関数を呼び出す必要があります。次のプログラムをコピー＆ペーストして実行してみてください。
+```
+3
+```
 
-```python{.numberLines caption="関数の実行"}
-def lv_up():
-  lv += 1
-  print("レベルが上がった！！")
-lv_up()
+</br>
+
+---
+
+- **Challenge1-1**　上のプログラムを改造して、1~50までの乱数を表示するプログラムを作成しましょう。
+- **Challenge1-2**　さらに改造して、2~100までのランダムな**偶数**を表示するプログラムを作成しましょう。
+
+ヒント: <span class="masked">`2から100までの偶数を数学的に書くと`2n (1 <= n <= 50)`となります。`</span>
+
+
+**<i class="fa-solid fa-check"></i>解答**
+
+Challenge1-1: <span class="masked">`print(random.randint(1,50))`</span>
+
+Challenge1-2: <span class="masked">`print(random.randint(1,50) * 2)`</span>
+
+</br>
+
+### random.choice()
+`random.choice(list)`を使って`list`からランダムに要素を選択します。
+
+以下のコードを実行してみてください。魚の名前が入ったリストからランダムに選択して表示します。
+
+```python{.numberLines}
+import random
+
+fishes = ["アジ","サバ","イワシ","タイ","サメ"]
+print(random.choice(fishes))
 ```
 
 **<i class="fa-solid fa-terminal"></i> 実行結果**
 
 ```
-レベルが上がった！！
+アジ
 ```
+</br>
 
+### random.choices()
+`random.choices(list,k,weights)`を使って`list`からランダムに複数の要素を選択します。
 
-## 関数と引数
+`random.choices()`で選択された要素は**重複することがあります。**重複させたくない場合は`random.sample()`が用意されています。
 
-関数には**引数（ひきすう）**という値を与えることができます。次のプログラムを実行してみてください。
+以下のコードを実行してみてください。魚の名前が入ったリストからランダムに3つ選択して表示します。
 
-```python{.numberLines caption="関数と引数"}
-def lv_up(name):
-  print(name+"のレベルが上がった！！")
+```python{.numberLines}
+import random
 
-lv_up("勇者")
-lv_up("賢者")
-```
-
-**<i class="fa-solid fa-terminal"></i> 実行結果**
-
-```
-勇者のレベルが上がった！！
-賢者のレベルが上がった！！
-```
-
-引数を複数指定することもできます。`,(カンマ)`を用いて記述します。
-
-```python{.numberLines caption="複数の引数はカンマで区切る"}
-def division(a,b):
-  print(str(a)+"÷"+str(b)+"="+str(a//b)+"あまり"+str(a%b))
-
-division(13,3)
+fishes = ["アジ","サバ","イワシ","タイ","サメ"]
+print(random.choices(fishes,k=3))
 ```
 
 **<i class="fa-solid fa-terminal"></i> 実行結果**
 
 ```
-13÷3=4あまり1
+['タイ', 'イワシ', 'イワシ']
 ```
+</br>
 
-このように、引数を用いることで同じような処理をひとまとめにできます。
+さらには重みをつけることもできます。引数`weights`で確率を指定します。
 
+```python{.numberLines}
+import random
 
-
-## 関数と戻り値
-
-引数は関数に値を与えることができますが、逆に関数から値を受け取ることもできます。それが**戻り値**です。
-
-```python{.numberLines caption="関数と引数"}
-def add(a,b):
-  return a+b
-
-print(add(5,6))
+fishes = ["アジ","サバ","イワシ","タイ","サメ"]
+fish_weights =[30,30,30,8,2] #アジ,サバ,イワシ30%、タイ8%、サメ2%
+print(random.choices(fishes,k=10,weights = fish_weights))
 ```
 
 **<i class="fa-solid fa-terminal"></i> 実行結果**
 
 ```
-11
+['サバ', 'イワシ', 'アジ', 'サメ', 'アジ', 'サバ', 'イワシ', 'アジ', 'イワシ', 'イワシ']
+```
+</br>
+
+<div class="note type-tips">
+
+**配列からランダムな要素を重み付きで取り出す**
+
+`random.choices()`を使えば、`random.choice()`ではできなかった、重みをつけて要素を取り出す操作ができました。
+では、**魚の名前のリストではなく魚の名前そのものが欲しいとき、どうすれば良い**でしょうか。
+
+まずは、先ほどのコードを`k=1`と書き換えて実行してみましょう。
+
+```python{.numberLines}
+import random
+
+fishes = ["アジ","サバ","イワシ","タイ","サメ"]
+fish_weights =[30,30,30,8,2] #アジ,サバ,イワシ30%、タイ8%、サメ2%
+print(random.choices(fishes,k=1,weights = fish_weights))
 ```
 
+**<i class="fa-solid fa-terminal"></i> 実行結果**
 
-少し難しいですが、プログラムを見ながら動作を確認しましょう。
+```
+['イワシ']
+```
 
-- 実行すると、1～2行目は関数の**定義なので**何も処理が行われません。
-- 3行目のprint文の中身にある**add(5,6)**によって、関数が呼び出されます。
-- a=5,b=6として関数の中で処理が行われ、戻り値として`11`が出力されます。
-- print文の中身が`11`になるので、`11`が表示されます。
+</br>
+
+ここで注意したいのは、**`k=1`と指定しても、要素数1の配列が返ってくる**ことです。配列の要素を取り出すには、`list[0]`のように**インデックスで指定**します。
+
+`random.choices(・・・)[0]`と指定することで、配列からランダムな要素を重み付きで取り出せます。
+```python{.numberLines}
+import random
+
+fishes = ["アジ","サバ","イワシ","タイ","サメ"]
+fish_weights =[30,30,30,8,2] #アジ,サバ,イワシ30%、タイ8%、サメ2%
+print(random.choices(fishes,k=1,weights = fish_weights)[0])
+```
+
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+イワシ
+```
+</br>
+
+</div>
 
 
 
+### 応用
 
+![img](figs/06/sample.gif)
+
+以下の要件を満たすプログラムを作成していきましょう。
+
+- レア度は★1~★3まであり、排出率は以下の通りです。
+
+    **★1**: 75%
+    **★2**: 20%
+    **★3**: 5%
+
+- それぞれのレア度には3種類の魚があり、以下のリストの通りです。同じレア度の中で何が選ばれるかはランダムです。
+
+```python{.numberLines caption="魚のランク"}
+STAR_1 = ["アジ","サバ","イワシ"]
+STAR_2 = ["カワハギ","タチウオ","メバル"]
+STAR_3 = ["タイ","スズキ","カサゴ"]
+```
+
+</br>
+
+先ほどの例をそのまま使えば以下のようになりますが、これではあまりよくありません。
+
+```python{.numberLines caption="良くない例"}
+import random
+
+FISH_LIST = ["アジ","サバ","イワシ","カワハギ","タチウオ","メバル","タイ","スズキ","カサゴ"]
+FISH_WEIGHT = [25,25,25,20/3,20/3,20/3,5/3,5/3,5/3] #それぞれの排出率
+print(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0])
+```
+
+要件通りには動くのですが、他人や未来の自分にとって読みにくく、何か改良しようとすると大変なコードです。具体的には以下の欠点が挙げられます。
+
+- どの魚がどのランクなのかわかりにくい
+- それぞれのランクの排出率がわかりにくい
+- 魚の種類を追加したとき、`FISH_WEIGHT`を何か所も変更する必要がある。
+
+</br>
+
+これらを解決するためにはどうすれば良いでしょうか。
+
+今回は**初めにレア度を排出率に従って決定し、次にその中からランダムに魚を選ぶ方法**を取りましょう。まずは排出率に従って「★n」と表示するプログラムを作成します。
+
+```python{.numberLines caption="レア度を排出率に従って決定する"}
+import random
+
+FISH_LIST = ["★1","★2","★3"] 
+FISH_WEIGHT = [75,20,5] #★1～3の排出率
+print(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0])
+```
+
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+★1
+```
+</br>
+
+次に、「★n」の部分をそれぞれの魚のリストに置き換えます。
+
+```python{.numberLines caption="レア度を排出率に従って決定する"}
+import random
+
+STAR_1 = ["アジ","サバ","イワシ"]
+STAR_2 = ["カワハギ","タチウオ","メバル"]
+STAR_3 = ["タイ","スズキ","カサゴ"]
+
+FISH_LIST = [STAR_1,STAR_2,STAR_3] #2次元配列であることに注意！
+FISH_WEIGHT = [75,20,5] #★1～3の排出率
+print(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0])
+```
+
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+['アジ', 'サバ', 'イワシ']
+```
+
+</br>
+
+リストが出力されているので、さらにこれを`random.choice()`で選択すれば良いですね。
+
+```python{.numberLines caption="randomfish.py"}
+import random
+
+STAR_1 = ["アジ","サバ","イワシ"]
+STAR_2 = ["カワハギ","タチウオ","メバル"]
+STAR_3 = ["タイ","スズキ","カサゴ"]
+
+FISH_LIST = [STAR_1,STAR_2,STAR_3] #2次元配列であることに注意！
+FISH_WEIGHT = [75,20,5] #★1～3の排出率
+
+print(random.choice(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0]))
+```
+
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+サバ
+```
+
+</br>
+
+
+**うまくいきました！これは釣りゲームの部品になるので、後で再利用できるように適当な名前を付けて保存しておきましょう。**
+これはよくない例と比較して格段に修正、改造しやすくなっています。次のChallengeで確認してください。
+
+---
+- **Challenge2-1**　上のプログラムを改造して、★2に「コイ」を追加しましょう。
+- **Challenge2-2**　**★4**の魚を追加してみましょう。排出率も適当に調節してください。
