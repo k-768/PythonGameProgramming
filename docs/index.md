@@ -23,7 +23,7 @@ var:
 -  [その他の演算](basic02.html#その他の演算) 
 -  [演算の順序](basic02.html#演算の順序) 
 
-###  [変数](basic03.html) 
+###  [変数](basic03.html) プログラムの最も基本になる概念を学ぼう
 
 -  [変数とは](basic03.html#変数とは) 
 -  [変数の値を変更する](basic03.html#変数の値を変更する) 
@@ -41,7 +41,6 @@ var:
 
 ###  [乱数](basic06.html) 　乱数を使ってガチャをつくろう
 
--  [モジュール](basic06.html#モジュール) 
 -  [乱数](basic06.html#乱数) 
 
 ###  [条件分岐](basic07.html)　条件に応じて処理を変えよう
@@ -51,6 +50,7 @@ var:
 -  [関係演算子](basic07.html#関係演算子)
 -  [if-else文](basic07.html#if-else文) 
 -  [if-elif文](basic07.html#if-elif文) 
+-  [論理演算子](basic07.html#論理演算子)
 
 ###  [関数](basic08.html)　同じ処理を使いまわそう
 
@@ -66,13 +66,13 @@ var:
 
 ###  [Tkinter](basic10.html)　ゲームの画面を表示しよう
 
--  [コメント文](basic06.html#コメント文) 
--  [式の構造](basic06.html#式の構造) 
+-  [モジュール](basic10.html#リスモジュールトとは) 
+-  [ウィンドウを表示する](basic10.html#ウィンドウを表示する) 
 
 ###  [Tkinter-2](basic09.html)　キーボードで画像を動かそう
 
--  [コメント文](basic06.html#コメント文) 
--  [式の構造](basic06.html#式の構造) 
+-  [AAA](basic06.html#コメント文) 
+-  [VVV](basic06.html#式の構造) 
 
 
 
