@@ -305,9 +305,9 @@ else:
 ```
 
 
-#### **charenge7** 
+#### **Challenge7** 
 
-先ほどのプログラムを改造してみましょう。新しいファイル`charenge7.py`を作成してください。
+先ほどのプログラムを改造してみましょう。新しいファイル`challenge7.py`を作成してください。
 
 **アイテム**：丈夫な釣り竿
 
@@ -316,7 +316,7 @@ else:
 **プレイヤーのレベル制限**：20
 
 
-```python{.numberLines caption="charenge7.py"}
+```python{.numberLines caption="challenge7.py"}
 level = 25 #プレイヤーのレベル
 money = 999 #所持金
 

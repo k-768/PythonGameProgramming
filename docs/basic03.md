@@ -157,14 +157,14 @@ print(a)
 
 ---
 
-- **Challenge2-1**　上のプログラムの1行目を書き換えて、`a`の値を`123`に変更しましょう。
-- **Challenge2-2**　3行目を書き換えて、`a`の値を**2倍**にするよう変更しましょう。
+- **Challenge3-1**　上のプログラムの1行目を書き換えて、`a`の値を`123`に変更しましょう。
+- **Challenge3-2**　3行目を書き換えて、`a`の値を**2倍**にするよう変更しましょう。
 
 **<i class="fa-solid fa-check"></i>解答**
 
-Challenge2-1: <span class="masked">`a = 123`</span>
+Challenge3-1: <span class="masked">`a = 123`</span>
 
-Challenge2-2: <span class="masked">`a = a * 2`</span>
+Challenge3-2: <span class="masked">`a = a * 2`</span>
 
 </br>
 
@@ -309,7 +309,7 @@ s = 1100
 
 ```
 
-#### **charenge2-3** 次の変数名は適切か判断しましょう。
+#### **challenge3-3** 次の変数名は適切か判断しましょう。
 
 - `tmp` ・・・ <span class="masked">⭕　　　　　　　　　　　　　　</span>
 - `Name` ・・・ <span class="masked">❌全て小文字にするべきです</span>

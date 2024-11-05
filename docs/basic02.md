@@ -95,7 +95,7 @@ print(2+3)
 </div>
 
 
-#### **charenge2-1** 次の計算をPythonでしてみましょう。
+#### **Challenge2-1** 次の計算をPythonでしてみましょう。
 
 - 4+6 ・・・ <span class="masked">`4+6`</span>
 - 5-2 ・・・ <span class="masked">`5-2`</span>
@@ -112,7 +112,7 @@ print(2+3)
 
 例えば7÷3=2あまり1を計算したいとき、`//`を用いて割り切れた数を、`%`を用いてあまりを求めることができます。
 
-#### **charenge2-2** 次の計算をPythonでしてみましょう。
+#### **Challenge2-2** 次の計算をPythonでしてみましょう。
 
 - 7÷3の商の整数値 ・・・ <span class="masked">`7//3`</span>
 - 7÷3の余り ・・・ <span class="masked">`7%3`</span>
