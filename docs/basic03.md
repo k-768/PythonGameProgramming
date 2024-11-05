@@ -309,7 +309,7 @@ s = 1100
 
 ```
 
-#### **challenge3-3** 次の変数名は適切か判断しましょう。
+#### **Challenge3-3** 次の変数名は適切か判断しましょう。
 
 - `tmp` ・・・ <span class="masked">⭕　　　　　　　　　　　　　　</span>
 - `Name` ・・・ <span class="masked">❌全て小文字にするべきです</span>
