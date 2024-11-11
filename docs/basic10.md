@@ -163,14 +163,17 @@ root.bind("<KeyPress>", on_key_press)
 root.mainloop()
 ```
 
-`23行目`に`bind()`命令があります。今回の場合は**条件＝ボタンが押されたとき**、**実行する関数＝`on_key_press`**になります。
+`18行目`では、**キーボードが押されたときに実行される関数**を設定しています。今回は、print文で押されたキーを出力します。
+引数`event`に、押されたキーボードの情報が渡されます。そして、`event.keysym`でキーの名前に変更できます。
+
+`23行目`では、**キーボードが押されたとき先ほどの関数が実行されるように**設定しています。これを`bind()`命令と呼び、今回の場合は**条件＝ボタンが押されたとき**、**実行する関数＝`on_key_press`**になります。今回のようにキーを押したときだけでなく、キーを離したとき、マウスを動かしたときなど、様々なことを検出できます。[この記事](https://denno-sekai.com/tkinter-bind/)に詳しく説明があります。
 
 ```python{}
 root.bind(条件, 実行する関数の名前)
 ```
 
-`18行目`に記述した、ボタンが押されたときに実行する関数を見てください。
-引数`event`に、押されたキーボードの情報が渡されます。そして、`event.keysym`でキーの名前に変更できます。
+
+
 
 
 
@@ -178,7 +181,41 @@ root.bind(条件, 実行する関数の名前)
 
 `key`の中身をif文で判定します。wキーか↑キーのときは上、aキーか←キーのときは左、...といった具合に場合分けしていきます。
 
-```python{.numberLines startFrom="1" caption="tk.py"}
+
+先ほどのプログラムに手を加えて、移動方向を判定するプログラムを作成してみましょう。
+WASDキーに対応して、以下のような出力を出せたら完成です。
+
+```
+→
+→
+↓
+↓
+↓
+↓
+←
+```
+
+関数`on_key_press`の**中身だけを改造して**作成できます。以下のヒントをもとに自分で考えて、書いてみてください。
+新しいファイル`tk2.py`を作成して、そこに`tk.py`の中身をコピーしてから作業してください。
+
+```python{.numberLines startFrom="17" caption="ヒント"}
+# 押されたキーを出力する
+def on_key_press(event):
+    key = event.keysym # 変数keyに「w」や「a」など、押したキーの名前が格納される
+    if(key == "w"): # 「w」が押されたとき
+        print("↑")
+    elif(...   #以下省略
+```
+---
+
+完成したら、以下の答えと照らし合わせて確認してください。
+
+---
+
+**<i class="fa-solid fa-terminal"></i> 答え**
+
+
+```python{.numberLines startFrom="1" caption="tk2.py"}
 import tkinter as tk
 # ウィンドウを表示する
 root = tk.Tk()
@@ -198,6 +235,35 @@ canvas.create_rectangle(x,y,x+rect_size,y+rect_size,fill="blue",tag="rect")
 # 何かのキーが押されたときに実行される関数
 def on_key_press(event):
     key = event.keysym # 変数keyに「w」や「a」など、押したキーの名前が格納される
+    if(key == "w"):
+        print("↑")
+    elif(key == "a"):
+        print("←")
+    elif(key == "s"):
+        print("↓")
+    elif(key == "d"):
+        print("→")
+
+# メインループ
+root.bind("<KeyPress>", on_key_press)
+root.mainloop()
+```
+
+- **Challenge8-3**　wasdだけでなく、矢印キーにも対応させてみましょう。矢印キーが押されたとき、keyには`Up``Down``Right``Left`という文字が渡されます。
+
+ヒント1:<span class="masked">`key == "A" or key == "B"`を使えば、「`key`が`A`または`B`のとき」という条件になります。</span>
+
+<br><br>
+
+--
+
+
+**<i class="fa-solid fa-terminal"></i> 答え**
+
+```python{.numberLines startFrom="17" caption="tk2.py(抜粋)"}
+# 何かのキーが押されたときに実行される関数
+def on_key_press(event):
+    key = event.keysym # 変数keyに「w」や「a」など、押したキーの名前が格納される
     if(key == "w" or key == "Up"):
         print("↑")
     elif(key == "a" or key == "Left"):
@@ -206,12 +272,7 @@ def on_key_press(event):
         print("↓")
     elif(key == "d" or key == "Right"):
         print("→")
-
-# メインループ
-root.bind("<KeyPress>", on_key_press)
-root.mainloop()
 ```
-
 
 ## キーボードの入力を判定する
 
@@ -237,7 +298,7 @@ canvas.create_rectangle(x,y,x+rect_size,y+rect_size,fill="blue",tag="rect")
 # 何かのキーが押されたときに実行される関数
 def on_key_press(event):
     global x,y
-    speed = 5
+    speed = 5 # 四角形を一度にずらす大きさ
     key = event.keysym # 変数keyに「w」や「a」など、押したキーの名前が格納される
     if(key == "w" or key == "Up"):
         print("↑")
@@ -260,3 +321,4 @@ def on_key_press(event):
 root.bind("<KeyPress>", on_key_press)
 root.mainloop()
 ```
+

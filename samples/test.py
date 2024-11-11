@@ -1,7 +1,6 @@
-import tkinter as tk
-# ウィンドウを表示する
-root = tk.Tk()
-root.title("test")
-root.geometry("600x400") 
+result = 0
+def add(a,b):
+    result = a + b
 
-root.mainloop()
+add(1,2)
+print(result)

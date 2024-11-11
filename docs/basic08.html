@@ -50,6 +50,15 @@ class="toc-section-number">2</span> 関数とは</a></li>
 class="toc-section-number">3</span> 関数と引数</a></li>
 <li><a href="#関数と戻り値" id="toc-関数と戻り値"><span
 class="toc-section-number">4</span> 関数と戻り値</a></li>
+<li><a href="#ローカル変数とグローバル変数"
+id="toc-ローカル変数とグローバル変数"><span
+class="toc-section-number">5</span> ローカル変数とグローバル変数</a>
+<ul>
+<li><a href="#ローカル変数" id="toc-ローカル変数"><span
+class="toc-section-number">5.1</span> ローカル変数</a></li>
+<li><a href="#グローバル変数" id="toc-グローバル変数"><span
+class="toc-section-number">5.2</span> グローバル変数</a></li>
+</ul></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -132,6 +141,53 @@ class="toc-section-number">4</span> 関数と戻り値</a></li>
       <li>a=5,b=6として関数の中で処理が行われ、戻り値として<code>11</code>が出力されます。</li>
       <li>print文の中身が<code>11</code>になるので、<code>11</code>が表示されます。</li>
       </ul>
+      <h1 data-number="5" id="ローカル変数とグローバル変数"><span
+      class="header-section-number">5</span>
+      ローカル変数とグローバル変数</h1>
+      <h2 data-number="5.1" id="ローカル変数"><span
+      class="header-section-number">5.1</span> ローカル変数</h2>
+      <p>ブロック(インデントされているまとまり)の中で宣言した変数は、他のブロックでは使えません。以下のコードを実行すると<strong>エラー</strong>になります。</p>
+      <div class="sourceCode" id="cb10" data-caption="ローカル変数"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">def</span> add(a,b):</span>
+<span id="cb10-2"><a href="#cb10-2"></a>    result <span class="op">=</span> a <span class="op">+</span> b</span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a>add(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="bu">print</span>(result)</span></code></pre></div>
+      <figure>
+      <img src="figs/08/local.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>関数の中で変数<code>result</code>を定義しているので、関数の外で変数を参照しようとするとエラーになります。このように、関数の中定義され、関数の中でしか使えない変数のことを<strong>ローカル変数</strong>といいます。</p>
+      <h2 data-number="5.2" id="グローバル変数"><span
+      class="header-section-number">5.2</span> グローバル変数</h2>
+      <p>この問題を解決するには<code>result</code>をグローバル変数にする必要があります。つまり、<code>result</code>を関数の外で定義すればよいわけです。しかし、ただ関数の外で宣言すればうまくいくかというと、そうではありません。</p>
+      <div class="sourceCode" id="cb11"
+      data-caption="グローバル変数（失敗例）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>result <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">def</span> add(a,b):</span>
+<span id="cb11-3"><a href="#cb11-3"></a>    result <span class="op">=</span> a <span class="op">+</span> b</span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a>add(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="bu">print</span>(result)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>0</code></pre>
+      <p>この場合でも、関数の中の<code>result</code>と、関数の外の<code>result</code>は違うものだとみなされてしまいます。関数の中の<code>result</code>がグローバル変数であることを明記しなけれまなりません。n個のグローバル変数を利用したいとき、関数の初めに以下の形式で記述します。</p>
+      <div class="sourceCode" id="cb13"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">global</span> 変数名<span class="dv">1</span>,変数名<span class="dv">2</span>,...,変数名n</span></code></pre></div>
+      <p>これを用れば、うまく変数の中身を受け渡せるようになります。</p>
+      <div class="sourceCode" id="cb14"
+      data-caption="グローバル変数（失敗例）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>result <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">def</span> add(a,b):</span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="kw">global</span> result</span>
+<span id="cb14-4"><a href="#cb14-4"></a>    result <span class="op">=</span> a <span class="op">+</span> b</span>
+<span id="cb14-5"><a href="#cb14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6"></a>add(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="bu">print</span>(result)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>3</code></pre>
       <!-- ---------------------------------------- -->
     </main>
 
