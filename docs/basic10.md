@@ -47,7 +47,7 @@ root.mainloop()
 - `5行目`の`"600x400"`はウィンドウのサイズを`"幅x高さ"`で指定しています。書き換えればサイズを変更できます。
 
 
-#### **Challenge8-1** 
+#### **Challenge10-1** 
 
 - ウィンドウの名前を`tk`に変更してください
 - ウィンドウのサイズを`800x600`に変更してください
@@ -82,7 +82,7 @@ root.mainloop()
 `width`が**幅**、`height`が**高さ**、`bg`が**背景色**に対応しています。
 
 
-#### **Challenge8-2** 
+#### **Challenge10-2** 
 
 - キャンバスのサイズをウィンドウと同じ`800x600`に設定してください。
 - キャンバスの色をオレンジ(`orange`)に変更してください。
@@ -249,13 +249,13 @@ root.bind("<KeyPress>", on_key_press)
 root.mainloop()
 ```
 
-- **Challenge8-3**　wasdだけでなく、矢印キーにも対応させてみましょう。矢印キーが押されたとき、keyには`Up``Down``Right``Left`という文字が渡されます。
+- **Challenge10-3**　wasdだけでなく、矢印キーにも対応させてみましょう。矢印キーが押されたとき、keyには`Up` `Down` `Right` `Left`という文字が渡されます。
 
-ヒント1:<span class="masked">`key == "A" or key == "B"`を使えば、「`key`が`A`または`B`のとき」という条件になります。</span>
+ヒント:<span class="masked">`key == "A" or key == "B"`を使えば、「`key`が`A`または`B`のとき」という条件になります。</span>
 
 <br><br>
 
---
+---
 
 
 **<i class="fa-solid fa-terminal"></i> 答え**
