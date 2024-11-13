@@ -26,7 +26,7 @@ var:
 
 <br>
 
-`Fishing game`という名前で新しいフォルダを作成して開く
+`FishingGame`という名前で新しいフォルダを作成して開く
 
 ![img](/docs/figs/101/NewFolder.png)
 
@@ -88,23 +88,26 @@ MARGINE_X = 2 #マージン
 MARGINE_Y = 2 #マージン
 CANVAS_SIZE = f"{CANVAS_WIDTH+MARGINE_X}x{CANVAS_HEIGHT+MARGINE_Y}"#キャンバスサイズ
 
+
 #ウィンドウ設置
 root = tk.Tk()
-root.title("Sample Game ver0.92")
+root.title("game01")
 root.geometry(CANVAS_SIZE)
+
 
 #キャンバス設置
 canvas = tk.Canvas(root,width = CANVAS_WIDTH,height = CANVAS_HEIGHT,bg = "skyblue")
 canvas.pack()
 
 
-
 #マップ画像
-MAP_IMAGE = tk.PhotoImage(file = cwd+"/img/fishing_map.png")
-MAP_BIG_IMAGE = MAP_IMAGE.zoom(MAGNIFICATION_RATE,MAGNIFICATION_RATE)
+MAP_IMAGE = tk.PhotoImage(file = cwd+"/img/fishing_map.png") # 画像を読み込む
+MAP_BIG_IMAGE = MAP_IMAGE.zoom(MAGNIFICATION_RATE,MAGNIFICATION_RATE) # 画像を拡大する
 
-canvas.create_image(0,0,image = MAP_BIG_IMAGE ,tag="bgi",anchor=tk.NW)
+canvas.create_image(0,0,image = MAP_BIG_IMAGE ,tag="bgimage",anchor=tk.NW) # 画像を配置する
 
+
+# メインループ
 root.mainloop()
 ```
 
@@ -112,13 +115,82 @@ root.mainloop()
 
 ![img](/docs/figs/101/gameWindow.png)
 
-`13行目`、`14行目`では、読み込む画像のサイズを指定しています。今回の画像は縦横384pxです。そのままでは小さくなるので、`16行目`で倍率を指定しています。
 
-画像の配置は、`create_image`を用いて、`41行目`で行っています。使い方は以下の通りです。
+---
 
-```python{}
+画像を表示する流れを見ていきましょう。`35行目`からに注目してください。
 
-canvas.create_image(x座標,y座標,image = 画像のパス（PC内のどこにあるか） ,tag=画像の識別用の名前,anchor=基準点)
+```python{.numberLines startFrom="35" caption="game01.py(抜粋)"}
+#マップ画像
+MAP_IMAGE = tk.PhotoImage(file = cwd+"/img/fishing_map.png") # 画像を読み込む
+MAP_BIG_IMAGE = MAP_IMAGE.zoom(MAGNIFICATION_RATE,MAGNIFICATION_RATE) # 画像を拡大する
+
+canvas.create_image(0,0,image = MAP_BIG_IMAGE ,tag="bgimage",anchor=tk.NW) # 画像を配置する
 
 ```
+
+<br>
+
+まず、`36行目`で画像を読み込んで`MAP_IMAGE`という変数に格納(データを保存)しています。画像を読み込むには`tk.PhotoImage`命令を用います。
+
+```python{caption="画像の読み込み"}
+MAP_IMAGE = tk.PhotoImage(file = ファイルのパス)
+
+```
+
+画像を読み込むには、画像の**パス**が必要になります。**パスとは、PC内の住所のようなもの**です。エクスプローラでは、画面の上部に表示されています。
+
+![img](/docs/figs/101/pass.png)
+
+
+<div class="note type-tips">
+
+**パスの求め方**
+
+今回のプログラムでは、Pythonのosモジュールを使って、作業ディレクトリ(作業フォルダー)のパスを取得しています。
+
+新しいファイル`cwd.py`を作成して、以下のプログラムを実行してみてください。
+
+```python{.numberLines caption="cwd.py"}
+import os
+
+# 現在の作業ディレクトリを取得
+cwd = os.getcwd()  # cwdは "current working directory" の略
+print(cwd)  # 現在の作業ディレクトリのパスが表示されます
+```
+
+実行すると、今開いているフォルダ`FishingGame`までのパスが表示されます。このように、自動でパスを取得して変数`cwd`に格納しています。
+
+フォルダ`FishingGame`までのパスは取得できたので、あとはフォルダ`FishingGame`から画像までのパスをつなげれば画像のパスがわかります。
+
+```python{.numberLines startFrom="36" caption="画像の読み込み"}
+MAP_IMAGE = tk.PhotoImage(file = cwd+"/img/fishing_map.png") # 画像を読み込む
+```
+
+少し難しい話ですが「そういうもんなんだ」と思ってさらっといきましょう。
+
+</div>
+
+<br>
+
+次に、`zoom`命令を用いて取得した画像を拡大しています。拡大率は整数である必要があります。今回は2倍です。
+
+```python{caption="画像の拡大"}
+画像を格納した変数.zoom(X方向の拡大率,Y方向の拡大率)
+```
+
+<br>
+
+最後に、拡大した画像を配置します。`create_image`命令を用います。使い方は以下の通りです。
+
+```python{caption="画像の配置"}
+canvas.create_image(x座標,y座標,image = 画像を格納した変数 ,tag=画像の識別用の名前,anchor=基準点)
+
+```
+
+- **tag**は、画像を後で消したりする際に必要になります。識別用なので、ほかの画像とかぶっていない必要があります。
+
+- **anchor**は、**指定したx座標、y座標を画像のどこに合わせるか**というものです。`tk.NW`はN=北、W=西という意味で北西、つまり**画像の左上を基準にしてください**という意味になります。
+
+
 
