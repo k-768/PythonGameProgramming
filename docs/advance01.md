@@ -185,7 +185,6 @@ MAP_IMAGE = tk.PhotoImage(file = cwd+"/img/fishing_map.png") # 画像を読み�
 
 ```python{caption="画像の配置"}
 canvas.create_image(x座標,y座標,image = 画像を格納した変数 ,tag=画像の識別用の名前,anchor=基準点)
-
 ```
 
 - **tag**は、画像を後で消したりする際に必要になります。識別用なので、ほかの画像とかぶっていない必要があります。
@@ -195,7 +194,196 @@ canvas.create_image(x座標,y座標,image = 画像を格納した変数 ,tag=画
 
 ### キーボード入力を判定する
 
-[基礎編10](basic10.html#キーボードの入力を判定する)で学んだキーボード入力の判定を組み合わせましょう。
+[基礎編10](basic10.html#キーボードの入力を判定する)で学んだキーボード入力の判定を組み合わせましょう。ただし、今後アニメーションをするにあたって少し工夫しなければいけません。以下のプログラムをコピペして実行してください。
 
+
+```python{.numberLines caption="game01.py"}
+import copy
+import os
+import tkinter as tk
+
+
+#>>ディレクトリ>>
+cwd = os.getcwd() 
+
+
+#>>マップ設定>>
+MAP_SIZE_X = 384  #マップ画像のxピクセル数
+MAP_SIZE_Y = 384  #マップ画像のyピクセル数
+
+MAGNIFICATION_RATE = 2 # 拡大率
+
+
+#>>ウィンドウ、キャンバス>>
+CANVAS_WIDTH = MAP_SIZE_X * MAGNIFICATION_RATE #キャンバス幅
+CANVAS_HEIGHT = MAP_SIZE_Y * MAGNIFICATION_RATE #キャンバス高さ
+MARGINE_X = 2 #マージン
+MARGINE_Y = 2 #マージン
+CANVAS_SIZE = f"{CANVAS_WIDTH+MARGINE_X}x{CANVAS_HEIGHT+MARGINE_Y}"#キャンバスサイズ
+
+
+#ウィンドウ設置
+root = tk.Tk()
+root.title("game01")
+root.geometry(CANVAS_SIZE)
+
+
+#キャンバス設置
+canvas = tk.Canvas(root,width = CANVAS_WIDTH,height = CANVAS_HEIGHT,bg = "skyblue")
+canvas.pack()
+
+
+#マップ画像
+MAP_IMAGE = tk.PhotoImage(file = cwd+"/img/fishing_map.png") # 画像を読み込む
+MAP_BIG_IMAGE = MAP_IMAGE.zoom(MAGNIFICATION_RATE,MAGNIFICATION_RATE) # 画像を拡大する
+
+canvas.create_image(0,0,image = MAP_BIG_IMAGE ,tag="bgimage",anchor=tk.NW) # 画像を配置する
+
+
+#ゲームの基本となる1ティック時間(ms)
+TICK_TIME = 50  
+
+
+#>>ゲームのメインループ関数>>
+def gameLoop():
+    global key,currentKey,prevKey
+    
+    prevKey = copy.deepcopy(key)
+    key = copy.deepcopy(currentKey)
+    root.after(TICK_TIME,gameLoop)
+
+
+#>>キー監視>>
+currentKey = []#現在押されているキー
+key = []       #前回の処理から押されたキー
+prevKey = [] #前回の処理までに押されたキー
+
+#何かのキーが押されたときに呼び出される関数
+def press(e):
+    keysym = e.keysym
+    if(keysym not in currentKey):#始めて押されたならば
+        currentKey.append(keysym)
+        print(f"pressed:{keysym}")
+    if(keysym not in key):#前回の処理から始めて押されたならば
+        key.append(keysym)
+
+#何かのキーが離されたときに呼び出される関数
+def release(e):
+    keysym = e.keysym
+    currentKey.remove(keysym)
+    print(f"released:{keysym}")
+
+#キー入力をトリガーに関数を呼び出すよう設定する
+root.bind("<KeyPress>", press)
+root.bind("<KeyRelease>", release)
+
+
+#>>メインループ>>>
+gameLoop()
+print("start!")
+root.mainloop()
+```
+
+このプログラムでは、**押しているキーがリスト**`key`**に格納されています**。そのため、配列の中身をチェックすることでキーボード入力を判定します。
+
+このプログラムをもとにして、改造を進めましょう。
+
+## スペースキーが押されたか調べる
+
+`50行目`の`gameloop`内に、スペースキーが押されたか判定するプログラムを作成しましょう。
+
+リストの中に目当てのものが含まれているかを調べるには、`in`を用います。
+
+```python{caption="リストの中身を調べる"}
+# もしリストの中にキーワードがあれば
+if キーワード in リスト:
+```
+
+これを使って、以下のように判定できます。
+
+```python{.numberLines startFrom=47 caption="game01.py（抜粋）"}
+#>>ゲームのメインループ関数>>
+def gameLoop():
+    global key,currentKey,prevKey
+    
+    if("space" in key):
+      print("スペースキーが押された！")
+    
+    prevKey = copy.deepcopy(key)
+    key = copy.deepcopy(currentKey)
+    root.after(TICK_TIME,gameLoop)
+```
+
+実行してスペースキーを押してみてください。スペースキーを**一度押しただけで数回コメントが出力される**ことがあると思います。
+
+---
+
+これを防ぐには、以下のように、少し前のキーボードの状態も考慮する必要があります。
+
+リスト`prevKey`には、**前回のループのときに押されたキー**（少し前に押されていたキー）が格納されています。
+
+```python{caption="押された瞬間だけ判定する方法"}
+# もしスペースキーが押されたなら
+if(("space" in key) and ("space" not in prevKey)):
+```
+
+まず、**①**`"space" in key`の部分で**現在の入力（今押されているか）の確認**を行います。
+
+そして、**②**`"space" not in prevKey`の部分で**前回の入力(前は押されていなかったか)を確認**します。
+
+**③**両方の条件を満たすとき、プレイヤーは**今回新たにスペースキーを押した**、ということになります。
+
+
+<div class="note type-tips">
+
+**判定の使い分け**
+
+ゲームにおけるキーボード入力には、**連続入力（＝長押し）を受け付ける場合と受け付けない場合があります**。ここでは、キャラクターの移動とメニュー操作を例に説明します。
+
+<br>
+
+
+#### 1: キャラクターの移動
+
+- **例:** ゲーム中に、キャラクターを前に移動させたいとき、プレイヤーは「W」キーを押し続けます。
+- **求める動作:** 「W」キーを押し続けると、キャラクターがどんどん前に移動します。つまり、長押しを受け付けたいということです。
+
+
+**処理の流れ**
+
+1. プレイヤーが「W」キーを押したとき、キャラクターは移動を始めます。
+2. プレイヤーが「W」キーを押し続けている限り、キャラクターはそのまま移動し続けます。
+3. プレイヤーが「W」キーを離したら、キャラクターの移動を止めます。
+
+<br>
+
+
+#### 2: メニュー操作
+
+- **例:** メニュー画面で「Space」キーを使って決定をしたいとき、プレイヤーが「Space」キーを押し続けると、メニューが毎回選択されてしまいます。
+- **求める動作:** 「Space」キーは一度だけ押されたときだけ決定をするようにしたい。つまり、長押しは受け付けないということです。
+
+
+**処理の流れ**
+
+1. プレイヤーが「Space」キーを押したとき、決定の処理を行います。
+2. しかし、次に「Space」キーが押されるまでは、再度決定処理が行われないようにします。これにより、連続してメニューが選択されることを防ぎます。
+
+
+#### まとめ
+
+- キャラクター移動の場合:
+
+連続入力を**許可します**。キーボードを長押しすると、キャラクターが**移動し続ける**ようにします。
+
+- メニュー操作の場合:
+
+連続入力を**許可しません**。キーボードを長押ししても、**一度しか処理を行いません**。
+
+---
+
+このように、場面によってキーボード入力の扱いが異なることを理解し、連続入力が必要なケースとそうでないケースを明確に分けて考えることが大切です！
+
+</div>
 
 
