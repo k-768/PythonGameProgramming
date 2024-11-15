@@ -86,25 +86,16 @@ var:
 
 ## Pythonでゲーム作り編
 
-###  [魚を釣るシステムを作ろう](basic01.html)
+###  [魚を釣るシステムを作ろう](advance01.html)
 
--  [abc](basic01.html#このテキストで学べる事) 
--  [def](basic01.html#Pythonについて) 
--  [ghi](basic01.html#環境設定) 
--  [jkl](basic01.html#helloworld!!) 
-
-###  [魚を釣るアニメーションを実装しよう](basic02.html) 
-
--  [abc](basic01.html#このテキストで学べる事) 
--  [def](basic01.html#Pythonについて) 
--  [ghi](basic01.html#環境設定) 
--  [jkl](basic01.html#helloworld!!)
-
-###  [魚を釣るミニゲームを完成させよう](basic02.html) 
+###  [魚を釣るアニメーションを実装しよう](advance02.html) 
 
 
-###  [マップを表示しよう](basic02.html) 
+###  [魚を釣るミニゲームを完成させよう](advance03.html) 
 
-###  [マップを移動しよう](basic02.html) 
 
-###  [組み合わせてゲームを完成させよう](basic02.html) 
+###  [マップを表示しよう](advance04.html) 
+
+###  [マップを移動しよう](advance05.html) 
+
+###  [組み合わせてゲームを完成させよう](advance06.html) 

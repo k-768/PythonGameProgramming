@@ -11,10 +11,13 @@ var:
 
 ここからは実際に**ゲームを製作していきましょう！**
 
+<br>
 
 ## もくじ
 - [環境を整える](advance01.html#環境を整える)
 - [ゲーム画面を表示する](advance01.html#ゲーム画面を表示する)
+
+<br>
 
 ## 環境を整える
 
@@ -48,8 +51,9 @@ var:
 
 エクスプローラを右クリックして、`game01.py`ファイルを作成
 
----
 
+<br>
+<br>
 
 ## ゲーム画面を表示する
 
@@ -191,6 +195,9 @@ canvas.create_image(x座標,y座標,image = 画像を格納した変数 ,tag=画
 
 - **anchor**は、**指定したx座標、y座標を画像のどこに合わせるか**というものです。`tk.NW`はN=北、W=西という意味で北西、つまり**画像の左上を基準にしてください**という意味になります。
 
+<br>
+<br>
+
 
 ### キーボード入力を判定する
 
@@ -288,6 +295,9 @@ root.mainloop()
 
 このプログラムをもとにして、改造を進めましょう。
 
+<br>
+<br>
+
 ## スペースキーが押されたか調べる
 
 `50行目`の`gameloop`内に、スペースキーが押されたか判定するプログラムを作成しましょう。
@@ -299,6 +309,8 @@ root.mainloop()
 if キーワード in リスト:
 ```
 
+<br>
+
 これを使って、以下のように判定できます。
 
 ```python{.numberLines startFrom=47 caption="game01.py（抜粋）"}
@@ -307,7 +319,7 @@ def gameLoop():
     global key,currentKey,prevKey
     
     if("space" in key):
-      print("スペースキーが押された！")
+        print("スペースキーが押された！")
     
     prevKey = copy.deepcopy(key)
     key = copy.deepcopy(currentKey)
@@ -333,6 +345,7 @@ if(("space" in key) and ("space" not in prevKey)):
 
 **③**両方の条件を満たすとき、プレイヤーは**今回新たにスペースキーを押した**、ということになります。
 
+<br><br>
 
 <div class="note type-tips">
 
@@ -386,6 +399,8 @@ if(("space" in key) and ("space" not in prevKey)):
 
 </div>
 
+<br>
+<br>
 
 ## 釣りをする
 
@@ -396,6 +411,8 @@ if(("space" in key) and ("space" not in prevKey)):
 ```python{}
 import random
 ```
+
+<br>
 
 次に、魚のデータを関数`gameLoop`の**前に追加**してください。
 
@@ -413,6 +430,8 @@ FISH_LIST.append(HIGH_RARE_FISH)
 FISH_WEIGHT = [75,20,5] #排出率
 ```
 
+<br>
+
 スペースキーが押されたときに、ランダムで魚を選択するようにしましょう。
 
 
@@ -422,6 +441,6 @@ def gameLoop():
     global key,currentKey,prevKey
     
     if("space" in key):
-      selectedFish = random.choice(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0])
-      print(selectedFish)
+        selectedFish = random.choice(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0])
+        print(selectedFish)
 ```
