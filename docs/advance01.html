@@ -61,6 +61,8 @@ class="toc-section-number">4.2</span> キーボード入力を判定する</a></
 id="toc-スペースキーが押されたか調べる"><span
 class="toc-section-number">5</span>
 スペースキーが押されたか調べる</a></li>
+<li><a href="#釣りをする" id="toc-釣りをする"><span
+class="toc-section-number">6</span> 釣りをする</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -400,6 +402,37 @@ class="toc-section-number">5</span>
       <hr />
       <p>このように、場面によってキーボード入力の扱いが異なることを理解し、連続入力が必要なケースとそうでないケースを明確に分けて考えることが大切です！</p>
       </div>
+      <h1 data-number="6" id="釣りをする"><span
+      class="header-section-number">6</span> 釣りをする</h1>
+      <p><a
+      href="basic06.html">基礎編6</a>で作った<code>randomfish.py</code>を組み合わせて、スペースキーを押したときに釣りができるようにしましょう。</p>
+      <p>まず、<code>random</code>モジュールをインポートしてください。</p>
+      <div class="sourceCode" id="cb12"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span></code></pre></div>
+      <p>次に、魚のデータを関数<code>gameLoop</code>の<strong>前に追加</strong>してください。</p>
+      <div class="sourceCode" id="cb13" data-startFrom="47"
+      data-caption="game01.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 46;"><span id="cb13-47"><a href="#cb13-47"></a><span class="co">#&gt;&gt;魚のデータ&gt;&gt;</span></span>
+<span id="cb13-48"><a href="#cb13-48"></a>LOW_RARE_FISH <span class="op">=</span> [<span class="st">&quot;アジ&quot;</span>,<span class="st">&quot;サバ&quot;</span>,<span class="st">&quot;イワシ&quot;</span>]</span>
+<span id="cb13-49"><a href="#cb13-49"></a>MIDDLE_RARE_FISH <span class="op">=</span> [<span class="st">&quot;カワハギ&quot;</span>,<span class="st">&quot;タチウオ&quot;</span>,<span class="st">&quot;メバル&quot;</span>]</span>
+<span id="cb13-50"><a href="#cb13-50"></a>HIGH_RARE_FISH <span class="op">=</span> [<span class="st">&quot;タイ&quot;</span>,<span class="st">&quot;スズキ&quot;</span>,<span class="st">&quot;カサゴ&quot;</span>]</span>
+<span id="cb13-51"><a href="#cb13-51"></a></span>
+<span id="cb13-52"><a href="#cb13-52"></a>FISH_LIST <span class="op">=</span> []</span>
+<span id="cb13-53"><a href="#cb13-53"></a>FISH_LIST.append(LOW_RARE_FISH)</span>
+<span id="cb13-54"><a href="#cb13-54"></a>FISH_LIST.append(MIDDLE_RARE_FISH)</span>
+<span id="cb13-55"><a href="#cb13-55"></a>FISH_LIST.append(HIGH_RARE_FISH)</span>
+<span id="cb13-56"><a href="#cb13-56"></a></span>
+<span id="cb13-57"><a href="#cb13-57"></a>FISH_WEIGHT <span class="op">=</span> [<span class="dv">75</span>,<span class="dv">20</span>,<span class="dv">5</span>] <span class="co">#排出率</span></span></code></pre></div>
+      <p>スペースキーが押されたときに、ランダムで魚を選択するようにしましょう。</p>
+      <div class="sourceCode" id="cb14" data-startFrom="60"
+      data-caption="game01.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 59;"><span id="cb14-60"><a href="#cb14-60"></a><span class="co">#&gt;&gt;ゲームのメインループ関数&gt;&gt;</span></span>
+<span id="cb14-61"><a href="#cb14-61"></a><span class="kw">def</span> gameLoop():</span>
+<span id="cb14-62"><a href="#cb14-62"></a>    <span class="kw">global</span> key,currentKey,prevKey</span>
+<span id="cb14-63"><a href="#cb14-63"></a>    </span>
+<span id="cb14-64"><a href="#cb14-64"></a>    <span class="cf">if</span>(<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key):</span>
+<span id="cb14-65"><a href="#cb14-65"></a>      selectedFish <span class="op">=</span> random.choice(random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights<span class="op">=</span>FISH_WEIGHT)[<span class="dv">0</span>])</span>
+<span id="cb14-66"><a href="#cb14-66"></a>      <span class="bu">print</span>(selectedFish)</span></code></pre></div>
       <!-- ---------------------------------------- -->
     </main>
 

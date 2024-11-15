@@ -387,3 +387,41 @@ if(("space" in key) and ("space" not in prevKey)):
 </div>
 
 
+## 釣りをする
+
+[基礎編6](basic06.html)で作った`randomfish.py`を組み合わせて、スペースキーを押したときに釣りができるようにしましょう。
+
+まず、`random`モジュールをインポートしてください。
+
+```python{}
+import random
+```
+
+次に、魚のデータを関数`gameLoop`の**前に追加**してください。
+
+```python{.numberLines startFrom=47 caption="game01.py（抜粋）"}
+#>>魚のデータ>>
+LOW_RARE_FISH = ["アジ","サバ","イワシ"]
+MIDDLE_RARE_FISH = ["カワハギ","タチウオ","メバル"]
+HIGH_RARE_FISH = ["タイ","スズキ","カサゴ"]
+
+FISH_LIST = []
+FISH_LIST.append(LOW_RARE_FISH)
+FISH_LIST.append(MIDDLE_RARE_FISH)
+FISH_LIST.append(HIGH_RARE_FISH)
+
+FISH_WEIGHT = [75,20,5] #排出率
+```
+
+スペースキーが押されたときに、ランダムで魚を選択するようにしましょう。
+
+
+```python{.numberLines startFrom=60 caption="game01.py（抜粋）"}
+#>>ゲームのメインループ関数>>
+def gameLoop():
+    global key,currentKey,prevKey
+    
+    if("space" in key):
+      selectedFish = random.choice(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0])
+      print(selectedFish)
+```
