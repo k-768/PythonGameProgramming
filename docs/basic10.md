@@ -1,10 +1,10 @@
 ---
 var:
-  header-title: "Pythonで釣りゲームを作ろう 基礎編10　tkinter(1) "
+  header-title: "Pythonで釣りゲームを作ろう 基礎編10　tkinter"
   header-date: "最終更新日：2024年11月05日（火）"
 ---
 
-# 基礎編10　tkinter (1) 
+# 基礎編10　tkinter
 
 グラフィック（見た目）は、ゲームにおいて非常な重要な部分です。
 今回は、Pythonを用いて画面を表示してみましょう。
