@@ -63,6 +63,8 @@ class="toc-section-number">5</span>
 スペースキーが押されたか調べる</a></li>
 <li><a href="#釣りをする" id="toc-釣りをする"><span
 class="toc-section-number">6</span> 釣りをする</a></li>
+<li><a href="#魚の重さや売値" id="toc-魚の重さや売値"><span
+class="toc-section-number">7</span> 魚の重さや売値</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -369,6 +371,10 @@ class="toc-section-number">6</span> 釣りをする</a></li>
       <h3 data-number="5.0.1" id="キャラクターの移動"><span
       class="header-section-number">5.0.1</span> 1:
       キャラクターの移動</h3>
+      <figure>
+      <img src="./figs/101/walk.gif" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
       <ul>
       <li><strong>例:</strong>
       ゲーム中に、キャラクターを前に移動させたいとき、プレイヤーは「W」キーを押し続けます。</li>
@@ -439,9 +445,84 @@ class="toc-section-number">6</span> 釣りをする</a></li>
 <span id="cb14-61"><a href="#cb14-61"></a><span class="kw">def</span> gameLoop():</span>
 <span id="cb14-62"><a href="#cb14-62"></a>    <span class="kw">global</span> key,currentKey,prevKey</span>
 <span id="cb14-63"><a href="#cb14-63"></a>    </span>
-<span id="cb14-64"><a href="#cb14-64"></a>    <span class="cf">if</span>(<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key):</span>
+<span id="cb14-64"><a href="#cb14-64"></a>    <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
 <span id="cb14-65"><a href="#cb14-65"></a>        selectedFish <span class="op">=</span> random.choice(random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights<span class="op">=</span>FISH_WEIGHT)[<span class="dv">0</span>])</span>
 <span id="cb14-66"><a href="#cb14-66"></a>        <span class="bu">print</span>(selectedFish)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>pressed:space
+アジ
+released:space
+pressed:space
+イワシ
+released:space</code></pre>
+      <p>これで、<strong>スペースキーを押すとランダムな魚が釣れる</strong>プログラムが完成しました！
+      ここからは<strong>魚の重さや売値</strong>の概念を追加したり、<strong>リザルト画面</strong>を表示させたり、<strong>キャラクターにアニメーション</strong>をさせたりと、ゲームのクオリティを上げる作業に入っていきましょう。</p>
+      <h1 data-number="7" id="魚の重さや売値"><span
+      class="header-section-number">7</span> 魚の重さや売値</h1>
+      <p>「同じ種類の魚でも、大物が釣れたりすると面白いかも？」と、いうことで、魚のデータを辞書型に変更して、平均の重さやkg単価といったデータを持たせました。</p>
+      <p>魚のデータを<strong>更新</strong>してください。</p>
+      <div class="sourceCode" id="cb16" data-startFrom="47"
+      data-caption="game01.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 46;"><span id="cb16-47"><a href="#cb16-47"></a><span class="co">#&gt;&gt;魚のデータ&gt;&gt;</span></span>
+<span id="cb16-48"><a href="#cb16-48"></a>LOW_RARE_FISH <span class="op">=</span> [</span>
+<span id="cb16-49"><a href="#cb16-49"></a>        {</span>
+<span id="cb16-50"><a href="#cb16-50"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;イワシ&quot;</span>,</span>
+<span id="cb16-51"><a href="#cb16-51"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.12</span>, <span class="co">#平均重量</span></span>
+<span id="cb16-52"><a href="#cb16-52"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">60</span> <span class="co">#kg単価</span></span>
+<span id="cb16-53"><a href="#cb16-53"></a>        },</span>
+<span id="cb16-54"><a href="#cb16-54"></a>        {</span>
+<span id="cb16-55"><a href="#cb16-55"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;アジ&quot;</span>,</span>
+<span id="cb16-56"><a href="#cb16-56"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.17</span>,</span>
+<span id="cb16-57"><a href="#cb16-57"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">100</span></span>
+<span id="cb16-58"><a href="#cb16-58"></a>        },</span>
+<span id="cb16-59"><a href="#cb16-59"></a>        {</span>
+<span id="cb16-60"><a href="#cb16-60"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;サバ&quot;</span>,</span>
+<span id="cb16-61"><a href="#cb16-61"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.35</span>,</span>
+<span id="cb16-62"><a href="#cb16-62"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">50</span></span>
+<span id="cb16-63"><a href="#cb16-63"></a>        },</span>
+<span id="cb16-64"><a href="#cb16-64"></a>    ]</span>
+<span id="cb16-65"><a href="#cb16-65"></a>MIDDLE_RARE_FISH <span class="op">=</span> [</span>
+<span id="cb16-66"><a href="#cb16-66"></a>        {</span>
+<span id="cb16-67"><a href="#cb16-67"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;タチウオ&quot;</span>,</span>
+<span id="cb16-68"><a href="#cb16-68"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="dv">3</span>,</span>
+<span id="cb16-69"><a href="#cb16-69"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">12</span></span>
+<span id="cb16-70"><a href="#cb16-70"></a>        },</span>
+<span id="cb16-71"><a href="#cb16-71"></a>        {</span>
+<span id="cb16-72"><a href="#cb16-72"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;カワハギ&quot;</span>,</span>
+<span id="cb16-73"><a href="#cb16-73"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.4</span>,</span>
+<span id="cb16-74"><a href="#cb16-74"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">80</span></span>
+<span id="cb16-75"><a href="#cb16-75"></a>        },</span>
+<span id="cb16-76"><a href="#cb16-76"></a>        {</span>
+<span id="cb16-77"><a href="#cb16-77"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;メバル&quot;</span>,</span>
+<span id="cb16-78"><a href="#cb16-78"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.43</span>,</span>
+<span id="cb16-79"><a href="#cb16-79"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">100</span></span>
+<span id="cb16-80"><a href="#cb16-80"></a>        },</span>
+<span id="cb16-81"><a href="#cb16-81"></a>    ]</span>
+<span id="cb16-82"><a href="#cb16-82"></a>HIGH_RARE_FISH <span class="op">=</span> [</span>
+<span id="cb16-83"><a href="#cb16-83"></a>        {</span>
+<span id="cb16-84"><a href="#cb16-84"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;タイ&quot;</span>,</span>
+<span id="cb16-85"><a href="#cb16-85"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">5.4</span>,</span>
+<span id="cb16-86"><a href="#cb16-86"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">20</span></span>
+<span id="cb16-87"><a href="#cb16-87"></a>        },</span>
+<span id="cb16-88"><a href="#cb16-88"></a>        {</span>
+<span id="cb16-89"><a href="#cb16-89"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;スズキ&quot;</span>,</span>
+<span id="cb16-90"><a href="#cb16-90"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">5.5</span>,</span>
+<span id="cb16-91"><a href="#cb16-91"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">19</span></span>
+<span id="cb16-92"><a href="#cb16-92"></a>        },</span>
+<span id="cb16-93"><a href="#cb16-93"></a>        {</span>
+<span id="cb16-94"><a href="#cb16-94"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;カサゴ&quot;</span>,</span>
+<span id="cb16-95"><a href="#cb16-95"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">1.65</span>,</span>
+<span id="cb16-96"><a href="#cb16-96"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">65</span></span>
+<span id="cb16-97"><a href="#cb16-97"></a>        },</span>
+<span id="cb16-98"><a href="#cb16-98"></a>    ]</span>
+<span id="cb16-99"><a href="#cb16-99"></a></span>
+<span id="cb16-100"><a href="#cb16-100"></a>FISH_LIST <span class="op">=</span> []</span>
+<span id="cb16-101"><a href="#cb16-101"></a>FISH_LIST.append(LOW_RARE_FISH)</span>
+<span id="cb16-102"><a href="#cb16-102"></a>FISH_LIST.append(MIDDLE_RARE_FISH)</span>
+<span id="cb16-103"><a href="#cb16-103"></a>FISH_LIST.append(HIGH_RARE_FISH)</span>
+<span id="cb16-104"><a href="#cb16-104"></a></span>
+<span id="cb16-105"><a href="#cb16-105"></a>FISH_WEIGHT <span class="op">=</span> [<span class="dv">75</span>,<span class="dv">20</span>,<span class="dv">5</span>] <span class="co">#排出率</span></span></code></pre></div>
       <!-- ---------------------------------------- -->
     </main>
 

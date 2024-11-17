@@ -358,6 +358,8 @@ if(("space" in key) and ("space" not in prevKey)):
 
 #### 1: キャラクターの移動
 
+![img](./figs/101/walk.gif)
+
 - **例:** ゲーム中に、キャラクターを前に移動させたいとき、プレイヤーは「W」キーを押し続けます。
 - **求める動作:** 「W」キーを押し続けると、キャラクターがどんどん前に移動します。つまり、長押しを受け付けたいということです。
 
@@ -440,7 +442,91 @@ FISH_WEIGHT = [75,20,5] #排出率
 def gameLoop():
     global key,currentKey,prevKey
     
-    if("space" in key):
+    if(("space" in key) and ("space" not in prevKey)):
         selectedFish = random.choice(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0])
         print(selectedFish)
+```
+
+
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+pressed:space
+アジ
+released:space
+pressed:space
+イワシ
+released:space
+```
+
+これで、**スペースキーを押すとランダムな魚が釣れる**プログラムが完成しました！
+ここからは**魚の重さや売値**の概念を追加したり、**リザルト画面**を表示させたり、**キャラクターにアニメーション**をさせたりと、ゲームのクオリティを上げる作業に入っていきましょう。
+
+
+## 魚の重さや売値
+
+「同じ種類の魚でも、大物が釣れたりすると面白いかも？」と、いうことで、魚のデータを辞書型に変更して、平均の重さやkg単価といったデータを持たせました。
+
+魚のデータを**更新**してください。
+
+```python{.numberLines startFrom=47 caption="game01.py（抜粋）"}
+#>>魚のデータ>>
+LOW_RARE_FISH = [
+        {
+        "name":"イワシ",
+        "aveWeight":0.12, #平均重量
+        "price":60 #kg単価
+        },
+        {
+        "name":"アジ",
+        "aveWeight":0.17,
+        "price":100
+        },
+        {
+        "name":"サバ",
+        "aveWeight":0.35,
+        "price":50
+        },
+    ]
+MIDDLE_RARE_FISH = [
+        {
+        "name":"タチウオ",
+        "aveWeight":3,
+        "price":12
+        },
+        {
+        "name":"カワハギ",
+        "aveWeight":0.4,
+        "price":80
+        },
+        {
+        "name":"メバル",
+        "aveWeight":0.43,
+        "price":100
+        },
+    ]
+HIGH_RARE_FISH = [
+        {
+        "name":"タイ",
+        "aveWeight":5.4,
+        "price":20
+        },
+        {
+        "name":"スズキ",
+        "aveWeight":5.5,
+        "price":19
+        },
+        {
+        "name":"カサゴ",
+        "aveWeight":1.65,
+        "price":65
+        },
+    ]
+
+FISH_LIST = []
+FISH_LIST.append(LOW_RARE_FISH)
+FISH_LIST.append(MIDDLE_RARE_FISH)
+FISH_LIST.append(HIGH_RARE_FISH)
+
+FISH_WEIGHT = [75,20,5] #排出率
 ```
