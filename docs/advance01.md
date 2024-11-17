@@ -25,17 +25,17 @@ var:
 
 ファイル→ファイルを開くを選択
 
-![img](/docs/figs/101/openFolder.png)
+![img](./figs/101/openFolder.png)
 
 <br>
 
 `FishingGame`という名前で新しいフォルダを作成して開く
 
-![img](/docs/figs/101/NewFolder.png)
+![img](./figs/101/NewFolder.png)
 
 <br>
 
-![img](/docs/figs/101/MakeFolder.png)
+![img](./figs/101/MakeFolder.png)
 
 <br>
 
@@ -43,7 +43,7 @@ var:
 
 エクスプローラを右クリックして、`img`フォルダを作成
 
-![img](/docs/figs/101/ImgFolder.png)
+![img](./figs/101/ImgFolder.png)
 
 <br>
 
@@ -59,7 +59,7 @@ var:
 
 まずはtkinterを用いて、ゲーム画面を表示します。背景として、以下の画像を使用します。[こちらから画像をダウンロードしてください。](https://github.com/k-768/python_game/blob/master/img/fishing_map.png)
 
-![img](/docs/figs/101/fishing_map.png)
+![img](./figs/101/fishing_map.png)
 
 ファイルをダウンロードしたら、画像を先ほど作成した`img`フォルダの**中に移動してください**。
 
@@ -117,7 +117,7 @@ root.mainloop()
 
 実行すると、背景画像が表示されます。
 
-![img](/docs/figs/101/gameWindow.png)
+![img](./figs/101/gameWindow.png)
 
 
 ---
@@ -144,7 +144,7 @@ MAP_IMAGE = tk.PhotoImage(file = ファイルのパス)
 
 画像を読み込むには、画像の**パス**が必要になります。**パスとは、PC内の住所のようなもの**です。エクスプローラでは、画面の上部に表示されています。
 
-![img](/docs/figs/101/pass.png)
+![img](./figs/101/pass.png)
 
 
 <div class="note type-tips">
