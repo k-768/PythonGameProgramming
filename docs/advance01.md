@@ -463,7 +463,7 @@ released:space
 ここからは**魚の重さや売値**の概念を追加したり、**リザルト画面**を表示させたり、**キャラクターにアニメーション**をさせたりと、ゲームのクオリティを上げる作業に入っていきましょう。
 
 
-## 魚の重さや売値
+## 魚の重さや売値を決める
 
 「同じ種類の魚でも、大物が釣れたりすると面白いかも？」と、いうことで、魚のデータを辞書型に変更して、平均の重さやkg単価といったデータを持たせました。
 
@@ -529,4 +529,22 @@ FISH_LIST.append(MIDDLE_RARE_FISH)
 FISH_LIST.append(HIGH_RARE_FISH)
 
 FISH_WEIGHT = [75,20,5] #排出率
+```
+
+
+```python{.numberLines startFrom=107 caption="game01.py（抜粋）"}
+#>>ゲームのメインループ関数>>
+def gameLoop():
+    global key,currentKey,prevKey
+    
+    if(("space" in key) and ("space" not in prevKey)):
+        selectedFish = random.choice(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0])
+        #魚の重さを決定(ランダム 0.5~1.5)
+        fishWeight = selectedFish["aveWeight"]*random.uniform(0.5, 1.5)
+        fishWeight = round(fishWeight,2) #少数第3位で四捨五入
+        #重さから売却価格を決定
+        fishPrice = fishWeight * selectedFish["price"]
+        print(selectedFish["name"])
+        print(fishWeight)
+        print(fishPrice)
 ```

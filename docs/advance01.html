@@ -63,8 +63,9 @@ class="toc-section-number">5</span>
 スペースキーが押されたか調べる</a></li>
 <li><a href="#釣りをする" id="toc-釣りをする"><span
 class="toc-section-number">6</span> 釣りをする</a></li>
-<li><a href="#魚の重さや売値" id="toc-魚の重さや売値"><span
-class="toc-section-number">7</span> 魚の重さや売値</a></li>
+<li><a href="#魚の重さや売値を決める"
+id="toc-魚の重さや売値を決める"><span
+class="toc-section-number">7</span> 魚の重さや売値を決める</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -458,8 +459,8 @@ pressed:space
 released:space</code></pre>
       <p>これで、<strong>スペースキーを押すとランダムな魚が釣れる</strong>プログラムが完成しました！
       ここからは<strong>魚の重さや売値</strong>の概念を追加したり、<strong>リザルト画面</strong>を表示させたり、<strong>キャラクターにアニメーション</strong>をさせたりと、ゲームのクオリティを上げる作業に入っていきましょう。</p>
-      <h1 data-number="7" id="魚の重さや売値"><span
-      class="header-section-number">7</span> 魚の重さや売値</h1>
+      <h1 data-number="7" id="魚の重さや売値を決める"><span
+      class="header-section-number">7</span> 魚の重さや売値を決める</h1>
       <p>「同じ種類の魚でも、大物が釣れたりすると面白いかも？」と、いうことで、魚のデータを辞書型に変更して、平均の重さやkg単価といったデータを持たせました。</p>
       <p>魚のデータを<strong>更新</strong>してください。</p>
       <div class="sourceCode" id="cb16" data-startFrom="47"
@@ -523,6 +524,22 @@ released:space</code></pre>
 <span id="cb16-103"><a href="#cb16-103"></a>FISH_LIST.append(HIGH_RARE_FISH)</span>
 <span id="cb16-104"><a href="#cb16-104"></a></span>
 <span id="cb16-105"><a href="#cb16-105"></a>FISH_WEIGHT <span class="op">=</span> [<span class="dv">75</span>,<span class="dv">20</span>,<span class="dv">5</span>] <span class="co">#排出率</span></span></code></pre></div>
+      <div class="sourceCode" id="cb17" data-startFrom="107"
+      data-caption="game01.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 106;"><span id="cb17-107"><a href="#cb17-107"></a><span class="co">#&gt;&gt;ゲームのメインループ関数&gt;&gt;</span></span>
+<span id="cb17-108"><a href="#cb17-108"></a><span class="kw">def</span> gameLoop():</span>
+<span id="cb17-109"><a href="#cb17-109"></a>    <span class="kw">global</span> key,currentKey,prevKey</span>
+<span id="cb17-110"><a href="#cb17-110"></a>    </span>
+<span id="cb17-111"><a href="#cb17-111"></a>    <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
+<span id="cb17-112"><a href="#cb17-112"></a>        selectedFish <span class="op">=</span> random.choice(random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights<span class="op">=</span>FISH_WEIGHT)[<span class="dv">0</span>])</span>
+<span id="cb17-113"><a href="#cb17-113"></a>        <span class="co">#魚の重さを決定(ランダム 0.5~1.5)</span></span>
+<span id="cb17-114"><a href="#cb17-114"></a>        fishWeight <span class="op">=</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span>random.uniform(<span class="fl">0.5</span>, <span class="fl">1.5</span>)</span>
+<span id="cb17-115"><a href="#cb17-115"></a>        fishWeight <span class="op">=</span> <span class="bu">round</span>(fishWeight,<span class="dv">2</span>) <span class="co">#少数第3位で四捨五入</span></span>
+<span id="cb17-116"><a href="#cb17-116"></a>        <span class="co">#重さから売却価格を決定</span></span>
+<span id="cb17-117"><a href="#cb17-117"></a>        fishPrice <span class="op">=</span> fishWeight <span class="op">*</span> selectedFish[<span class="st">&quot;price&quot;</span>]</span>
+<span id="cb17-118"><a href="#cb17-118"></a>        <span class="bu">print</span>(selectedFish[<span class="st">&quot;name&quot;</span>])</span>
+<span id="cb17-119"><a href="#cb17-119"></a>        <span class="bu">print</span>(fishWeight)</span>
+<span id="cb17-120"><a href="#cb17-120"></a>        <span class="bu">print</span>(fishPrice)</span></code></pre></div>
       <!-- ---------------------------------------- -->
     </main>
 
