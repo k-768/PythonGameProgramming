@@ -105,7 +105,7 @@ VSCodeが立ち上がったら、設定を行います。
 
 日本語で表示されれば**成功です!!**
 
-![img](./figs/01/vscodeSuc.png)
+![img](./figs/01/vscodesuc.png)
 
 <br>
 
