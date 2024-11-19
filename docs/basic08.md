@@ -23,7 +23,7 @@ var:
 
 ```python{.numberLines caption="関数の構造"}
 def lv_up():
-  lv += 1
+  print("テレテレッテッテテー")
   print("レベルが上がった！！")
 ```
 
@@ -36,7 +36,7 @@ def lv_up():
 
 ```python{.numberLines caption="関数の実行"}
 def lv_up():
-  lv += 1
+  print("テレテレッテッテテー")
   print("レベルが上がった！！")
 lv_up()
 ```
@@ -44,6 +44,7 @@ lv_up()
 **<i class="fa-solid fa-terminal"></i> 実行結果**
 
 ```
+テレテレッテッテテー
 レベルが上がった！！
 ```
 
