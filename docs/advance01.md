@@ -531,6 +531,11 @@ FISH_LIST.append(HIGH_RARE_FISH)
 FISH_WEIGHT = [75,20,5] #排出率
 ```
 
+データを更新してプログラムを実行してみると、ランダムな辞書型が出力されます。
+`print(selectedFish["name"])`で**名前**を、`print(selectedFish["aveWeight"])`
+で平均の重さを取得できます。以下のようにすれば、重さや売価もランダムになります。
+
+
 
 ```python{.numberLines startFrom=107 caption="game01.py（抜粋）"}
 #>>ゲームのメインループ関数>>
@@ -548,3 +553,4 @@ def gameLoop():
         print(fishWeight)
         print(fishPrice)
 ```
+
