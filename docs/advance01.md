@@ -422,7 +422,7 @@ import random
 #>>魚のデータ>>
 LOW_RARE_FISH = ["アジ","サバ","イワシ"]
 MIDDLE_RARE_FISH = ["カワハギ","タチウオ","メバル"]
-HIGH_RARE_FISH = ["タイ","スズキ","カサゴ"]
+HIGH_RARE_FISH = ["タイ","スズキ","サケ"]
 
 FISH_LIST = []
 FISH_LIST.append(LOW_RARE_FISH)
@@ -517,7 +517,7 @@ HIGH_RARE_FISH = [
         "price":19
         },
         {
-        "name":"カサゴ",
+        "name":"サケ",
         "aveWeight":1.65,
         "price":65
         },
@@ -736,7 +736,7 @@ HIGH_RARE_FISH = [
         "price":19
         },
         {
-        "name":"カサゴ",
+        "name":"サケ",
         "aveWeight":1.65,
         "price":65
         },
