@@ -71,11 +71,11 @@ var:
 新しいpythonファイル`game03.py`を作成してください。[ここから](https://github.com/k-768/PythonGameProgramming/blob/main/programs/game03.py
 )プログラムをコピー＆ペーストして実行してみてください。**キャラクターが表示されているはずです**。このプログラムの要点について解説します。
 
-`40行目`からキャラクタに関する処理が記述されています。変数`charaX`、`charaY`がキャラクタの座標です。`58行目`では、画像を辞書型で読み込んでいます。
+`40行目`からキャラクタに関する処理が記述されています。変数`charaX`、`charaY`がキャラクタの座標です。`49行目`では、画像を辞書型で読み込んでいます。
 
-そして、`71行目`からはキャラクタの画像を配置する関数が定義されています。
+そして、`61行目`からはキャラクタの画像を配置する関数が定義されています。
 
-```python{.numberLines startFrom=70 caption="game03.py（抜粋）"}
+```python{.numberLines startFrom=60 caption="game03.py（抜粋）"}
 #キャラクターを再描写する関数  
 def setChara(x,y,state):
     """
@@ -96,7 +96,30 @@ def setChara(x,y,state):
 
 ![img](./figs/102/fishing_1.svg)
 
-まず、
+まず、現在どの状態にいるのかを示すために、変数`flag`を用意します。
+
+flag | 意味
+defalt | 待機中
+wait | 釣り中
+hit | ウキが沈む
+success | 釣り成功
+result | 釣り結果表示
+
+
+<br>
+
+今回は、この`flag`の中身を確認することでどの状態にいるのか判定できます。また、状態を遷移する際には`flag`の中身も忘れずに変更しなければいけません。
+
+```python{.numberLines startFrom=1 caption="flagによる判定"}
+if flag == "defalt": #待機中のとき
+    待機中の処理を記述
+    if(("space" in key) and ("space" not in prevKey)):
+        待機中にスペースキーが押されたときの処理（釣りを開始する）
+        flag = "wait"
+
+if (flag == "wait"): #魚釣り中のとき
+    魚釣り中の処理を記述
+```
 
 ## 釣りの失敗を実装する
 
