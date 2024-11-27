@@ -68,6 +68,9 @@ id="toc-魚の重さや売値を決める"><span
 class="toc-section-number">7</span> 魚の重さや売値を決める</a></li>
 <li><a href="#大物を判定する" id="toc-大物を判定する"><span
 class="toc-section-number">8</span> 大物を判定する</a></li>
+<li><a href="#結果表示ウィンドウをつくる"
+id="toc-結果表示ウィンドウをつくる"><span
+class="toc-section-number">9</span> 結果表示ウィンドウをつくる</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -627,191 +630,118 @@ released:space</code></pre>
       data-caption="答え"><pre
       class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 106;"><span id="cb21-107"><a href="#cb21-107"></a>    <span class="bu">print</span>(<span class="bu">str</span>(fishWeight)<span class="op">+</span><span class="st">&quot;kgの&quot;</span><span class="op">+</span>name<span class="op">+</span><span class="st">&quot;を釣り上げた!&quot;</span>)</span>
 <span id="cb21-108"><a href="#cb21-108"></a>    <span class="bu">print</span>(<span class="bu">str</span>(fishPrice)<span class="op">+</span><span class="st">&quot;Gで売れそうだ!&quot;</span>)</span></code></pre></div>
+      <p>ここまでのプログラム全体は<a
+      href="https://github.com/k-768/PythonGameProgramming/blob/main/programs/game01.py">ここから</a>確認できます。</p>
       <hr />
-      <p>これで今回は完成です。最後にプログラムの全体を提示しておきます。
-      今後のために、釣りの結果表示は別の関数に分けてあります。</p>
-      <div class="sourceCode" id="cb22" data-startFrom="1"
-      data-caption="game01.py（完成版）"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="im">import</span> copy</span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="im">import</span> os</span>
-<span id="cb22-3"><a href="#cb22-3"></a><span class="im">import</span> random</span>
-<span id="cb22-4"><a href="#cb22-4"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
-<span id="cb22-5"><a href="#cb22-5"></a></span>
-<span id="cb22-6"><a href="#cb22-6"></a></span>
-<span id="cb22-7"><a href="#cb22-7"></a><span class="co">#&gt;&gt;ディレクトリ&gt;&gt;</span></span>
-<span id="cb22-8"><a href="#cb22-8"></a>cwd <span class="op">=</span> os.getcwd()</span>
-<span id="cb22-9"><a href="#cb22-9"></a></span>
-<span id="cb22-10"><a href="#cb22-10"></a></span>
-<span id="cb22-11"><a href="#cb22-11"></a><span class="co">#&gt;&gt;マップ設定&gt;&gt;</span></span>
-<span id="cb22-12"><a href="#cb22-12"></a>MAP_SIZE_X <span class="op">=</span> <span class="dv">384</span>  <span class="co">#マップ画像のxピクセル数</span></span>
-<span id="cb22-13"><a href="#cb22-13"></a>MAP_SIZE_Y <span class="op">=</span> <span class="dv">384</span>  <span class="co">#マップ画像のyピクセル数</span></span>
-<span id="cb22-14"><a href="#cb22-14"></a></span>
-<span id="cb22-15"><a href="#cb22-15"></a>MAGNIFICATION_RATE <span class="op">=</span> <span class="dv">2</span> <span class="co"># 拡大率</span></span>
-<span id="cb22-16"><a href="#cb22-16"></a></span>
-<span id="cb22-17"><a href="#cb22-17"></a></span>
-<span id="cb22-18"><a href="#cb22-18"></a><span class="co">#&gt;&gt;ウィンドウ、キャンバス&gt;&gt;</span></span>
-<span id="cb22-19"><a href="#cb22-19"></a>CANVAS_WIDTH <span class="op">=</span> MAP_SIZE_X <span class="op">*</span> MAGNIFICATION_RATE <span class="co">#キャンバス幅</span></span>
-<span id="cb22-20"><a href="#cb22-20"></a>CANVAS_HEIGHT <span class="op">=</span> MAP_SIZE_Y <span class="op">*</span> MAGNIFICATION_RATE <span class="co">#キャンバス高さ</span></span>
-<span id="cb22-21"><a href="#cb22-21"></a>MARGINE_X <span class="op">=</span> <span class="dv">2</span> <span class="co">#マージン</span></span>
-<span id="cb22-22"><a href="#cb22-22"></a>MARGINE_Y <span class="op">=</span> <span class="dv">2</span> <span class="co">#マージン</span></span>
-<span id="cb22-23"><a href="#cb22-23"></a>CANVAS_SIZE <span class="op">=</span> <span class="ss">f&quot;</span><span class="sc">{</span>CANVAS_WIDTH<span class="op">+</span>MARGINE_X<span class="sc">}</span><span class="ss">x</span><span class="sc">{</span>CANVAS_HEIGHT<span class="op">+</span>MARGINE_Y<span class="sc">}</span><span class="ss">&quot;</span><span class="co">#キャンバスサイズ</span></span>
-<span id="cb22-24"><a href="#cb22-24"></a></span>
-<span id="cb22-25"><a href="#cb22-25"></a><span class="co">#ウィンドウ設置</span></span>
-<span id="cb22-26"><a href="#cb22-26"></a>root <span class="op">=</span> tk.Tk()</span>
-<span id="cb22-27"><a href="#cb22-27"></a>root.title(<span class="st">&quot;game01&quot;</span>)</span>
-<span id="cb22-28"><a href="#cb22-28"></a>root.geometry(CANVAS_SIZE)</span>
-<span id="cb22-29"><a href="#cb22-29"></a></span>
-<span id="cb22-30"><a href="#cb22-30"></a><span class="co">#キャンバス設置</span></span>
-<span id="cb22-31"><a href="#cb22-31"></a>canvas <span class="op">=</span> tk.Canvas(root,width <span class="op">=</span> CANVAS_WIDTH,height <span class="op">=</span> CANVAS_HEIGHT,bg <span class="op">=</span> <span class="st">&quot;skyblue&quot;</span>)</span>
-<span id="cb22-32"><a href="#cb22-32"></a>canvas.pack()</span>
-<span id="cb22-33"><a href="#cb22-33"></a></span>
-<span id="cb22-34"><a href="#cb22-34"></a></span>
-<span id="cb22-35"><a href="#cb22-35"></a></span>
-<span id="cb22-36"><a href="#cb22-36"></a><span class="co">#マップ画像</span></span>
-<span id="cb22-37"><a href="#cb22-37"></a>MAP_IMAGE <span class="op">=</span> tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/fishing_map.png&quot;</span>)</span>
-<span id="cb22-38"><a href="#cb22-38"></a>MAP_BIG_IMAGE <span class="op">=</span> MAP_IMAGE.zoom(MAGNIFICATION_RATE,MAGNIFICATION_RATE)</span>
-<span id="cb22-39"><a href="#cb22-39"></a></span>
-<span id="cb22-40"><a href="#cb22-40"></a><span class="co">#ゲームの基本となる1ティック時間(ms)</span></span>
-<span id="cb22-41"><a href="#cb22-41"></a>TICK_TIME <span class="op">=</span> <span class="dv">50</span>  </span>
-<span id="cb22-42"><a href="#cb22-42"></a></span>
-<span id="cb22-43"><a href="#cb22-43"></a><span class="co">#&gt;&gt;魚&gt;&gt;</span></span>
-<span id="cb22-44"><a href="#cb22-44"></a>fishFlag <span class="op">=</span> <span class="va">False</span> <span class="co">#釣り可能かどうか</span></span>
-<span id="cb22-45"><a href="#cb22-45"></a></span>
-<span id="cb22-46"><a href="#cb22-46"></a>LOW_RARE_FISH <span class="op">=</span> [</span>
-<span id="cb22-47"><a href="#cb22-47"></a>        {</span>
-<span id="cb22-48"><a href="#cb22-48"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;イワシ&quot;</span>,</span>
-<span id="cb22-49"><a href="#cb22-49"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.12</span>, <span class="co">#平均重量</span></span>
-<span id="cb22-50"><a href="#cb22-50"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">60</span> <span class="co">#kg単価</span></span>
-<span id="cb22-51"><a href="#cb22-51"></a>        },</span>
-<span id="cb22-52"><a href="#cb22-52"></a>        {</span>
-<span id="cb22-53"><a href="#cb22-53"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;アジ&quot;</span>,</span>
-<span id="cb22-54"><a href="#cb22-54"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.17</span>,</span>
-<span id="cb22-55"><a href="#cb22-55"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">100</span></span>
-<span id="cb22-56"><a href="#cb22-56"></a>        },</span>
-<span id="cb22-57"><a href="#cb22-57"></a>        {</span>
-<span id="cb22-58"><a href="#cb22-58"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;サバ&quot;</span>,</span>
-<span id="cb22-59"><a href="#cb22-59"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.35</span>,</span>
-<span id="cb22-60"><a href="#cb22-60"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">50</span></span>
-<span id="cb22-61"><a href="#cb22-61"></a>        },</span>
-<span id="cb22-62"><a href="#cb22-62"></a>    ]</span>
-<span id="cb22-63"><a href="#cb22-63"></a>MIDDLE_RARE_FISH <span class="op">=</span> [</span>
-<span id="cb22-64"><a href="#cb22-64"></a>        {</span>
-<span id="cb22-65"><a href="#cb22-65"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;タチウオ&quot;</span>,</span>
-<span id="cb22-66"><a href="#cb22-66"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="dv">3</span>,</span>
-<span id="cb22-67"><a href="#cb22-67"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">12</span></span>
-<span id="cb22-68"><a href="#cb22-68"></a>        },</span>
-<span id="cb22-69"><a href="#cb22-69"></a>        {</span>
-<span id="cb22-70"><a href="#cb22-70"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;カワハギ&quot;</span>,</span>
-<span id="cb22-71"><a href="#cb22-71"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.4</span>,</span>
-<span id="cb22-72"><a href="#cb22-72"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">80</span></span>
-<span id="cb22-73"><a href="#cb22-73"></a>        },</span>
-<span id="cb22-74"><a href="#cb22-74"></a>        {</span>
-<span id="cb22-75"><a href="#cb22-75"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;メバル&quot;</span>,</span>
-<span id="cb22-76"><a href="#cb22-76"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.43</span>,</span>
-<span id="cb22-77"><a href="#cb22-77"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">100</span></span>
-<span id="cb22-78"><a href="#cb22-78"></a>        },</span>
-<span id="cb22-79"><a href="#cb22-79"></a>    ]</span>
-<span id="cb22-80"><a href="#cb22-80"></a>HIGH_RARE_FISH <span class="op">=</span> [</span>
-<span id="cb22-81"><a href="#cb22-81"></a>        {</span>
-<span id="cb22-82"><a href="#cb22-82"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;タイ&quot;</span>,</span>
-<span id="cb22-83"><a href="#cb22-83"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">5.4</span>,</span>
-<span id="cb22-84"><a href="#cb22-84"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">20</span></span>
-<span id="cb22-85"><a href="#cb22-85"></a>        },</span>
-<span id="cb22-86"><a href="#cb22-86"></a>        {</span>
-<span id="cb22-87"><a href="#cb22-87"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;スズキ&quot;</span>,</span>
-<span id="cb22-88"><a href="#cb22-88"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">5.5</span>,</span>
-<span id="cb22-89"><a href="#cb22-89"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">19</span></span>
-<span id="cb22-90"><a href="#cb22-90"></a>        },</span>
-<span id="cb22-91"><a href="#cb22-91"></a>        {</span>
-<span id="cb22-92"><a href="#cb22-92"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;サケ&quot;</span>,</span>
-<span id="cb22-93"><a href="#cb22-93"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">1.65</span>,</span>
-<span id="cb22-94"><a href="#cb22-94"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">65</span></span>
-<span id="cb22-95"><a href="#cb22-95"></a>        },</span>
-<span id="cb22-96"><a href="#cb22-96"></a>    ]</span>
-<span id="cb22-97"><a href="#cb22-97"></a></span>
-<span id="cb22-98"><a href="#cb22-98"></a>FISH_LIST <span class="op">=</span> []</span>
-<span id="cb22-99"><a href="#cb22-99"></a>FISH_LIST.append(LOW_RARE_FISH)</span>
-<span id="cb22-100"><a href="#cb22-100"></a>FISH_LIST.append(MIDDLE_RARE_FISH)</span>
-<span id="cb22-101"><a href="#cb22-101"></a>FISH_LIST.append(HIGH_RARE_FISH)</span>
-<span id="cb22-102"><a href="#cb22-102"></a></span>
-<span id="cb22-103"><a href="#cb22-103"></a>FISH_WEIGHT <span class="op">=</span> [<span class="dv">75</span>,<span class="dv">20</span>,<span class="dv">5</span>] <span class="co">#排出率</span></span>
-<span id="cb22-104"><a href="#cb22-104"></a></span>
-<span id="cb22-105"><a href="#cb22-105"></a></span>
-<span id="cb22-106"><a href="#cb22-106"></a><span class="co"># &gt;&gt;釣り結果表示&gt;&gt;</span></span>
-<span id="cb22-107"><a href="#cb22-107"></a><span class="kw">def</span> showResult(fish,rank,weight,price):</span>
-<span id="cb22-108"><a href="#cb22-108"></a>    <span class="cf">if</span>(rank <span class="op">==</span> <span class="st">&quot;silver&quot;</span>):</span>
-<span id="cb22-109"><a href="#cb22-109"></a>        name <span class="op">=</span> <span class="st">&quot;大物の&quot;</span><span class="op">+</span>fish</span>
-<span id="cb22-110"><a href="#cb22-110"></a>    <span class="cf">elif</span>(rank <span class="op">==</span> <span class="st">&quot;gold&quot;</span>):</span>
-<span id="cb22-111"><a href="#cb22-111"></a>        name <span class="op">=</span> <span class="st">&quot;超大物の&quot;</span><span class="op">+</span>fish</span>
-<span id="cb22-112"><a href="#cb22-112"></a>    <span class="cf">else</span>:</span>
-<span id="cb22-113"><a href="#cb22-113"></a>        name <span class="op">=</span> fish</span>
-<span id="cb22-114"><a href="#cb22-114"></a>    </span>
-<span id="cb22-115"><a href="#cb22-115"></a>    <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの&quot;</span><span class="op">+</span>name<span class="op">+</span><span class="st">&quot;を釣り上げた!&quot;</span>)</span>
-<span id="cb22-116"><a href="#cb22-116"></a>    <span class="bu">print</span>(<span class="bu">str</span>(price)<span class="op">+</span><span class="st">&quot;Gで売れそうだ!&quot;</span>)</span>
-<span id="cb22-117"><a href="#cb22-117"></a></span>
-<span id="cb22-118"><a href="#cb22-118"></a></span>
-<span id="cb22-119"><a href="#cb22-119"></a></span>
-<span id="cb22-120"><a href="#cb22-120"></a><span class="co">#&gt;&gt;ゲームのメインループ関数&gt;&gt;</span></span>
-<span id="cb22-121"><a href="#cb22-121"></a><span class="kw">def</span> gameLoop():</span>
-<span id="cb22-122"><a href="#cb22-122"></a>    <span class="kw">global</span> key,currentKey,prevKey</span>
-<span id="cb22-123"><a href="#cb22-123"></a>    </span>
-<span id="cb22-124"><a href="#cb22-124"></a>    <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
-<span id="cb22-125"><a href="#cb22-125"></a>        selectedFish <span class="op">=</span> random.choice((random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights <span class="op">=</span> FISH_WEIGHT))[<span class="dv">0</span>])</span>
-<span id="cb22-126"><a href="#cb22-126"></a>        <span class="co">#魚の重さを決定(ランダム 平均の0.5~1.5倍)</span></span>
-<span id="cb22-127"><a href="#cb22-127"></a>        fishWeight <span class="op">=</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span>random.uniform(<span class="fl">0.5</span>, <span class="fl">1.5</span>)</span>
-<span id="cb22-128"><a href="#cb22-128"></a>        fishWeight <span class="op">=</span> <span class="bu">round</span>(fishWeight,<span class="dv">2</span>) <span class="co">#少数第3位で四捨五入</span></span>
-<span id="cb22-129"><a href="#cb22-129"></a>        <span class="co">#重さから売却価格を決定</span></span>
-<span id="cb22-130"><a href="#cb22-130"></a>        fishPrice <span class="op">=</span> fishWeight <span class="op">*</span> selectedFish[<span class="st">&quot;price&quot;</span>]</span>
-<span id="cb22-131"><a href="#cb22-131"></a>        </span>
-<span id="cb22-132"><a href="#cb22-132"></a>        <span class="co">#魚のランクを決定、ランクに応じて価格を上方修正</span></span>
-<span id="cb22-133"><a href="#cb22-133"></a>        <span class="cf">if</span>(fishWeight <span class="op">&gt;</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span><span class="fl">1.4</span>):</span>
-<span id="cb22-134"><a href="#cb22-134"></a>            fishRank <span class="op">=</span> <span class="st">&quot;gold&quot;</span></span>
-<span id="cb22-135"><a href="#cb22-135"></a>            fishPrice <span class="op">*=</span> <span class="fl">1.4</span></span>
-<span id="cb22-136"><a href="#cb22-136"></a>        <span class="cf">elif</span> (fishWeight <span class="op">&gt;</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span><span class="fl">1.2</span>):</span>
-<span id="cb22-137"><a href="#cb22-137"></a>            fishRank <span class="op">=</span> <span class="st">&quot;silver&quot;</span></span>
-<span id="cb22-138"><a href="#cb22-138"></a>            fishPrice <span class="op">*=</span> <span class="fl">1.2</span></span>
-<span id="cb22-139"><a href="#cb22-139"></a>        <span class="cf">else</span>:</span>
-<span id="cb22-140"><a href="#cb22-140"></a>            fishRank <span class="op">=</span> <span class="st">&quot;bronze&quot;</span></span>
-<span id="cb22-141"><a href="#cb22-141"></a>        </span>
-<span id="cb22-142"><a href="#cb22-142"></a>        fishPrice <span class="op">=</span> <span class="bu">round</span>(fishPrice) <span class="co">#四捨五入</span></span>
-<span id="cb22-143"><a href="#cb22-143"></a>        </span>
-<span id="cb22-144"><a href="#cb22-144"></a>        </span>
-<span id="cb22-145"><a href="#cb22-145"></a>        showResult(selectedFish[<span class="st">&quot;name&quot;</span>],fishRank,fishWeight,fishPrice)</span>
-<span id="cb22-146"><a href="#cb22-146"></a>    </span>
-<span id="cb22-147"><a href="#cb22-147"></a>    prevKey <span class="op">=</span> copy.deepcopy(key)</span>
-<span id="cb22-148"><a href="#cb22-148"></a>    key <span class="op">=</span> copy.deepcopy(currentKey)</span>
-<span id="cb22-149"><a href="#cb22-149"></a>    root.after(TICK_TIME,gameLoop)</span>
-<span id="cb22-150"><a href="#cb22-150"></a></span>
-<span id="cb22-151"><a href="#cb22-151"></a><span class="co">#&gt;&gt;キー監視&gt;&gt;</span></span>
-<span id="cb22-152"><a href="#cb22-152"></a>currentKey <span class="op">=</span> []<span class="co">#現在押されているキー</span></span>
-<span id="cb22-153"><a href="#cb22-153"></a>key <span class="op">=</span> []       <span class="co">#前回の処理から押されたキー</span></span>
-<span id="cb22-154"><a href="#cb22-154"></a>prevKey <span class="op">=</span> [] <span class="co">#前回の処理までに押されたキー</span></span>
-<span id="cb22-155"><a href="#cb22-155"></a></span>
-<span id="cb22-156"><a href="#cb22-156"></a><span class="co">#何かのキーが押されたときに呼び出される関数</span></span>
-<span id="cb22-157"><a href="#cb22-157"></a><span class="kw">def</span> press(e):</span>
-<span id="cb22-158"><a href="#cb22-158"></a>    keysym <span class="op">=</span> e.keysym</span>
-<span id="cb22-159"><a href="#cb22-159"></a>    <span class="cf">if</span>(keysym <span class="kw">not</span> <span class="kw">in</span> currentKey):<span class="co">#始めて押されたならば</span></span>
-<span id="cb22-160"><a href="#cb22-160"></a>        currentKey.append(keysym)</span>
-<span id="cb22-161"><a href="#cb22-161"></a>        <span class="bu">print</span>(<span class="ss">f&quot;pressed:</span><span class="sc">{</span>keysym<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb22-162"><a href="#cb22-162"></a>    <span class="cf">if</span>(keysym <span class="kw">not</span> <span class="kw">in</span> key):<span class="co">#前回の処理から始めて押されたならば</span></span>
-<span id="cb22-163"><a href="#cb22-163"></a>        key.append(keysym)</span>
-<span id="cb22-164"><a href="#cb22-164"></a></span>
-<span id="cb22-165"><a href="#cb22-165"></a><span class="co">#何かのキーが離されたときに呼び出される関数</span></span>
-<span id="cb22-166"><a href="#cb22-166"></a><span class="kw">def</span> release(e):</span>
-<span id="cb22-167"><a href="#cb22-167"></a>    keysym <span class="op">=</span> e.keysym</span>
-<span id="cb22-168"><a href="#cb22-168"></a>    currentKey.remove(keysym)</span>
-<span id="cb22-169"><a href="#cb22-169"></a>    <span class="bu">print</span>(<span class="ss">f&quot;released:</span><span class="sc">{</span>keysym<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb22-170"><a href="#cb22-170"></a></span>
-<span id="cb22-171"><a href="#cb22-171"></a><span class="co">#キー入力をトリガーに関数を呼び出すよう設定する</span></span>
-<span id="cb22-172"><a href="#cb22-172"></a>root.bind(<span class="st">&quot;&lt;KeyPress&gt;&quot;</span>, press)</span>
-<span id="cb22-173"><a href="#cb22-173"></a>root.bind(<span class="st">&quot;&lt;KeyRelease&gt;&quot;</span>, release)</span>
-<span id="cb22-174"><a href="#cb22-174"></a></span>
-<span id="cb22-175"><a href="#cb22-175"></a><span class="co">#&gt;&gt;メインループ&gt;&gt;&gt;</span></span>
-<span id="cb22-176"><a href="#cb22-176"></a>canvas.create_image(<span class="dv">0</span>,<span class="dv">0</span>,image <span class="op">=</span> MAP_BIG_IMAGE ,tag<span class="op">=</span><span class="st">&quot;bgimage&quot;</span>,anchor<span class="op">=</span>tk.NW)</span>
-<span id="cb22-177"><a href="#cb22-177"></a></span>
-<span id="cb22-178"><a href="#cb22-178"></a>gameLoop()</span>
-<span id="cb22-179"><a href="#cb22-179"></a><span class="bu">print</span>(<span class="st">&quot;start!&quot;</span>)</span>
-<span id="cb22-180"><a href="#cb22-180"></a>root.mainloop()</span></code></pre></div>
+      <h1 data-number="9" id="結果表示ウィンドウをつくる"><span
+      class="header-section-number">9</span>
+      結果表示ウィンドウをつくる</h1>
+      <p>せっかく釣れたのに文字だけではつまらないので、画像を使って結果ウィンドウをつくりましょう。</p>
+      <p>まずは魚の画像を用意しましょう。</p>
+      <p><img src="./figs/101/tai.png" alt="img" /> <img
+      src="./figs/101/suzuki.png" alt="img" /></p>
+      <p><a
+      href="https://github.com/k-768/python_game/blob/master/img/fish.zip">ここから</a>zipファイルをダウンロードしてください。</p>
+      <p>ファイルをダウンロードしたら、解凍したのち、中の画像すべてを<code>img</code>フォルダの<strong>中に移動してください</strong>。</p>
+      <p><br></p>
+      <p>次に、新しいpythonファイル<code>game02.py</code>を作成してください。<a
+      href="https://github.com/k-768/PythonGameProgramming/blob/main/programs/game02.py">ここから</a>プログラムをコピー＆ペーストして実行してみてください。<strong>スペースキーを押すと結果ウィンドウが表示されます</strong>。このプログラムの要点について解説します。</p>
+      <p><br></p>
+      <div class="sourceCode" id="cb22" data-startFrom="46"
+      data-caption="game02.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 45;"><span id="cb22-46"><a href="#cb22-46"></a>FISH_IMAGE <span class="op">=</span> {</span>
+<span id="cb22-47"><a href="#cb22-47"></a>    <span class="st">&quot;イワシ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/iwashi.png&quot;</span>),</span>
+<span id="cb22-48"><a href="#cb22-48"></a>    <span class="st">&quot;アジ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/aji.png&quot;</span>),</span>
+<span id="cb22-49"><a href="#cb22-49"></a>    <span class="st">&quot;サバ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/saba.png&quot;</span>),</span>
+<span id="cb22-50"><a href="#cb22-50"></a>    <span class="st">&quot;タチウオ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/tachiuo.png&quot;</span>),</span>
+<span id="cb22-51"><a href="#cb22-51"></a>    <span class="st">&quot;カワハギ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/kawahagi.png&quot;</span>),</span>
+<span id="cb22-52"><a href="#cb22-52"></a>    <span class="st">&quot;メバル&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/mebaru.png&quot;</span>),</span>
+<span id="cb22-53"><a href="#cb22-53"></a>    <span class="st">&quot;タイ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/iwashi.png&quot;</span>),</span>
+<span id="cb22-54"><a href="#cb22-54"></a>    <span class="st">&quot;スズキ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/iwashi.png&quot;</span>),</span>
+<span id="cb22-55"><a href="#cb22-55"></a>    <span class="st">&quot;サケ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/sake.png&quot;</span>),</span>
+<span id="cb22-56"><a href="#cb22-56"></a>}</span>
+<span id="cb22-57"><a href="#cb22-57"></a>BIG_FISH_IMAGE <span class="op">=</span> {key :img.zoom(<span class="dv">2</span>,<span class="dv">2</span>) <span class="cf">for</span> key , img <span class="kw">in</span> FISH_IMAGE.items()}</span></code></pre></div>
+      <p><code>46行目</code>では、先ほど用意した魚の画像を読み込んでいます。<code>57行目</code>では、<strong>リストの内包表記</strong>というものを用いて、全ての画像を2倍に拡大しています。</p>
+      <p><br></p>
+      <p><code>59行目</code>からの魚のデータに画像の項目を追加し、先ほど読み込んだ画像を読み込んでいます。</p>
+      <div class="sourceCode" id="cb23" data-startFrom="46"
+      data-caption="game02.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 45;"><span id="cb23-46"><a href="#cb23-46"></a>LOW_RARE_FISH <span class="op">=</span> [</span>
+<span id="cb23-47"><a href="#cb23-47"></a>        {</span>
+<span id="cb23-48"><a href="#cb23-48"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;イワシ&quot;</span>,</span>
+<span id="cb23-49"><a href="#cb23-49"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;イワシ&quot;</span>],</span>
+<span id="cb23-50"><a href="#cb23-50"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.12</span>, <span class="co">#平均重量</span></span>
+<span id="cb23-51"><a href="#cb23-51"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">60</span> <span class="co">#kg単価</span></span>
+<span id="cb23-52"><a href="#cb23-52"></a>        },</span>
+<span id="cb23-53"><a href="#cb23-53"></a>        {</span>
+<span id="cb23-54"><a href="#cb23-54"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;アジ&quot;</span>,</span>
+<span id="cb23-55"><a href="#cb23-55"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;アジ&quot;</span>],</span>
+<span id="cb23-56"><a href="#cb23-56"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.17</span>,</span>
+<span id="cb23-57"><a href="#cb23-57"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">100</span></span>
+<span id="cb23-58"><a href="#cb23-58"></a>        },</span>
+<span id="cb23-59"><a href="#cb23-59"></a>        {</span>
+<span id="cb23-60"><a href="#cb23-60"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;サバ&quot;</span>,</span>
+<span id="cb23-61"><a href="#cb23-61"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;サバ&quot;</span>],</span>
+<span id="cb23-62"><a href="#cb23-62"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.35</span>,</span>
+<span id="cb23-63"><a href="#cb23-63"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">50</span></span>
+<span id="cb23-64"><a href="#cb23-64"></a>        },</span>
+<span id="cb23-65"><a href="#cb23-65"></a>    ]</span></code></pre></div>
+      <p><code>128行目</code>から、結果ウィンドウを表示する関数が記述されています。ウィンドウの中に画像や文字を配置し、表示します。</p>
+      <div class="sourceCode" id="cb24" data-startFrom="128"
+      data-caption="game02.py（抜粋・コメント付き）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 127;"><span id="cb24-128"><a href="#cb24-128"></a><span class="co"># &gt;&gt;釣り結果表示&gt;&gt;</span></span>
+<span id="cb24-129"><a href="#cb24-129"></a>RESULT_X <span class="op">=</span> <span class="dv">300</span> <span class="co">#結果ウィンドウの幅</span></span>
+<span id="cb24-130"><a href="#cb24-130"></a>RESULT_Y <span class="op">=</span> <span class="dv">200</span> <span class="co">#結果ウィンドウの高さ</span></span>
+<span id="cb24-131"><a href="#cb24-131"></a>RESULT_SIZE <span class="op">=</span> <span class="ss">f&quot;</span><span class="sc">{</span>RESULT_X<span class="sc">}</span><span class="ss">x</span><span class="sc">{</span>RESULT_Y<span class="sc">}</span><span class="ss">+</span><span class="sc">{</span><span class="bu">int</span>((CANVAS_WIDTH <span class="op">-</span> RESULT_X)<span class="op">/</span><span class="dv">2</span>)<span class="sc">}</span><span class="ss">+</span><span class="sc">{</span><span class="bu">int</span>((CANVAS_HEIGHT <span class="op">-</span> RESULT_Y)<span class="op">/</span><span class="dv">2</span>)<span class="sc">}</span><span class="ss">&quot;</span> <span class="co">#結果ウィンドウのサイズと位置を指定</span></span>
+<span id="cb24-132"><a href="#cb24-132"></a></span>
+<span id="cb24-133"><a href="#cb24-133"></a><span class="co"># 結果ウィンドウを表示する関数</span></span>
+<span id="cb24-134"><a href="#cb24-134"></a><span class="kw">def</span> showResultWindow(fish,rank,weight,price):</span>
+<span id="cb24-135"><a href="#cb24-135"></a>    <span class="kw">global</span> resultWindow,FISH_IMAGE</span>
+<span id="cb24-136"><a href="#cb24-136"></a>    <span class="co">#ウィンドウ設置</span></span>
+<span id="cb24-137"><a href="#cb24-137"></a>    resultWindow <span class="op">=</span> tk.Toplevel() <span class="co">#結果ウィンドウをトップレベル（最前面）にする</span></span>
+<span id="cb24-138"><a href="#cb24-138"></a>    resultWindow.title(<span class="st">&quot;Result&quot;</span>) <span class="co">#ウィンドウのタイトルを設定</span></span>
+<span id="cb24-139"><a href="#cb24-139"></a>    resultWindow.geometry(RESULT_SIZE) <span class="co">#ウィンドウの大きさを設定</span></span>
+<span id="cb24-140"><a href="#cb24-140"></a>    resultWindow.resizable(<span class="va">False</span>,<span class="va">False</span>) <span class="co">#ウィンドウの大きさを変更不可にする</span></span>
+<span id="cb24-141"><a href="#cb24-141"></a>    resultWindow.configure(bg<span class="op">=</span><span class="st">&quot;burlywood&quot;</span>) <span class="co">#ウィンドウの背景色を設定</span></span>
+<span id="cb24-142"><a href="#cb24-142"></a>    </span>
+<span id="cb24-143"><a href="#cb24-143"></a>    </span>
+<span id="cb24-144"><a href="#cb24-144"></a>    <span class="co"># フレームの作成と設置　（フレーム：グループ化し、整理するためのコンテナ）</span></span>
+<span id="cb24-145"><a href="#cb24-145"></a>    nameFrame <span class="op">=</span> tk.Frame(resultWindow , relief<span class="op">=</span>tk.RAISED , bg<span class="op">=</span><span class="st">&quot;burlywood&quot;</span>) <span class="co">#フレームの設定</span></span>
+<span id="cb24-146"><a href="#cb24-146"></a>    canvasFrame <span class="op">=</span> tk.Frame(resultWindow , relief<span class="op">=</span>tk.RAISED , bg<span class="op">=</span><span class="st">&quot;burlywood&quot;</span>)</span>
+<span id="cb24-147"><a href="#cb24-147"></a>    infoFrame <span class="op">=</span> tk.Frame(resultWindow , relief<span class="op">=</span>tk.RAISED , bg<span class="op">=</span><span class="st">&quot;burlywood&quot;</span>)</span>
+<span id="cb24-148"><a href="#cb24-148"></a>    nameFrame.pack(fill <span class="op">=</span> tk.BOTH, pady<span class="op">=</span><span class="dv">10</span>) <span class="co">#フレームの配置</span></span>
+<span id="cb24-149"><a href="#cb24-149"></a>    canvasFrame.pack(fill <span class="op">=</span> tk.BOTH, pady<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb24-150"><a href="#cb24-150"></a>    infoFrame.pack(fill <span class="op">=</span> tk.BOTH, pady<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb24-151"><a href="#cb24-151"></a>    </span>
+<span id="cb24-152"><a href="#cb24-152"></a>    <span class="cf">if</span>(rank <span class="op">==</span> <span class="st">&quot;silver&quot;</span>): <span class="co">#ランクに応じて名前や色を変更する</span></span>
+<span id="cb24-153"><a href="#cb24-153"></a>        name <span class="op">=</span> <span class="st">&quot;大物の&quot;</span><span class="op">+</span>fish <span class="co">#名前の前に追加</span></span>
+<span id="cb24-154"><a href="#cb24-154"></a>        color <span class="op">=</span> <span class="st">&quot;LightBlue4&quot;</span> <span class="co">#魚の名前の文字色を指定</span></span>
+<span id="cb24-155"><a href="#cb24-155"></a>    <span class="cf">elif</span>(rank <span class="op">==</span> <span class="st">&quot;gold&quot;</span>):</span>
+<span id="cb24-156"><a href="#cb24-156"></a>        name <span class="op">=</span> <span class="st">&quot;超大物の&quot;</span><span class="op">+</span>fish</span>
+<span id="cb24-157"><a href="#cb24-157"></a>        color <span class="op">=</span> <span class="st">&quot;gold&quot;</span></span>
+<span id="cb24-158"><a href="#cb24-158"></a>    <span class="cf">else</span>:</span>
+<span id="cb24-159"><a href="#cb24-159"></a>        name <span class="op">=</span> fish</span>
+<span id="cb24-160"><a href="#cb24-160"></a>        color <span class="op">=</span> <span class="st">&quot;DarkOrange4&quot;</span></span>
+<span id="cb24-161"><a href="#cb24-161"></a>    </span>
+<span id="cb24-162"><a href="#cb24-162"></a>    viewCanvas <span class="op">=</span> tk.Canvas(canvasFrame,width <span class="op">=</span> <span class="dv">96</span>,height <span class="op">=</span> <span class="dv">48</span>,bg <span class="op">=</span> <span class="st">&quot;burlywood&quot;</span>,highlightthickness<span class="op">=</span><span class="dv">0</span>) <span class="co">#魚の画像を表示するキャンバス</span></span>
+<span id="cb24-163"><a href="#cb24-163"></a>    viewCanvas.pack() <span class="co">#キャンバス設置</span></span>
+<span id="cb24-164"><a href="#cb24-164"></a>    viewCanvas.create_image(<span class="dv">48</span>,<span class="dv">24</span>,image <span class="op">=</span>BIG_FISH_IMAGE[fish],tag<span class="op">=</span><span class="st">&quot;view&quot;</span>,anchor<span class="op">=</span>tk.CENTER) <span class="co">#魚の画像を配置</span></span>
+<span id="cb24-165"><a href="#cb24-165"></a>    </span>
+<span id="cb24-166"><a href="#cb24-166"></a>    <span class="co"># ラベル（文字列を表示する部品）の作成</span></span>
+<span id="cb24-167"><a href="#cb24-167"></a>    fishName <span class="op">=</span> tk.Label(nameFrame, text<span class="op">=</span>name, font<span class="op">=</span>(<span class="st">&quot;MSゴシック&quot;</span>, <span class="st">&quot;20&quot;</span>, <span class="st">&quot;bold&quot;</span>),fg <span class="op">=</span> color,bg <span class="op">=</span> <span class="st">&quot;burlywood&quot;</span>)<span class="co"># 名前</span></span>
+<span id="cb24-168"><a href="#cb24-168"></a>    fishWeight <span class="op">=</span> tk.Label(infoFrame, text<span class="op">=</span><span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot; kg&quot;</span>, font<span class="op">=</span>(<span class="st">&quot;MSゴシック&quot;</span>, <span class="st">&quot;16&quot;</span>),bg <span class="op">=</span> <span class="st">&quot;burlywood&quot;</span>)<span class="co"># 重さ</span></span>
+<span id="cb24-169"><a href="#cb24-169"></a>    fishPrice <span class="op">=</span> tk.Label(infoFrame, text<span class="op">=</span><span class="bu">str</span>(price)<span class="op">+</span><span class="st">&quot; G&quot;</span>, font<span class="op">=</span>(<span class="st">&quot;MSゴシック&quot;</span>, <span class="st">&quot;16&quot;</span>),bg <span class="op">=</span> <span class="st">&quot;burlywood&quot;</span>) <span class="co"># 売値</span></span>
+<span id="cb24-170"><a href="#cb24-170"></a>    fishName.pack()</span>
+<span id="cb24-171"><a href="#cb24-171"></a>    fishWeight.pack()</span>
+<span id="cb24-172"><a href="#cb24-172"></a>    fishPrice.pack()</span></code></pre></div>
+      <p><br></p>
+      <p>今回初めて出てきたラベルは、以下の命令で作成、配置できます。</p>
+      <div class="sourceCode" id="cb25" data-caption="ラベルの作成"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ラベルの変数名 <span class="op">=</span> tk.label(ウィンドウ,text<span class="op">=</span><span class="st">&quot;表示する文字&quot;</span>,font<span class="op">=</span>(<span class="st">&quot;フォント名&quot;</span>,フォントサイズ))</span></code></pre></div>
+      <div class="sourceCode" id="cb26" data-caption="ラベルの配置"><pre
+      class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ラベルの変数名.place(x<span class="op">=</span>x座標,y<span class="op">=</span>y座標)</span></code></pre></div>
+      <p><br></p>
+      <p>次回は、いよいよキャラクターの描画などを実装していきます。</p>
       <!-- ---------------------------------------- -->
     </main>
 

@@ -64,9 +64,51 @@ var:
 
 ファイルをダウンロードしたら、解凍したのち、中の画像すべてを`img`フォルダの**中に移動してください**。
 
+<br>
+
+## 画像を表示する
+
+新しいpythonファイル`game03.py`を作成してください。[ここから](https://github.com/k-768/PythonGameProgramming/blob/main/programs/game03.py
+)プログラムをコピー＆ペーストして実行してみてください。**キャラクターが表示されているはずです**。このプログラムの要点について解説します。
+
+`40行目`からキャラクタに関する処理が記述されています。変数`charaX`、`charaY`がキャラクタの座標です。`58行目`では、画像を辞書型で読み込んでいます。
+
+そして、`71行目`からはキャラクタの画像を配置する関数が定義されています。
+
+```python{.numberLines startFrom=70 caption="game03.py（抜粋）"}
+#キャラクターを再描写する関数  
+def setChara(x,y,state):
+    """
+    x:キャラのX座標
+    y:キャラのY座標
+    state:キャラの状態
+    """
+    #今の画像を消して再描写
+    canvas.delete("chara")
+    canvas.create_image(x,y,image =BIG_CHARA_IMAGE[state] ,tag="chara",anchor=tk.NW)
+```
+
+<br>
+
+## 釣りのシステムを整える
+
+以下の状態遷移図をもとに、システムを整えましょう。
+
 ![img](./figs/102/fishing_1.svg)
+
+まず、
+
+## 釣りの失敗を実装する
+
 ![img](./figs/102/fishing_2.svg)
+
+## ウキが少しだけ沈むイベントを実装する
+
 ![img](./figs/102/fishing_3.svg)
+
+
+しかし、このままだと「ウキが沈んだ」のか「ピクピクしている」だけなのか区別がつきにくくなってしまいました。そこで、ヒットしたときに頭上にアイコンを表示して、分かりやすくしましょう。
+[ここから](https://github.com/k-768/python_game/blob/master/img/icon.zip)zipファイルをダウンロードして、`img`フォルダに解凍してください。
 
 完成版
 
