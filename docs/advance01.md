@@ -646,10 +646,24 @@ def gameLoop():
 
 ---
 
+## 結果表示ウィンドウをつくる
+
+せっかく釣れたのに文字だけではつまらないので、画像を使って結果ウィンドウをつくりましょう。
+
+
+まずは魚の画像を用意しましょう。
+
+![img](./figs/101/tai.png)
+![img](./figs/101/suzuki.png)
+
+[ここから](https://github.com/k-768/python_game/blob/master/img/fish.zip)zipファイルをダウンロードしてください。
+
+ファイルをダウンロードしたら、解凍したのち、中の画像すべてを`img`フォルダの**中に移動してください**。
+
 これで今回は完成です。最後にプログラムの全体を提示しておきます。
 今後のために、釣りの結果表示は別の関数に分けてあります。
 
-```python{.numberLines startFrom=1 caption="game01.py（完成版）"}
+```python{.numberLines startFrom=1 caption="game02.py"}
 import copy
 import os
 import random
@@ -676,7 +690,7 @@ CANVAS_SIZE = f"{CANVAS_WIDTH+MARGINE_X}x{CANVAS_HEIGHT+MARGINE_Y}"#キャンバ
 
 #ウィンドウ設置
 root = tk.Tk()
-root.title("game01")
+root.title("game02")
 root.geometry(CANVAS_SIZE)
 
 #キャンバス設置
@@ -695,19 +709,35 @@ TICK_TIME = 50
 #>>魚>>
 fishFlag = False #釣り可能かどうか
 
+FISH_IMAGE = {
+    "イワシ":tk.PhotoImage(file = cwd+"/img/iwashi.png"),
+    "アジ":tk.PhotoImage(file = cwd+"/img/aji.png"),
+    "サバ":tk.PhotoImage(file = cwd+"/img/saba.png"),
+    "タチウオ":tk.PhotoImage(file = cwd+"/img/tachiuo.png"),
+    "カワハギ":tk.PhotoImage(file = cwd+"/img/kawahagi.png"),
+    "メバル":tk.PhotoImage(file = cwd+"/img/mebaru.png"),
+    "タイ":tk.PhotoImage(file = cwd+"/img/iwashi.png"),
+    "スズキ":tk.PhotoImage(file = cwd+"/img/iwashi.png"),
+    "サケ":tk.PhotoImage(file = cwd+"/img/sake.png"),
+}
+BIG_FISH_IMAGE = {key :img.zoom(2,2) for key , img in FISH_IMAGE.items()}
+
 LOW_RARE_FISH = [
         {
         "name":"イワシ",
+        "img":FISH_IMAGE["イワシ"],
         "aveWeight":0.12, #平均重量
         "price":60 #kg単価
         },
         {
         "name":"アジ",
+        "img":FISH_IMAGE["アジ"],
         "aveWeight":0.17,
         "price":100
         },
         {
         "name":"サバ",
+        "img":FISH_IMAGE["サバ"],
         "aveWeight":0.35,
         "price":50
         },
@@ -715,16 +745,19 @@ LOW_RARE_FISH = [
 MIDDLE_RARE_FISH = [
         {
         "name":"タチウオ",
+        "img":FISH_IMAGE["タチウオ"],
         "aveWeight":3,
         "price":12
         },
         {
         "name":"カワハギ",
+        "img":FISH_IMAGE["カワハギ"],
         "aveWeight":0.4,
         "price":80
         },
         {
         "name":"メバル",
+        "img":FISH_IMAGE["メバル"],
         "aveWeight":0.43,
         "price":100
         },
@@ -732,16 +765,19 @@ MIDDLE_RARE_FISH = [
 HIGH_RARE_FISH = [
         {
         "name":"タイ",
+        "img":FISH_IMAGE["タイ"],
         "aveWeight":5.4,
         "price":20
         },
         {
         "name":"スズキ",
+        "img":FISH_IMAGE["スズキ"],
         "aveWeight":5.5,
         "price":19
         },
         {
         "name":"サケ",
+        "img":FISH_IMAGE["サケ"],
         "aveWeight":1.65,
         "price":65
         },
@@ -756,16 +792,50 @@ FISH_WEIGHT = [75,20,5] #排出率
 
 
 # >>釣り結果表示>>
-def showResult(fish,rank,weight,price):
+RESULT_X = 300
+RESULT_Y = 200
+RESULT_SIZE = f"{RESULT_X}x{RESULT_Y}+{int((CANVAS_WIDTH - RESULT_X)/2)}+{int((CANVAS_HEIGHT - RESULT_Y)/2)}"
+
+
+def showResultWindow(fish,rank,weight,price):
+    global resultWindow,FISH_IMAGE
+    #ウィンドウ設置
+    resultWindow = tk.Toplevel()
+    resultWindow.title("Result")
+    resultWindow.geometry(RESULT_SIZE)
+    resultWindow.resizable(False,False)
+    resultWindow.configure(bg="burlywood")
+    
+    
+    # フレームの作成と設置
+    nameFrame = tk.Frame(resultWindow , relief=tk.RAISED , bg="burlywood")
+    canvasFrame = tk.Frame(resultWindow , relief=tk.RAISED , bg="burlywood")
+    infoFrame = tk.Frame(resultWindow , relief=tk.RAISED , bg="burlywood")
+    nameFrame.pack(fill = tk.BOTH, pady=10)
+    canvasFrame.pack(fill = tk.BOTH, pady=0)
+    infoFrame.pack(fill = tk.BOTH, pady=10)
+    
     if(rank == "silver"):
         name = "大物の"+fish
+        color = "LightBlue4"
     elif(rank == "gold"):
         name = "超大物の"+fish
+        color = "gold"
     else:
         name = fish
+        color = "DarkOrange4"
     
-    print(str(weight)+"kgの"+name+"を釣り上げた!")
-    print(str(price)+"Gで売れそうだ!")
+    viewCanvas = tk.Canvas(canvasFrame,width = 96,height = 48,bg = "burlywood",highlightthickness=0)
+    viewCanvas.pack()
+    viewCanvas.create_image(48,24,image =BIG_FISH_IMAGE[fish],tag="view",anchor=tk.CENTER)
+    
+    # 各種ウィジェットの作成
+    fishName = tk.Label(nameFrame, text=name, font=("MSゴシック", "20", "bold"),fg = color,bg = "burlywood")
+    fishWeight = tk.Label(infoFrame, text=str(weight)+" kg", font=("MSゴシック", "16"),bg = "burlywood")
+    fishPrice = tk.Label(infoFrame, text=str(price)+" G", font=("MSゴシック", "16"),bg = "burlywood")
+    fishName.pack()
+    fishWeight.pack()
+    fishPrice.pack()
 
 
 
@@ -794,7 +864,7 @@ def gameLoop():
         fishPrice = round(fishPrice) #四捨五入
         
         
-        showResult(selectedFish["name"],fishRank,fishWeight,fishPrice)
+        showResultWindow(selectedFish["name"],fishRank,fishWeight,fishPrice)
     
     prevKey = copy.deepcopy(key)
     key = copy.deepcopy(currentKey)
