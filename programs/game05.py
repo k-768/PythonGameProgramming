@@ -252,7 +252,7 @@ def gameLoop():
             #キャラクター再描写
             setChara(charaX,charaY,"fight")
             print("ビク！")
-        elif(fishingCount == waitTick):#待ち時間を終えたとき
+        elif(fishingCount >= waitTick):#待ち時間を終えたとき
             print("遅すぎた！")
             flag = "default"
         

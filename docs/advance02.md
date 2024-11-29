@@ -185,19 +185,74 @@ def gameLoop():
 
 失敗したときは、`flag`は`"default"`にすることにします。
 
+---
 
+- **Challenge A2-1**　「ウキ投下中」にスペースキーを押したら失敗する処理を追加しましょう。
+
+- **Challenge A2-2**　「ウキ沈む」に遷移したのち、一定時間が経過すると失敗する処理を追加しましょう。
+
+<br><br>
+
+**<i class="fa-solid fa-check"></i>解答例**
+
+```python{.numberLines startFrom=230 caption="Challenge A2-1"}
+    if (flag == "wait"):#魚釣り中のとき
+        if(fishingCount == 0):#初回なら
+            #キャラクター再描写
+            setChara(charaX,charaY,"wait")
+        elif(fishingCount >= waitTick):#待ち時間を終えたとき
+            flag = "hit" #「ウキ沈む」に遷移
+            waitTick = 10
+            fishingCount = 0
+        
+        #!!!!!!!!!!!!ここから!!!!!!!!!!!!!
+        if(("space" in key) and ("space" not in prevKey) and  fishingCount): 
+            print("早すぎた！")
+            flag = "default"
+        #!!!!!!!!!!!!ここまで!!!!!!!!!!!!!
+
+        if (flag == "wait"):
+            fishingCount += 1 #待機カウンタを増やす
+```
+
+
+```python{.numberLines startFrom=247 caption="Challenge A2-2"}
+    elif (flag == "hit"): #魚がかかったとき
+        if(("space" in key) and ("space" not in prevKey)):  #スペースキー押下されたとき
+            flag = "success"
+            fishingCount = 0
+        elif(fishingCount == 0):#初回なら
+            #キャラクター再描写
+            setChara(charaX,charaY,"fight")
+            print("ビク！")
+
+        #!!!!!!!!!!!!ここから!!!!!!!!!!!!!
+        elif(fishingCount >= waitTick):#待ち時間を終えたとき
+            print("遅すぎた！")
+            flag = "default"
+        #!!!!!!!!!!!!ここまで!!!!!!!!!!!!!
+
+        if (flag == "hit"):
+            fishingCount += 1
+```
 
 ## ウキが少しだけ沈むイベントを実装する
 
 ![img](./figs/102/fishing_3.svg)
 
+実際の魚釣りでは、魚が喰いつく前に餌をつつくことがあります。それを実装してみましょう。
+
+ウキがピクピクしているときにあせってスペースキーを押すと魚を逃がしてしまいます。ウキがピクピクするか沈むかはランダムで決定します。
+
 
 しかし、このままだと「ウキが沈んだ」のか「ピクピクしている」だけなのか区別がつきにくくなってしまいました。そこで、ヒットしたときに頭上にアイコンを表示して、分かりやすくしましょう。
 [ここから](https://github.com/k-768/python_game/blob/master/img/icon.zip)zipファイルをダウンロードして、`img`フォルダに解凍してください。
 
-完成版
+各状態に遷移したときに、頭上にアイコンを表示させるように改造しました。これにて、簡単な釣りゲームの完成です！
 
-```python{.numberLines startFrom=1 caption="game02.py"}
+次回からは釣りとは少し離れて、マップの表示やキャラクタの歩行について学びましょう。
+
+```python{.numberLines startFrom=1 caption="game07.py"}
 import copy
 import os
 import random
@@ -224,7 +279,7 @@ CANVAS_SIZE = f"{CANVAS_WIDTH+MARGINE_X}x{CANVAS_HEIGHT+MARGINE_Y}"#キャンバ
 
 #ウィンドウ設置
 root = tk.Tk()
-root.title("game02")
+root.title("game06")
 root.geometry(CANVAS_SIZE)
 
 #キャンバス設置
@@ -252,7 +307,6 @@ bite:ウキがピクつく
 hit:ウキが沈む
 fight:格闘中
 success:釣り成功
-miss:釣り失敗
 result:釣り結果表示
 '''
 fishingCount = 0
