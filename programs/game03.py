@@ -47,7 +47,7 @@ charaY = 128 * MAGNIFICATION_RATE
 
 #キャラクターの画像
 CHARA_IMAGE = {
-    "defalt":tk.PhotoImage(file = cwd+"/img/character_A.png"),
+    "default":tk.PhotoImage(file = cwd+"/img/character_A.png"),
     "wait":tk.PhotoImage(file = cwd+"/img/character_B.png"),
     "bite":tk.PhotoImage(file = cwd+"/img/character_C.png"),
     "hit":tk.PhotoImage(file = cwd+"/img/character_D1.png"),
@@ -209,7 +209,7 @@ def showResultWindow(fish,rank,weight,price):
 def gameLoop():
     global key,currentKey,prevKey,charaX,charaY
     
-    setChara(charaX,charaY,"defalt")
+    setChara(charaX,charaY,"default")
     if(("space" in key) and ("space" not in prevKey)):
         selectedFish = random.choice((random.choices(FISH_LIST,k=1,weights = FISH_WEIGHT))[0])
         #魚の重さを決定(ランダム 平均の0.5~1.5倍)

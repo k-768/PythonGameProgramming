@@ -236,6 +236,11 @@ def gameLoop():
             waitTick = 10
             fishingCount = 0
         
+        # スペースキーが再び押された時
+        if(("space" in key) and ("space" not in prevKey) and  fishingCount): 
+            print("早すぎた！")
+            flag = "default"
+        
         if (flag == "wait"):
             fishingCount += 1 #待機カウンタを増やす
     
@@ -247,6 +252,9 @@ def gameLoop():
             #キャラクター再描写
             setChara(charaX,charaY,"fight")
             print("ビク！")
+        elif(fishingCount == waitTick):#待ち時間を終えたとき
+            print("遅すぎた！")
+            flag = "default"
         
         if (flag == "hit"):
             fishingCount += 1

@@ -99,7 +99,7 @@ def setChara(x,y,state):
 まず、現在どの状態にいるのかを示すために、変数`flag`を用意します。
 
 flag | 意味
-defalt | 待機中
+default | 待機中
 wait | 釣り中
 hit | ウキが沈む
 success | 釣り成功
@@ -111,7 +111,7 @@ result | 釣り結果表示
 今回は、この`flag`の中身を確認することでどの状態にいるのか判定できます。また、状態を遷移する際には`flag`の中身も忘れずに変更しなければいけません。
 
 ```python{.numberLines startFrom=1 caption="flagによる判定"}
-if flag == "defalt": #待機中のとき
+if flag == "default": #待機中のとき
     待機中の処理を記述
     if(("space" in key) and ("space" not in prevKey)):
         待機中にスペースキーが押されたときの処理（釣りを開始する）
@@ -119,11 +119,73 @@ if flag == "defalt": #待機中のとき
 
 if (flag == "wait"): #魚釣り中のとき
     魚釣り中の処理を記述
+    ・・・
 ```
+
+[ここから](https://github.com/k-768/PythonGameProgramming/blob/main/programs/game04.py)プログラムをコピー＆ペーストして実行してみてください。スペースキーを押すと、キャラクターが釣りをする姿勢になります。
+
+![img](./figs/102/fishing_chara.png)
+
+`game03.py`から変更されたのは、以下のフラグによる条件分岐の箇所だけです。
+
+```python{.numberLines startFrom=218 caption="game04.py（抜粋）"}
+#>>ゲームのメインループ関数>>
+def gameLoop():
+    global charaX,charaY,flag,key,currentKey,prevKey,waitTick,fishingCount,resultWindow
+    
+    if (flag == "default"): #待機中のとき 
+        setChara(charaX,charaY,"default")
+        if(("space" in key) and ("space" not in prevKey)):
+            canvas.delete("icon")#釣りアイコン削除
+            flag = "wait" #魚釣り中に遷移
+            waitTick = random.randint(round(3000/TICK_TIME),round(7000/TICK_TIME))#3-7秒
+            fishingCount = 0 #待ち時間をランダムに決定
+    
+    if (flag == "wait"):#魚釣り中のとき
+        if(fishingCount == 0):#初回なら
+            #キャラクター再描写
+            setChara(charaX,charaY,"wait")
+        elif(fishingCount >= waitTick):#待ち時間を終えたとき
+            flag = "hit" #「ウキ沈む」に遷移
+            waitTick = 10
+            fishingCount = 0
+        
+        if (flag == "wait"):
+            fishingCount += 1 #待機カウンタを増やす
+    
+    elif (flag == "hit"): #魚がかかったとき
+        if(("space" in key) and ("space" not in prevKey)):  #スペースキー押下されたとき
+            flag = "success"
+            fishingCount = 0
+        elif(fishingCount == 0):#初回なら
+            #キャラクター再描写
+            setChara(charaX,charaY,"fight")
+            print("ビク！")
+        
+        if (flag == "hit"):
+            fishingCount += 1
+    
+```
+
+<br>
+
+![img](./figs/102/fishing_1.svg)
+
+「ウキ投下中」から「ウキ沈む」には、時間の経過によって遷移します。そのため、変数`fishingCount`を用いて**時間を計っています**。処理を1回行うごとに`fishingCount`を1ずつ増やしていき、変数`waitTick`と同じ値になれば遷移する仕組みです。
+
+`waitTick`はランダムに決定しているので、**魚はすぐ釣れるときもあればなかなか釣れないときもあります**。
+
+<br>
 
 ## 釣りの失敗を実装する
 
+今の状態では、釣りは絶対に失敗することがありません。これではゲームとしてはイマイチです。そこで、**スペースキーを押すのが早すぎたり遅すぎたりしたら失敗する**ように改造しましょう。
+
 ![img](./figs/102/fishing_2.svg)
+
+失敗したときは、`flag`は`"default"`にすることにします。
+
+
 
 ## ウキが少しだけ沈むイベントを実装する
 
@@ -182,9 +244,9 @@ CHARA_HEIGHT = 96 #キャラの高さ
 #キャラクターの座標
 charaX = 160 * MAGNIFICATION_RATE 
 charaY = 128 * MAGNIFICATION_RATE
-flag = "defalt"
+flag = "default"
 '''
-defalt:通常状態
+default:通常状態
 wait:釣り中
 bite:ウキがピクつく
 hit:ウキが沈む
@@ -202,7 +264,7 @@ TICK_TIME = 50
 
 #キャラクターの画像
 CHARA_IMAGE = {
-    "defalt":tk.PhotoImage(file = cwd+"/img/character_A.png"),
+    "default":tk.PhotoImage(file = cwd+"/img/character_A.png"),
     "wait":tk.PhotoImage(file = cwd+"/img/character_B.png"),
     "bite":tk.PhotoImage(file = cwd+"/img/character_C.png"),
     "hit":tk.PhotoImage(file = cwd+"/img/character_D1.png"),
@@ -394,8 +456,8 @@ def showResultWindow(fish,rank,weight,price):
 def gameLoop():
     global charaX,charaY,flag,key,currentKey,prevKey,waitTick,fishingCount,resultWindow
 
-    if (flag == "defalt"): #待機中のとき 
-        setChara(charaX,charaY,"defalt")
+    if (flag == "default"): #待機中のとき 
+        setChara(charaX,charaY,"default")
         if(("space" in key) and ("space" not in prevKey)):
             canvas.delete("icon")#釣りアイコン削除
             flag = "wait"
@@ -420,7 +482,7 @@ def gameLoop():
         if(("space" in key) and ("space" not in prevKey) and  fishingCount): 
             setIcon(charaX,charaY,"miss")#アイコン描写
             print("早すぎた！")
-            flag = "defalt"
+            flag = "default"
             
         if (flag == "wait"):
             fishingCount += 1
@@ -429,7 +491,7 @@ def gameLoop():
         if(("space" in key) and ("space" not in prevKey)):  #スペースキー押下されたとき
             setIcon(charaX,charaY,"miss")#アイコン描写
             print("早すぎた！")
-            flag = "defalt"
+            flag = "default"
         elif(fishingCount == 0):#初回なら
             setChara(charaX,charaY,"bite")
             print("ピク...")
@@ -454,7 +516,7 @@ def gameLoop():
         elif(fishingCount == waitTick):#待ち時間を終えたとき
             print("遅すぎた！")
             setIcon(charaX,charaY,"miss")#アイコン描写
-            flag = "defalt"
+            flag = "default"
         
         if (flag == "hit"):
             fishingCount += 1
@@ -494,7 +556,7 @@ def gameLoop():
         
         
         #釣りの姿勢から通常状態に戻す
-        setChara(charaX,charaY,"defalt")
+        setChara(charaX,charaY,"default")
         canvas.delete("rod")
         #*魚を仮表示
         setIcon(charaX,charaY,"success")#アイコン描写
@@ -503,7 +565,7 @@ def gameLoop():
         
     elif(flag == "result"): #結果表示中のとき
         if(("space" in key) and ("space" not in prevKey)):  #スペースキー押下されたとき
-            flag = "defalt"
+            flag = "default"
             canvas.delete("fish")
             setIcon(charaX,charaY,"fishing")
             resultWindow.destroy()
@@ -538,7 +600,7 @@ root.bind("<KeyRelease>", release)
 
 #>>メインループ>>>
 canvas.create_image(0,0,image = MAP_BIG_IMAGE ,tag="bgimage",anchor=tk.NW)
-setChara(charaX,charaY,"defalt")
+setChara(charaX,charaY,"default")
 setIcon(charaX,charaY,"fishing")
 
 gameLoop()
