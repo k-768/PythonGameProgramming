@@ -24,7 +24,7 @@ CANVAS_SIZE = f"{CANVAS_WIDTH+MARGINE_X}x{CANVAS_HEIGHT+MARGINE_Y}"#キャンバ
 
 #ウィンドウ設置
 root = tk.Tk()
-root.title("game02")
+root.title("game04")
 root.geometry(CANVAS_SIZE)
 
 #キャンバス設置
@@ -227,7 +227,7 @@ def gameLoop():
             waitTick = random.randint(round(3000/TICK_TIME),round(7000/TICK_TIME))#3-7秒
             fishingCount = 0 #待ち時間をランダムに決定
     
-    if (flag == "wait"):#魚釣り中のとき
+    elif (flag == "wait"):#魚釣り中のとき
         if(fishingCount == 0):#初回なら
             #キャラクター再描写
             setChara(charaX,charaY,"wait")

@@ -24,7 +24,7 @@ CANVAS_SIZE = f"{CANVAS_WIDTH+MARGINE_X}x{CANVAS_HEIGHT+MARGINE_Y}"#キャンバ
 
 #ウィンドウ設置
 root = tk.Tk()
-root.title("game02")
+root.title("game05")
 root.geometry(CANVAS_SIZE)
 
 #キャンバス設置
@@ -227,19 +227,18 @@ def gameLoop():
             waitTick = random.randint(round(3000/TICK_TIME),round(7000/TICK_TIME))#3-7秒
             fishingCount = 0 #待ち時間をランダムに決定
     
-    if (flag == "wait"):#魚釣り中のとき
-        if(fishingCount == 0):#初回なら
+    elif (flag == "wait"):#魚釣り中のとき
+        # スペースキーが再び押された時
+        if(("space" in key) and ("space" not in prevKey)): 
+            print("早すぎた！")
+            flag = "default"
+        elif(fishingCount == 0):#初回なら
             #キャラクター再描写
             setChara(charaX,charaY,"wait")
         elif(fishingCount >= waitTick):#待ち時間を終えたとき
             flag = "hit" #「ウキ沈む」に遷移
             waitTick = 10
             fishingCount = 0
-        
-        # スペースキーが再び押された時
-        if(("space" in key) and ("space" not in prevKey) and  fishingCount): 
-            print("早すぎた！")
-            flag = "default"
         
         if (flag == "wait"):
             fishingCount += 1 #待機カウンタを増やす

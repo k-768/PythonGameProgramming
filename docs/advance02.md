@@ -141,7 +141,7 @@ def gameLoop():
             waitTick = random.randint(round(3000/TICK_TIME),round(7000/TICK_TIME))#3-7秒
             fishingCount = 0 #待ち時間をランダムに決定
     
-    if (flag == "wait"):#魚釣り中のとき
+    elif (flag == "wait"):#魚釣り中のとき
         if(fishingCount == 0):#初回なら
             #キャラクター再描写
             setChara(charaX,charaY,"wait")
@@ -196,20 +196,19 @@ def gameLoop():
 **<i class="fa-solid fa-check"></i>解答例**
 
 ```python{.numberLines startFrom=230 caption="Challenge A2-1"}
-    if (flag == "wait"):#魚釣り中のとき
-        if(fishingCount == 0):#初回なら
+    elif (flag == "wait"):#魚釣り中のとき
+        #!!!!!!!!!!!!ここから!!!!!!!!!!!!!
+        if(("space" in key) and ("space" not in prevKey)): 
+            print("早すぎた！")
+            flag = "default"
+        #!!!!!!!!!!!!ここまで!!!!!!!!!!!!!
+        elif(fishingCount == 0):#初回なら
             #キャラクター再描写
             setChara(charaX,charaY,"wait")
         elif(fishingCount >= waitTick):#待ち時間を終えたとき
             flag = "hit" #「ウキ沈む」に遷移
             waitTick = 10
             fishingCount = 0
-        
-        #!!!!!!!!!!!!ここから!!!!!!!!!!!!!
-        if(("space" in key) and ("space" not in prevKey) and  fishingCount): 
-            print("早すぎた！")
-            flag = "default"
-        #!!!!!!!!!!!!ここまで!!!!!!!!!!!!!
 
         if (flag == "wait"):
             fishingCount += 1 #待機カウンタを増やす
@@ -225,7 +224,6 @@ def gameLoop():
             #キャラクター再描写
             setChara(charaX,charaY,"fight")
             print("ビク！")
-
         #!!!!!!!!!!!!ここから!!!!!!!!!!!!!
         elif(fishingCount >= waitTick):#待ち時間を終えたとき
             print("遅すぎた！")
@@ -242,7 +240,51 @@ def gameLoop():
 
 実際の魚釣りでは、魚が喰いつく前に餌をつつくことがあります。それを実装してみましょう。
 
-ウキがピクピクしているときにあせってスペースキーを押すと魚を逃がしてしまいます。ウキがピクピクするか沈むかはランダムで決定します。
+ウキがピクピクしているときにあせってスペースキーを押すと魚を逃がしてしまいます。ウキがピクピクするか沈むかはランダムで決定します。`flag`は`"bite"`にすることにします。
+
+
+まず、「釣り中」に一定時間経過したらウキがピクピクするか沈むかはランダムで決定するように書き換えます。
+
+```python{.numberLines startFrom=279 caption="game06"}
+    elif (flag == "wait"):#魚釣り中のとき
+        if(("space" in key) and ("space" not in prevKey)): 
+            print("早すぎた！")
+            flag = "default"
+        elif(fishingCount == 0):#初回なら
+            #キャラクター再描写
+            setChara(charaX,charaY,"wait")
+        elif(fishingCount >= waitTick):#待ち時間を終えたとき
+            #!!!!!!!!!!!!!ここから!!!!!!!!!!!!!!!!
+            if(random.randint(1,3)!=1):#2/3の確率で
+                flag = "hit"
+                waitTick = 10
+                fishingCount = 0
+            else:
+                flag = "bite"
+                waitTick = random.randint(2,10)
+                fishingCount = 0
+            #!!!!!!!!!!!!!ここまで!!!!!!!!!!!!!!!!
+```
+
+そして、`flag`が`"bite"`のときは、少し時間が経過したら`"default"`に戻るようにしましょう。
+
+```python{.numberLines startFrom=302 caption="game06"}
+    elif (flag == "bite"): #魚が少し喰いついたとき
+        if(("space" in key) and ("space" not in prevKey)):  #スペースキー押下されたとき
+            setIcon(charaX,charaY,"miss")#アイコン描写
+            print("早すぎた！")
+            flag = "default"
+        elif(fishingCount == 0):#初回なら
+            setChara(charaX,charaY,"bite")
+            print("ピク...")
+        elif(fishingCount >= waitTick):#待ち時間を終えたとき
+            flag = "wait"
+            waitTick = random.randint(round(200/TICK_TIME),round(2000/TICK_TIME))
+            fishingCount = 0
+        
+        if (flag == "bite"):
+            fishingCount += 1
+```
 
 
 しかし、このままだと「ウキが沈んだ」のか「ピクピクしている」だけなのか区別がつきにくくなってしまいました。そこで、ヒットしたときに頭上にアイコンを表示して、分かりやすくしましょう。
@@ -279,7 +321,7 @@ CANVAS_SIZE = f"{CANVAS_WIDTH+MARGINE_X}x{CANVAS_HEIGHT+MARGINE_Y}"#キャンバ
 
 #ウィンドウ設置
 root = tk.Tk()
-root.title("game06")
+root.title("game07")
 root.geometry(CANVAS_SIZE)
 
 #キャンバス設置
@@ -509,7 +551,7 @@ def showResultWindow(fish,rank,weight,price):
 #>>ゲームのメインループ関数>>
 def gameLoop():
     global charaX,charaY,flag,key,currentKey,prevKey,waitTick,fishingCount,resultWindow
-
+    
     if (flag == "default"): #待機中のとき 
         setChara(charaX,charaY,"default")
         if(("space" in key) and ("space" not in prevKey)):
@@ -518,8 +560,13 @@ def gameLoop():
             waitTick = random.randint(round(3000/TICK_TIME),round(5000/TICK_TIME))#3-5秒
             fishingCount = 0
     
-    if (flag == "wait"):#魚釣り中のとき
-        if(fishingCount == 0):#初回なら
+    elif (flag == "wait"):#魚釣り中のとき
+        # スペースキーが再び押された時
+        if(("space" in key) and ("space" not in prevKey)): 
+            setIcon(charaX,charaY,"miss")#アイコン描写
+            print("早すぎた！")
+            flag = "default"
+        elif(fishingCount == 0):#初回なら
             #キャラクター再描写
             setChara(charaX,charaY,"wait")
         elif(fishingCount >= waitTick):#待ち時間を終えたとき
@@ -531,12 +578,6 @@ def gameLoop():
                 flag = "bite"
                 waitTick = random.randint(2,10)
                 fishingCount = 0
-        
-        # スペースキーが再び押された時
-        if(("space" in key) and ("space" not in prevKey) and  fishingCount): 
-            setIcon(charaX,charaY,"miss")#アイコン描写
-            print("早すぎた！")
-            flag = "default"
             
         if (flag == "wait"):
             fishingCount += 1
@@ -549,7 +590,7 @@ def gameLoop():
         elif(fishingCount == 0):#初回なら
             setChara(charaX,charaY,"bite")
             print("ピク...")
-        elif(fishingCount == waitTick):#待ち時間を終えたとき
+        elif(fishingCount >= waitTick):#待ち時間を終えたとき
             flag = "wait"
             waitTick = random.randint(round(200/TICK_TIME),round(2000/TICK_TIME))
             fishingCount = 0
@@ -567,7 +608,7 @@ def gameLoop():
             setChara(charaX,charaY,"fight")
             setIcon(charaX,charaY,"hit")#アイコン描写
             print("ビク！")
-        elif(fishingCount == waitTick):#待ち時間を終えたとき
+        elif(fishingCount >= waitTick):#待ち時間を終えたとき
             print("遅すぎた！")
             setIcon(charaX,charaY,"miss")#アイコン描写
             flag = "default"
@@ -612,7 +653,6 @@ def gameLoop():
         #釣りの姿勢から通常状態に戻す
         setChara(charaX,charaY,"default")
         canvas.delete("rod")
-        #*魚を仮表示
         setIcon(charaX,charaY,"success")#アイコン描写
         showResultWindow(selectedFish["name"],fishRank,fishWeight,fishPrice)
         flag = "result"
@@ -620,7 +660,6 @@ def gameLoop():
     elif(flag == "result"): #結果表示中のとき
         if(("space" in key) and ("space" not in prevKey)):  #スペースキー押下されたとき
             flag = "default"
-            canvas.delete("fish")
             setIcon(charaX,charaY,"fishing")
             resultWindow.destroy()
     
