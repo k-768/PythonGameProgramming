@@ -101,6 +101,92 @@ a:1
 <=   a<=b   aがb以下
 ----------------------- 
 
+<br>
+
+試しに、以下の文を実行してみましょう。
+
+```python{.numberLines caption="True_or_False"}
+n = 5
+print(n>3)
+print(n == 5)
+print(n < 3)
+print(n != 5)
+```
+
+---
+
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+True
+True
+False
+False
+```
+
+`==`や`<`といった関係演算子は、**その式が正しいかどうかを「True（真）」か「False（偽）」で出力**します。
+
+つまり、if文は**if:の後ろが「True」なら実行する**という仕組みになっています。ためしに、条件の代わりに`True`や`False`を入れてみると、`True`の方のみが出力されます。
+
+```python{.numberLines caption="ifTrue"}
+if True:
+  print("実行される")
+
+if False:
+  print("実行されない")
+```
+
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+実行される
+```
+
+<br>
+
+<div class="note type-tips">
+
+**数値を入れるとどうなるか**
+
+Pythonでは、**0 は「False（偽）」と、0以外の数値 は「True（真）」とみなされます**。
+
+```python{.numberLines caption="数字を入れるとどうなる?"}
+if 1:
+  print("1:実行される")
+
+if 5:
+  print("5:実行される")
+
+if 0.1:
+  print("0.1:実行される")
+
+if 0:
+  print("0:実行されない")
+```
+
+**<i class="fa-solid fa-terminal"></i> 実行結果**
+
+```
+1:実行される
+5:実行される
+0.1:実行される
+```
+
+この性質を利用したプログラムがこちらです。
+
+```python{.numberLines caption="奇数判定"}
+n = 27
+if n%2:
+  print(str(n)+"は奇数です")
+
+```
+
+`%`は **「余り」を計算する演算子**です。つまり、`n % 2`は n を2で割った余りを計算します。nが奇数の場合、余りは`1`になります。これは「True（真）」とみなされ、print("奇数") が実行されます。
+逆に、nが偶数の場合、余りは`0`になります。これは「False（偽）」とみなされ、print("奇数") は実行されません。
+</div>
+
+<br>
+
 ## if-else文
 
 `else`を用いて、**条件が満たされなかったときの処理を設定する**ことができます。
@@ -365,3 +451,10 @@ if money >= 500 and level >= 20:
 elif money < 500:
   print("所持金が"+str(500-money)+"円足りません")
 ```
+
+<br>
+
+## 「True（真）」と「False（偽）」
+
+
+

@@ -142,6 +142,10 @@ pip install Pillow
 ```
 ![img](./figs/103/install.png)
 
+<br>
+
+インストールが完了したら、新しいファイル`map02.py`を作成して、コピー＆ペーストして実行してみてください。
+
 ```python{.numberLines startFrom=1 caption="map02.py"}
 import os
 import tkinter as tk
