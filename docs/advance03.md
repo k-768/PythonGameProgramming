@@ -135,6 +135,13 @@ for y in range(Y_MAPSIZE):
 ![img](./figs/103/sheet1.png)
 
 
+1枚の画像を分割するためには、**Pillow**と呼ばれるライブラリが必要になります。ターミナルで、以下を入力して実行してください。
+
+```
+pip install Pillow
+```
+![img](./figs/103/install.png)
+
 ```python{.numberLines startFrom=1 caption="map02.py"}
 import os
 import tkinter as tk
