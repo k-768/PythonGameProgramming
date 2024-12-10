@@ -33,7 +33,7 @@
     />
     <link rel="stylesheet" href="style.css" />
 
-    <title></title>
+    <title>ゲームづくり編2　状態遷移図を用いて処理を考えよう</title>
   </head>
 
   <body>
@@ -41,928 +41,711 @@
     <nav id="g-nav">
       <div id="g-nav-list">
         <!-- ---------------------------------------- -->
-        
+         <ul>
+<li><a href="#シーン管理" id="toc-シーン管理"><span
+class="toc-section-number">1</span> シーン管理</a></li>
+<li><a href="#もくじ" id="toc-もくじ"><span
+class="toc-section-number">2</span> もくじ</a></li>
+<li><a href="#状態遷移図とは" id="toc-状態遷移図とは"><span
+class="toc-section-number">3</span> 状態遷移図とは</a></li>
+<li><a href="#画像を準備する" id="toc-画像を準備する"><span
+class="toc-section-number">4</span> 画像を準備する</a></li>
+<li><a href="#画像を表示する" id="toc-画像を表示する"><span
+class="toc-section-number">5</span> 画像を表示する</a></li>
+<li><a href="#釣りのシステムを整える"
+id="toc-釣りのシステムを整える"><span
+class="toc-section-number">6</span> 釣りのシステムを整える</a></li>
+<li><a href="#釣りの失敗を実装する" id="toc-釣りの失敗を実装する"><span
+class="toc-section-number">7</span> 釣りの失敗を実装する</a></li>
+<li><a href="#ウキが少しだけ沈むイベントを実装する"
+id="toc-ウキが少しだけ沈むイベントを実装する"><span
+class="toc-section-number">8</span>
+ウキが少しだけ沈むイベントを実装する</a></li>
+<li><a href="#ゲームを改造する" id="toc-ゲームを改造する"><span
+class="toc-section-number">9</span> ゲームを改造する</a></li>
+</ul> 
         <!-- ---------------------------------------- -->
       </div>
     </nav>
 
     <header class="markdown-body">
-      <p></p>
-      <p></p>
+      <p>Pythonで釣りゲームを作ろう
+ゲームづくり編2　状態遷移図を用いて処理を考えよう</p>
+      <p>2024年12月6日（金）</p>
     </header>
 
     <main class="markdown-body">
       <!-- ---------------------------------------- -->
-      &lt;!DOCTYPE html&gt;
-      <html lang="ja">
-      <head>
-      <meta charset="utf-8" />
-      <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, user-scalable=yes"
-          />
-      <meta name="robots" content="noindex,nofollow,noarchive" />
-      <script>
-            MathJax = {
-              chtml: {
-                displayAlign: "left",
-                displayIndent: "1em",
-              },
-            };
-          </script>
-      <p><link rel="icon" href="favicon2.ico" sizes="any" /> <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-            integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-          /> <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
-          /> <link rel="stylesheet" href="style.css" /></p>
-      <title>
-      ゲームづくり編2　状態遷移図を用いて処理を考えよう
-      </title>
-      </head>
-      <body>
-      <div class="openbtn">
-      <span></span><span></span><span></span>
-      </div>
-      <nav id="g-nav">
-      <div id="g-nav-list">
-      <pre><code>    &lt;!-- ---------------------------------------- --&gt;
-     &lt;ul&gt;</code></pre>
-      <li>
-      <a href="#シーン管理" id="toc-シーン管理"><span
-      class="toc-section-number">1</span> シーン管理</a>
-      </li>
-      <li>
-      <a href="#もくじ" id="toc-もくじ"><span
-      class="toc-section-number">2</span> もくじ</a>
-      </li>
-      <li>
-      <a href="#状態遷移図とは" id="toc-状態遷移図とは"><span
-      class="toc-section-number">3</span> 状態遷移図とは</a>
-      </li>
-      <li>
-      <a href="#画像を準備する" id="toc-画像を準備する"><span
-      class="toc-section-number">4</span> 画像を準備する</a>
-      </li>
-      <li>
-      <a href="#画像を表示する" id="toc-画像を表示する"><span
-      class="toc-section-number">5</span> 画像を表示する</a>
-      </li>
-      <li>
-      <a href="#釣りのシステムを整える"
-      id="toc-釣りのシステムを整える"><span
-      class="toc-section-number">6</span> 釣りのシステムを整える</a>
-      </li>
-      <li>
-      <a href="#釣りの失敗を実装する" id="toc-釣りの失敗を実装する"><span
-      class="toc-section-number">7</span> 釣りの失敗を実装する</a>
-      </li>
-      <li>
-      <a href="#ウキが少しだけ沈むイベントを実装する"
-      id="toc-ウキが少しだけ沈むイベントを実装する"><span
-      class="toc-section-number">8</span>
-      ウキが少しだけ沈むイベントを実装する</a>
-      </li>
-      <li>
-      <a href="#ゲームを改造する" id="toc-ゲームを改造する"><span
-      class="toc-section-number">9</span> ゲームを改造する</a>
-      </li>
+      <h1 data-number="1" id="シーン管理"><span
+      class="header-section-number">1</span> シーン管理</h1>
+      <p>ゲームづくりにおいて、重要な考えが<strong>シーン</strong>と呼ばれるものです。普段私たちが遊んでいるゲームにはさまざまなシーンが存在します。例えば、「戦闘画面」「移動画面」「購入画面」などです。これらのシーンをスムーズに切り替えるためには、どの画面からどの画面へどうやって移るのかをしっかりと計画する必要があります。</p>
+      <p>あるいは、ターン制のバトルゲームを考えてみましょう。自分のターンのときは、「攻撃する」「道具を使う」など、コマンドを選択できる必要がありますが、相手のターンのときは選択できないようにする必要があります。</p>
+      <p>このように、ゲームづくりにおいて「<strong>この入力はいつ受け付けるのか</strong>」や「<strong>この画像はいつ表示するのか</strong>」といった<strong>条件の計画・確認が非常に重要</strong>になります。そこで<strong>状態遷移図</strong>というツールが役立ちます。</p>
+      <p>今回は、状態遷移図について学んだうえで、釣りゲームにどのような処理が必要か考え、実装していきましょう。</p>
+      <p><br></p>
+      <h1 data-number="2" id="もくじ"><span
+      class="header-section-number">2</span> もくじ</h1>
+      <ul>
+      <li><a
+      href="advance02.html#状態遷移図とは">状態遷移図とは</a></li>
+      <li><a
+      href="advance02.html#画像を準備する">画像を準備する</a></li>
+      <li><a
+      href="advance02.html#画像を表示する">画像を表示する</a></li>
+      <li><a
+      href="advance02.html#釣りのシステムを整える">釣りのシステムを整える</a></li>
+      <li><a
+      href="advance02.html#釣りの失敗を実装する">釣りの失敗を実装する</a></li>
+      <li><a
+      href="advance02.html#ウキが少しだけ沈むイベントを実装する">ウキが少しだけ沈むイベントを実装する</a></li>
+      <li><a
+      href="advance02.html#ゲームを改造する">ゲームを改造する</a></li>
       </ul>
-      <pre><code>    &lt;!-- ---------------------------------------- --&gt;
-  &lt;/div&gt;
-&lt;/nav&gt;
-
-&lt;header class=&quot;markdown-body&quot;&gt;
-  &lt;p&gt;Pythonで釣りゲームを作ろう</code></pre>
-      ゲームづくり編2　状態遷移図を用いて処理を考えよう
-      </p>
-      <pre><code>  &lt;p&gt;2024年12月6日（金）&lt;/p&gt;
-&lt;/header&gt;
-
-&lt;main class=&quot;markdown-body&quot;&gt;
-  &lt;!-- ---------------------------------------- --&gt;
-  &lt;h1 data-number=&quot;1&quot; id=&quot;シーン管理&quot;&gt;&lt;span
-  class=&quot;header-section-number&quot;&gt;1&lt;/span&gt; シーン管理&lt;/h1&gt;
-  &lt;p&gt;ゲームづくりにおいて、重要な考えが&lt;strong&gt;シーン&lt;/strong&gt;と呼ばれるものです。普段私たちが遊んでいるゲームにはさまざまなシーンが存在します。例えば、「戦闘画面」「移動画面」「購入画面」などです。これらのシーンをスムーズに切り替えるためには、どの画面からどの画面へどうやって移るのかをしっかりと計画する必要があります。&lt;/p&gt;
-  &lt;p&gt;あるいは、ターン制のバトルゲームを考えてみましょう。自分のターンのときは、「攻撃する」「道具を使う」など、コマンドを選択できる必要がありますが、相手のターンのときは選択できないようにする必要があります。&lt;/p&gt;
-  &lt;p&gt;このように、ゲームづくりにおいて「&lt;strong&gt;この入力はいつ受け付けるのか&lt;/strong&gt;」や「&lt;strong&gt;この画像はいつ表示するのか&lt;/strong&gt;」といった&lt;strong&gt;条件の計画・確認が非常に重要&lt;/strong&gt;になります。そこで&lt;strong&gt;状態遷移図&lt;/strong&gt;というツールが役立ちます。&lt;/p&gt;
-  &lt;p&gt;今回は、状態遷移図について学んだうえで、釣りゲームにどのような処理が必要か考え、実装していきましょう。&lt;/p&gt;
-  &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-  &lt;h1 data-number=&quot;2&quot; id=&quot;もくじ&quot;&gt;&lt;span
-  class=&quot;header-section-number&quot;&gt;2&lt;/span&gt; もくじ&lt;/h1&gt;
-  &lt;ul&gt;
-  &lt;li&gt;&lt;a
-  href=&quot;advance02.html#状態遷移図とは&quot;&gt;状態遷移図とは&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a
-  href=&quot;advance02.html#画像を準備する&quot;&gt;画像を準備する&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a
-  href=&quot;advance02.html#画像を表示する&quot;&gt;画像を表示する&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a
-  href=&quot;advance02.html#釣りのシステムを整える&quot;&gt;釣りのシステムを整える&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a
-  href=&quot;advance02.html#釣りの失敗を実装する&quot;&gt;釣りの失敗を実装する&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a
-  href=&quot;advance02.html#ウキが少しだけ沈むイベントを実装する&quot;&gt;ウキが少しだけ沈むイベントを実装する&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a
-  href=&quot;advance02.html#ゲームを改造する&quot;&gt;ゲームを改造する&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-  &lt;h1 data-number=&quot;3&quot; id=&quot;状態遷移図とは&quot;&gt;&lt;span
-  class=&quot;header-section-number&quot;&gt;3&lt;/span&gt; 状態遷移図とは&lt;/h1&gt;
-  &lt;p&gt;状態遷移図とは、&lt;strong&gt;ゲームの各シーン（状態）がどのように繋がっているかを図で表したもの&lt;/strong&gt;です。例えば、プレイヤーが移動中の画面から敵に遭遇したら戦闘画面に切り替わる、戦闘が終わったら再び移動画面に戻る、などの流れを&lt;strong&gt;視覚的&lt;/strong&gt;に示します。これにより、&lt;strong&gt;ゲーム全体の流れが一目でわかる&lt;/strong&gt;ようになります。&lt;/p&gt;
-  &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-  &lt;figure&gt;
-  &lt;img src=&quot;./figs/102/demo.svg&quot; alt=&quot;img&quot; /&gt;
-  &lt;figcaption aria-hidden=&quot;true&quot;&gt;img&lt;/figcaption&gt;
-  &lt;/figure&gt;
-  &lt;p&gt;状態遷移図は、&lt;strong&gt;状態を表す〇&lt;/strong&gt;と、&lt;strong&gt;イベントを表す矢印&lt;/strong&gt;で構成されます。イベントでは、&lt;strong&gt;条件や処理内容&lt;/strong&gt;を記述します。&lt;/p&gt;
-  &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-  &lt;p&gt;例として、キャラクターを操作してマップ上を移動するプログラムを考えてみましょう。&lt;/p&gt;
-  &lt;figure&gt;
-  &lt;img src=&quot;./figs/102/move.svg&quot; alt=&quot;img&quot; /&gt;
-  &lt;figcaption aria-hidden=&quot;true&quot;&gt;img&lt;/figcaption&gt;
-  &lt;/figure&gt;
-  &lt;p&gt;この場合、「待機中」と「移動中」の&lt;strong&gt;2つの状態&lt;/strong&gt;があります。&lt;strong&gt;それぞれの状態を矢印がつないで&lt;/strong&gt;います。&lt;/p&gt;
-  &lt;p&gt;今、「待機中」の状態にあるとしましょう。「待機中」から「移動中」に向かう矢印には「移動キー押下
-  かつ
-  移動可能」とあります。これは、その状態に&lt;strong&gt;遷移する条件&lt;/strong&gt;を示しています。つまり、&lt;strong&gt;「待機中」のときに移動キーを押して、なおかつその先が移動できる場所であれば「移動中」になる&lt;/strong&gt;ということです。&lt;/p&gt;
-  &lt;p&gt;今度は、「待機中」から自分自身に向かっている矢印に注目してください。この場合、&lt;strong&gt;スラッシュの前半は条件を、後半は処理を示しています&lt;/strong&gt;。つまり、&lt;strong&gt;「待機中」のときに移動キーを押したものの、その先が移動できない場所であれば、向きだけ変えて状態は「待機中」のまま&lt;/strong&gt;ということです。&lt;/p&gt;
-  &lt;p&gt;このように、状態遷移図を用いることで&lt;strong&gt;全体の流れを整理できる&lt;/strong&gt;点が大きな魅力です。どの状態からどの状態へ、どんな条件で移るのかが明確になるため、設計がスムーズになります。また、状態遷移図を作成することで、必要な画面の切り替えを忘れてしまったり、逆に不要な切り替えをしてしまうなどの&lt;strong&gt;ミスも防ぐことができます&lt;/strong&gt;。特に&lt;strong&gt;複雑なシステムではとても大きな効果を発揮&lt;/strong&gt;します。&lt;/p&gt;
-  &lt;p&gt;この状態遷移図を活用して釣りゲームを作っていきましょう！…と言いたいところですが、先に少し準備が必要です。&lt;/p&gt;
-  &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-  &lt;h1 data-number=&quot;4&quot; id=&quot;画像を準備する&quot;&gt;&lt;span
-  class=&quot;header-section-number&quot;&gt;4&lt;/span&gt; 画像を準備する&lt;/h1&gt;
-  &lt;p&gt;キャラクタの画像を用意しましょう。&lt;/p&gt;
-  &lt;p&gt;&lt;img src=&quot;./figs/102/character_A.png&quot; alt=&quot;img&quot; /&gt; &lt;img
-  src=&quot;./figs/102/character_B.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
-  &lt;p&gt;&lt;a
-  href=&quot;https://github.com/k-768/python_game/blob/master/img/character_sideview.zip&quot;&gt;ここから&lt;/a&gt;zipファイルをダウンロードしてください。&lt;/p&gt;
-  &lt;p&gt;ファイルをダウンロードしたら、解凍したのち、中の画像すべてを&lt;code&gt;img&lt;/code&gt;フォルダの&lt;strong&gt;中に移動してください&lt;/strong&gt;。&lt;/p&gt;
-  &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-  &lt;h1 data-number=&quot;5&quot; id=&quot;画像を表示する&quot;&gt;&lt;span
-  class=&quot;header-section-number&quot;&gt;5&lt;/span&gt; 画像を表示する&lt;/h1&gt;
-  &lt;p&gt;新しいpythonファイル&lt;code&gt;game03.py&lt;/code&gt;を作成してください。&lt;a
-  href=&quot;https://github.com/k-768/PythonGameProgramming/blob/main/programs/game03.py&quot;&gt;ここから&lt;/a&gt;プログラムをコピー＆ペーストして実行してみてください。&lt;strong&gt;キャラクターが表示されているはずです&lt;/strong&gt;。このプログラムの要点について解説します。&lt;/p&gt;
-  &lt;p&gt;&lt;code&gt;40行目&lt;/code&gt;からキャラクタに関する処理が記述されています。変数&lt;code&gt;charaX&lt;/code&gt;、&lt;code&gt;charaY&lt;/code&gt;がキャラクタの座標です。&lt;code&gt;49行目&lt;/code&gt;では、画像を辞書型で読み込んでいます。&lt;/p&gt;
-  &lt;p&gt;そして、&lt;code&gt;61行目&lt;/code&gt;からはキャラクタの画像を配置する関数が定義されています。&lt;/p&gt;
-  &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-startFrom=&quot;60&quot;
-  data-caption=&quot;game03.py（抜粋）&quot;&gt;&lt;pre
-  class=&quot;sourceCode numberSource python numberLines&quot;&gt;&lt;code class=&quot;sourceCode python&quot; style=&quot;counter-reset: source-line 59;&quot;&gt;&lt;span id=&quot;cb1-60&quot;&gt;&lt;a href=&quot;#cb1-60&quot;&gt;&lt;/a&gt;&lt;span class=&quot;co&quot;&gt;#キャラクターを再描写する関数  &lt;/span&gt;&lt;/span&gt;</code></pre>
-      <span id="cb1-61"><a href="#cb1-61"></a><span
-      class="kw">def</span> setChara(x,y,state):</span> <span
-      id="cb1-62"><a href="#cb1-62"></a> <span
-      class="co">"""</span></span> <span
-      id="cb1-63"><a href="#cb1-63"></a><span class="co">
-      x:キャラのX座標</span></span> <span
-      id="cb1-64"><a href="#cb1-64"></a><span class="co">
-      y:キャラのY座標</span></span> <span
-      id="cb1-65"><a href="#cb1-65"></a><span class="co">
-      state:キャラの状態</span></span> <span
-      id="cb1-66"><a href="#cb1-66"></a><span class="co">
-      """</span></span> <span id="cb1-67"><a href="#cb1-67"></a> <span
-      class="co">#今の画像を消して再描写</span></span> <span
-      id="cb1-68"><a href="#cb1-68"></a> canvas.delete(<span
-      class="st">"chara"</span>)</span> <span
-      id="cb1-69"><a href="#cb1-69"></a> canvas.create_image(x,y,image
-      <span class="op">=</span>BIG_CHARA_IMAGE[state] ,tag<span
-      class="op">=</span><span class="st">"chara"</span>,anchor<span
-      class="op">=</span>tk.NW)</span></code>
-      </pre>
-      </div>
-      <p>
-      <br>
-      </p>
-      <h1 data-number="6" id="釣りのシステムを整える">
-      <span class="header-section-number">6</span>
-      釣りのシステムを整える
-      </h1>
-      <p>
-      以下の状態遷移図をもとに、システムを整えましょう。
-      </p>
+      <p><br></p>
+      <h1 data-number="3" id="状態遷移図とは"><span
+      class="header-section-number">3</span> 状態遷移図とは</h1>
+      <p>状態遷移図とは、<strong>ゲームの各シーン（状態）がどのように繋がっているかを図で表したもの</strong>です。例えば、プレイヤーが移動中の画面から敵に遭遇したら戦闘画面に切り替わる、戦闘が終わったら再び移動画面に戻る、などの流れを<strong>視覚的</strong>に示します。これにより、<strong>ゲーム全体の流れが一目でわかる</strong>ようになります。</p>
+      <p><br></p>
+      <figure>
+      <img src="./figs/102/demo.svg" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>状態遷移図は、<strong>状態を表す〇</strong>と、<strong>イベントを表す矢印</strong>で構成されます。イベントでは、<strong>条件や処理内容</strong>を記述します。</p>
+      <p><br></p>
+      <p>例として、キャラクターを操作してマップ上を移動するプログラムを考えてみましょう。</p>
+      <figure>
+      <img src="./figs/102/move.svg" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>この場合、「待機中」と「移動中」の<strong>2つの状態</strong>があります。<strong>それぞれの状態を矢印がつないで</strong>います。</p>
+      <p>今、「待機中」の状態にあるとしましょう。「待機中」から「移動中」に向かう矢印には「移動キー押下
+      かつ
+      移動可能」とあります。これは、その状態に<strong>遷移する条件</strong>を示しています。つまり、<strong>「待機中」のときに移動キーを押して、なおかつその先が移動できる場所であれば「移動中」になる</strong>ということです。</p>
+      <p>今度は、「待機中」から自分自身に向かっている矢印に注目してください。この場合、<strong>スラッシュの前半は条件を、後半は処理を示しています</strong>。つまり、<strong>「待機中」のときに移動キーを押したものの、その先が移動できない場所であれば、向きだけ変えて状態は「待機中」のまま</strong>ということです。</p>
+      <p>このように、状態遷移図を用いることで<strong>全体の流れを整理できる</strong>点が大きな魅力です。どの状態からどの状態へ、どんな条件で移るのかが明確になるため、設計がスムーズになります。また、状態遷移図を作成することで、必要な画面の切り替えを忘れてしまったり、逆に不要な切り替えをしてしまうなどの<strong>ミスも防ぐことができます</strong>。特に<strong>複雑なシステムではとても大きな効果を発揮</strong>します。</p>
+      <p>この状態遷移図を活用して釣りゲームを作っていきましょう！…と言いたいところですが、先に少し準備が必要です。</p>
+      <p><br></p>
+      <h1 data-number="4" id="画像を準備する"><span
+      class="header-section-number">4</span> 画像を準備する</h1>
+      <p>キャラクタの画像を用意しましょう。</p>
+      <p><img src="./figs/102/character_A.png" alt="img" /> <img
+      src="./figs/102/character_B.png" alt="img" /></p>
+      <p><a
+      href="https://github.com/k-768/python_game/blob/master/img/character_sideview.zip">ここから</a>zipファイルをダウンロードしてください。</p>
+      <p>ファイルをダウンロードしたら、解凍したのち、中の画像すべてを<code>img</code>フォルダの<strong>中に移動してください</strong>。</p>
+      <p><br></p>
+      <h1 data-number="5" id="画像を表示する"><span
+      class="header-section-number">5</span> 画像を表示する</h1>
+      <p>新しいpythonファイル<code>game03.py</code>を作成してください。<a
+      href="https://github.com/k-768/PythonGameProgramming/blob/main/programs/game03.py">ここから</a>プログラムをコピー＆ペーストして実行してみてください。<strong>キャラクターが表示されているはずです</strong>。このプログラムの要点について解説します。</p>
+      <p><code>40行目</code>からキャラクタに関する処理が記述されています。変数<code>charaX</code>、<code>charaY</code>がキャラクタの座標です。<code>49行目</code>では、画像を辞書型で読み込んでいます。</p>
+      <p>そして、<code>61行目</code>からはキャラクタの画像を配置する関数が定義されています。</p>
+      <div class="sourceCode" id="cb1" data-startFrom="60"
+      data-caption="game03.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 59;"><span id="cb1-60"><a href="#cb1-60"></a><span class="co">#キャラクターを再描写する関数  </span></span>
+<span id="cb1-61"><a href="#cb1-61"></a><span class="kw">def</span> setChara(x,y,state):</span>
+<span id="cb1-62"><a href="#cb1-62"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb1-63"><a href="#cb1-63"></a><span class="co">    x:キャラのX座標</span></span>
+<span id="cb1-64"><a href="#cb1-64"></a><span class="co">    y:キャラのY座標</span></span>
+<span id="cb1-65"><a href="#cb1-65"></a><span class="co">    state:キャラの状態</span></span>
+<span id="cb1-66"><a href="#cb1-66"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb1-67"><a href="#cb1-67"></a>    <span class="co">#今の画像を消して再描写</span></span>
+<span id="cb1-68"><a href="#cb1-68"></a>    canvas.delete(<span class="st">&quot;chara&quot;</span>)</span>
+<span id="cb1-69"><a href="#cb1-69"></a>    canvas.create_image(x,y,image <span class="op">=</span>BIG_CHARA_IMAGE[state] ,tag<span class="op">=</span><span class="st">&quot;chara&quot;</span>,anchor<span class="op">=</span>tk.NW)</span></code></pre></div>
+      <p><br></p>
+      <h1 data-number="6" id="釣りのシステムを整える"><span
+      class="header-section-number">6</span> 釣りのシステムを整える</h1>
+      <p>以下の状態遷移図をもとに、システムを整えましょう。</p>
       <figure>
       <img src="./figs/102/fishing_1.svg" alt="img" />
-      <figcaption aria-hidden="true">
-      img
-      </figcaption>
+      <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>
-      まず、現在どの状態にいるのかを示すために、変数<code>flag</code>を用意します。
-      </p>
-      <p>
-      flag | 意味 default | 待機中 wait | 釣り中 hit | ウキが沈む
-      success | 釣り成功 result | 釣り結果表示
-      </p>
-      <p>
-      <br>
-      </p>
-      <p>
-      今回は、この<code>flag</code>の中身を確認することでどの状態にいるのか判定できます。また、状態を遷移する際には<code>flag</code>の中身も忘れずに変更しなければいけません。
-      </p>
-      <div id="cb2" class="sourceCode" data-startfrom="1"
-      data-caption="flagによる判定">
-      <pre
-            class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>: <span class="co">#待機中のとき</span></span>
-      <span id="cb2-2"><a href="#cb2-2"></a>    待機中の処理を記述</span>
-      <span id="cb2-3"><a href="#cb2-3"></a>    <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
-      <span id="cb2-4"><a href="#cb2-4"></a>        待機中にスペースキーが押されたときの処理（釣りを開始する）</span>
-      <span id="cb2-5"><a href="#cb2-5"></a>        flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span></span>
-      <span id="cb2-6"><a href="#cb2-6"></a></span>
-      <span id="cb2-7"><a href="#cb2-7"></a><span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>): <span class="co">#魚釣り中のとき</span></span>
-      <span id="cb2-8"><a href="#cb2-8"></a>    魚釣り中の処理を記述</span>
-      <span id="cb2-9"><a href="#cb2-9"></a>    ・・・</span></code></pre>
-      </div>
-      <p>
-      <a
-            href="https://github.com/k-768/PythonGameProgramming/blob/main/programs/game04.py">ここから</a>プログラムをコピー＆ペーストして実行してみてください。スペースキーを押すと、キャラクターが釣りをする姿勢になります。
-      </p>
+      <p>まず、現在どの状態にいるのかを示すために、変数<code>flag</code>を用意します。</p>
+      <p>flag | 意味 default | 待機中 wait | 釣り中 hit | ウキが沈む
+      success | 釣り成功 result | 釣り結果表示</p>
+      <p><br></p>
+      <p>今回は、この<code>flag</code>の中身を確認することでどの状態にいるのか判定できます。また、状態を遷移する際には<code>flag</code>の中身も忘れずに変更しなければいけません。</p>
+      <div class="sourceCode" id="cb2" data-startFrom="1"
+      data-caption="flagによる判定"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>: <span class="co">#待機中のとき</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>    待機中の処理を記述</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
+<span id="cb2-4"><a href="#cb2-4"></a>        待機中にスペースキーが押されたときの処理（釣りを開始する）</span>
+<span id="cb2-5"><a href="#cb2-5"></a>        flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>): <span class="co">#魚釣り中のとき</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    魚釣り中の処理を記述</span>
+<span id="cb2-9"><a href="#cb2-9"></a>    ・・・</span></code></pre></div>
+      <p><a
+      href="https://github.com/k-768/PythonGameProgramming/blob/main/programs/game04.py">ここから</a>プログラムをコピー＆ペーストして実行してみてください。スペースキーを押すと、キャラクターが釣りをする姿勢になります。</p>
       <figure>
       <img src="./figs/102/fishing_chara.png" alt="img" />
-      <figcaption aria-hidden="true">
-      img
-      </figcaption>
+      <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>
-      <code>game03.py</code>から変更されたのは、以下のフラグによる条件分岐の箇所だけです。
-      </p>
-      <div id="cb3" class="sourceCode" data-startfrom="218"
-      data-caption="game04.py（抜粋）">
-      <pre
-            class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 217;"><span id="cb3-218"><a href="#cb3-218"></a><span class="co">#&gt;&gt;ゲームのメインループ関数&gt;&gt;</span></span>
-      <span id="cb3-219"><a href="#cb3-219"></a><span class="kw">def</span> gameLoop():</span>
-      <span id="cb3-220"><a href="#cb3-220"></a>    <span class="kw">global</span> charaX,charaY,flag,key,currentKey,prevKey,waitTick,fishingCount,resultWindow</span>
-      <span id="cb3-221"><a href="#cb3-221"></a>    </span>
-      <span id="cb3-222"><a href="#cb3-222"></a>    <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>): <span class="co">#待機中のとき </span></span>
-      <span id="cb3-223"><a href="#cb3-223"></a>        setChara(charaX,charaY,<span class="st">&quot;default&quot;</span>)</span>
-      <span id="cb3-224"><a href="#cb3-224"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
-      <span id="cb3-225"><a href="#cb3-225"></a>            canvas.delete(<span class="st">&quot;icon&quot;</span>)<span class="co">#釣りアイコン削除</span></span>
-      <span id="cb3-226"><a href="#cb3-226"></a>            flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span> <span class="co">#魚釣り中に遷移</span></span>
-      <span id="cb3-227"><a href="#cb3-227"></a>            waitTick <span class="op">=</span> random.randint(<span class="bu">round</span>(<span class="dv">3000</span><span class="op">/</span>TICK_TIME),<span class="bu">round</span>(<span class="dv">7000</span><span class="op">/</span>TICK_TIME))<span class="co">#3-7秒</span></span>
-      <span id="cb3-228"><a href="#cb3-228"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span> <span class="co">#待ち時間をランダムに決定</span></span>
-      <span id="cb3-229"><a href="#cb3-229"></a>    </span>
-      <span id="cb3-230"><a href="#cb3-230"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):<span class="co">#魚釣り中のとき</span></span>
-      <span id="cb3-231"><a href="#cb3-231"></a>        <span class="cf">if</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
-      <span id="cb3-232"><a href="#cb3-232"></a>            <span class="co">#キャラクター再描写</span></span>
-      <span id="cb3-233"><a href="#cb3-233"></a>            setChara(charaX,charaY,<span class="st">&quot;wait&quot;</span>)</span>
-      <span id="cb3-234"><a href="#cb3-234"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
-      <span id="cb3-235"><a href="#cb3-235"></a>            flag <span class="op">=</span> <span class="st">&quot;hit&quot;</span> <span class="co">#「ウキ沈む」に遷移</span></span>
-      <span id="cb3-236"><a href="#cb3-236"></a>            waitTick <span class="op">=</span> <span class="dv">10</span></span>
-      <span id="cb3-237"><a href="#cb3-237"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-      <span id="cb3-238"><a href="#cb3-238"></a>        </span>
-      <span id="cb3-239"><a href="#cb3-239"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):</span>
-      <span id="cb3-240"><a href="#cb3-240"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span> <span class="co">#待機カウンタを増やす</span></span>
-      <span id="cb3-241"><a href="#cb3-241"></a>    </span>
-      <span id="cb3-242"><a href="#cb3-242"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>): <span class="co">#魚がかかったとき</span></span>
-      <span id="cb3-243"><a href="#cb3-243"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
-      <span id="cb3-244"><a href="#cb3-244"></a>            flag <span class="op">=</span> <span class="st">&quot;success&quot;</span></span>
-      <span id="cb3-245"><a href="#cb3-245"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-      <span id="cb3-246"><a href="#cb3-246"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
-      <span id="cb3-247"><a href="#cb3-247"></a>            <span class="co">#キャラクター再描写</span></span>
-      <span id="cb3-248"><a href="#cb3-248"></a>            setChara(charaX,charaY,<span class="st">&quot;fight&quot;</span>)</span>
-      <span id="cb3-249"><a href="#cb3-249"></a>            <span class="bu">print</span>(<span class="st">&quot;ビク！&quot;</span>)</span>
-      <span id="cb3-250"><a href="#cb3-250"></a>        </span>
-      <span id="cb3-251"><a href="#cb3-251"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>):</span>
-      <span id="cb3-252"><a href="#cb3-252"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span>
-      <span id="cb3-253"><a href="#cb3-253"></a>    </span></code></pre>
-      </div>
-      <p>
-      <br>
-      </p>
+      <p><code>game03.py</code>から変更されたのは、以下のフラグによる条件分岐の箇所だけです。</p>
+      <div class="sourceCode" id="cb3" data-startFrom="218"
+      data-caption="game04.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 217;"><span id="cb3-218"><a href="#cb3-218"></a><span class="co">#&gt;&gt;ゲームのメインループ関数&gt;&gt;</span></span>
+<span id="cb3-219"><a href="#cb3-219"></a><span class="kw">def</span> gameLoop():</span>
+<span id="cb3-220"><a href="#cb3-220"></a>    <span class="kw">global</span> charaX,charaY,flag,key,currentKey,prevKey,waitTick,fishingCount,resultWindow</span>
+<span id="cb3-221"><a href="#cb3-221"></a>    </span>
+<span id="cb3-222"><a href="#cb3-222"></a>    <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>): <span class="co">#待機中のとき </span></span>
+<span id="cb3-223"><a href="#cb3-223"></a>        setChara(charaX,charaY,<span class="st">&quot;default&quot;</span>)</span>
+<span id="cb3-224"><a href="#cb3-224"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
+<span id="cb3-225"><a href="#cb3-225"></a>            canvas.delete(<span class="st">&quot;icon&quot;</span>)<span class="co">#釣りアイコン削除</span></span>
+<span id="cb3-226"><a href="#cb3-226"></a>            flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span> <span class="co">#魚釣り中に遷移</span></span>
+<span id="cb3-227"><a href="#cb3-227"></a>            waitTick <span class="op">=</span> random.randint(<span class="bu">round</span>(<span class="dv">3000</span><span class="op">/</span>TICK_TIME),<span class="bu">round</span>(<span class="dv">7000</span><span class="op">/</span>TICK_TIME))<span class="co">#3-7秒</span></span>
+<span id="cb3-228"><a href="#cb3-228"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span> <span class="co">#待ち時間をランダムに決定</span></span>
+<span id="cb3-229"><a href="#cb3-229"></a>    </span>
+<span id="cb3-230"><a href="#cb3-230"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):<span class="co">#魚釣り中のとき</span></span>
+<span id="cb3-231"><a href="#cb3-231"></a>        <span class="cf">if</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb3-232"><a href="#cb3-232"></a>            <span class="co">#キャラクター再描写</span></span>
+<span id="cb3-233"><a href="#cb3-233"></a>            setChara(charaX,charaY,<span class="st">&quot;wait&quot;</span>)</span>
+<span id="cb3-234"><a href="#cb3-234"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb3-235"><a href="#cb3-235"></a>            flag <span class="op">=</span> <span class="st">&quot;hit&quot;</span> <span class="co">#「ウキ沈む」に遷移</span></span>
+<span id="cb3-236"><a href="#cb3-236"></a>            waitTick <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb3-237"><a href="#cb3-237"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-238"><a href="#cb3-238"></a>        </span>
+<span id="cb3-239"><a href="#cb3-239"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):</span>
+<span id="cb3-240"><a href="#cb3-240"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span> <span class="co">#待機カウンタを増やす</span></span>
+<span id="cb3-241"><a href="#cb3-241"></a>    </span>
+<span id="cb3-242"><a href="#cb3-242"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>): <span class="co">#魚がかかったとき</span></span>
+<span id="cb3-243"><a href="#cb3-243"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
+<span id="cb3-244"><a href="#cb3-244"></a>            flag <span class="op">=</span> <span class="st">&quot;success&quot;</span></span>
+<span id="cb3-245"><a href="#cb3-245"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-246"><a href="#cb3-246"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb3-247"><a href="#cb3-247"></a>            <span class="co">#キャラクター再描写</span></span>
+<span id="cb3-248"><a href="#cb3-248"></a>            setChara(charaX,charaY,<span class="st">&quot;fight&quot;</span>)</span>
+<span id="cb3-249"><a href="#cb3-249"></a>            <span class="bu">print</span>(<span class="st">&quot;ビク！&quot;</span>)</span>
+<span id="cb3-250"><a href="#cb3-250"></a>        </span>
+<span id="cb3-251"><a href="#cb3-251"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>):</span>
+<span id="cb3-252"><a href="#cb3-252"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb3-253"><a href="#cb3-253"></a>    </span></code></pre></div>
+      <p><br></p>
       <figure>
       <img src="./figs/102/fishing_1.svg" alt="img" />
-      <figcaption aria-hidden="true">
-      img
-      </figcaption>
+      <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>
-      「ウキ投下中」から「ウキ沈む」には、時間の経過によって遷移します。そのため、変数<code>fishingCount</code>を用いて<strong>時間を計っています</strong>。処理を1回行うごとに<code>fishingCount</code>を1ずつ増やしていき、変数<code>waitTick</code>と同じ値になれば遷移する仕組みです。
-      </p>
-      <p>
-      <code>waitTick</code>はランダムに決定しているので、<strong>魚はすぐ釣れるときもあればなかなか釣れないときもあります</strong>。
-      </p>
-      <p>
-      <br>
-      </p>
-      <h1 data-number="7" id="釣りの失敗を実装する">
-      <span class="header-section-number">7</span> 釣りの失敗を実装する
-      </h1>
-      <p>
-      今の状態では、釣りは絶対に失敗することがありません。これではゲームとしてはイマイチです。そこで、<strong>スペースキーを押すのが早すぎたり遅すぎたりしたら失敗する</strong>ように改造しましょう。
-      </p>
+      <p>「ウキ投下中」から「ウキ沈む」には、時間の経過によって遷移します。そのため、変数<code>fishingCount</code>を用いて<strong>時間を計っています</strong>。処理を1回行うごとに<code>fishingCount</code>を1ずつ増やしていき、変数<code>waitTick</code>と同じ値になれば遷移する仕組みです。</p>
+      <p><code>waitTick</code>はランダムに決定しているので、<strong>魚はすぐ釣れるときもあればなかなか釣れないときもあります</strong>。</p>
+      <p><br></p>
+      <h1 data-number="7" id="釣りの失敗を実装する"><span
+      class="header-section-number">7</span> 釣りの失敗を実装する</h1>
+      <p>今の状態では、釣りは絶対に失敗することがありません。これではゲームとしてはイマイチです。そこで、<strong>スペースキーを押すのが早すぎたり遅すぎたりしたら失敗する</strong>ように改造しましょう。</p>
       <figure>
       <img src="./figs/102/fishing_2.svg" alt="img" />
-      <figcaption aria-hidden="true">
-      img
-      </figcaption>
+      <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>
-      失敗したときは、<code>flag</code>は<code>“default”</code>にすることにします。
-      </p>
+      <p>失敗したときは、<code>flag</code>は<code>"default"</code>にすることにします。</p>
       <hr />
       <ul>
-      <li>
-      <p>
-      <strong>Challenge
-      A2-1</strong>　「ウキ投下中」にスペースキーを押したら失敗する処理を追加しましょう。
-      </p>
-      </li>
-      <li>
-      <p>
-      <strong>Challenge
-      A2-2</strong>　「ウキ沈む」に遷移したのち、一定時間が経過すると失敗する処理を追加しましょう。
-      </p>
-      </li>
+      <li><p><strong>Challenge
+      A2-1</strong>　「ウキ投下中」にスペースキーを押したら失敗する処理を追加しましょう。</p></li>
+      <li><p><strong>Challenge
+      A2-2</strong>　「ウキ沈む」に遷移したのち、一定時間が経過すると失敗する処理を追加しましょう。</p></li>
       </ul>
-      <p>
-      <br><br>
-      </p>
-      <p>
-      <strong><i class="fa-solid fa-check"></i>解答例</strong>
-      </p>
-      <div id="cb4" class="sourceCode" data-startfrom="230"
-      data-caption="Challenge A2-1">
-      <pre
-            class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 229;"><span id="cb4-230"><a href="#cb4-230"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):<span class="co">#魚釣り中のとき</span></span>
-      <span id="cb4-231"><a href="#cb4-231"></a>        <span class="co">#!!!!!!!!!!!!ここから!!!!!!!!!!!!!</span></span>
-      <span id="cb4-232"><a href="#cb4-232"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)): </span>
-      <span id="cb4-233"><a href="#cb4-233"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
-      <span id="cb4-234"><a href="#cb4-234"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
-      <span id="cb4-235"><a href="#cb4-235"></a>        <span class="co">#!!!!!!!!!!!!ここまで!!!!!!!!!!!!!</span></span>
-      <span id="cb4-236"><a href="#cb4-236"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
-      <span id="cb4-237"><a href="#cb4-237"></a>            <span class="co">#キャラクター再描写</span></span>
-      <span id="cb4-238"><a href="#cb4-238"></a>            setChara(charaX,charaY,<span class="st">&quot;wait&quot;</span>)</span>
-      <span id="cb4-239"><a href="#cb4-239"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
-      <span id="cb4-240"><a href="#cb4-240"></a>            flag <span class="op">=</span> <span class="st">&quot;hit&quot;</span> <span class="co">#「ウキ沈む」に遷移</span></span>
-      <span id="cb4-241"><a href="#cb4-241"></a>            waitTick <span class="op">=</span> <span class="dv">10</span></span>
-      <span id="cb4-242"><a href="#cb4-242"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-      <span id="cb4-243"><a href="#cb4-243"></a></span>
-      <span id="cb4-244"><a href="#cb4-244"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):</span>
-      <span id="cb4-245"><a href="#cb4-245"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span> <span class="co">#待機カウンタを増やす</span></span></code></pre>
-      </div>
-      <div id="cb5" class="sourceCode" data-startfrom="247"
-      data-caption="Challenge A2-2">
-      <pre
-            class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 246;"><span id="cb5-247"><a href="#cb5-247"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>): <span class="co">#魚がかかったとき</span></span>
-      <span id="cb5-248"><a href="#cb5-248"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
-      <span id="cb5-249"><a href="#cb5-249"></a>            flag <span class="op">=</span> <span class="st">&quot;success&quot;</span></span>
-      <span id="cb5-250"><a href="#cb5-250"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-      <span id="cb5-251"><a href="#cb5-251"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
-      <span id="cb5-252"><a href="#cb5-252"></a>            <span class="co">#キャラクター再描写</span></span>
-      <span id="cb5-253"><a href="#cb5-253"></a>            setChara(charaX,charaY,<span class="st">&quot;fight&quot;</span>)</span>
-      <span id="cb5-254"><a href="#cb5-254"></a>            <span class="bu">print</span>(<span class="st">&quot;ビク！&quot;</span>)</span>
-      <span id="cb5-255"><a href="#cb5-255"></a>        <span class="co">#!!!!!!!!!!!!ここから!!!!!!!!!!!!!</span></span>
-      <span id="cb5-256"><a href="#cb5-256"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
-      <span id="cb5-257"><a href="#cb5-257"></a>            <span class="bu">print</span>(<span class="st">&quot;遅すぎた！&quot;</span>)</span>
-      <span id="cb5-258"><a href="#cb5-258"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
-      <span id="cb5-259"><a href="#cb5-259"></a>        <span class="co">#!!!!!!!!!!!!ここまで!!!!!!!!!!!!!</span></span>
-      <span id="cb5-260"><a href="#cb5-260"></a></span>
-      <span id="cb5-261"><a href="#cb5-261"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>):</span>
-      <span id="cb5-262"><a href="#cb5-262"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span></code></pre>
-      </div>
-      <h1 data-number="8" id="ウキが少しだけ沈むイベントを実装する">
-      <span class="header-section-number">8</span>
-      ウキが少しだけ沈むイベントを実装する
-      </h1>
+      <p><br><br></p>
+      <p><strong><i class="fa-solid fa-check"></i>解答例</strong></p>
+      <div class="sourceCode" id="cb4" data-startFrom="230"
+      data-caption="Challenge A2-1"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 229;"><span id="cb4-230"><a href="#cb4-230"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):<span class="co">#魚釣り中のとき</span></span>
+<span id="cb4-231"><a href="#cb4-231"></a>        <span class="co">#!!!!!!!!!!!!ここから!!!!!!!!!!!!!</span></span>
+<span id="cb4-232"><a href="#cb4-232"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)): </span>
+<span id="cb4-233"><a href="#cb4-233"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
+<span id="cb4-234"><a href="#cb4-234"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
+<span id="cb4-235"><a href="#cb4-235"></a>        <span class="co">#!!!!!!!!!!!!ここまで!!!!!!!!!!!!!</span></span>
+<span id="cb4-236"><a href="#cb4-236"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb4-237"><a href="#cb4-237"></a>            <span class="co">#キャラクター再描写</span></span>
+<span id="cb4-238"><a href="#cb4-238"></a>            setChara(charaX,charaY,<span class="st">&quot;wait&quot;</span>)</span>
+<span id="cb4-239"><a href="#cb4-239"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb4-240"><a href="#cb4-240"></a>            flag <span class="op">=</span> <span class="st">&quot;hit&quot;</span> <span class="co">#「ウキ沈む」に遷移</span></span>
+<span id="cb4-241"><a href="#cb4-241"></a>            waitTick <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb4-242"><a href="#cb4-242"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-243"><a href="#cb4-243"></a></span>
+<span id="cb4-244"><a href="#cb4-244"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):</span>
+<span id="cb4-245"><a href="#cb4-245"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span> <span class="co">#待機カウンタを増やす</span></span></code></pre></div>
+      <div class="sourceCode" id="cb5" data-startFrom="247"
+      data-caption="Challenge A2-2"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 246;"><span id="cb5-247"><a href="#cb5-247"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>): <span class="co">#魚がかかったとき</span></span>
+<span id="cb5-248"><a href="#cb5-248"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
+<span id="cb5-249"><a href="#cb5-249"></a>            flag <span class="op">=</span> <span class="st">&quot;success&quot;</span></span>
+<span id="cb5-250"><a href="#cb5-250"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-251"><a href="#cb5-251"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb5-252"><a href="#cb5-252"></a>            <span class="co">#キャラクター再描写</span></span>
+<span id="cb5-253"><a href="#cb5-253"></a>            setChara(charaX,charaY,<span class="st">&quot;fight&quot;</span>)</span>
+<span id="cb5-254"><a href="#cb5-254"></a>            <span class="bu">print</span>(<span class="st">&quot;ビク！&quot;</span>)</span>
+<span id="cb5-255"><a href="#cb5-255"></a>        <span class="co">#!!!!!!!!!!!!ここから!!!!!!!!!!!!!</span></span>
+<span id="cb5-256"><a href="#cb5-256"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb5-257"><a href="#cb5-257"></a>            <span class="bu">print</span>(<span class="st">&quot;遅すぎた！&quot;</span>)</span>
+<span id="cb5-258"><a href="#cb5-258"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
+<span id="cb5-259"><a href="#cb5-259"></a>        <span class="co">#!!!!!!!!!!!!ここまで!!!!!!!!!!!!!</span></span>
+<span id="cb5-260"><a href="#cb5-260"></a></span>
+<span id="cb5-261"><a href="#cb5-261"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>):</span>
+<span id="cb5-262"><a href="#cb5-262"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
+      <h1 data-number="8"
+      id="ウキが少しだけ沈むイベントを実装する"><span
+      class="header-section-number">8</span>
+      ウキが少しだけ沈むイベントを実装する</h1>
       <figure>
       <img src="./figs/102/fishing_3.svg" alt="img" />
-      <figcaption aria-hidden="true">
-      img
-      </figcaption>
+      <figcaption aria-hidden="true">img</figcaption>
       </figure>
-      <p>
-      実際の魚釣りでは、魚が喰いつく前に餌をつつくことがあります。それを実装してみましょう。
-      </p>
-      <p>
-      ウキがピクピクしているときにあせってスペースキーを押すと魚を逃がしてしまいます。ウキがピクピクするか沈むかはランダムで決定します。<code>flag</code>は<code>“bite”</code>にすることにします。
-      </p>
-      <p>
-      まず、「釣り中」に一定時間経過したらウキがピクピクするか沈むかはランダムで決定するように書き換えます。
-      </p>
-      <div id="cb6" class="sourceCode" data-startfrom="279"
-      data-caption="game06">
-      <pre
-            class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 278;"><span id="cb6-279"><a href="#cb6-279"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):<span class="co">#魚釣り中のとき</span></span>
-      <span id="cb6-280"><a href="#cb6-280"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)): </span>
-      <span id="cb6-281"><a href="#cb6-281"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
-      <span id="cb6-282"><a href="#cb6-282"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
-      <span id="cb6-283"><a href="#cb6-283"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
-      <span id="cb6-284"><a href="#cb6-284"></a>            <span class="co">#キャラクター再描写</span></span>
-      <span id="cb6-285"><a href="#cb6-285"></a>            setChara(charaX,charaY,<span class="st">&quot;wait&quot;</span>)</span>
-      <span id="cb6-286"><a href="#cb6-286"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
-      <span id="cb6-287"><a href="#cb6-287"></a>            <span class="co">#!!!!!!!!!!!!!ここから!!!!!!!!!!!!!!!!</span></span>
-      <span id="cb6-288"><a href="#cb6-288"></a>            <span class="cf">if</span>(random.randint(<span class="dv">1</span>,<span class="dv">3</span>)<span class="op">!=</span><span class="dv">1</span>):<span class="co">#2/3の確率で</span></span>
-      <span id="cb6-289"><a href="#cb6-289"></a>                flag <span class="op">=</span> <span class="st">&quot;hit&quot;</span></span>
-      <span id="cb6-290"><a href="#cb6-290"></a>                waitTick <span class="op">=</span> <span class="dv">10</span></span>
-      <span id="cb6-291"><a href="#cb6-291"></a>                fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-      <span id="cb6-292"><a href="#cb6-292"></a>            <span class="cf">else</span>:</span>
-      <span id="cb6-293"><a href="#cb6-293"></a>                flag <span class="op">=</span> <span class="st">&quot;bite&quot;</span></span>
-      <span id="cb6-294"><a href="#cb6-294"></a>                waitTick <span class="op">=</span> random.randint(<span class="dv">2</span>,<span class="dv">10</span>)</span>
-      <span id="cb6-295"><a href="#cb6-295"></a>                fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-      <span id="cb6-296"><a href="#cb6-296"></a>            <span class="co">#!!!!!!!!!!!!!ここまで!!!!!!!!!!!!!!!!</span></span></code></pre>
-      </div>
-      <p>
-      そして、<code>flag</code>が<code>“bite”</code>のときの処理を追加します。
+      <p>実際の魚釣りでは、魚が喰いつく前に餌をつつくことがあります。それを実装してみましょう。</p>
+      <p>ウキがピクピクしているときにあせってスペースキーを押すと魚を逃がしてしまいます。ウキがピクピクするか沈むかはランダムで決定します。<code>flag</code>は<code>"bite"</code>にすることにします。</p>
+      <p>まず、「釣り中」に一定時間経過したらウキがピクピクするか沈むかはランダムで決定するように書き換えます。</p>
+      <div class="sourceCode" id="cb6" data-startFrom="279"
+      data-caption="game06"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 278;"><span id="cb6-279"><a href="#cb6-279"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):<span class="co">#魚釣り中のとき</span></span>
+<span id="cb6-280"><a href="#cb6-280"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)): </span>
+<span id="cb6-281"><a href="#cb6-281"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
+<span id="cb6-282"><a href="#cb6-282"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
+<span id="cb6-283"><a href="#cb6-283"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb6-284"><a href="#cb6-284"></a>            <span class="co">#キャラクター再描写</span></span>
+<span id="cb6-285"><a href="#cb6-285"></a>            setChara(charaX,charaY,<span class="st">&quot;wait&quot;</span>)</span>
+<span id="cb6-286"><a href="#cb6-286"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb6-287"><a href="#cb6-287"></a>            <span class="co">#!!!!!!!!!!!!!ここから!!!!!!!!!!!!!!!!</span></span>
+<span id="cb6-288"><a href="#cb6-288"></a>            <span class="cf">if</span>(random.randint(<span class="dv">1</span>,<span class="dv">3</span>)<span class="op">!=</span><span class="dv">1</span>):<span class="co">#2/3の確率で</span></span>
+<span id="cb6-289"><a href="#cb6-289"></a>                flag <span class="op">=</span> <span class="st">&quot;hit&quot;</span></span>
+<span id="cb6-290"><a href="#cb6-290"></a>                waitTick <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb6-291"><a href="#cb6-291"></a>                fishingCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-292"><a href="#cb6-292"></a>            <span class="cf">else</span>:</span>
+<span id="cb6-293"><a href="#cb6-293"></a>                flag <span class="op">=</span> <span class="st">&quot;bite&quot;</span></span>
+<span id="cb6-294"><a href="#cb6-294"></a>                waitTick <span class="op">=</span> random.randint(<span class="dv">2</span>,<span class="dv">10</span>)</span>
+<span id="cb6-295"><a href="#cb6-295"></a>                fishingCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-296"><a href="#cb6-296"></a>            <span class="co">#!!!!!!!!!!!!!ここまで!!!!!!!!!!!!!!!!</span></span></code></pre></div>
+      <p>そして、<code>flag</code>が<code>"bite"</code>のときの処理を追加します。
       条件分岐が状態遷移図と対応していいるのを確認してください。
-      少し時間が経過したら<code>“default”</code>に戻るようになっています。
-      </p>
-      <div id="cb7" class="sourceCode" data-startfrom="302"
-      data-caption="game06">
-      <pre
-            class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 301;"><span id="cb7-302"><a href="#cb7-302"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>): <span class="co">#魚が少し喰いついたとき</span></span>
-      <span id="cb7-303"><a href="#cb7-303"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
-      <span id="cb7-304"><a href="#cb7-304"></a>            setIcon(charaX,charaY,<span class="st">&quot;miss&quot;</span>)<span class="co">#アイコン描写</span></span>
-      <span id="cb7-305"><a href="#cb7-305"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
-      <span id="cb7-306"><a href="#cb7-306"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
-      <span id="cb7-307"><a href="#cb7-307"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
-      <span id="cb7-308"><a href="#cb7-308"></a>            setChara(charaX,charaY,<span class="st">&quot;bite&quot;</span>)</span>
-      <span id="cb7-309"><a href="#cb7-309"></a>            <span class="bu">print</span>(<span class="st">&quot;ピク...&quot;</span>)</span>
-      <span id="cb7-310"><a href="#cb7-310"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
-      <span id="cb7-311"><a href="#cb7-311"></a>            flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span></span>
-      <span id="cb7-312"><a href="#cb7-312"></a>            waitTick <span class="op">=</span> random.randint(<span class="bu">round</span>(<span class="dv">200</span><span class="op">/</span>TICK_TIME),<span class="bu">round</span>(<span class="dv">2000</span><span class="op">/</span>TICK_TIME))</span>
-      <span id="cb7-313"><a href="#cb7-313"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-      <span id="cb7-314"><a href="#cb7-314"></a>        </span>
-      <span id="cb7-315"><a href="#cb7-315"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>):</span>
-      <span id="cb7-316"><a href="#cb7-316"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span></code></pre>
-      </div>
-      <h1 data-number="9" id="ゲームを改造する">
-      <span class="header-section-number">9</span> ゲームを改造する
-      </h1>
-      <p>
-      これにて、簡単な釣りゲームの完成です！ここからは、自由に改造してみてください。
-      </p>
-      <p>
-      改造例を提示します。ウキが少しだけ沈むイベントを実装しましたが、このままだと「ウキが沈んだ」のか「ピクピクしている」だけなのか区別がつきにくくなってしまいました。そこで、ヒットしたときに頭上にアイコンを表示して、分かりやすくしてみました。以下にプログラム全体を示します。
-      </p>
-      <p>
-      実行する前に<a
-            href="https://github.com/k-768/python_game/blob/master/img/icon.zip">ここから</a>zipファイルをダウンロードして、<code>img</code>フォルダに解凍してください。実行すると、各状態に遷移したときに、頭上にアイコンを表示されます。
-      </p>
-      <p>
-      次回からは釣りとは少し離れて、マップの表示やキャラクタの歩行について学びましょう。
-      </p>
-      <div id="cb8" class="sourceCode" data-startfrom="1"
-      data-caption="game07.py">
-      <pre
-            class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> copy</span>
-      <span id="cb8-2"><a href="#cb8-2"></a><span class="im">import</span> os</span>
-      <span id="cb8-3"><a href="#cb8-3"></a><span class="im">import</span> random</span>
-      <span id="cb8-4"><a href="#cb8-4"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
-      <span id="cb8-5"><a href="#cb8-5"></a></span>
-      <span id="cb8-6"><a href="#cb8-6"></a></span>
-      <span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;&gt;ディレクトリ&gt;&gt;</span></span>
-      <span id="cb8-8"><a href="#cb8-8"></a>cwd <span class="op">=</span> os.getcwd()</span>
-      <span id="cb8-9"><a href="#cb8-9"></a></span>
-      <span id="cb8-10"><a href="#cb8-10"></a></span>
-      <span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt;&gt;マップ設定&gt;&gt;</span></span>
-      <span id="cb8-12"><a href="#cb8-12"></a>MAP_SIZE_X <span class="op">=</span> <span class="dv">384</span>  <span class="co">#マップ画像のxピクセル数</span></span>
-      <span id="cb8-13"><a href="#cb8-13"></a>MAP_SIZE_Y <span class="op">=</span> <span class="dv">384</span>  <span class="co">#マップ画像のyピクセル数</span></span>
-      <span id="cb8-14"><a href="#cb8-14"></a></span>
-      <span id="cb8-15"><a href="#cb8-15"></a>MAGNIFICATION_RATE <span class="op">=</span> <span class="dv">2</span> <span class="co"># 拡大率</span></span>
-      <span id="cb8-16"><a href="#cb8-16"></a></span>
-      <span id="cb8-17"><a href="#cb8-17"></a></span>
-      <span id="cb8-18"><a href="#cb8-18"></a><span class="co">#&gt;&gt;ウィンドウ、キャンバス&gt;&gt;</span></span>
-      <span id="cb8-19"><a href="#cb8-19"></a>CANVAS_WIDTH <span class="op">=</span> MAP_SIZE_X <span class="op">*</span> MAGNIFICATION_RATE <span class="co">#キャンバス幅</span></span>
-      <span id="cb8-20"><a href="#cb8-20"></a>CANVAS_HEIGHT <span class="op">=</span> MAP_SIZE_Y <span class="op">*</span> MAGNIFICATION_RATE <span class="co">#キャンバス高さ</span></span>
-      <span id="cb8-21"><a href="#cb8-21"></a>MARGINE_X <span class="op">=</span> <span class="dv">2</span> <span class="co">#マージン</span></span>
-      <span id="cb8-22"><a href="#cb8-22"></a>MARGINE_Y <span class="op">=</span> <span class="dv">2</span> <span class="co">#マージン</span></span>
-      <span id="cb8-23"><a href="#cb8-23"></a>CANVAS_SIZE <span class="op">=</span> <span class="ss">f&quot;</span><span class="sc">{</span>CANVAS_WIDTH<span class="op">+</span>MARGINE_X<span class="sc">}</span><span class="ss">x</span><span class="sc">{</span>CANVAS_HEIGHT<span class="op">+</span>MARGINE_Y<span class="sc">}</span><span class="ss">&quot;</span><span class="co">#キャンバスサイズ</span></span>
-      <span id="cb8-24"><a href="#cb8-24"></a></span>
-      <span id="cb8-25"><a href="#cb8-25"></a><span class="co">#ウィンドウ設置</span></span>
-      <span id="cb8-26"><a href="#cb8-26"></a>root <span class="op">=</span> tk.Tk()</span>
-      <span id="cb8-27"><a href="#cb8-27"></a>root.title(<span class="st">&quot;game07&quot;</span>)</span>
-      <span id="cb8-28"><a href="#cb8-28"></a>root.geometry(CANVAS_SIZE)</span>
-      <span id="cb8-29"><a href="#cb8-29"></a></span>
-      <span id="cb8-30"><a href="#cb8-30"></a><span class="co">#キャンバス設置</span></span>
-      <span id="cb8-31"><a href="#cb8-31"></a>canvas <span class="op">=</span> tk.Canvas(root,width <span class="op">=</span> CANVAS_WIDTH,height <span class="op">=</span> CANVAS_HEIGHT,bg <span class="op">=</span> <span class="st">&quot;skyblue&quot;</span>)</span>
-      <span id="cb8-32"><a href="#cb8-32"></a>canvas.pack()</span>
-      <span id="cb8-33"><a href="#cb8-33"></a></span>
-      <span id="cb8-34"><a href="#cb8-34"></a></span>
-      <span id="cb8-35"><a href="#cb8-35"></a></span>
-      <span id="cb8-36"><a href="#cb8-36"></a><span class="co">#マップ画像</span></span>
-      <span id="cb8-37"><a href="#cb8-37"></a>MAP_IMAGE <span class="op">=</span> tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/fishing_map.png&quot;</span>)</span>
-      <span id="cb8-38"><a href="#cb8-38"></a>MAP_BIG_IMAGE <span class="op">=</span> MAP_IMAGE.zoom(MAGNIFICATION_RATE,MAGNIFICATION_RATE)</span>
-      <span id="cb8-39"><a href="#cb8-39"></a></span>
-      <span id="cb8-40"><a href="#cb8-40"></a><span class="co">#&gt;&gt;キャラクター&gt;&gt;</span></span>
-      <span id="cb8-41"><a href="#cb8-41"></a>CHARA_WIDTH <span class="op">=</span> <span class="dv">64</span>  <span class="co">#キャラの幅</span></span>
-      <span id="cb8-42"><a href="#cb8-42"></a>CHARA_HEIGHT <span class="op">=</span> <span class="dv">96</span> <span class="co">#キャラの高さ</span></span>
-      <span id="cb8-43"><a href="#cb8-43"></a></span>
-      <span id="cb8-44"><a href="#cb8-44"></a><span class="co">#キャラクターの座標</span></span>
-      <span id="cb8-45"><a href="#cb8-45"></a>charaX <span class="op">=</span> <span class="dv">160</span> <span class="op">*</span> MAGNIFICATION_RATE </span>
-      <span id="cb8-46"><a href="#cb8-46"></a>charaY <span class="op">=</span> <span class="dv">128</span> <span class="op">*</span> MAGNIFICATION_RATE</span>
-      <span id="cb8-47"><a href="#cb8-47"></a>flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
-      <span id="cb8-48"><a href="#cb8-48"></a><span class="co">&#39;&#39;&#39;</span></span>
-      <span id="cb8-49"><a href="#cb8-49"></a><span class="co">default:通常状態</span></span>
-      <span id="cb8-50"><a href="#cb8-50"></a><span class="co">wait:釣り中</span></span>
-      <span id="cb8-51"><a href="#cb8-51"></a><span class="co">bite:ウキがピクつく</span></span>
-      <span id="cb8-52"><a href="#cb8-52"></a><span class="co">hit:ウキが沈む</span></span>
-      <span id="cb8-53"><a href="#cb8-53"></a><span class="co">fight:格闘中</span></span>
-      <span id="cb8-54"><a href="#cb8-54"></a><span class="co">success:釣り成功</span></span>
-      <span id="cb8-55"><a href="#cb8-55"></a><span class="co">result:釣り結果表示</span></span>
-      <span id="cb8-56"><a href="#cb8-56"></a><span class="co">&#39;&#39;&#39;</span></span>
-      <span id="cb8-57"><a href="#cb8-57"></a>fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-      <span id="cb8-58"><a href="#cb8-58"></a>waitTick <span class="op">=</span> <span class="dv">0</span></span>
-      <span id="cb8-59"><a href="#cb8-59"></a></span>
-      <span id="cb8-60"><a href="#cb8-60"></a></span>
-      <span id="cb8-61"><a href="#cb8-61"></a><span class="co">#ゲームの基本となる1ティック時間(ms)</span></span>
-      <span id="cb8-62"><a href="#cb8-62"></a>TICK_TIME <span class="op">=</span> <span class="dv">50</span>  </span>
-      <span id="cb8-63"><a href="#cb8-63"></a></span>
-      <span id="cb8-64"><a href="#cb8-64"></a><span class="co">#キャラクターの画像</span></span>
-      <span id="cb8-65"><a href="#cb8-65"></a>CHARA_IMAGE <span class="op">=</span> {</span>
-      <span id="cb8-66"><a href="#cb8-66"></a>    <span class="st">&quot;default&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/character_A.png&quot;</span>),</span>
-      <span id="cb8-67"><a href="#cb8-67"></a>    <span class="st">&quot;wait&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/character_B.png&quot;</span>),</span>
-      <span id="cb8-68"><a href="#cb8-68"></a>    <span class="st">&quot;bite&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/character_C.png&quot;</span>),</span>
-      <span id="cb8-69"><a href="#cb8-69"></a>    <span class="st">&quot;hit&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/character_D1.png&quot;</span>),</span>
-      <span id="cb8-70"><a href="#cb8-70"></a>    <span class="st">&quot;fight&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/character_D2.png&quot;</span>),</span>
-      <span id="cb8-71"><a href="#cb8-71"></a>}</span>
-      <span id="cb8-72"><a href="#cb8-72"></a></span>
-      <span id="cb8-73"><a href="#cb8-73"></a>BIG_CHARA_IMAGE <span class="op">=</span> {key :img.zoom(MAGNIFICATION_RATE,MAGNIFICATION_RATE) <span class="cf">for</span> key , img <span class="kw">in</span> CHARA_IMAGE.items()}</span>
-      <span id="cb8-74"><a href="#cb8-74"></a></span>
-      <span id="cb8-75"><a href="#cb8-75"></a></span>
-      <span id="cb8-76"><a href="#cb8-76"></a><span class="co">#キャラクターを再描写する関数  </span></span>
-      <span id="cb8-77"><a href="#cb8-77"></a><span class="kw">def</span> setChara(x,y,state):</span>
-      <span id="cb8-78"><a href="#cb8-78"></a>    <span class="co">&quot;&quot;&quot;</span></span>
-      <span id="cb8-79"><a href="#cb8-79"></a><span class="co">    x:キャラのX座標</span></span>
-      <span id="cb8-80"><a href="#cb8-80"></a><span class="co">    y:キャラのY座標</span></span>
-      <span id="cb8-81"><a href="#cb8-81"></a><span class="co">    state:キャラの状態</span></span>
-      <span id="cb8-82"><a href="#cb8-82"></a><span class="co">    &quot;&quot;&quot;</span></span>
-      <span id="cb8-83"><a href="#cb8-83"></a>    <span class="co">#今の画像を消して再描写</span></span>
-      <span id="cb8-84"><a href="#cb8-84"></a>    canvas.delete(<span class="st">&quot;chara&quot;</span>)</span>
-      <span id="cb8-85"><a href="#cb8-85"></a>    canvas.create_image(x,y,image <span class="op">=</span>BIG_CHARA_IMAGE[state] ,tag<span class="op">=</span><span class="st">&quot;chara&quot;</span>,anchor<span class="op">=</span>tk.NW)</span>
-      <span id="cb8-86"><a href="#cb8-86"></a></span>
-      <span id="cb8-87"><a href="#cb8-87"></a></span>
-      <span id="cb8-88"><a href="#cb8-88"></a><span class="co">#&gt;&gt;アイコン&gt;&gt;</span></span>
-      <span id="cb8-89"><a href="#cb8-89"></a><span class="co"># 吹き出し</span></span>
-      <span id="cb8-90"><a href="#cb8-90"></a></span>
-      <span id="cb8-91"><a href="#cb8-91"></a>ICON <span class="op">=</span> {</span>
-      <span id="cb8-92"><a href="#cb8-92"></a>    <span class="st">&quot;fishing&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/fishing.png&quot;</span>),</span>
-      <span id="cb8-93"><a href="#cb8-93"></a>    <span class="st">&quot;hit&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/hit.png&quot;</span>),</span>
-      <span id="cb8-94"><a href="#cb8-94"></a>    <span class="st">&quot;miss&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/miss.png&quot;</span>),</span>
-      <span id="cb8-95"><a href="#cb8-95"></a>    <span class="st">&quot;fight&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/fight.png&quot;</span>),</span>
-      <span id="cb8-96"><a href="#cb8-96"></a>    <span class="st">&quot;success&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/success.png&quot;</span>),</span>
-      <span id="cb8-97"><a href="#cb8-97"></a>}</span>
-      <span id="cb8-98"><a href="#cb8-98"></a></span>
-      <span id="cb8-99"><a href="#cb8-99"></a>BIG_ICON <span class="op">=</span> {key :img.zoom(MAGNIFICATION_RATE<span class="op">//</span><span class="dv">1</span>,MAGNIFICATION_RATE<span class="op">//</span><span class="dv">1</span>) <span class="cf">for</span> key , img <span class="kw">in</span> ICON.items()}</span>
-      <span id="cb8-100"><a href="#cb8-100"></a></span>
-      <span id="cb8-101"><a href="#cb8-101"></a></span>
-      <span id="cb8-102"><a href="#cb8-102"></a></span>
-      <span id="cb8-103"><a href="#cb8-103"></a><span class="co">#アイコンを表示する関数</span></span>
-      <span id="cb8-104"><a href="#cb8-104"></a><span class="kw">def</span> setIcon(x,y,<span class="bu">type</span>):</span>
-      <span id="cb8-105"><a href="#cb8-105"></a>    <span class="co">&quot;&quot;&quot;</span></span>
-      <span id="cb8-106"><a href="#cb8-106"></a><span class="co">    x:キャラのx座標</span></span>
-      <span id="cb8-107"><a href="#cb8-107"></a><span class="co">    y:キャラのy座標</span></span>
-      <span id="cb8-108"><a href="#cb8-108"></a><span class="co">    type:アイコンの種類</span></span>
-      <span id="cb8-109"><a href="#cb8-109"></a><span class="co">    &quot;&quot;&quot;</span></span>
-      <span id="cb8-110"><a href="#cb8-110"></a>    <span class="co"># 一回消して再描写</span></span>
-      <span id="cb8-111"><a href="#cb8-111"></a>    canvas.delete(<span class="st">&quot;icon&quot;</span>)</span>
-      <span id="cb8-112"><a href="#cb8-112"></a>    canvas.create_image(</span>
-      <span id="cb8-113"><a href="#cb8-113"></a>        x<span class="op">+</span>CHARA_WIDTH<span class="op">*</span>MAGNIFICATION_RATE<span class="op">/</span><span class="dv">16</span>,</span>
-      <span id="cb8-114"><a href="#cb8-114"></a>        y<span class="op">-</span>CHARA_HEIGHT<span class="op">*</span>MAGNIFICATION_RATE<span class="op">/</span><span class="dv">2</span>,</span>
-      <span id="cb8-115"><a href="#cb8-115"></a>        image <span class="op">=</span> BIG_ICON[<span class="bu">type</span>],</span>
-      <span id="cb8-116"><a href="#cb8-116"></a>        tag<span class="op">=</span><span class="st">&quot;icon&quot;</span>,</span>
-      <span id="cb8-117"><a href="#cb8-117"></a>        anchor<span class="op">=</span>tk.NW</span>
-      <span id="cb8-118"><a href="#cb8-118"></a>        )</span>
-      <span id="cb8-119"><a href="#cb8-119"></a></span>
-      <span id="cb8-120"><a href="#cb8-120"></a></span>
-      <span id="cb8-121"><a href="#cb8-121"></a></span>
-      <span id="cb8-122"><a href="#cb8-122"></a></span>
-      <span id="cb8-123"><a href="#cb8-123"></a><span class="co">#&gt;&gt;魚&gt;&gt;</span></span>
-      <span id="cb8-124"><a href="#cb8-124"></a>fishFlag <span class="op">=</span> <span class="va">False</span> <span class="co">#釣り可能かどうか</span></span>
-      <span id="cb8-125"><a href="#cb8-125"></a></span>
-      <span id="cb8-126"><a href="#cb8-126"></a></span>
-      <span id="cb8-127"><a href="#cb8-127"></a>FISH_IMAGE <span class="op">=</span> {</span>
-      <span id="cb8-128"><a href="#cb8-128"></a>    <span class="st">&quot;イワシ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/iwashi.png&quot;</span>),</span>
-      <span id="cb8-129"><a href="#cb8-129"></a>    <span class="st">&quot;アジ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/aji.png&quot;</span>),</span>
-      <span id="cb8-130"><a href="#cb8-130"></a>    <span class="st">&quot;サバ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/saba.png&quot;</span>),</span>
-      <span id="cb8-131"><a href="#cb8-131"></a>    <span class="st">&quot;タチウオ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/tachiuo.png&quot;</span>),</span>
-      <span id="cb8-132"><a href="#cb8-132"></a>    <span class="st">&quot;カワハギ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/kawahagi.png&quot;</span>),</span>
-      <span id="cb8-133"><a href="#cb8-133"></a>    <span class="st">&quot;メバル&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/mebaru.png&quot;</span>),</span>
-      <span id="cb8-134"><a href="#cb8-134"></a>    <span class="st">&quot;タイ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/tai.png&quot;</span>),</span>
-      <span id="cb8-135"><a href="#cb8-135"></a>    <span class="st">&quot;スズキ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/suzuki.png&quot;</span>),</span>
-      <span id="cb8-136"><a href="#cb8-136"></a>    <span class="st">&quot;サケ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/sake.png&quot;</span>),</span>
-      <span id="cb8-137"><a href="#cb8-137"></a>}</span>
-      <span id="cb8-138"><a href="#cb8-138"></a>BIG_FISH_IMAGE <span class="op">=</span> {key :img.zoom(<span class="dv">2</span>,<span class="dv">2</span>) <span class="cf">for</span> key , img <span class="kw">in</span> FISH_IMAGE.items()}</span>
-      <span id="cb8-139"><a href="#cb8-139"></a></span>
-      <span id="cb8-140"><a href="#cb8-140"></a>LOW_RARE_FISH <span class="op">=</span> [</span>
-      <span id="cb8-141"><a href="#cb8-141"></a>        {</span>
-      <span id="cb8-142"><a href="#cb8-142"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;イワシ&quot;</span>,</span>
-      <span id="cb8-143"><a href="#cb8-143"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;イワシ&quot;</span>],</span>
-      <span id="cb8-144"><a href="#cb8-144"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.12</span>, <span class="co">#平均重量</span></span>
-      <span id="cb8-145"><a href="#cb8-145"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">60</span> <span class="co">#kg単価</span></span>
-      <span id="cb8-146"><a href="#cb8-146"></a>        },</span>
-      <span id="cb8-147"><a href="#cb8-147"></a>        {</span>
-      <span id="cb8-148"><a href="#cb8-148"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;アジ&quot;</span>,</span>
-      <span id="cb8-149"><a href="#cb8-149"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;アジ&quot;</span>],</span>
-      <span id="cb8-150"><a href="#cb8-150"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.17</span>,</span>
-      <span id="cb8-151"><a href="#cb8-151"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">100</span></span>
-      <span id="cb8-152"><a href="#cb8-152"></a>        },</span>
-      <span id="cb8-153"><a href="#cb8-153"></a>        {</span>
-      <span id="cb8-154"><a href="#cb8-154"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;サバ&quot;</span>,</span>
-      <span id="cb8-155"><a href="#cb8-155"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;サバ&quot;</span>],</span>
-      <span id="cb8-156"><a href="#cb8-156"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.35</span>,</span>
-      <span id="cb8-157"><a href="#cb8-157"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">50</span></span>
-      <span id="cb8-158"><a href="#cb8-158"></a>        },</span>
-      <span id="cb8-159"><a href="#cb8-159"></a>    ]</span>
-      <span id="cb8-160"><a href="#cb8-160"></a>MIDDLE_RARE_FISH <span class="op">=</span> [</span>
-      <span id="cb8-161"><a href="#cb8-161"></a>        {</span>
-      <span id="cb8-162"><a href="#cb8-162"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;タチウオ&quot;</span>,</span>
-      <span id="cb8-163"><a href="#cb8-163"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;タチウオ&quot;</span>],</span>
-      <span id="cb8-164"><a href="#cb8-164"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="dv">3</span>,</span>
-      <span id="cb8-165"><a href="#cb8-165"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">12</span></span>
-      <span id="cb8-166"><a href="#cb8-166"></a>        },</span>
-      <span id="cb8-167"><a href="#cb8-167"></a>        {</span>
-      <span id="cb8-168"><a href="#cb8-168"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;カワハギ&quot;</span>,</span>
-      <span id="cb8-169"><a href="#cb8-169"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;カワハギ&quot;</span>],</span>
-      <span id="cb8-170"><a href="#cb8-170"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.4</span>,</span>
-      <span id="cb8-171"><a href="#cb8-171"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">80</span></span>
-      <span id="cb8-172"><a href="#cb8-172"></a>        },</span>
-      <span id="cb8-173"><a href="#cb8-173"></a>        {</span>
-      <span id="cb8-174"><a href="#cb8-174"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;メバル&quot;</span>,</span>
-      <span id="cb8-175"><a href="#cb8-175"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;メバル&quot;</span>],</span>
-      <span id="cb8-176"><a href="#cb8-176"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.43</span>,</span>
-      <span id="cb8-177"><a href="#cb8-177"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">100</span></span>
-      <span id="cb8-178"><a href="#cb8-178"></a>        },</span>
-      <span id="cb8-179"><a href="#cb8-179"></a>    ]</span>
-      <span id="cb8-180"><a href="#cb8-180"></a>HIGH_RARE_FISH <span class="op">=</span> [</span>
-      <span id="cb8-181"><a href="#cb8-181"></a>        {</span>
-      <span id="cb8-182"><a href="#cb8-182"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;タイ&quot;</span>,</span>
-      <span id="cb8-183"><a href="#cb8-183"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;タイ&quot;</span>],</span>
-      <span id="cb8-184"><a href="#cb8-184"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">5.4</span>,</span>
-      <span id="cb8-185"><a href="#cb8-185"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">20</span></span>
-      <span id="cb8-186"><a href="#cb8-186"></a>        },</span>
-      <span id="cb8-187"><a href="#cb8-187"></a>        {</span>
-      <span id="cb8-188"><a href="#cb8-188"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;スズキ&quot;</span>,</span>
-      <span id="cb8-189"><a href="#cb8-189"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;スズキ&quot;</span>],</span>
-      <span id="cb8-190"><a href="#cb8-190"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">5.5</span>,</span>
-      <span id="cb8-191"><a href="#cb8-191"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">19</span></span>
-      <span id="cb8-192"><a href="#cb8-192"></a>        },</span>
-      <span id="cb8-193"><a href="#cb8-193"></a>        {</span>
-      <span id="cb8-194"><a href="#cb8-194"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;サケ&quot;</span>,</span>
-      <span id="cb8-195"><a href="#cb8-195"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;サケ&quot;</span>],</span>
-      <span id="cb8-196"><a href="#cb8-196"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">1.65</span>,</span>
-      <span id="cb8-197"><a href="#cb8-197"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">65</span></span>
-      <span id="cb8-198"><a href="#cb8-198"></a>        },</span>
-      <span id="cb8-199"><a href="#cb8-199"></a>    ]</span>
-      <span id="cb8-200"><a href="#cb8-200"></a>FISH_LIST <span class="op">=</span> []</span>
-      <span id="cb8-201"><a href="#cb8-201"></a>FISH_LIST.append(LOW_RARE_FISH)</span>
-      <span id="cb8-202"><a href="#cb8-202"></a>FISH_LIST.append(MIDDLE_RARE_FISH)</span>
-      <span id="cb8-203"><a href="#cb8-203"></a>FISH_LIST.append(HIGH_RARE_FISH)</span>
-      <span id="cb8-204"><a href="#cb8-204"></a></span>
-      <span id="cb8-205"><a href="#cb8-205"></a></span>
-      <span id="cb8-206"><a href="#cb8-206"></a><span class="co"># &gt;&gt;釣り結果表示&gt;&gt;</span></span>
-      <span id="cb8-207"><a href="#cb8-207"></a>RESULT_X <span class="op">=</span> <span class="dv">300</span></span>
-      <span id="cb8-208"><a href="#cb8-208"></a>RESULT_Y <span class="op">=</span> <span class="dv">200</span></span>
-      <span id="cb8-209"><a href="#cb8-209"></a>RESULT_SIZE <span class="op">=</span> <span class="ss">f&quot;</span><span class="sc">{</span>RESULT_X<span class="sc">}</span><span class="ss">x</span><span class="sc">{</span>RESULT_Y<span class="sc">}</span><span class="ss">+</span><span class="sc">{</span><span class="bu">int</span>((CANVAS_WIDTH <span class="op">-</span> RESULT_X)<span class="op">/</span><span class="dv">2</span>)<span class="sc">}</span><span class="ss">+</span><span class="sc">{</span><span class="bu">int</span>((CANVAS_HEIGHT <span class="op">-</span> RESULT_Y)<span class="op">/</span><span class="dv">2</span>)<span class="sc">}</span><span class="ss">&quot;</span></span>
-      <span id="cb8-210"><a href="#cb8-210"></a></span>
-      <span id="cb8-211"><a href="#cb8-211"></a></span>
-      <span id="cb8-212"><a href="#cb8-212"></a><span class="kw">def</span> showResultWindow(fish,rank,weight,price):</span>
-      <span id="cb8-213"><a href="#cb8-213"></a>    <span class="kw">global</span> resultWindow,FISH_IMAGE</span>
-      <span id="cb8-214"><a href="#cb8-214"></a>    <span class="co">#ウィンドウ設置</span></span>
-      <span id="cb8-215"><a href="#cb8-215"></a>    resultWindow <span class="op">=</span> tk.Toplevel()</span>
-      <span id="cb8-216"><a href="#cb8-216"></a>    resultWindow.title(<span class="st">&quot;Result&quot;</span>)</span>
-      <span id="cb8-217"><a href="#cb8-217"></a>    resultWindow.geometry(RESULT_SIZE)</span>
-      <span id="cb8-218"><a href="#cb8-218"></a>    resultWindow.resizable(<span class="va">False</span>,<span class="va">False</span>)</span>
-      <span id="cb8-219"><a href="#cb8-219"></a>    resultWindow.configure(bg<span class="op">=</span><span class="st">&quot;burlywood&quot;</span>)</span>
-      <span id="cb8-220"><a href="#cb8-220"></a>    </span>
-      <span id="cb8-221"><a href="#cb8-221"></a>    </span>
-      <span id="cb8-222"><a href="#cb8-222"></a>    <span class="co"># フレームの作成と設置</span></span>
-      <span id="cb8-223"><a href="#cb8-223"></a>    nameFrame <span class="op">=</span> tk.Frame(resultWindow , relief<span class="op">=</span>tk.RAISED , bg<span class="op">=</span><span class="st">&quot;burlywood&quot;</span>)</span>
-      <span id="cb8-224"><a href="#cb8-224"></a>    canvasFrame <span class="op">=</span> tk.Frame(resultWindow , relief<span class="op">=</span>tk.RAISED , bg<span class="op">=</span><span class="st">&quot;burlywood&quot;</span>)</span>
-      <span id="cb8-225"><a href="#cb8-225"></a>    infoFrame <span class="op">=</span> tk.Frame(resultWindow , relief<span class="op">=</span>tk.RAISED , bg<span class="op">=</span><span class="st">&quot;burlywood&quot;</span>)</span>
-      <span id="cb8-226"><a href="#cb8-226"></a>    nameFrame.pack(fill <span class="op">=</span> tk.BOTH, pady<span class="op">=</span><span class="dv">10</span>)</span>
-      <span id="cb8-227"><a href="#cb8-227"></a>    canvasFrame.pack(fill <span class="op">=</span> tk.BOTH, pady<span class="op">=</span><span class="dv">0</span>)</span>
-      <span id="cb8-228"><a href="#cb8-228"></a>    infoFrame.pack(fill <span class="op">=</span> tk.BOTH, pady<span class="op">=</span><span class="dv">10</span>)</span>
-      <span id="cb8-229"><a href="#cb8-229"></a>    </span>
-      <span id="cb8-230"><a href="#cb8-230"></a>    <span class="cf">if</span>(rank <span class="op">==</span> <span class="st">&quot;silver&quot;</span>):</span>
-      <span id="cb8-231"><a href="#cb8-231"></a>        name <span class="op">=</span> <span class="st">&quot;大物の&quot;</span><span class="op">+</span>fish</span>
-      <span id="cb8-232"><a href="#cb8-232"></a>        color <span class="op">=</span> <span class="st">&quot;LightBlue4&quot;</span></span>
-      <span id="cb8-233"><a href="#cb8-233"></a>    <span class="cf">elif</span>(rank <span class="op">==</span> <span class="st">&quot;gold&quot;</span>):</span>
-      <span id="cb8-234"><a href="#cb8-234"></a>        name <span class="op">=</span> <span class="st">&quot;超大物の&quot;</span><span class="op">+</span>fish</span>
-      <span id="cb8-235"><a href="#cb8-235"></a>        color <span class="op">=</span> <span class="st">&quot;gold&quot;</span></span>
-      <span id="cb8-236"><a href="#cb8-236"></a>    <span class="cf">else</span>:</span>
-      <span id="cb8-237"><a href="#cb8-237"></a>        name <span class="op">=</span> fish</span>
-      <span id="cb8-238"><a href="#cb8-238"></a>        color <span class="op">=</span> <span class="st">&quot;DarkOrange4&quot;</span></span>
-      <span id="cb8-239"><a href="#cb8-239"></a>    </span>
-      <span id="cb8-240"><a href="#cb8-240"></a>    viewCanvas <span class="op">=</span> tk.Canvas(canvasFrame,width <span class="op">=</span> <span class="dv">192</span>,height <span class="op">=</span> <span class="dv">48</span>,bg <span class="op">=</span> <span class="st">&quot;burlywood&quot;</span>,highlightthickness<span class="op">=</span><span class="dv">0</span>)</span>
-      <span id="cb8-241"><a href="#cb8-241"></a>    viewCanvas.pack()</span>
-      <span id="cb8-242"><a href="#cb8-242"></a>    viewCanvas.create_image(<span class="dv">96</span>,<span class="dv">24</span>,image <span class="op">=</span>BIG_FISH_IMAGE[fish],tag<span class="op">=</span><span class="st">&quot;view&quot;</span>,anchor<span class="op">=</span>tk.CENTER)</span>
-      <span id="cb8-243"><a href="#cb8-243"></a>    </span>
-      <span id="cb8-244"><a href="#cb8-244"></a>    <span class="co"># 各種ウィジェットの作成</span></span>
-      <span id="cb8-245"><a href="#cb8-245"></a>    fishName <span class="op">=</span> tk.Label(nameFrame, text<span class="op">=</span>name, font<span class="op">=</span>(<span class="st">&quot;MSゴシック&quot;</span>, <span class="st">&quot;20&quot;</span>, <span class="st">&quot;bold&quot;</span>),fg <span class="op">=</span> color,bg <span class="op">=</span> <span class="st">&quot;burlywood&quot;</span>)</span>
-      <span id="cb8-246"><a href="#cb8-246"></a>    fishWeight <span class="op">=</span> tk.Label(infoFrame, text<span class="op">=</span><span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot; kg&quot;</span>, font<span class="op">=</span>(<span class="st">&quot;MSゴシック&quot;</span>, <span class="st">&quot;16&quot;</span>),bg <span class="op">=</span> <span class="st">&quot;burlywood&quot;</span>)</span>
-      <span id="cb8-247"><a href="#cb8-247"></a>    fishPrice <span class="op">=</span> tk.Label(infoFrame, text<span class="op">=</span><span class="bu">str</span>(price)<span class="op">+</span><span class="st">&quot; G&quot;</span>, font<span class="op">=</span>(<span class="st">&quot;MSゴシック&quot;</span>, <span class="st">&quot;16&quot;</span>),bg <span class="op">=</span> <span class="st">&quot;burlywood&quot;</span>)</span>
-      <span id="cb8-248"><a href="#cb8-248"></a>    fishName.pack()</span>
-      <span id="cb8-249"><a href="#cb8-249"></a>    fishWeight.pack()</span>
-      <span id="cb8-250"><a href="#cb8-250"></a>    fishPrice.pack()</span>
-      <span id="cb8-251"><a href="#cb8-251"></a></span>
-      <span id="cb8-252"><a href="#cb8-252"></a></span>
-      <span id="cb8-253"><a href="#cb8-253"></a></span>
-      <span id="cb8-254"><a href="#cb8-254"></a><span class="co">#&gt;&gt;ゲームのメインループ関数&gt;&gt;</span></span>
-      <span id="cb8-255"><a href="#cb8-255"></a><span class="kw">def</span> gameLoop():</span>
-      <span id="cb8-256"><a href="#cb8-256"></a>    <span class="kw">global</span> charaX,charaY,flag,key,currentKey,prevKey,waitTick,fishingCount,resultWindow</span>
-      <span id="cb8-257"><a href="#cb8-257"></a>    </span>
-      <span id="cb8-258"><a href="#cb8-258"></a>    <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>): <span class="co">#待機中のとき </span></span>
-      <span id="cb8-259"><a href="#cb8-259"></a>        setChara(charaX,charaY,<span class="st">&quot;default&quot;</span>)</span>
-      <span id="cb8-260"><a href="#cb8-260"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
-      <span id="cb8-261"><a href="#cb8-261"></a>            canvas.delete(<span class="st">&quot;icon&quot;</span>)<span class="co">#釣りアイコン削除</span></span>
-      <span id="cb8-262"><a href="#cb8-262"></a>            flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span></span>
-      <span id="cb8-263"><a href="#cb8-263"></a>            waitTick <span class="op">=</span> random.randint(<span class="bu">round</span>(<span class="dv">3000</span><span class="op">/</span>TICK_TIME),<span class="bu">round</span>(<span class="dv">5000</span><span class="op">/</span>TICK_TIME))<span class="co">#3-5秒</span></span>
-      <span id="cb8-264"><a href="#cb8-264"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-      <span id="cb8-265"><a href="#cb8-265"></a>    </span>
-      <span id="cb8-266"><a href="#cb8-266"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):<span class="co">#魚釣り中のとき</span></span>
-      <span id="cb8-267"><a href="#cb8-267"></a>        <span class="co"># スペースキーが再び押された時</span></span>
-      <span id="cb8-268"><a href="#cb8-268"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)): </span>
-      <span id="cb8-269"><a href="#cb8-269"></a>            setIcon(charaX,charaY,<span class="st">&quot;miss&quot;</span>)<span class="co">#アイコン描写</span></span>
-      <span id="cb8-270"><a href="#cb8-270"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
-      <span id="cb8-271"><a href="#cb8-271"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
-      <span id="cb8-272"><a href="#cb8-272"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
-      <span id="cb8-273"><a href="#cb8-273"></a>            <span class="co">#キャラクター再描写</span></span>
-      <span id="cb8-274"><a href="#cb8-274"></a>            setChara(charaX,charaY,<span class="st">&quot;wait&quot;</span>)</span>
-      <span id="cb8-275"><a href="#cb8-275"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
-      <span id="cb8-276"><a href="#cb8-276"></a>            <span class="cf">if</span>(random.randint(<span class="dv">1</span>,<span class="dv">3</span>)<span class="op">!=</span><span class="dv">1</span>):<span class="co">#2/3の確率で</span></span>
-      <span id="cb8-277"><a href="#cb8-277"></a>                flag <span class="op">=</span> <span class="st">&quot;hit&quot;</span></span>
-      <span id="cb8-278"><a href="#cb8-278"></a>                waitTick <span class="op">=</span> <span class="dv">10</span></span>
-      <span id="cb8-279"><a href="#cb8-279"></a>                fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-      <span id="cb8-280"><a href="#cb8-280"></a>            <span class="cf">else</span>:</span>
-      <span id="cb8-281"><a href="#cb8-281"></a>                flag <span class="op">=</span> <span class="st">&quot;bite&quot;</span></span>
-      <span id="cb8-282"><a href="#cb8-282"></a>                waitTick <span class="op">=</span> random.randint(<span class="dv">2</span>,<span class="dv">10</span>)</span>
-      <span id="cb8-283"><a href="#cb8-283"></a>                fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-      <span id="cb8-284"><a href="#cb8-284"></a>            </span>
-      <span id="cb8-285"><a href="#cb8-285"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):</span>
-      <span id="cb8-286"><a href="#cb8-286"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span>
-      <span id="cb8-287"><a href="#cb8-287"></a>    </span>
-      <span id="cb8-288"><a href="#cb8-288"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>): <span class="co">#魚が少し喰いついたとき</span></span>
-      <span id="cb8-289"><a href="#cb8-289"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
-      <span id="cb8-290"><a href="#cb8-290"></a>            setIcon(charaX,charaY,<span class="st">&quot;miss&quot;</span>)<span class="co">#アイコン描写</span></span>
-      <span id="cb8-291"><a href="#cb8-291"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
-      <span id="cb8-292"><a href="#cb8-292"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
-      <span id="cb8-293"><a href="#cb8-293"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
-      <span id="cb8-294"><a href="#cb8-294"></a>            setChara(charaX,charaY,<span class="st">&quot;bite&quot;</span>)</span>
-      <span id="cb8-295"><a href="#cb8-295"></a>            <span class="bu">print</span>(<span class="st">&quot;ピク...&quot;</span>)</span>
-      <span id="cb8-296"><a href="#cb8-296"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
-      <span id="cb8-297"><a href="#cb8-297"></a>            flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span></span>
-      <span id="cb8-298"><a href="#cb8-298"></a>            waitTick <span class="op">=</span> random.randint(<span class="bu">round</span>(<span class="dv">200</span><span class="op">/</span>TICK_TIME),<span class="bu">round</span>(<span class="dv">2000</span><span class="op">/</span>TICK_TIME))</span>
-      <span id="cb8-299"><a href="#cb8-299"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-      <span id="cb8-300"><a href="#cb8-300"></a>        </span>
-      <span id="cb8-301"><a href="#cb8-301"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>):</span>
-      <span id="cb8-302"><a href="#cb8-302"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span>
-      <span id="cb8-303"><a href="#cb8-303"></a>    </span>
-      <span id="cb8-304"><a href="#cb8-304"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>): <span class="co">#魚がかかったとき</span></span>
-      <span id="cb8-305"><a href="#cb8-305"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
-      <span id="cb8-306"><a href="#cb8-306"></a>            flag <span class="op">=</span> <span class="st">&quot;fight&quot;</span></span>
-      <span id="cb8-307"><a href="#cb8-307"></a>            setIcon(charaX,charaY,<span class="st">&quot;fight&quot;</span>)<span class="co">#アイコン描写</span></span>
-      <span id="cb8-308"><a href="#cb8-308"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-      <span id="cb8-309"><a href="#cb8-309"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
-      <span id="cb8-310"><a href="#cb8-310"></a>            <span class="co">#キャラクター再描写</span></span>
-      <span id="cb8-311"><a href="#cb8-311"></a>            setChara(charaX,charaY,<span class="st">&quot;fight&quot;</span>)</span>
-      <span id="cb8-312"><a href="#cb8-312"></a>            setIcon(charaX,charaY,<span class="st">&quot;hit&quot;</span>)<span class="co">#アイコン描写</span></span>
-      <span id="cb8-313"><a href="#cb8-313"></a>            <span class="bu">print</span>(<span class="st">&quot;ビク！&quot;</span>)</span>
-      <span id="cb8-314"><a href="#cb8-314"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
-      <span id="cb8-315"><a href="#cb8-315"></a>            <span class="bu">print</span>(<span class="st">&quot;遅すぎた！&quot;</span>)</span>
-      <span id="cb8-316"><a href="#cb8-316"></a>            setIcon(charaX,charaY,<span class="st">&quot;miss&quot;</span>)<span class="co">#アイコン描写</span></span>
-      <span id="cb8-317"><a href="#cb8-317"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
-      <span id="cb8-318"><a href="#cb8-318"></a>        </span>
-      <span id="cb8-319"><a href="#cb8-319"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>):</span>
-      <span id="cb8-320"><a href="#cb8-320"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span>
-      <span id="cb8-321"><a href="#cb8-321"></a>    </span>
-      <span id="cb8-322"><a href="#cb8-322"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;fight&quot;</span>): <span class="co">#かかった魚を釣り上げているとき</span></span>
-      <span id="cb8-323"><a href="#cb8-323"></a>        <span class="cf">if</span>(fishingCount <span class="op">&lt;</span> <span class="dv">20</span>):</span>
-      <span id="cb8-324"><a href="#cb8-324"></a>            <span class="cf">if</span>(fishingCount<span class="op">%</span><span class="dv">4</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">or</span> fishingCount<span class="op">%</span><span class="dv">4</span> <span class="op">==</span> <span class="dv">1</span> ):</span>
-      <span id="cb8-325"><a href="#cb8-325"></a>                setChara(charaX,charaY,<span class="st">&quot;hit&quot;</span>)</span>
-      <span id="cb8-326"><a href="#cb8-326"></a>            <span class="cf">else</span>:</span>
-      <span id="cb8-327"><a href="#cb8-327"></a>                setChara(charaX,charaY,<span class="st">&quot;fight&quot;</span>)</span>
-      <span id="cb8-328"><a href="#cb8-328"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span>
-      <span id="cb8-329"><a href="#cb8-329"></a>        <span class="cf">else</span>:</span>
-      <span id="cb8-330"><a href="#cb8-330"></a>            flag <span class="op">=</span> <span class="st">&quot;success&quot;</span></span>
-      <span id="cb8-331"><a href="#cb8-331"></a>    </span>
-      <span id="cb8-332"><a href="#cb8-332"></a>    <span class="cf">elif</span>(flag <span class="op">==</span> <span class="st">&quot;success&quot;</span>): <span class="co">#釣りに成功したとき</span></span>
-      <span id="cb8-333"><a href="#cb8-333"></a>        <span class="co">#ランダムな魚を選択</span></span>
-      <span id="cb8-334"><a href="#cb8-334"></a>        selectedFish <span class="op">=</span> random.choice((random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights <span class="op">=</span> (<span class="dv">75</span>,<span class="dv">20</span>,<span class="dv">5</span>)))[<span class="dv">0</span>])</span>
-      <span id="cb8-335"><a href="#cb8-335"></a>        <span class="bu">print</span>(selectedFish[<span class="st">&quot;name&quot;</span>])</span>
-      <span id="cb8-336"><a href="#cb8-336"></a>        <span class="co">#魚の重さを決定(ランダム 0.5~1.5)</span></span>
-      <span id="cb8-337"><a href="#cb8-337"></a>        fishWeight <span class="op">=</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span>random.uniform(<span class="fl">0.5</span>, <span class="fl">1.5</span>)</span>
-      <span id="cb8-338"><a href="#cb8-338"></a>        fishWeight <span class="op">=</span> <span class="bu">round</span>(fishWeight,<span class="dv">2</span>) <span class="co">#少数第3位で四捨五入</span></span>
-      <span id="cb8-339"><a href="#cb8-339"></a>        <span class="bu">print</span>(fishWeight)</span>
-      <span id="cb8-340"><a href="#cb8-340"></a>        <span class="co">#重さから売却価格を決定</span></span>
-      <span id="cb8-341"><a href="#cb8-341"></a>        fishPrice <span class="op">=</span> fishWeight <span class="op">*</span> selectedFish[<span class="st">&quot;price&quot;</span>]</span>
-      <span id="cb8-342"><a href="#cb8-342"></a>        </span>
-      <span id="cb8-343"><a href="#cb8-343"></a>        <span class="co">#魚のランクを決定、ランクに応じて価格を上方修正</span></span>
-      <span id="cb8-344"><a href="#cb8-344"></a>        <span class="cf">if</span>(fishWeight <span class="op">&gt;</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span><span class="fl">1.4</span>):</span>
-      <span id="cb8-345"><a href="#cb8-345"></a>            fishRank <span class="op">=</span> <span class="st">&quot;gold&quot;</span></span>
-      <span id="cb8-346"><a href="#cb8-346"></a>            fishPrice <span class="op">*=</span> <span class="fl">1.4</span></span>
-      <span id="cb8-347"><a href="#cb8-347"></a>        <span class="cf">elif</span> (fishWeight <span class="op">&gt;</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span><span class="fl">1.2</span>):</span>
-      <span id="cb8-348"><a href="#cb8-348"></a>            fishRank <span class="op">=</span> <span class="st">&quot;silver&quot;</span></span>
-      <span id="cb8-349"><a href="#cb8-349"></a>            fishPrice <span class="op">*=</span> <span class="fl">1.2</span></span>
-      <span id="cb8-350"><a href="#cb8-350"></a>        <span class="cf">else</span>:</span>
-      <span id="cb8-351"><a href="#cb8-351"></a>            fishRank <span class="op">=</span> <span class="st">&quot;bronze&quot;</span></span>
-      <span id="cb8-352"><a href="#cb8-352"></a>        </span>
-      <span id="cb8-353"><a href="#cb8-353"></a>        fishPrice <span class="op">=</span> <span class="bu">round</span>(fishPrice) <span class="co">#四捨五入</span></span>
-      <span id="cb8-354"><a href="#cb8-354"></a>        </span>
-      <span id="cb8-355"><a href="#cb8-355"></a>        </span>
-      <span id="cb8-356"><a href="#cb8-356"></a>        <span class="co">#釣りの姿勢から通常状態に戻す</span></span>
-      <span id="cb8-357"><a href="#cb8-357"></a>        setChara(charaX,charaY,<span class="st">&quot;default&quot;</span>)</span>
-      <span id="cb8-358"><a href="#cb8-358"></a>        canvas.delete(<span class="st">&quot;rod&quot;</span>)</span>
-      <span id="cb8-359"><a href="#cb8-359"></a>        setIcon(charaX,charaY,<span class="st">&quot;success&quot;</span>)<span class="co">#アイコン描写</span></span>
-      <span id="cb8-360"><a href="#cb8-360"></a>        showResultWindow(selectedFish[<span class="st">&quot;name&quot;</span>],fishRank,fishWeight,fishPrice)</span>
-      <span id="cb8-361"><a href="#cb8-361"></a>        flag <span class="op">=</span> <span class="st">&quot;result&quot;</span></span>
-      <span id="cb8-362"><a href="#cb8-362"></a>        </span>
-      <span id="cb8-363"><a href="#cb8-363"></a>    <span class="cf">elif</span>(flag <span class="op">==</span> <span class="st">&quot;result&quot;</span>): <span class="co">#結果表示中のとき</span></span>
-      <span id="cb8-364"><a href="#cb8-364"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
-      <span id="cb8-365"><a href="#cb8-365"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
-      <span id="cb8-366"><a href="#cb8-366"></a>            setIcon(charaX,charaY,<span class="st">&quot;fishing&quot;</span>)</span>
-      <span id="cb8-367"><a href="#cb8-367"></a>            resultWindow.destroy()</span>
-      <span id="cb8-368"><a href="#cb8-368"></a>    </span>
-      <span id="cb8-369"><a href="#cb8-369"></a>    prevKey <span class="op">=</span> copy.deepcopy(key)</span>
-      <span id="cb8-370"><a href="#cb8-370"></a>    key <span class="op">=</span> copy.deepcopy(currentKey)</span>
-      <span id="cb8-371"><a href="#cb8-371"></a>    root.after(TICK_TIME,gameLoop)</span>
-      <span id="cb8-372"><a href="#cb8-372"></a></span>
-      <span id="cb8-373"><a href="#cb8-373"></a><span class="co">#&gt;&gt;キー監視&gt;&gt;</span></span>
-      <span id="cb8-374"><a href="#cb8-374"></a>currentKey <span class="op">=</span> []<span class="co">#現在押されているキー</span></span>
-      <span id="cb8-375"><a href="#cb8-375"></a>key <span class="op">=</span> []       <span class="co">#前回の処理から押されたキー</span></span>
-      <span id="cb8-376"><a href="#cb8-376"></a>prevKey <span class="op">=</span> [] <span class="co">#前回の処理までに押されたキー</span></span>
-      <span id="cb8-377"><a href="#cb8-377"></a></span>
-      <span id="cb8-378"><a href="#cb8-378"></a><span class="co">#何かのキーが押されたときに呼び出される関数</span></span>
-      <span id="cb8-379"><a href="#cb8-379"></a><span class="kw">def</span> press(e):</span>
-      <span id="cb8-380"><a href="#cb8-380"></a>    keysym <span class="op">=</span> e.keysym</span>
-      <span id="cb8-381"><a href="#cb8-381"></a>    <span class="cf">if</span>(keysym <span class="kw">not</span> <span class="kw">in</span> currentKey):<span class="co">#始めて押されたならば</span></span>
-      <span id="cb8-382"><a href="#cb8-382"></a>        currentKey.append(keysym)</span>
-      <span id="cb8-383"><a href="#cb8-383"></a>        <span class="bu">print</span>(<span class="ss">f&quot;pressed:</span><span class="sc">{</span>keysym<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-      <span id="cb8-384"><a href="#cb8-384"></a>    <span class="cf">if</span>(keysym <span class="kw">not</span> <span class="kw">in</span> key):<span class="co">#前回の処理から始めて押されたならば</span></span>
-      <span id="cb8-385"><a href="#cb8-385"></a>        key.append(keysym)</span>
-      <span id="cb8-386"><a href="#cb8-386"></a></span>
-      <span id="cb8-387"><a href="#cb8-387"></a><span class="co">#何かのキーが離されたときに呼び出される関数</span></span>
-      <span id="cb8-388"><a href="#cb8-388"></a><span class="kw">def</span> release(e):</span>
-      <span id="cb8-389"><a href="#cb8-389"></a>    keysym <span class="op">=</span> e.keysym</span>
-      <span id="cb8-390"><a href="#cb8-390"></a>    currentKey.remove(keysym)</span>
-      <span id="cb8-391"><a href="#cb8-391"></a>    <span class="bu">print</span>(<span class="ss">f&quot;released:</span><span class="sc">{</span>keysym<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-      <span id="cb8-392"><a href="#cb8-392"></a></span>
-      <span id="cb8-393"><a href="#cb8-393"></a><span class="co">#キー入力をトリガーに関数を呼び出すよう設定する</span></span>
-      <span id="cb8-394"><a href="#cb8-394"></a>root.bind(<span class="st">&quot;&lt;KeyPress&gt;&quot;</span>, press)</span>
-      <span id="cb8-395"><a href="#cb8-395"></a>root.bind(<span class="st">&quot;&lt;KeyRelease&gt;&quot;</span>, release)</span>
-      <span id="cb8-396"><a href="#cb8-396"></a></span>
-      <span id="cb8-397"><a href="#cb8-397"></a><span class="co">#&gt;&gt;メインループ&gt;&gt;&gt;</span></span>
-      <span id="cb8-398"><a href="#cb8-398"></a>canvas.create_image(<span class="dv">0</span>,<span class="dv">0</span>,image <span class="op">=</span> MAP_BIG_IMAGE ,tag<span class="op">=</span><span class="st">&quot;bgimage&quot;</span>,anchor<span class="op">=</span>tk.NW)</span>
-      <span id="cb8-399"><a href="#cb8-399"></a>setChara(charaX,charaY,<span class="st">&quot;default&quot;</span>)</span>
-      <span id="cb8-400"><a href="#cb8-400"></a>setIcon(charaX,charaY,<span class="st">&quot;fishing&quot;</span>)</span>
-      <span id="cb8-401"><a href="#cb8-401"></a></span>
-      <span id="cb8-402"><a href="#cb8-402"></a>gameLoop()</span>
-      <span id="cb8-403"><a href="#cb8-403"></a><span class="bu">print</span>(<span class="st">&quot;start!&quot;</span>)</span>
-      <span id="cb8-404"><a href="#cb8-404"></a>root.mainloop()</span></code></pre>
-      </div>
-      <!-- ---------------------------------------- -->
-      </main>
-      <footer class="markdown-body">
-      <p>
-      <a href="https://k-768.github.io/PythonGameProgramming/">講義資料のIndexに移動</a>
-      </p>
-      </footer>
-      <script>
-            window.onload = function () {
-              // ナビゲーション関連
-              let openBtn = document.getElementsByClassName("openbtn")[0];
-              let navPnl = document.getElementById("g-nav");
-              openBtn.onclick = () => {
-                openBtn.classList.toggle("active");
-                navPnl.classList.toggle("panelactive");
-              };
-
-              let items = navPnl.getElementsByTagName("a");
-              Array.from(items).forEach((item) => {
-                item.onclick = () => {
-                  openBtn.classList.toggle("active");
-                  navPnl.classList.toggle("panelactive");
-                };
-              });
-
-              // マスク処理
-              let maskedSpans = document.getElementsByClassName("masked");
-              Array.from(maskedSpans).forEach((span) => {
-                span.onclick = () => {
-                  span.classList.toggle("open");
-                };
-              });
-
-              // data-startfrom 属性の行番号カウンタのリセット
-              document.querySelectorAll("div.sourceCode").forEach(function (div) {
-                var startFrom = div.getAttribute("data-startfrom");
-                if (startFrom != null) {
-                  div.style.counterReset = "pg-line " + (startFrom - 1);
-                }
-              });
-
-              // 画像にリンクを付与
-              // let images = document.querySelectorAll("figure img");
-              // Array.from(images).forEach((img) => {
-              //   img.onclick = () => {
-              //     location.href = img.getAttribute("src");
-              //   };
-              // });
-            };
-          </script>
-      </body>
-      </html>
+      少し時間が経過したら<code>"default"</code>に戻るようになっています。</p>
+      <div class="sourceCode" id="cb7" data-startFrom="302"
+      data-caption="game06"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 301;"><span id="cb7-302"><a href="#cb7-302"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>): <span class="co">#魚が少し喰いついたとき</span></span>
+<span id="cb7-303"><a href="#cb7-303"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
+<span id="cb7-304"><a href="#cb7-304"></a>            setIcon(charaX,charaY,<span class="st">&quot;miss&quot;</span>)<span class="co">#アイコン描写</span></span>
+<span id="cb7-305"><a href="#cb7-305"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
+<span id="cb7-306"><a href="#cb7-306"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
+<span id="cb7-307"><a href="#cb7-307"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb7-308"><a href="#cb7-308"></a>            setChara(charaX,charaY,<span class="st">&quot;bite&quot;</span>)</span>
+<span id="cb7-309"><a href="#cb7-309"></a>            <span class="bu">print</span>(<span class="st">&quot;ピク...&quot;</span>)</span>
+<span id="cb7-310"><a href="#cb7-310"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb7-311"><a href="#cb7-311"></a>            flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span></span>
+<span id="cb7-312"><a href="#cb7-312"></a>            waitTick <span class="op">=</span> random.randint(<span class="bu">round</span>(<span class="dv">200</span><span class="op">/</span>TICK_TIME),<span class="bu">round</span>(<span class="dv">2000</span><span class="op">/</span>TICK_TIME))</span>
+<span id="cb7-313"><a href="#cb7-313"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-314"><a href="#cb7-314"></a>        </span>
+<span id="cb7-315"><a href="#cb7-315"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>):</span>
+<span id="cb7-316"><a href="#cb7-316"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
+      <h1 data-number="9" id="ゲームを改造する"><span
+      class="header-section-number">9</span> ゲームを改造する</h1>
+      <p>これにて、簡単な釣りゲームの完成です！ここからは、自由に改造してみてください。</p>
+      <p>改造例を提示します。ウキが少しだけ沈むイベントを実装しましたが、このままだと「ウキが沈んだ」のか「ピクピクしている」だけなのか区別がつきにくくなってしまいました。そこで、ヒットしたときに頭上にアイコンを表示して、分かりやすくしてみました。以下にプログラム全体を示します。</p>
+      <p>実行する前に<a
+      href="https://github.com/k-768/python_game/blob/master/img/icon.zip">ここから</a>zipファイルをダウンロードして、<code>img</code>フォルダに解凍してください。実行すると、各状態に遷移したときに、頭上にアイコンを表示されます。</p>
+      <p>次回からは釣りとは少し離れて、マップの表示やキャラクタの歩行について学びましょう。</p>
+      <div class="sourceCode" id="cb8" data-startFrom="1"
+      data-caption="game07.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> copy</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="im">import</span> os</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="im">import</span> random</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;&gt;ディレクトリ&gt;&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>cwd <span class="op">=</span> os.getcwd()</span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt;&gt;マップ設定&gt;&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>MAP_SIZE_X <span class="op">=</span> <span class="dv">384</span>  <span class="co">#マップ画像のxピクセル数</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>MAP_SIZE_Y <span class="op">=</span> <span class="dv">384</span>  <span class="co">#マップ画像のyピクセル数</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a></span>
+<span id="cb8-15"><a href="#cb8-15"></a>MAGNIFICATION_RATE <span class="op">=</span> <span class="dv">2</span> <span class="co"># 拡大率</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a></span>
+<span id="cb8-17"><a href="#cb8-17"></a></span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="co">#&gt;&gt;ウィンドウ、キャンバス&gt;&gt;</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a>CANVAS_WIDTH <span class="op">=</span> MAP_SIZE_X <span class="op">*</span> MAGNIFICATION_RATE <span class="co">#キャンバス幅</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a>CANVAS_HEIGHT <span class="op">=</span> MAP_SIZE_Y <span class="op">*</span> MAGNIFICATION_RATE <span class="co">#キャンバス高さ</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a>MARGINE_X <span class="op">=</span> <span class="dv">2</span> <span class="co">#マージン</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a>MARGINE_Y <span class="op">=</span> <span class="dv">2</span> <span class="co">#マージン</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a>CANVAS_SIZE <span class="op">=</span> <span class="ss">f&quot;</span><span class="sc">{</span>CANVAS_WIDTH<span class="op">+</span>MARGINE_X<span class="sc">}</span><span class="ss">x</span><span class="sc">{</span>CANVAS_HEIGHT<span class="op">+</span>MARGINE_Y<span class="sc">}</span><span class="ss">&quot;</span><span class="co">#キャンバスサイズ</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a></span>
+<span id="cb8-25"><a href="#cb8-25"></a><span class="co">#ウィンドウ設置</span></span>
+<span id="cb8-26"><a href="#cb8-26"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb8-27"><a href="#cb8-27"></a>root.title(<span class="st">&quot;game07&quot;</span>)</span>
+<span id="cb8-28"><a href="#cb8-28"></a>root.geometry(CANVAS_SIZE)</span>
+<span id="cb8-29"><a href="#cb8-29"></a></span>
+<span id="cb8-30"><a href="#cb8-30"></a><span class="co">#キャンバス設置</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a>canvas <span class="op">=</span> tk.Canvas(root,width <span class="op">=</span> CANVAS_WIDTH,height <span class="op">=</span> CANVAS_HEIGHT,bg <span class="op">=</span> <span class="st">&quot;skyblue&quot;</span>)</span>
+<span id="cb8-32"><a href="#cb8-32"></a>canvas.pack()</span>
+<span id="cb8-33"><a href="#cb8-33"></a></span>
+<span id="cb8-34"><a href="#cb8-34"></a></span>
+<span id="cb8-35"><a href="#cb8-35"></a></span>
+<span id="cb8-36"><a href="#cb8-36"></a><span class="co">#マップ画像</span></span>
+<span id="cb8-37"><a href="#cb8-37"></a>MAP_IMAGE <span class="op">=</span> tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/fishing_map.png&quot;</span>)</span>
+<span id="cb8-38"><a href="#cb8-38"></a>MAP_BIG_IMAGE <span class="op">=</span> MAP_IMAGE.zoom(MAGNIFICATION_RATE,MAGNIFICATION_RATE)</span>
+<span id="cb8-39"><a href="#cb8-39"></a></span>
+<span id="cb8-40"><a href="#cb8-40"></a><span class="co">#&gt;&gt;キャラクター&gt;&gt;</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a>CHARA_WIDTH <span class="op">=</span> <span class="dv">64</span>  <span class="co">#キャラの幅</span></span>
+<span id="cb8-42"><a href="#cb8-42"></a>CHARA_HEIGHT <span class="op">=</span> <span class="dv">96</span> <span class="co">#キャラの高さ</span></span>
+<span id="cb8-43"><a href="#cb8-43"></a></span>
+<span id="cb8-44"><a href="#cb8-44"></a><span class="co">#キャラクターの座標</span></span>
+<span id="cb8-45"><a href="#cb8-45"></a>charaX <span class="op">=</span> <span class="dv">160</span> <span class="op">*</span> MAGNIFICATION_RATE </span>
+<span id="cb8-46"><a href="#cb8-46"></a>charaY <span class="op">=</span> <span class="dv">128</span> <span class="op">*</span> MAGNIFICATION_RATE</span>
+<span id="cb8-47"><a href="#cb8-47"></a>flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
+<span id="cb8-48"><a href="#cb8-48"></a><span class="co">&#39;&#39;&#39;</span></span>
+<span id="cb8-49"><a href="#cb8-49"></a><span class="co">default:通常状態</span></span>
+<span id="cb8-50"><a href="#cb8-50"></a><span class="co">wait:釣り中</span></span>
+<span id="cb8-51"><a href="#cb8-51"></a><span class="co">bite:ウキがピクつく</span></span>
+<span id="cb8-52"><a href="#cb8-52"></a><span class="co">hit:ウキが沈む</span></span>
+<span id="cb8-53"><a href="#cb8-53"></a><span class="co">fight:格闘中</span></span>
+<span id="cb8-54"><a href="#cb8-54"></a><span class="co">success:釣り成功</span></span>
+<span id="cb8-55"><a href="#cb8-55"></a><span class="co">result:釣り結果表示</span></span>
+<span id="cb8-56"><a href="#cb8-56"></a><span class="co">&#39;&#39;&#39;</span></span>
+<span id="cb8-57"><a href="#cb8-57"></a>fishingCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-58"><a href="#cb8-58"></a>waitTick <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-59"><a href="#cb8-59"></a></span>
+<span id="cb8-60"><a href="#cb8-60"></a></span>
+<span id="cb8-61"><a href="#cb8-61"></a><span class="co">#ゲームの基本となる1ティック時間(ms)</span></span>
+<span id="cb8-62"><a href="#cb8-62"></a>TICK_TIME <span class="op">=</span> <span class="dv">50</span>  </span>
+<span id="cb8-63"><a href="#cb8-63"></a></span>
+<span id="cb8-64"><a href="#cb8-64"></a><span class="co">#キャラクターの画像</span></span>
+<span id="cb8-65"><a href="#cb8-65"></a>CHARA_IMAGE <span class="op">=</span> {</span>
+<span id="cb8-66"><a href="#cb8-66"></a>    <span class="st">&quot;default&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/character_A.png&quot;</span>),</span>
+<span id="cb8-67"><a href="#cb8-67"></a>    <span class="st">&quot;wait&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/character_B.png&quot;</span>),</span>
+<span id="cb8-68"><a href="#cb8-68"></a>    <span class="st">&quot;bite&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/character_C.png&quot;</span>),</span>
+<span id="cb8-69"><a href="#cb8-69"></a>    <span class="st">&quot;hit&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/character_D1.png&quot;</span>),</span>
+<span id="cb8-70"><a href="#cb8-70"></a>    <span class="st">&quot;fight&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/character_D2.png&quot;</span>),</span>
+<span id="cb8-71"><a href="#cb8-71"></a>}</span>
+<span id="cb8-72"><a href="#cb8-72"></a></span>
+<span id="cb8-73"><a href="#cb8-73"></a>BIG_CHARA_IMAGE <span class="op">=</span> {key :img.zoom(MAGNIFICATION_RATE,MAGNIFICATION_RATE) <span class="cf">for</span> key , img <span class="kw">in</span> CHARA_IMAGE.items()}</span>
+<span id="cb8-74"><a href="#cb8-74"></a></span>
+<span id="cb8-75"><a href="#cb8-75"></a></span>
+<span id="cb8-76"><a href="#cb8-76"></a><span class="co">#キャラクターを再描写する関数  </span></span>
+<span id="cb8-77"><a href="#cb8-77"></a><span class="kw">def</span> setChara(x,y,state):</span>
+<span id="cb8-78"><a href="#cb8-78"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb8-79"><a href="#cb8-79"></a><span class="co">    x:キャラのX座標</span></span>
+<span id="cb8-80"><a href="#cb8-80"></a><span class="co">    y:キャラのY座標</span></span>
+<span id="cb8-81"><a href="#cb8-81"></a><span class="co">    state:キャラの状態</span></span>
+<span id="cb8-82"><a href="#cb8-82"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb8-83"><a href="#cb8-83"></a>    <span class="co">#今の画像を消して再描写</span></span>
+<span id="cb8-84"><a href="#cb8-84"></a>    canvas.delete(<span class="st">&quot;chara&quot;</span>)</span>
+<span id="cb8-85"><a href="#cb8-85"></a>    canvas.create_image(x,y,image <span class="op">=</span>BIG_CHARA_IMAGE[state] ,tag<span class="op">=</span><span class="st">&quot;chara&quot;</span>,anchor<span class="op">=</span>tk.NW)</span>
+<span id="cb8-86"><a href="#cb8-86"></a></span>
+<span id="cb8-87"><a href="#cb8-87"></a></span>
+<span id="cb8-88"><a href="#cb8-88"></a><span class="co">#&gt;&gt;アイコン&gt;&gt;</span></span>
+<span id="cb8-89"><a href="#cb8-89"></a><span class="co"># 吹き出し</span></span>
+<span id="cb8-90"><a href="#cb8-90"></a></span>
+<span id="cb8-91"><a href="#cb8-91"></a>ICON <span class="op">=</span> {</span>
+<span id="cb8-92"><a href="#cb8-92"></a>    <span class="st">&quot;fishing&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/fishing.png&quot;</span>),</span>
+<span id="cb8-93"><a href="#cb8-93"></a>    <span class="st">&quot;hit&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/hit.png&quot;</span>),</span>
+<span id="cb8-94"><a href="#cb8-94"></a>    <span class="st">&quot;miss&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/miss.png&quot;</span>),</span>
+<span id="cb8-95"><a href="#cb8-95"></a>    <span class="st">&quot;fight&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/fight.png&quot;</span>),</span>
+<span id="cb8-96"><a href="#cb8-96"></a>    <span class="st">&quot;success&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/success.png&quot;</span>),</span>
+<span id="cb8-97"><a href="#cb8-97"></a>}</span>
+<span id="cb8-98"><a href="#cb8-98"></a></span>
+<span id="cb8-99"><a href="#cb8-99"></a>BIG_ICON <span class="op">=</span> {key :img.zoom(MAGNIFICATION_RATE<span class="op">//</span><span class="dv">1</span>,MAGNIFICATION_RATE<span class="op">//</span><span class="dv">1</span>) <span class="cf">for</span> key , img <span class="kw">in</span> ICON.items()}</span>
+<span id="cb8-100"><a href="#cb8-100"></a></span>
+<span id="cb8-101"><a href="#cb8-101"></a></span>
+<span id="cb8-102"><a href="#cb8-102"></a></span>
+<span id="cb8-103"><a href="#cb8-103"></a><span class="co">#アイコンを表示する関数</span></span>
+<span id="cb8-104"><a href="#cb8-104"></a><span class="kw">def</span> setIcon(x,y,<span class="bu">type</span>):</span>
+<span id="cb8-105"><a href="#cb8-105"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb8-106"><a href="#cb8-106"></a><span class="co">    x:キャラのx座標</span></span>
+<span id="cb8-107"><a href="#cb8-107"></a><span class="co">    y:キャラのy座標</span></span>
+<span id="cb8-108"><a href="#cb8-108"></a><span class="co">    type:アイコンの種類</span></span>
+<span id="cb8-109"><a href="#cb8-109"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb8-110"><a href="#cb8-110"></a>    <span class="co"># 一回消して再描写</span></span>
+<span id="cb8-111"><a href="#cb8-111"></a>    canvas.delete(<span class="st">&quot;icon&quot;</span>)</span>
+<span id="cb8-112"><a href="#cb8-112"></a>    canvas.create_image(</span>
+<span id="cb8-113"><a href="#cb8-113"></a>        x<span class="op">+</span>CHARA_WIDTH<span class="op">*</span>MAGNIFICATION_RATE<span class="op">/</span><span class="dv">16</span>,</span>
+<span id="cb8-114"><a href="#cb8-114"></a>        y<span class="op">-</span>CHARA_HEIGHT<span class="op">*</span>MAGNIFICATION_RATE<span class="op">/</span><span class="dv">2</span>,</span>
+<span id="cb8-115"><a href="#cb8-115"></a>        image <span class="op">=</span> BIG_ICON[<span class="bu">type</span>],</span>
+<span id="cb8-116"><a href="#cb8-116"></a>        tag<span class="op">=</span><span class="st">&quot;icon&quot;</span>,</span>
+<span id="cb8-117"><a href="#cb8-117"></a>        anchor<span class="op">=</span>tk.NW</span>
+<span id="cb8-118"><a href="#cb8-118"></a>        )</span>
+<span id="cb8-119"><a href="#cb8-119"></a></span>
+<span id="cb8-120"><a href="#cb8-120"></a></span>
+<span id="cb8-121"><a href="#cb8-121"></a></span>
+<span id="cb8-122"><a href="#cb8-122"></a></span>
+<span id="cb8-123"><a href="#cb8-123"></a><span class="co">#&gt;&gt;魚&gt;&gt;</span></span>
+<span id="cb8-124"><a href="#cb8-124"></a>fishFlag <span class="op">=</span> <span class="va">False</span> <span class="co">#釣り可能かどうか</span></span>
+<span id="cb8-125"><a href="#cb8-125"></a></span>
+<span id="cb8-126"><a href="#cb8-126"></a></span>
+<span id="cb8-127"><a href="#cb8-127"></a>FISH_IMAGE <span class="op">=</span> {</span>
+<span id="cb8-128"><a href="#cb8-128"></a>    <span class="st">&quot;イワシ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/iwashi.png&quot;</span>),</span>
+<span id="cb8-129"><a href="#cb8-129"></a>    <span class="st">&quot;アジ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/aji.png&quot;</span>),</span>
+<span id="cb8-130"><a href="#cb8-130"></a>    <span class="st">&quot;サバ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/saba.png&quot;</span>),</span>
+<span id="cb8-131"><a href="#cb8-131"></a>    <span class="st">&quot;タチウオ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/tachiuo.png&quot;</span>),</span>
+<span id="cb8-132"><a href="#cb8-132"></a>    <span class="st">&quot;カワハギ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/kawahagi.png&quot;</span>),</span>
+<span id="cb8-133"><a href="#cb8-133"></a>    <span class="st">&quot;メバル&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/mebaru.png&quot;</span>),</span>
+<span id="cb8-134"><a href="#cb8-134"></a>    <span class="st">&quot;タイ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/tai.png&quot;</span>),</span>
+<span id="cb8-135"><a href="#cb8-135"></a>    <span class="st">&quot;スズキ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/suzuki.png&quot;</span>),</span>
+<span id="cb8-136"><a href="#cb8-136"></a>    <span class="st">&quot;サケ&quot;</span>:tk.PhotoImage(<span class="bu">file</span> <span class="op">=</span> cwd<span class="op">+</span><span class="st">&quot;/img/sake.png&quot;</span>),</span>
+<span id="cb8-137"><a href="#cb8-137"></a>}</span>
+<span id="cb8-138"><a href="#cb8-138"></a>BIG_FISH_IMAGE <span class="op">=</span> {key :img.zoom(<span class="dv">2</span>,<span class="dv">2</span>) <span class="cf">for</span> key , img <span class="kw">in</span> FISH_IMAGE.items()}</span>
+<span id="cb8-139"><a href="#cb8-139"></a></span>
+<span id="cb8-140"><a href="#cb8-140"></a>LOW_RARE_FISH <span class="op">=</span> [</span>
+<span id="cb8-141"><a href="#cb8-141"></a>        {</span>
+<span id="cb8-142"><a href="#cb8-142"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;イワシ&quot;</span>,</span>
+<span id="cb8-143"><a href="#cb8-143"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;イワシ&quot;</span>],</span>
+<span id="cb8-144"><a href="#cb8-144"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.12</span>, <span class="co">#平均重量</span></span>
+<span id="cb8-145"><a href="#cb8-145"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">60</span> <span class="co">#kg単価</span></span>
+<span id="cb8-146"><a href="#cb8-146"></a>        },</span>
+<span id="cb8-147"><a href="#cb8-147"></a>        {</span>
+<span id="cb8-148"><a href="#cb8-148"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;アジ&quot;</span>,</span>
+<span id="cb8-149"><a href="#cb8-149"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;アジ&quot;</span>],</span>
+<span id="cb8-150"><a href="#cb8-150"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.17</span>,</span>
+<span id="cb8-151"><a href="#cb8-151"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">100</span></span>
+<span id="cb8-152"><a href="#cb8-152"></a>        },</span>
+<span id="cb8-153"><a href="#cb8-153"></a>        {</span>
+<span id="cb8-154"><a href="#cb8-154"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;サバ&quot;</span>,</span>
+<span id="cb8-155"><a href="#cb8-155"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;サバ&quot;</span>],</span>
+<span id="cb8-156"><a href="#cb8-156"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.35</span>,</span>
+<span id="cb8-157"><a href="#cb8-157"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">50</span></span>
+<span id="cb8-158"><a href="#cb8-158"></a>        },</span>
+<span id="cb8-159"><a href="#cb8-159"></a>    ]</span>
+<span id="cb8-160"><a href="#cb8-160"></a>MIDDLE_RARE_FISH <span class="op">=</span> [</span>
+<span id="cb8-161"><a href="#cb8-161"></a>        {</span>
+<span id="cb8-162"><a href="#cb8-162"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;タチウオ&quot;</span>,</span>
+<span id="cb8-163"><a href="#cb8-163"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;タチウオ&quot;</span>],</span>
+<span id="cb8-164"><a href="#cb8-164"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="dv">3</span>,</span>
+<span id="cb8-165"><a href="#cb8-165"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">12</span></span>
+<span id="cb8-166"><a href="#cb8-166"></a>        },</span>
+<span id="cb8-167"><a href="#cb8-167"></a>        {</span>
+<span id="cb8-168"><a href="#cb8-168"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;カワハギ&quot;</span>,</span>
+<span id="cb8-169"><a href="#cb8-169"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;カワハギ&quot;</span>],</span>
+<span id="cb8-170"><a href="#cb8-170"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.4</span>,</span>
+<span id="cb8-171"><a href="#cb8-171"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">80</span></span>
+<span id="cb8-172"><a href="#cb8-172"></a>        },</span>
+<span id="cb8-173"><a href="#cb8-173"></a>        {</span>
+<span id="cb8-174"><a href="#cb8-174"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;メバル&quot;</span>,</span>
+<span id="cb8-175"><a href="#cb8-175"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;メバル&quot;</span>],</span>
+<span id="cb8-176"><a href="#cb8-176"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">0.43</span>,</span>
+<span id="cb8-177"><a href="#cb8-177"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">100</span></span>
+<span id="cb8-178"><a href="#cb8-178"></a>        },</span>
+<span id="cb8-179"><a href="#cb8-179"></a>    ]</span>
+<span id="cb8-180"><a href="#cb8-180"></a>HIGH_RARE_FISH <span class="op">=</span> [</span>
+<span id="cb8-181"><a href="#cb8-181"></a>        {</span>
+<span id="cb8-182"><a href="#cb8-182"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;タイ&quot;</span>,</span>
+<span id="cb8-183"><a href="#cb8-183"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;タイ&quot;</span>],</span>
+<span id="cb8-184"><a href="#cb8-184"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">5.4</span>,</span>
+<span id="cb8-185"><a href="#cb8-185"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">20</span></span>
+<span id="cb8-186"><a href="#cb8-186"></a>        },</span>
+<span id="cb8-187"><a href="#cb8-187"></a>        {</span>
+<span id="cb8-188"><a href="#cb8-188"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;スズキ&quot;</span>,</span>
+<span id="cb8-189"><a href="#cb8-189"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;スズキ&quot;</span>],</span>
+<span id="cb8-190"><a href="#cb8-190"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">5.5</span>,</span>
+<span id="cb8-191"><a href="#cb8-191"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">19</span></span>
+<span id="cb8-192"><a href="#cb8-192"></a>        },</span>
+<span id="cb8-193"><a href="#cb8-193"></a>        {</span>
+<span id="cb8-194"><a href="#cb8-194"></a>        <span class="st">&quot;name&quot;</span>:<span class="st">&quot;サケ&quot;</span>,</span>
+<span id="cb8-195"><a href="#cb8-195"></a>        <span class="st">&quot;img&quot;</span>:FISH_IMAGE[<span class="st">&quot;サケ&quot;</span>],</span>
+<span id="cb8-196"><a href="#cb8-196"></a>        <span class="st">&quot;aveWeight&quot;</span>:<span class="fl">1.65</span>,</span>
+<span id="cb8-197"><a href="#cb8-197"></a>        <span class="st">&quot;price&quot;</span>:<span class="dv">65</span></span>
+<span id="cb8-198"><a href="#cb8-198"></a>        },</span>
+<span id="cb8-199"><a href="#cb8-199"></a>    ]</span>
+<span id="cb8-200"><a href="#cb8-200"></a>FISH_LIST <span class="op">=</span> []</span>
+<span id="cb8-201"><a href="#cb8-201"></a>FISH_LIST.append(LOW_RARE_FISH)</span>
+<span id="cb8-202"><a href="#cb8-202"></a>FISH_LIST.append(MIDDLE_RARE_FISH)</span>
+<span id="cb8-203"><a href="#cb8-203"></a>FISH_LIST.append(HIGH_RARE_FISH)</span>
+<span id="cb8-204"><a href="#cb8-204"></a></span>
+<span id="cb8-205"><a href="#cb8-205"></a></span>
+<span id="cb8-206"><a href="#cb8-206"></a><span class="co"># &gt;&gt;釣り結果表示&gt;&gt;</span></span>
+<span id="cb8-207"><a href="#cb8-207"></a>RESULT_X <span class="op">=</span> <span class="dv">300</span></span>
+<span id="cb8-208"><a href="#cb8-208"></a>RESULT_Y <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb8-209"><a href="#cb8-209"></a>RESULT_SIZE <span class="op">=</span> <span class="ss">f&quot;</span><span class="sc">{</span>RESULT_X<span class="sc">}</span><span class="ss">x</span><span class="sc">{</span>RESULT_Y<span class="sc">}</span><span class="ss">+</span><span class="sc">{</span><span class="bu">int</span>((CANVAS_WIDTH <span class="op">-</span> RESULT_X)<span class="op">/</span><span class="dv">2</span>)<span class="sc">}</span><span class="ss">+</span><span class="sc">{</span><span class="bu">int</span>((CANVAS_HEIGHT <span class="op">-</span> RESULT_Y)<span class="op">/</span><span class="dv">2</span>)<span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb8-210"><a href="#cb8-210"></a></span>
+<span id="cb8-211"><a href="#cb8-211"></a></span>
+<span id="cb8-212"><a href="#cb8-212"></a><span class="kw">def</span> showResultWindow(fish,rank,weight,price):</span>
+<span id="cb8-213"><a href="#cb8-213"></a>    <span class="kw">global</span> resultWindow,FISH_IMAGE</span>
+<span id="cb8-214"><a href="#cb8-214"></a>    <span class="co">#ウィンドウ設置</span></span>
+<span id="cb8-215"><a href="#cb8-215"></a>    resultWindow <span class="op">=</span> tk.Toplevel()</span>
+<span id="cb8-216"><a href="#cb8-216"></a>    resultWindow.title(<span class="st">&quot;Result&quot;</span>)</span>
+<span id="cb8-217"><a href="#cb8-217"></a>    resultWindow.geometry(RESULT_SIZE)</span>
+<span id="cb8-218"><a href="#cb8-218"></a>    resultWindow.resizable(<span class="va">False</span>,<span class="va">False</span>)</span>
+<span id="cb8-219"><a href="#cb8-219"></a>    resultWindow.configure(bg<span class="op">=</span><span class="st">&quot;burlywood&quot;</span>)</span>
+<span id="cb8-220"><a href="#cb8-220"></a>    </span>
+<span id="cb8-221"><a href="#cb8-221"></a>    </span>
+<span id="cb8-222"><a href="#cb8-222"></a>    <span class="co"># フレームの作成と設置</span></span>
+<span id="cb8-223"><a href="#cb8-223"></a>    nameFrame <span class="op">=</span> tk.Frame(resultWindow , relief<span class="op">=</span>tk.RAISED , bg<span class="op">=</span><span class="st">&quot;burlywood&quot;</span>)</span>
+<span id="cb8-224"><a href="#cb8-224"></a>    canvasFrame <span class="op">=</span> tk.Frame(resultWindow , relief<span class="op">=</span>tk.RAISED , bg<span class="op">=</span><span class="st">&quot;burlywood&quot;</span>)</span>
+<span id="cb8-225"><a href="#cb8-225"></a>    infoFrame <span class="op">=</span> tk.Frame(resultWindow , relief<span class="op">=</span>tk.RAISED , bg<span class="op">=</span><span class="st">&quot;burlywood&quot;</span>)</span>
+<span id="cb8-226"><a href="#cb8-226"></a>    nameFrame.pack(fill <span class="op">=</span> tk.BOTH, pady<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb8-227"><a href="#cb8-227"></a>    canvasFrame.pack(fill <span class="op">=</span> tk.BOTH, pady<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-228"><a href="#cb8-228"></a>    infoFrame.pack(fill <span class="op">=</span> tk.BOTH, pady<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb8-229"><a href="#cb8-229"></a>    </span>
+<span id="cb8-230"><a href="#cb8-230"></a>    <span class="cf">if</span>(rank <span class="op">==</span> <span class="st">&quot;silver&quot;</span>):</span>
+<span id="cb8-231"><a href="#cb8-231"></a>        name <span class="op">=</span> <span class="st">&quot;大物の&quot;</span><span class="op">+</span>fish</span>
+<span id="cb8-232"><a href="#cb8-232"></a>        color <span class="op">=</span> <span class="st">&quot;LightBlue4&quot;</span></span>
+<span id="cb8-233"><a href="#cb8-233"></a>    <span class="cf">elif</span>(rank <span class="op">==</span> <span class="st">&quot;gold&quot;</span>):</span>
+<span id="cb8-234"><a href="#cb8-234"></a>        name <span class="op">=</span> <span class="st">&quot;超大物の&quot;</span><span class="op">+</span>fish</span>
+<span id="cb8-235"><a href="#cb8-235"></a>        color <span class="op">=</span> <span class="st">&quot;gold&quot;</span></span>
+<span id="cb8-236"><a href="#cb8-236"></a>    <span class="cf">else</span>:</span>
+<span id="cb8-237"><a href="#cb8-237"></a>        name <span class="op">=</span> fish</span>
+<span id="cb8-238"><a href="#cb8-238"></a>        color <span class="op">=</span> <span class="st">&quot;DarkOrange4&quot;</span></span>
+<span id="cb8-239"><a href="#cb8-239"></a>    </span>
+<span id="cb8-240"><a href="#cb8-240"></a>    viewCanvas <span class="op">=</span> tk.Canvas(canvasFrame,width <span class="op">=</span> <span class="dv">192</span>,height <span class="op">=</span> <span class="dv">48</span>,bg <span class="op">=</span> <span class="st">&quot;burlywood&quot;</span>,highlightthickness<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb8-241"><a href="#cb8-241"></a>    viewCanvas.pack()</span>
+<span id="cb8-242"><a href="#cb8-242"></a>    viewCanvas.create_image(<span class="dv">96</span>,<span class="dv">24</span>,image <span class="op">=</span>BIG_FISH_IMAGE[fish],tag<span class="op">=</span><span class="st">&quot;view&quot;</span>,anchor<span class="op">=</span>tk.CENTER)</span>
+<span id="cb8-243"><a href="#cb8-243"></a>    </span>
+<span id="cb8-244"><a href="#cb8-244"></a>    <span class="co"># 各種ウィジェットの作成</span></span>
+<span id="cb8-245"><a href="#cb8-245"></a>    fishName <span class="op">=</span> tk.Label(nameFrame, text<span class="op">=</span>name, font<span class="op">=</span>(<span class="st">&quot;MSゴシック&quot;</span>, <span class="st">&quot;20&quot;</span>, <span class="st">&quot;bold&quot;</span>),fg <span class="op">=</span> color,bg <span class="op">=</span> <span class="st">&quot;burlywood&quot;</span>)</span>
+<span id="cb8-246"><a href="#cb8-246"></a>    fishWeight <span class="op">=</span> tk.Label(infoFrame, text<span class="op">=</span><span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot; kg&quot;</span>, font<span class="op">=</span>(<span class="st">&quot;MSゴシック&quot;</span>, <span class="st">&quot;16&quot;</span>),bg <span class="op">=</span> <span class="st">&quot;burlywood&quot;</span>)</span>
+<span id="cb8-247"><a href="#cb8-247"></a>    fishPrice <span class="op">=</span> tk.Label(infoFrame, text<span class="op">=</span><span class="bu">str</span>(price)<span class="op">+</span><span class="st">&quot; G&quot;</span>, font<span class="op">=</span>(<span class="st">&quot;MSゴシック&quot;</span>, <span class="st">&quot;16&quot;</span>),bg <span class="op">=</span> <span class="st">&quot;burlywood&quot;</span>)</span>
+<span id="cb8-248"><a href="#cb8-248"></a>    fishName.pack()</span>
+<span id="cb8-249"><a href="#cb8-249"></a>    fishWeight.pack()</span>
+<span id="cb8-250"><a href="#cb8-250"></a>    fishPrice.pack()</span>
+<span id="cb8-251"><a href="#cb8-251"></a></span>
+<span id="cb8-252"><a href="#cb8-252"></a></span>
+<span id="cb8-253"><a href="#cb8-253"></a></span>
+<span id="cb8-254"><a href="#cb8-254"></a><span class="co">#&gt;&gt;ゲームのメインループ関数&gt;&gt;</span></span>
+<span id="cb8-255"><a href="#cb8-255"></a><span class="kw">def</span> gameLoop():</span>
+<span id="cb8-256"><a href="#cb8-256"></a>    <span class="kw">global</span> charaX,charaY,flag,key,currentKey,prevKey,waitTick,fishingCount,resultWindow</span>
+<span id="cb8-257"><a href="#cb8-257"></a>    </span>
+<span id="cb8-258"><a href="#cb8-258"></a>    <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>): <span class="co">#待機中のとき </span></span>
+<span id="cb8-259"><a href="#cb8-259"></a>        setChara(charaX,charaY,<span class="st">&quot;default&quot;</span>)</span>
+<span id="cb8-260"><a href="#cb8-260"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
+<span id="cb8-261"><a href="#cb8-261"></a>            canvas.delete(<span class="st">&quot;icon&quot;</span>)<span class="co">#釣りアイコン削除</span></span>
+<span id="cb8-262"><a href="#cb8-262"></a>            flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span></span>
+<span id="cb8-263"><a href="#cb8-263"></a>            waitTick <span class="op">=</span> random.randint(<span class="bu">round</span>(<span class="dv">3000</span><span class="op">/</span>TICK_TIME),<span class="bu">round</span>(<span class="dv">5000</span><span class="op">/</span>TICK_TIME))<span class="co">#3-5秒</span></span>
+<span id="cb8-264"><a href="#cb8-264"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-265"><a href="#cb8-265"></a>    </span>
+<span id="cb8-266"><a href="#cb8-266"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):<span class="co">#魚釣り中のとき</span></span>
+<span id="cb8-267"><a href="#cb8-267"></a>        <span class="co"># スペースキーが再び押された時</span></span>
+<span id="cb8-268"><a href="#cb8-268"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)): </span>
+<span id="cb8-269"><a href="#cb8-269"></a>            setIcon(charaX,charaY,<span class="st">&quot;miss&quot;</span>)<span class="co">#アイコン描写</span></span>
+<span id="cb8-270"><a href="#cb8-270"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
+<span id="cb8-271"><a href="#cb8-271"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
+<span id="cb8-272"><a href="#cb8-272"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb8-273"><a href="#cb8-273"></a>            <span class="co">#キャラクター再描写</span></span>
+<span id="cb8-274"><a href="#cb8-274"></a>            setChara(charaX,charaY,<span class="st">&quot;wait&quot;</span>)</span>
+<span id="cb8-275"><a href="#cb8-275"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb8-276"><a href="#cb8-276"></a>            <span class="cf">if</span>(random.randint(<span class="dv">1</span>,<span class="dv">3</span>)<span class="op">!=</span><span class="dv">1</span>):<span class="co">#2/3の確率で</span></span>
+<span id="cb8-277"><a href="#cb8-277"></a>                flag <span class="op">=</span> <span class="st">&quot;hit&quot;</span></span>
+<span id="cb8-278"><a href="#cb8-278"></a>                waitTick <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb8-279"><a href="#cb8-279"></a>                fishingCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-280"><a href="#cb8-280"></a>            <span class="cf">else</span>:</span>
+<span id="cb8-281"><a href="#cb8-281"></a>                flag <span class="op">=</span> <span class="st">&quot;bite&quot;</span></span>
+<span id="cb8-282"><a href="#cb8-282"></a>                waitTick <span class="op">=</span> random.randint(<span class="dv">2</span>,<span class="dv">10</span>)</span>
+<span id="cb8-283"><a href="#cb8-283"></a>                fishingCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-284"><a href="#cb8-284"></a>            </span>
+<span id="cb8-285"><a href="#cb8-285"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):</span>
+<span id="cb8-286"><a href="#cb8-286"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb8-287"><a href="#cb8-287"></a>    </span>
+<span id="cb8-288"><a href="#cb8-288"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>): <span class="co">#魚が少し喰いついたとき</span></span>
+<span id="cb8-289"><a href="#cb8-289"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
+<span id="cb8-290"><a href="#cb8-290"></a>            setIcon(charaX,charaY,<span class="st">&quot;miss&quot;</span>)<span class="co">#アイコン描写</span></span>
+<span id="cb8-291"><a href="#cb8-291"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
+<span id="cb8-292"><a href="#cb8-292"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
+<span id="cb8-293"><a href="#cb8-293"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb8-294"><a href="#cb8-294"></a>            setChara(charaX,charaY,<span class="st">&quot;bite&quot;</span>)</span>
+<span id="cb8-295"><a href="#cb8-295"></a>            <span class="bu">print</span>(<span class="st">&quot;ピク...&quot;</span>)</span>
+<span id="cb8-296"><a href="#cb8-296"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb8-297"><a href="#cb8-297"></a>            flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span></span>
+<span id="cb8-298"><a href="#cb8-298"></a>            waitTick <span class="op">=</span> random.randint(<span class="bu">round</span>(<span class="dv">200</span><span class="op">/</span>TICK_TIME),<span class="bu">round</span>(<span class="dv">2000</span><span class="op">/</span>TICK_TIME))</span>
+<span id="cb8-299"><a href="#cb8-299"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-300"><a href="#cb8-300"></a>        </span>
+<span id="cb8-301"><a href="#cb8-301"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>):</span>
+<span id="cb8-302"><a href="#cb8-302"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb8-303"><a href="#cb8-303"></a>    </span>
+<span id="cb8-304"><a href="#cb8-304"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>): <span class="co">#魚がかかったとき</span></span>
+<span id="cb8-305"><a href="#cb8-305"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
+<span id="cb8-306"><a href="#cb8-306"></a>            flag <span class="op">=</span> <span class="st">&quot;fight&quot;</span></span>
+<span id="cb8-307"><a href="#cb8-307"></a>            setIcon(charaX,charaY,<span class="st">&quot;fight&quot;</span>)<span class="co">#アイコン描写</span></span>
+<span id="cb8-308"><a href="#cb8-308"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-309"><a href="#cb8-309"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb8-310"><a href="#cb8-310"></a>            <span class="co">#キャラクター再描写</span></span>
+<span id="cb8-311"><a href="#cb8-311"></a>            setChara(charaX,charaY,<span class="st">&quot;fight&quot;</span>)</span>
+<span id="cb8-312"><a href="#cb8-312"></a>            setIcon(charaX,charaY,<span class="st">&quot;hit&quot;</span>)<span class="co">#アイコン描写</span></span>
+<span id="cb8-313"><a href="#cb8-313"></a>            <span class="bu">print</span>(<span class="st">&quot;ビク！&quot;</span>)</span>
+<span id="cb8-314"><a href="#cb8-314"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb8-315"><a href="#cb8-315"></a>            <span class="bu">print</span>(<span class="st">&quot;遅すぎた！&quot;</span>)</span>
+<span id="cb8-316"><a href="#cb8-316"></a>            setIcon(charaX,charaY,<span class="st">&quot;miss&quot;</span>)<span class="co">#アイコン描写</span></span>
+<span id="cb8-317"><a href="#cb8-317"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
+<span id="cb8-318"><a href="#cb8-318"></a>        </span>
+<span id="cb8-319"><a href="#cb8-319"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>):</span>
+<span id="cb8-320"><a href="#cb8-320"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb8-321"><a href="#cb8-321"></a>    </span>
+<span id="cb8-322"><a href="#cb8-322"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;fight&quot;</span>): <span class="co">#かかった魚を釣り上げているとき</span></span>
+<span id="cb8-323"><a href="#cb8-323"></a>        <span class="cf">if</span>(fishingCount <span class="op">&lt;</span> <span class="dv">20</span>):</span>
+<span id="cb8-324"><a href="#cb8-324"></a>            <span class="cf">if</span>(fishingCount<span class="op">%</span><span class="dv">4</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">or</span> fishingCount<span class="op">%</span><span class="dv">4</span> <span class="op">==</span> <span class="dv">1</span> ):</span>
+<span id="cb8-325"><a href="#cb8-325"></a>                setChara(charaX,charaY,<span class="st">&quot;hit&quot;</span>)</span>
+<span id="cb8-326"><a href="#cb8-326"></a>            <span class="cf">else</span>:</span>
+<span id="cb8-327"><a href="#cb8-327"></a>                setChara(charaX,charaY,<span class="st">&quot;fight&quot;</span>)</span>
+<span id="cb8-328"><a href="#cb8-328"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb8-329"><a href="#cb8-329"></a>        <span class="cf">else</span>:</span>
+<span id="cb8-330"><a href="#cb8-330"></a>            flag <span class="op">=</span> <span class="st">&quot;success&quot;</span></span>
+<span id="cb8-331"><a href="#cb8-331"></a>    </span>
+<span id="cb8-332"><a href="#cb8-332"></a>    <span class="cf">elif</span>(flag <span class="op">==</span> <span class="st">&quot;success&quot;</span>): <span class="co">#釣りに成功したとき</span></span>
+<span id="cb8-333"><a href="#cb8-333"></a>        <span class="co">#ランダムな魚を選択</span></span>
+<span id="cb8-334"><a href="#cb8-334"></a>        selectedFish <span class="op">=</span> random.choice((random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights <span class="op">=</span> (<span class="dv">75</span>,<span class="dv">20</span>,<span class="dv">5</span>)))[<span class="dv">0</span>])</span>
+<span id="cb8-335"><a href="#cb8-335"></a>        <span class="bu">print</span>(selectedFish[<span class="st">&quot;name&quot;</span>])</span>
+<span id="cb8-336"><a href="#cb8-336"></a>        <span class="co">#魚の重さを決定(ランダム 0.5~1.5)</span></span>
+<span id="cb8-337"><a href="#cb8-337"></a>        fishWeight <span class="op">=</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span>random.uniform(<span class="fl">0.5</span>, <span class="fl">1.5</span>)</span>
+<span id="cb8-338"><a href="#cb8-338"></a>        fishWeight <span class="op">=</span> <span class="bu">round</span>(fishWeight,<span class="dv">2</span>) <span class="co">#少数第3位で四捨五入</span></span>
+<span id="cb8-339"><a href="#cb8-339"></a>        <span class="bu">print</span>(fishWeight)</span>
+<span id="cb8-340"><a href="#cb8-340"></a>        <span class="co">#重さから売却価格を決定</span></span>
+<span id="cb8-341"><a href="#cb8-341"></a>        fishPrice <span class="op">=</span> fishWeight <span class="op">*</span> selectedFish[<span class="st">&quot;price&quot;</span>]</span>
+<span id="cb8-342"><a href="#cb8-342"></a>        </span>
+<span id="cb8-343"><a href="#cb8-343"></a>        <span class="co">#魚のランクを決定、ランクに応じて価格を上方修正</span></span>
+<span id="cb8-344"><a href="#cb8-344"></a>        <span class="cf">if</span>(fishWeight <span class="op">&gt;</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span><span class="fl">1.4</span>):</span>
+<span id="cb8-345"><a href="#cb8-345"></a>            fishRank <span class="op">=</span> <span class="st">&quot;gold&quot;</span></span>
+<span id="cb8-346"><a href="#cb8-346"></a>            fishPrice <span class="op">*=</span> <span class="fl">1.4</span></span>
+<span id="cb8-347"><a href="#cb8-347"></a>        <span class="cf">elif</span> (fishWeight <span class="op">&gt;</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span><span class="fl">1.2</span>):</span>
+<span id="cb8-348"><a href="#cb8-348"></a>            fishRank <span class="op">=</span> <span class="st">&quot;silver&quot;</span></span>
+<span id="cb8-349"><a href="#cb8-349"></a>            fishPrice <span class="op">*=</span> <span class="fl">1.2</span></span>
+<span id="cb8-350"><a href="#cb8-350"></a>        <span class="cf">else</span>:</span>
+<span id="cb8-351"><a href="#cb8-351"></a>            fishRank <span class="op">=</span> <span class="st">&quot;bronze&quot;</span></span>
+<span id="cb8-352"><a href="#cb8-352"></a>        </span>
+<span id="cb8-353"><a href="#cb8-353"></a>        fishPrice <span class="op">=</span> <span class="bu">round</span>(fishPrice) <span class="co">#四捨五入</span></span>
+<span id="cb8-354"><a href="#cb8-354"></a>        </span>
+<span id="cb8-355"><a href="#cb8-355"></a>        </span>
+<span id="cb8-356"><a href="#cb8-356"></a>        <span class="co">#釣りの姿勢から通常状態に戻す</span></span>
+<span id="cb8-357"><a href="#cb8-357"></a>        setChara(charaX,charaY,<span class="st">&quot;default&quot;</span>)</span>
+<span id="cb8-358"><a href="#cb8-358"></a>        canvas.delete(<span class="st">&quot;rod&quot;</span>)</span>
+<span id="cb8-359"><a href="#cb8-359"></a>        setIcon(charaX,charaY,<span class="st">&quot;success&quot;</span>)<span class="co">#アイコン描写</span></span>
+<span id="cb8-360"><a href="#cb8-360"></a>        showResultWindow(selectedFish[<span class="st">&quot;name&quot;</span>],fishRank,fishWeight,fishPrice)</span>
+<span id="cb8-361"><a href="#cb8-361"></a>        flag <span class="op">=</span> <span class="st">&quot;result&quot;</span></span>
+<span id="cb8-362"><a href="#cb8-362"></a>        </span>
+<span id="cb8-363"><a href="#cb8-363"></a>    <span class="cf">elif</span>(flag <span class="op">==</span> <span class="st">&quot;result&quot;</span>): <span class="co">#結果表示中のとき</span></span>
+<span id="cb8-364"><a href="#cb8-364"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
+<span id="cb8-365"><a href="#cb8-365"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
+<span id="cb8-366"><a href="#cb8-366"></a>            setIcon(charaX,charaY,<span class="st">&quot;fishing&quot;</span>)</span>
+<span id="cb8-367"><a href="#cb8-367"></a>            resultWindow.destroy()</span>
+<span id="cb8-368"><a href="#cb8-368"></a>    </span>
+<span id="cb8-369"><a href="#cb8-369"></a>    prevKey <span class="op">=</span> copy.deepcopy(key)</span>
+<span id="cb8-370"><a href="#cb8-370"></a>    key <span class="op">=</span> copy.deepcopy(currentKey)</span>
+<span id="cb8-371"><a href="#cb8-371"></a>    root.after(TICK_TIME,gameLoop)</span>
+<span id="cb8-372"><a href="#cb8-372"></a></span>
+<span id="cb8-373"><a href="#cb8-373"></a><span class="co">#&gt;&gt;キー監視&gt;&gt;</span></span>
+<span id="cb8-374"><a href="#cb8-374"></a>currentKey <span class="op">=</span> []<span class="co">#現在押されているキー</span></span>
+<span id="cb8-375"><a href="#cb8-375"></a>key <span class="op">=</span> []       <span class="co">#前回の処理から押されたキー</span></span>
+<span id="cb8-376"><a href="#cb8-376"></a>prevKey <span class="op">=</span> [] <span class="co">#前回の処理までに押されたキー</span></span>
+<span id="cb8-377"><a href="#cb8-377"></a></span>
+<span id="cb8-378"><a href="#cb8-378"></a><span class="co">#何かのキーが押されたときに呼び出される関数</span></span>
+<span id="cb8-379"><a href="#cb8-379"></a><span class="kw">def</span> press(e):</span>
+<span id="cb8-380"><a href="#cb8-380"></a>    keysym <span class="op">=</span> e.keysym</span>
+<span id="cb8-381"><a href="#cb8-381"></a>    <span class="cf">if</span>(keysym <span class="kw">not</span> <span class="kw">in</span> currentKey):<span class="co">#始めて押されたならば</span></span>
+<span id="cb8-382"><a href="#cb8-382"></a>        currentKey.append(keysym)</span>
+<span id="cb8-383"><a href="#cb8-383"></a>        <span class="bu">print</span>(<span class="ss">f&quot;pressed:</span><span class="sc">{</span>keysym<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb8-384"><a href="#cb8-384"></a>    <span class="cf">if</span>(keysym <span class="kw">not</span> <span class="kw">in</span> key):<span class="co">#前回の処理から始めて押されたならば</span></span>
+<span id="cb8-385"><a href="#cb8-385"></a>        key.append(keysym)</span>
+<span id="cb8-386"><a href="#cb8-386"></a></span>
+<span id="cb8-387"><a href="#cb8-387"></a><span class="co">#何かのキーが離されたときに呼び出される関数</span></span>
+<span id="cb8-388"><a href="#cb8-388"></a><span class="kw">def</span> release(e):</span>
+<span id="cb8-389"><a href="#cb8-389"></a>    keysym <span class="op">=</span> e.keysym</span>
+<span id="cb8-390"><a href="#cb8-390"></a>    currentKey.remove(keysym)</span>
+<span id="cb8-391"><a href="#cb8-391"></a>    <span class="bu">print</span>(<span class="ss">f&quot;released:</span><span class="sc">{</span>keysym<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb8-392"><a href="#cb8-392"></a></span>
+<span id="cb8-393"><a href="#cb8-393"></a><span class="co">#キー入力をトリガーに関数を呼び出すよう設定する</span></span>
+<span id="cb8-394"><a href="#cb8-394"></a>root.bind(<span class="st">&quot;&lt;KeyPress&gt;&quot;</span>, press)</span>
+<span id="cb8-395"><a href="#cb8-395"></a>root.bind(<span class="st">&quot;&lt;KeyRelease&gt;&quot;</span>, release)</span>
+<span id="cb8-396"><a href="#cb8-396"></a></span>
+<span id="cb8-397"><a href="#cb8-397"></a><span class="co">#&gt;&gt;メインループ&gt;&gt;&gt;</span></span>
+<span id="cb8-398"><a href="#cb8-398"></a>canvas.create_image(<span class="dv">0</span>,<span class="dv">0</span>,image <span class="op">=</span> MAP_BIG_IMAGE ,tag<span class="op">=</span><span class="st">&quot;bgimage&quot;</span>,anchor<span class="op">=</span>tk.NW)</span>
+<span id="cb8-399"><a href="#cb8-399"></a>setChara(charaX,charaY,<span class="st">&quot;default&quot;</span>)</span>
+<span id="cb8-400"><a href="#cb8-400"></a>setIcon(charaX,charaY,<span class="st">&quot;fishing&quot;</span>)</span>
+<span id="cb8-401"><a href="#cb8-401"></a></span>
+<span id="cb8-402"><a href="#cb8-402"></a>gameLoop()</span>
+<span id="cb8-403"><a href="#cb8-403"></a><span class="bu">print</span>(<span class="st">&quot;start!&quot;</span>)</span>
+<span id="cb8-404"><a href="#cb8-404"></a>root.mainloop()</span></code></pre></div>
       <!-- ---------------------------------------- -->
     </main>
 
