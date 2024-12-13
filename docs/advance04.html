@@ -60,6 +60,8 @@ class="toc-section-number">5</span>
 id="toc-キャラクターをアニメーションさせる"><span
 class="toc-section-number">6</span>
 キャラクターをアニメーションさせる</a></li>
+<li><a href="#組み合わせる" id="toc-組み合わせる"><span
+class="toc-section-number">7</span> 組み合わせる</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -350,14 +352,188 @@ class="toc-section-number">6</span>
 <span id="cb8-201"><a href="#cb8-201"></a>                    moveY <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb8-202"><a href="#cb8-202"></a>                    setChara(charaX,charaY,charaD)</span></code></pre></div>
       <p><code>MAP_DATA[charaY+moveY][charaX+moveX]</code>が移動する先のマップの情報(1なら草地、2なら砂地…)です。それを<code>PASSAGE_PERMIT</code>に入れることで、<strong>移動先のマップチップが、上を歩ける種類かどうか判定できます</strong></p>
-      <p>移動先が侵入できない場合、<code>flag</code>を<strong>defaultに戻します</strong>。</p>
+      <p>移動先が侵入できない場合、<code>flag</code>を<strong>defaultに戻します</strong>。ただし、向きだけは変えたいので関数<code>setChara()</code>でキャラクターを更新しています。</p>
       <h1 data-number="6" id="キャラクターをアニメーションさせる"><span
       class="header-section-number">6</span>
       キャラクターをアニメーションさせる</h1>
+      <p>次に、キャラクターに歩行アニメーションをつけてみましょう。
+      キャラクターが歩いているように見せるためには、図のような順番で表示する必要があります。</p>
       <figure>
-      <img src="./figs/104/walk.png" alt="img" />
+      <img src="./figs/104/walk2.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
+      <p>これを<strong>index</strong>で表すと、0→1→2→1となります。そこで<code>FRAME_LIST = [0,1,2,1]</code>とおき、これを参照することにします。新しいpythonファイル<code>move03.py</code>を作成してください。</p>
+      <div class="sourceCode" id="cb9" data-startFrom="1"
+      data-caption="move03.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">import</span> os</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="im">import</span> tkinter <span class="im">as</span> tk</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="im">from</span> PIL <span class="im">import</span> Image,ImageTk</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt;&gt;ディレクトリ&gt;&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>cwd <span class="op">=</span> os.getcwd()</span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;&gt;ウィンドウ、キャンバス&gt;&gt;</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>CANVAS_WIDTH <span class="op">=</span> <span class="dv">160</span> <span class="co">#キャンバス幅</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>CANVAS_HEIGHT <span class="op">=</span> <span class="dv">200</span> <span class="co">#キャンバス高さ</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>MARGINE_X <span class="op">=</span> <span class="dv">2</span> <span class="co">#マージン</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>MARGINE_Y <span class="op">=</span> <span class="dv">2</span> <span class="co">#マージン</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a>CANVAS_SIZE <span class="op">=</span> <span class="ss">f&quot;</span><span class="sc">{</span>CANVAS_WIDTH<span class="op">+</span>MARGINE_X<span class="sc">}</span><span class="ss">x</span><span class="sc">{</span>CANVAS_HEIGHT<span class="op">+</span>MARGINE_Y<span class="sc">}</span><span class="ss">&quot;</span><span class="co">#キャンバスサイズ</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#ウィンドウ設置</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a>root <span class="op">=</span> tk.Tk()</span>
+<span id="cb9-18"><a href="#cb9-18"></a>root.title(<span class="st">&quot;アニメーション&quot;</span>)</span>
+<span id="cb9-19"><a href="#cb9-19"></a>root.geometry(CANVAS_SIZE)</span>
+<span id="cb9-20"><a href="#cb9-20"></a></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#キャンバス設置</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a>canvas <span class="op">=</span> tk.Canvas(root,width <span class="op">=</span> CANVAS_WIDTH,height <span class="op">=</span> CANVAS_HEIGHT,bg <span class="op">=</span> <span class="st">&quot;skyblue&quot;</span>)</span>
+<span id="cb9-23"><a href="#cb9-23"></a>canvas.pack()</span>
+<span id="cb9-24"><a href="#cb9-24"></a></span>
+<span id="cb9-25"><a href="#cb9-25"></a></span>
+<span id="cb9-26"><a href="#cb9-26"></a><span class="co">#&gt;&gt;キャラクター&gt;&gt;</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a>CHARA_WIDTH <span class="op">=</span> <span class="dv">64</span>  <span class="co">#キャラの幅</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a>CHARA_HEIGHT <span class="op">=</span> <span class="dv">96</span> <span class="co">#キャラの高さ</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="co">#キャラクターの座標</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a>charaX <span class="op">=</span> <span class="dv">60</span> </span>
+<span id="cb9-32"><a href="#cb9-32"></a>charaY <span class="op">=</span> <span class="dv">60</span> </span>
+<span id="cb9-33"><a href="#cb9-33"></a>charaD <span class="op">=</span> <span class="dv">1</span>  <span class="co">#キャラの向き</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a>FRAME_LIST <span class="op">=</span> [<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>]</span>
+<span id="cb9-35"><a href="#cb9-35"></a></span>
+<span id="cb9-36"><a href="#cb9-36"></a>moveCount <span class="op">=</span> <span class="dv">0</span>    <span class="co">#移動カウンタ 0から3の4段階</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a></span>
+<span id="cb9-38"><a href="#cb9-38"></a><span class="co">#ゲームの基本となる1ティック時間(ms)</span></span>
+<span id="cb9-39"><a href="#cb9-39"></a>TICK_TIME <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a></span>
+<span id="cb9-41"><a href="#cb9-41"></a><span class="co">#キャラチップを1毎の画像に並べたキャラシートを読み込む</span></span>
+<span id="cb9-42"><a href="#cb9-42"></a>CHARA_SHEET <span class="op">=</span> Image.<span class="bu">open</span>(cwd<span class="op">+</span><span class="st">&quot;/img/character.png&quot;</span>)</span>
+<span id="cb9-43"><a href="#cb9-43"></a></span>
+<span id="cb9-44"><a href="#cb9-44"></a><span class="co">#読み込んだ画像から縦横何枚ずつチップがあるか求める</span></span>
+<span id="cb9-45"><a href="#cb9-45"></a>CHARA_X <span class="op">=</span> CHARA_SHEET.width <span class="op">//</span> CHARA_WIDTH</span>
+<span id="cb9-46"><a href="#cb9-46"></a>CHARA_Y <span class="op">=</span> CHARA_SHEET.height <span class="op">//</span> CHARA_HEIGHT</span>
+<span id="cb9-47"><a href="#cb9-47"></a></span>
+<span id="cb9-48"><a href="#cb9-48"></a></span>
+<span id="cb9-49"><a href="#cb9-49"></a><span class="co">#キャラチップに分割し2次元配列に格納する</span></span>
+<span id="cb9-50"><a href="#cb9-50"></a>CHARA_CHIP <span class="op">=</span> []</span>
+<span id="cb9-51"><a href="#cb9-51"></a><span class="co">#キャラシートの列数だけ繰り返す</span></span>
+<span id="cb9-52"><a href="#cb9-52"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(CHARA_Y): </span>
+<span id="cb9-53"><a href="#cb9-53"></a>    <span class="co">#新しい行を作成</span></span>
+<span id="cb9-54"><a href="#cb9-54"></a>    row <span class="op">=</span> []</span>
+<span id="cb9-55"><a href="#cb9-55"></a>    </span>
+<span id="cb9-56"><a href="#cb9-56"></a>    <span class="co">#キャラシートの行数だけ繰り返す</span></span>
+<span id="cb9-57"><a href="#cb9-57"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(CHARA_X): </span>
+<span id="cb9-58"><a href="#cb9-58"></a>        <span class="co"># キャラクターのチップを切り出して画像を作成</span></span>
+<span id="cb9-59"><a href="#cb9-59"></a>        image <span class="op">=</span> ImageTk.PhotoImage(CHARA_SHEET.crop((</span>
+<span id="cb9-60"><a href="#cb9-60"></a>            CHARA_WIDTH <span class="op">*</span> i,               <span class="co"># 左上のX座標</span></span>
+<span id="cb9-61"><a href="#cb9-61"></a>            CHARA_HEIGHT <span class="op">*</span> j,              <span class="co"># 左上のY座標</span></span>
+<span id="cb9-62"><a href="#cb9-62"></a>            CHARA_WIDTH <span class="op">*</span> (i <span class="op">+</span> <span class="dv">1</span>),         <span class="co"># 右下のX座標</span></span>
+<span id="cb9-63"><a href="#cb9-63"></a>            CHARA_HEIGHT <span class="op">*</span> (j <span class="op">+</span> <span class="dv">1</span>)         <span class="co"># 右下のY座標</span></span>
+<span id="cb9-64"><a href="#cb9-64"></a>        )))</span>
+<span id="cb9-65"><a href="#cb9-65"></a>        </span>
+<span id="cb9-66"><a href="#cb9-66"></a>        <span class="co"># 作成した画像を行に追加</span></span>
+<span id="cb9-67"><a href="#cb9-67"></a>        row.append(image)</span>
+<span id="cb9-68"><a href="#cb9-68"></a>    </span>
+<span id="cb9-69"><a href="#cb9-69"></a>    <span class="co"># 行をCHARA_CHIPに追加</span></span>
+<span id="cb9-70"><a href="#cb9-70"></a>    CHARA_CHIP.append(row)</span>
+<span id="cb9-71"><a href="#cb9-71"></a></span>
+<span id="cb9-72"><a href="#cb9-72"></a></span>
+<span id="cb9-73"><a href="#cb9-73"></a><span class="co">#キャラクターを再描写する関数</span></span>
+<span id="cb9-74"><a href="#cb9-74"></a><span class="kw">def</span> setChara(x,y,d,frame):</span>
+<span id="cb9-75"><a href="#cb9-75"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb9-76"><a href="#cb9-76"></a><span class="co">    x:キャラのX座標</span></span>
+<span id="cb9-77"><a href="#cb9-77"></a><span class="co">    y:キャラのY座標</span></span>
+<span id="cb9-78"><a href="#cb9-78"></a><span class="co">    d:キャラの向き</span></span>
+<span id="cb9-79"><a href="#cb9-79"></a><span class="co">    frame:コマ数</span></span>
+<span id="cb9-80"><a href="#cb9-80"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb9-81"><a href="#cb9-81"></a>    <span class="co">#キャラの画像を選択</span></span>
+<span id="cb9-82"><a href="#cb9-82"></a>    img <span class="op">=</span> CHARA_CHIP[d][FRAME_LIST[frame]]</span>
+<span id="cb9-83"><a href="#cb9-83"></a>    </span>
+<span id="cb9-84"><a href="#cb9-84"></a>    <span class="co">#今の画像を消して再描写</span></span>
+<span id="cb9-85"><a href="#cb9-85"></a>    canvas.delete(<span class="st">&quot;chara&quot;</span>)</span>
+<span id="cb9-86"><a href="#cb9-86"></a>    canvas.create_image(x,y,image <span class="op">=</span>img ,tag<span class="op">=</span><span class="st">&quot;chara&quot;</span>,anchor<span class="op">=</span>tk.NW)</span>
+<span id="cb9-87"><a href="#cb9-87"></a></span>
+<span id="cb9-88"><a href="#cb9-88"></a></span>
+<span id="cb9-89"><a href="#cb9-89"></a><span class="co">#&gt;&gt;ゲームのメインループ関数&gt;&gt;</span></span>
+<span id="cb9-90"><a href="#cb9-90"></a><span class="kw">def</span> gameLoop():</span>
+<span id="cb9-91"><a href="#cb9-91"></a>    <span class="kw">global</span> charaX,charaY,charaD,moveCount</span>
+<span id="cb9-92"><a href="#cb9-92"></a>    </span>
+<span id="cb9-93"><a href="#cb9-93"></a>    setChara(charaX,charaY,charaD,moveCount)</span>
+<span id="cb9-94"><a href="#cb9-94"></a>    </span>
+<span id="cb9-95"><a href="#cb9-95"></a>    <span class="cf">if</span>(moveCount<span class="op">==</span><span class="dv">3</span>):<span class="co">#アニメーションが最終コマならば</span></span>
+<span id="cb9-96"><a href="#cb9-96"></a>        moveCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-97"><a href="#cb9-97"></a>    <span class="cf">else</span>:</span>
+<span id="cb9-98"><a href="#cb9-98"></a>        moveCount <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb9-99"><a href="#cb9-99"></a>    </span>
+<span id="cb9-100"><a href="#cb9-100"></a>    root.after(TICK_TIME,gameLoop)</span>
+<span id="cb9-101"><a href="#cb9-101"></a></span>
+<span id="cb9-102"><a href="#cb9-102"></a>setChara(charaX,charaY,charaD,<span class="dv">1</span>)</span>
+<span id="cb9-103"><a href="#cb9-103"></a></span>
+<span id="cb9-104"><a href="#cb9-104"></a>gameLoop()</span>
+<span id="cb9-105"><a href="#cb9-105"></a><span class="bu">print</span>(<span class="st">&quot;start!&quot;</span>)</span>
+<span id="cb9-106"><a href="#cb9-106"></a>root.mainloop()</span></code></pre></div>
+      <p>実行するとキャラクターが歩き出します。</p>
+      <figure>
+      <img src="./figs/104/walk_anime.gif" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><br></p>
+      <p>ポイントは、<strong><code>moveCount</code>を1ずつ増やしていき、3まで増えたら0に戻ることです</strong>。<code>moveCount</code>は0→1→2→3→0→1→…と繰り返します。</p>
+      <div class="sourceCode" id="cb10" data-startFrom="89"
+      data-caption="move03.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 88;"><span id="cb10-89"><a href="#cb10-89"></a><span class="co">#&gt;&gt;ゲームのメインループ関数&gt;&gt;</span></span>
+<span id="cb10-90"><a href="#cb10-90"></a><span class="kw">def</span> gameLoop():</span>
+<span id="cb10-91"><a href="#cb10-91"></a>    <span class="kw">global</span> charaX,charaY,charaD,moveCount</span>
+<span id="cb10-92"><a href="#cb10-92"></a>    </span>
+<span id="cb10-93"><a href="#cb10-93"></a>    setChara(charaX,charaY,charaD,moveCount)</span>
+<span id="cb10-94"><a href="#cb10-94"></a>    </span>
+<span id="cb10-95"><a href="#cb10-95"></a>    <span class="cf">if</span>(moveCount<span class="op">==</span><span class="dv">3</span>):<span class="co">#アニメーションが最終コマならば</span></span>
+<span id="cb10-96"><a href="#cb10-96"></a>        moveCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb10-97"><a href="#cb10-97"></a>    <span class="cf">else</span>:</span>
+<span id="cb10-98"><a href="#cb10-98"></a>        moveCount <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
+      <p><br></p>
+      <p>そして<code>CHARA_CHIP</code>の2つめの引数に<code>FRAME_LIST[frame]</code>を指定することでアニメーションさせます。</p>
+      <div class="sourceCode" id="cb11" data-startFrom="73"
+      data-caption="move03.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 72;"><span id="cb11-73"><a href="#cb11-73"></a><span class="co">#キャラクターを再描写する関数</span></span>
+<span id="cb11-74"><a href="#cb11-74"></a><span class="kw">def</span> setChara(x,y,d,frame):</span>
+<span id="cb11-75"><a href="#cb11-75"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb11-76"><a href="#cb11-76"></a><span class="co">    x:キャラのX座標</span></span>
+<span id="cb11-77"><a href="#cb11-77"></a><span class="co">    y:キャラのY座標</span></span>
+<span id="cb11-78"><a href="#cb11-78"></a><span class="co">    d:キャラの向き</span></span>
+<span id="cb11-79"><a href="#cb11-79"></a><span class="co">    frame:コマ数</span></span>
+<span id="cb11-80"><a href="#cb11-80"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb11-81"><a href="#cb11-81"></a>    <span class="co">#キャラの画像を選択</span></span>
+<span id="cb11-82"><a href="#cb11-82"></a>    img <span class="op">=</span> CHARA_CHIP[d][FRAME_LIST[frame]]</span></code></pre></div>
+      <h1 data-number="7" id="組み合わせる"><span
+      class="header-section-number">7</span> 組み合わせる</h1>
+      <p>キーボードによる移動とアニメーションを組み合わせてプログラムを完成させましょう。
+      新しいpythonファイル<code>move.py</code>を作成してください。<a
+      href="https://github.com/k-768/PythonGameProgramming/blob/main/programs/move.py">ここから</a>プログラムをコピー＆ペーストして実行してみてください。WASDでキャラクターが<strong>歩いて移動します</strong>。このプログラムの要点について解説します。</p>
+      <p><br></p>
+      <hr />
+      <div class="sourceCode" id="cb12" data-startFrom="138"
+      data-caption="move.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 137;"><span id="cb12-138"><a href="#cb12-138"></a><span class="co">#マップ座標からキャラをどこに配置するか決める関数</span></span>
+<span id="cb12-139"><a href="#cb12-139"></a><span class="co">#dx,dy:移動中の微小変化 0,1,2,3,4の4段階</span></span>
+<span id="cb12-140"><a href="#cb12-140"></a><span class="kw">def</span> getCharaCoord(x,y,dx<span class="op">=</span><span class="dv">0</span>,dy<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb12-141"><a href="#cb12-141"></a>    <span class="cf">return</span>((x<span class="op">+</span>dx<span class="op">/</span><span class="dv">4</span>)<span class="op">*</span>CHIP_SIZE, (y<span class="op">+</span>dy<span class="op">/</span><span class="dv">4</span><span class="op">-</span><span class="fl">0.5</span>)<span class="op">*</span>CHIP_SIZE)</span></code></pre></div>
+      <p><code>138行目</code>からは、キャラクタの座標を計算しています。キャラクターが1マス移動する間に表示する<code>frame</code>は4コマなので、<strong>1コマにつき1/4マスずつ移動する</strong>ことで滑らかな移動ができます。</p>
+      <p><br></p>
+      <div class="sourceCode" id="cb13" data-startFrom="209"
+      data-caption="move.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 208;"><span id="cb13-209"><a href="#cb13-209"></a>    <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;move&quot;</span>):<span class="co">#移動中のとき</span></span>
+<span id="cb13-210"><a href="#cb13-210"></a>        <span class="co">#キャラクター再描写</span></span>
+<span id="cb13-211"><a href="#cb13-211"></a>        setChara(charaX,charaY,charaD,moveCount)</span>
+<span id="cb13-212"><a href="#cb13-212"></a>        </span>
+<span id="cb13-213"><a href="#cb13-213"></a>        <span class="cf">if</span>(moveCount<span class="op">==</span><span class="dv">3</span>):<span class="co">#アニメーションが最終コマならば</span></span>
+<span id="cb13-214"><a href="#cb13-214"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span><span class="co">#待機中に状態を戻す</span></span>
+<span id="cb13-215"><a href="#cb13-215"></a>            moveCount <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb13-216"><a href="#cb13-216"></a>            charaX <span class="op">+=</span> moveX</span>
+<span id="cb13-217"><a href="#cb13-217"></a>            charaY <span class="op">+=</span> moveY</span>
+<span id="cb13-218"><a href="#cb13-218"></a>        <span class="cf">else</span>:</span>
+<span id="cb13-219"><a href="#cb13-219"></a>            moveCount <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
+      <p>そして、<strong><code>moveCount</code>が3まで増えたら、一度<code>flag</code>をdefaultに戻します</strong>。これにより、キーボード操作によるキャラクターの移動は完成です。</p>
+      <p>次回はいよいよ、釣りと移動と組み合わせて、釣りゲームを完成させましょう。</p>
       <!-- ---------------------------------------- -->
     </main>
 
