@@ -38,7 +38,7 @@ var:
 <br>
 
 
-```python{.numberLines startFrom=76 caption="move01.py"}
+```python{.numberLines startFrom=76 caption="move01（抜粋）.py"}
 #>>キャラクター>>
 CHARA_WIDTH = 64  #キャラの幅
 CHARA_HEIGHT = 96 #キャラの高さ
@@ -63,7 +63,7 @@ move:移動中
 
 <br>
 
-```python{.numberLines startFrom=95 caption="move01.py"}
+```python{.numberLines startFrom=95 caption="move01（抜粋）.py"}
 #移動方向
 moveX = 0
 moveY = 0
@@ -73,7 +73,7 @@ moveY = 0
 <br>
 
 
-```python{.numberLines startFrom=99 caption="move01.py"}
+```python{.numberLines startFrom=99 caption="move01（抜粋）.py"}
 #キャラチップを1毎の画像に並べたキャラシートを読み込む
 CHARA_SHEET = Image.open(cwd+"/img/character.png")
 
@@ -176,12 +176,143 @@ for j in range(CHARA_Y):
 
 プログラムの解説に戻ります。
 
+```python{.numberLines startFrom=150 caption="move01.py（抜粋）"}
+#>>ゲームのメインループ関数>>
+def gameLoop():
+    global charaX,charaY,charaD,moveCount,moveX,moveY,flag,key,currentKey,prevKey
+    
+    if (len(key)> 0):
+        lastKey = key[len(key) - 1] #最後に押されたキー
+    else:
+        lastKey = ""
+    
+    
+    if (flag == "default"): #待機中のとき 
+        
+        if(len(key)): #何かのキーが押されているとき
+            if(lastKey=="s" or lastKey=="Down"):#下入力
+                flag = "move"
+                charaD = 0
+                moveX = 0
+                moveY = 1
+                print("↓")
+            elif(lastKey=="a" or lastKey=="Left"):#左入力
+                flag = "move"
+                charaD = 1
+                moveX = -1
+                moveY = 0
+                print("←")
+            elif(lastKey=="d" or lastKey=="Right"):#右入力
+                flag = "move"
+                charaD = 2
+                moveX = 1
+                moveY = 0
+                print("→")
+            elif(lastKey=="w" or lastKey=="Up"):#上入力
+                flag = "move"
+                charaD = 3
+                moveX = 0
+                moveY = -1
+                print("↑")
+    
+    if (flag == "move"):#移動中のとき
+        flag = "default"#待機中に状態を戻す
+        charaX += moveX
+        charaY += moveY
+        #キャラクター再描写
+        setChara(charaX,charaY,charaD)
+```
 
+ゲームの処理は、関数`gameLoop`内にあります。if文を用いて、**移動用のキーが押されたかを判定**し、**進む方向によって`moveX`と`moveY`を変更**します。また、`flag`を**moveに変更**します。
+キーが押されて移動中になったら、今度はキャラクターの位置を進行方向に一つ進んだ位置に変更し、`flag`を**defaultに戻し**ます。今は`flag`が必要ないように感じると思いますが、アニメーションを行う際に必要になります。
+
+これで、作成したマップの上を、キーボードの操作でキャラクターを移動させることができるようになりました。
 
 しかし、直立不動で移動していたり、水の上を歩いていたりと、このままではおかしなところがたくさんあります。
 
 ![img](./figs/104/walk.gif)
 
+まずは水の上には侵入できないようにしましょう。
+
+## 水の中には入れないようにする
+
+はじめに、各マップチップに対して、入れるかどうかを設定しましょう。
+マップのリストの後ろに以下を追加してください。
+
+```python{.numberLines startFrom=67 caption="move02.py（追加）"}
+#通行許可設定
+#0:不可
+#1:可能
+PASSAGE_PERMIT = [0,1,1,0]
+```
+
+この配列は、`CHIP_DATA`の順番と対応しています。
+
+![img](./figs/104/sheet1.png)
+
+つまり、マップチップの左から侵入「不可」「可」「可」「不可」となり、草地と砂地は侵入できることになります。
+
+<br>
+
+この設定を使って、**移動する前に**判定を行います。
+
+**!!!!ここから追加する!!!!**と書かれたところからのプログラムを追加してください。
+追加する際、インデントに注意してください。
+
+```python{.numberLines startFrom=155 caption="move02.py（追加）"}
+def gameLoop():
+    global charaX,charaY,charaD,moveCount,moveX,moveY,flag,key,currentKey,prevKey
+    
+    if (len(key)> 0):
+        lastKey = key[len(key) - 1] #最後に押されたキー
+    else:
+        lastKey = ""
+    
+    
+    if (flag == "default"): #待機中のとき 
+        
+        if(len(key)): #何かのキーが押されているとき
+            if(lastKey=="s" or lastKey=="Down"):#下入力
+                flag = "move"
+                charaD = 0
+                moveX = 0
+                moveY = 1
+                print("↓")
+            elif(lastKey=="a" or lastKey=="Left"):#左入力
+                flag = "move"
+                charaD = 1
+                moveX = -1
+                moveY = 0
+                print("←")
+            elif(lastKey=="d" or lastKey=="Right"):#右入力
+                flag = "move"
+                charaD = 2
+                moveX = 1
+                moveY = 0
+                print("→")
+            elif(lastKey=="w" or lastKey=="Up"):#上入力
+                flag = "move"
+                charaD = 3
+                moveX = 0
+                moveY = -1
+                print("↑")
+            
+            #!!!!ここから追加する!!!#
+
+            #上の処理で移動中フラグが立ったとき
+            if(flag == "move"):
+                #移動先が通行可能でないならば
+                if(not PASSAGE_PERMIT[MAP_DATA[charaY+moveY][charaX+moveX]]):
+                    #移動をやめて向きのみ変える
+                    flag = "default"
+                    moveX = 0
+                    moveY = 0
+                    setChara(charaX,charaY,charaD)
+```
+
+`MAP_DATA[charaY+moveY][charaX+moveX]`が移動する先のマップの情報(1なら草地、2なら砂地...)です。それを`PASSAGE_PERMIT`に入れることで、**移動先のマップチップが、上を歩ける種類かどうか判定できます**
+
+移動先が侵入できない場合、`flag`を**defaultに戻します**。
 
 
 ## キャラクターをアニメーションさせる

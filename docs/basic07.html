@@ -62,6 +62,9 @@ class="toc-section-number">7.1</span> andを用いる例</a></li>
 <li><a href="#orを用いる例" id="toc-orを用いる例"><span
 class="toc-section-number">7.2</span> orを用いる例</a></li>
 </ul></li>
+<li><a href="#true真とfalse偽" id="toc-true真とfalse偽"><span
+class="toc-section-number">8</span>
+「True（真）」と「False（偽）」</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -183,34 +186,97 @@ a:1</code></pre>
       </tr>
       </tbody>
       </table>
+      <p><br></p>
+      <p>試しに、以下の文を実行してみましょう。</p>
+      <div class="sourceCode" id="cb5" data-caption="True_or_False"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>n <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="bu">print</span>(n<span class="op">&gt;</span><span class="dv">3</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="bu">print</span>(n <span class="op">==</span> <span class="dv">5</span>)</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="bu">print</span>(n <span class="op">&lt;</span> <span class="dv">3</span>)</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="bu">print</span>(n <span class="op">!=</span> <span class="dv">5</span>)</span></code></pre></div>
+      <hr />
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>True
+True
+False
+False</code></pre>
+      <p><code>==</code>や<code>&lt;</code>といった関係演算子は、<strong>その式が正しいかどうかを「True（真）」か「False（偽）」で出力</strong>します。</p>
+      <p>つまり、if文は<strong>if:の後ろが「True」なら実行する</strong>という仕組みになっています。ためしに、条件の代わりに<code>True</code>や<code>False</code>を入れてみると、<code>True</code>の方のみが出力されます。</p>
+      <div class="sourceCode" id="cb7" data-caption="ifTrue"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">if</span> <span class="va">True</span>:</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="bu">print</span>(<span class="st">&quot;実行される&quot;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="cf">if</span> <span class="va">False</span>:</span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="bu">print</span>(<span class="st">&quot;実行されない&quot;</span>)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>実行される</code></pre>
+      <p><br></p>
+      <div class="note type-tips">
+      <p><strong>数値を入れるとどうなるか</strong></p>
+      <p>Pythonでは、<strong>0 は「False（偽）」と、0以外の数値
+      は「True（真）」とみなされます</strong>。</p>
+      <div class="sourceCode" id="cb9"
+      data-caption="数字を入れるとどうなる?"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="cf">if</span> <span class="dv">1</span>:</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="bu">print</span>(<span class="st">&quot;1:実行される&quot;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="cf">if</span> <span class="dv">5</span>:</span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="bu">print</span>(<span class="st">&quot;5:実行される&quot;</span>)</span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="cf">if</span> <span class="fl">0.1</span>:</span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="bu">print</span>(<span class="st">&quot;0.1:実行される&quot;</span>)</span>
+<span id="cb9-9"><a href="#cb9-9"></a></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="cf">if</span> <span class="dv">0</span>:</span>
+<span id="cb9-11"><a href="#cb9-11"></a>  <span class="bu">print</span>(<span class="st">&quot;0:実行されない&quot;</span>)</span></code></pre></div>
+      <p><strong><i class="fa-solid fa-terminal"></i>
+      実行結果</strong></p>
+      <pre><code>1:実行される
+5:実行される
+0.1:実行される</code></pre>
+      <p>この性質を利用したプログラムがこちらです。</p>
+      <div class="sourceCode" id="cb11" data-caption="奇数判定"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>n <span class="op">=</span> <span class="dv">27</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="cf">if</span> n<span class="op">%</span><span class="dv">2</span>:</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="bu">print</span>(<span class="bu">str</span>(n)<span class="op">+</span><span class="st">&quot;は奇数です&quot;</span>)</span></code></pre></div>
+      <p><code>%</code>は
+      <strong>「余り」を計算する演算子</strong>です。つまり、<code>n % 2</code>は
+      n
+      を2で割った余りを計算します。nが奇数の場合、余りは<code>1</code>になります。これは「True（真）」とみなされ、print(“奇数”)
+      が実行されます。
+      逆に、nが偶数の場合、余りは<code>0</code>になります。これは「False（偽）」とみなされ、print(“奇数”)
+      は実行されません。</p>
+      </div>
+      <p><br></p>
       <h1 data-number="5" id="if-else文"><span
       class="header-section-number">5</span> if-else文</h1>
       <p><code>else</code>を用いて、<strong>条件が満たされなかったときの処理を設定する</strong>ことができます。</p>
-      <div class="sourceCode" id="cb5"
+      <div class="sourceCode" id="cb12"
       data-caption="if-else文の構造"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> random</span>
-<span id="cb5-2"><a href="#cb5-2"></a>weight <span class="op">=</span> random.randint(<span class="dv">10</span>,<span class="dv">50</span>)<span class="op">/</span><span class="dv">10</span> <span class="co">#1.0から5.0までの乱数</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">3</span>: <span class="co"># weight&gt;3であれば</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの大物が釣れた！&quot;</span>)</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="cf">else</span>: <span class="co"># weight&gt;3でなければ</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの魚が釣れた！&quot;</span>)</span></code></pre></div>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="im">import</span> random</span>
+<span id="cb12-2"><a href="#cb12-2"></a>weight <span class="op">=</span> random.randint(<span class="dv">10</span>,<span class="dv">50</span>)<span class="op">/</span><span class="dv">10</span> <span class="co">#1.0から5.0までの乱数</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">3</span>: <span class="co"># weight&gt;3であれば</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの大物が釣れた！&quot;</span>)</span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="cf">else</span>: <span class="co"># weight&gt;3でなければ</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの魚が釣れた！&quot;</span>)</span></code></pre></div>
       <ul>
       <li><code>weight</code>が3より大きいとき、条件を満たすので、「XXkgの大物が釣れた！」と出力されます。</li>
       <li><code>weight</code>が3以下のとき、条件を満たさないので、「XXkgの魚が釣れた！」と出力されます。</li>
       </ul>
       <hr />
       <p><code>if-else文</code>を入れ子にすることで、<strong>細かく条件を設定する</strong>ことができます。</p>
-      <div class="sourceCode" id="cb6"
+      <div class="sourceCode" id="cb13"
       data-caption="if-else文の入れ子"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">import</span> random</span>
-<span id="cb6-2"><a href="#cb6-2"></a>weight <span class="op">=</span> random.randint(<span class="dv">10</span>,<span class="dv">50</span>)<span class="op">/</span><span class="dv">10</span> <span class="co">#1.0から5.0までの乱数</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">4</span>: <span class="co"># weight&gt;4であれば</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの超大物が釣れた！&quot;</span>)</span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="cf">else</span>: <span class="co"># weight&gt;4でなければ</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>  <span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">3</span>: <span class="co"># weight&gt;3であれば</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>    <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの大物が釣れた！&quot;</span>)</span>
-<span id="cb6-8"><a href="#cb6-8"></a>  <span class="cf">else</span>: <span class="co"># weight&gt;3でなければ</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a>    <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの魚が釣れた！&quot;</span>)</span></code></pre></div>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="im">import</span> random</span>
+<span id="cb13-2"><a href="#cb13-2"></a>weight <span class="op">=</span> random.randint(<span class="dv">10</span>,<span class="dv">50</span>)<span class="op">/</span><span class="dv">10</span> <span class="co">#1.0から5.0までの乱数</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">4</span>: <span class="co"># weight&gt;4であれば</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの超大物が釣れた！&quot;</span>)</span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="cf">else</span>: <span class="co"># weight&gt;4でなければ</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">3</span>: <span class="co"># weight&gt;3であれば</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>    <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの大物が釣れた！&quot;</span>)</span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="cf">else</span>: <span class="co"># weight&gt;3でなければ</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>    <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの魚が釣れた！&quot;</span>)</span></code></pre></div>
       <p>もっと細かく条件を分けたければ、もっと<strong>if文を入れ子にすれば良い</strong>わけです。
       しかし、それではどんどんプログラムが複雑になってしまいます。
       入れ子が増えた構造は<strong>ネスト</strong>とよばれ、わかりやすいプログラムにするためには<strong>なるべくネストを避ける工夫が必要</strong>です。
@@ -218,31 +284,31 @@ a:1</code></pre>
       <h1 data-number="6" id="if-elif文"><span
       class="header-section-number">6</span> if-elif文</h1>
       <p><code>elif</code>を用いて上のプログラムをもっとスマートに書くことができます。</p>
-      <div class="sourceCode" id="cb7"
+      <div class="sourceCode" id="cb14"
       data-caption="if-elif文の構造"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">import</span> random</span>
-<span id="cb7-2"><a href="#cb7-2"></a>weight <span class="op">=</span> random.randint(<span class="dv">10</span>,<span class="dv">50</span>)<span class="op">/</span><span class="dv">10</span> <span class="co">#1.0から5.0までの乱数</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">4</span>: <span class="co"># weight&gt;4であれば</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの超大物が釣れた！&quot;</span>)</span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="cf">elif</span> weight <span class="op">&gt;</span> <span class="dv">3</span>: <span class="co"># weight&gt;3であれば</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの大物が釣れた！&quot;</span>)</span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="cf">else</span>: <span class="co"># weight&gt;3でなければ</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの魚が釣れた！&quot;</span>)</span></code></pre></div>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="im">import</span> random</span>
+<span id="cb14-2"><a href="#cb14-2"></a>weight <span class="op">=</span> random.randint(<span class="dv">10</span>,<span class="dv">50</span>)<span class="op">/</span><span class="dv">10</span> <span class="co">#1.0から5.0までの乱数</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">4</span>: <span class="co"># weight&gt;4であれば</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの超大物が釣れた！&quot;</span>)</span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="cf">elif</span> weight <span class="op">&gt;</span> <span class="dv">3</span>: <span class="co"># weight&gt;3であれば</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの大物が釣れた！&quot;</span>)</span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="cf">else</span>: <span class="co"># weight&gt;3でなければ</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの魚が釣れた！&quot;</span>)</span></code></pre></div>
       <div class="note type-tips">
       <p><strong>if文とif-elif文の違い</strong></p>
       <p>下の二つのプログラムを実行して、違いを確認しましょう。</p>
-      <div class="sourceCode" id="cb8" data-caption="if文"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>weight <span class="op">=</span> <span class="fl">4.5</span> </span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">4</span>: <span class="co"># weight&gt;4であれば</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの超大物が釣れた！&quot;</span>)</span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">3</span>: <span class="co"># weight&gt;3であれば</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの大物が釣れた！&quot;</span>)</span></code></pre></div>
-      <div class="sourceCode" id="cb9" data-caption="elif文"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>weight <span class="op">=</span> <span class="fl">4.5</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">4</span>: <span class="co"># weight&gt;4であれば</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの超大物が釣れた！&quot;</span>)</span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="cf">elif</span> weight <span class="op">&gt;</span> <span class="dv">3</span>: <span class="co"># weight&gt;3であれば</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの大物が釣れた！&quot;</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb15" data-caption="if文"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>weight <span class="op">=</span> <span class="fl">4.5</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">4</span>: <span class="co"># weight&gt;4であれば</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの超大物が釣れた！&quot;</span>)</span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">3</span>: <span class="co"># weight&gt;3であれば</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの大物が釣れた！&quot;</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb16" data-caption="elif文"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>weight <span class="op">=</span> <span class="fl">4.5</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="cf">if</span> weight <span class="op">&gt;</span> <span class="dv">4</span>: <span class="co"># weight&gt;4であれば</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの超大物が釣れた！&quot;</span>)</span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="cf">elif</span> weight <span class="op">&gt;</span> <span class="dv">3</span>: <span class="co"># weight&gt;3であれば</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="bu">print</span>(<span class="bu">str</span>(weight)<span class="op">+</span><span class="st">&quot;kgの大物が釣れた！&quot;</span>)</span></code></pre></div>
       <hr />
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果(if文)</strong></p>
@@ -263,18 +329,18 @@ a:1</code></pre>
       </div>
       <p><br></p>
       <p><code>if-elif文</code>が用いられる代表的な例としては、<strong>キーボードによるキャラクター移動</strong>が挙げられます。</p>
-      <div class="sourceCode" id="cb12" data-caption="move.py"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>key <span class="op">=</span> <span class="st">&quot;w&quot;</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="cf">if</span> key <span class="op">==</span> <span class="st">&quot;w&quot;</span>:</span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="bu">print</span>(<span class="st">&quot;奥に進みます&quot;</span>)</span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;a&quot;</span>:</span>
-<span id="cb12-5"><a href="#cb12-5"></a>  <span class="bu">print</span>(<span class="st">&quot;左に進みます&quot;</span>)</span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;s&quot;</span>:</span>
-<span id="cb12-7"><a href="#cb12-7"></a>  <span class="bu">print</span>(<span class="st">&quot;手前に進みます&quot;</span>)</span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;d&quot;</span>:</span>
-<span id="cb12-9"><a href="#cb12-9"></a>  <span class="bu">print</span>(<span class="st">&quot;右に進みます&quot;</span>)</span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="cf">else</span>: </span>
-<span id="cb12-11"><a href="#cb12-11"></a>  <span class="bu">print</span>(<span class="st">&quot;不正な入力です&quot;</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb19" data-caption="move.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>key <span class="op">=</span> <span class="st">&quot;w&quot;</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="cf">if</span> key <span class="op">==</span> <span class="st">&quot;w&quot;</span>:</span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="bu">print</span>(<span class="st">&quot;奥に進みます&quot;</span>)</span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;a&quot;</span>:</span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="bu">print</span>(<span class="st">&quot;左に進みます&quot;</span>)</span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;s&quot;</span>:</span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="bu">print</span>(<span class="st">&quot;手前に進みます&quot;</span>)</span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;d&quot;</span>:</span>
+<span id="cb19-9"><a href="#cb19-9"></a>  <span class="bu">print</span>(<span class="st">&quot;右に進みます&quot;</span>)</span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="cf">else</span>: </span>
+<span id="cb19-11"><a href="#cb19-11"></a>  <span class="bu">print</span>(<span class="st">&quot;不正な入力です&quot;</span>)</span></code></pre></div>
       <h1 data-number="7" id="論理演算子"><span
       class="header-section-number">7</span> 論理演算子</h1>
       <p>条件分岐をする際に、もう一つ重要になるのが論理演算子です。複数の条件を記述する際に用います。
@@ -341,27 +407,27 @@ a:1</code></pre>
       <li>プレイヤーのレベルが20以上</li>
       </ul>
       <p>すなわち、以下のようになります。</p>
-      <div class="sourceCode" id="cb13" data-caption="ex_and.py"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>level <span class="op">=</span> <span class="dv">25</span> <span class="co">#プレイヤーのレベル</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>money <span class="op">=</span> <span class="dv">999</span> <span class="co">#所持金</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="cf">if</span> money <span class="op">&gt;=</span> <span class="dv">500</span> <span class="kw">and</span> level <span class="op">&gt;=</span> <span class="dv">20</span>:</span>
-<span id="cb13-5"><a href="#cb13-5"></a>  <span class="bu">print</span>(<span class="st">&quot;丈夫な釣り竿を手に入れた！&quot;</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb20" data-caption="ex_and.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>level <span class="op">=</span> <span class="dv">25</span> <span class="co">#プレイヤーのレベル</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>money <span class="op">=</span> <span class="dv">999</span> <span class="co">#所持金</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="cf">if</span> money <span class="op">&gt;=</span> <span class="dv">500</span> <span class="kw">and</span> level <span class="op">&gt;=</span> <span class="dv">20</span>:</span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="bu">print</span>(<span class="st">&quot;丈夫な釣り竿を手に入れた！&quot;</span>)</span></code></pre></div>
       <h2 data-number="7.2" id="orを用いる例"><span
       class="header-section-number">7.2</span> orを用いる例</h2>
       <p>キーボードによるキャラクター移動を<strong>WASDと矢印キー</strong>両方に対応できます。</p>
-      <div class="sourceCode" id="cb14" data-caption="ex_or.py"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>key <span class="op">=</span> <span class="st">&quot;w&quot;</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="cf">if</span> key <span class="op">==</span> <span class="st">&quot;w&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Up&quot;</span>:</span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="bu">print</span>(<span class="st">&quot;奥に進みます&quot;</span>)</span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;a&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Left&quot;</span>:</span>
-<span id="cb14-5"><a href="#cb14-5"></a>  <span class="bu">print</span>(<span class="st">&quot;左に進みます&quot;</span>)</span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;s&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Down&quot;</span>:</span>
-<span id="cb14-7"><a href="#cb14-7"></a>  <span class="bu">print</span>(<span class="st">&quot;手前に進みます&quot;</span>)</span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;d&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Right&quot;</span>:</span>
-<span id="cb14-9"><a href="#cb14-9"></a>  <span class="bu">print</span>(<span class="st">&quot;右に進みます&quot;</span>)</span>
-<span id="cb14-10"><a href="#cb14-10"></a><span class="cf">else</span>: </span>
-<span id="cb14-11"><a href="#cb14-11"></a>  <span class="bu">print</span>(<span class="st">&quot;不正な入力です&quot;</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb21" data-caption="ex_or.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>key <span class="op">=</span> <span class="st">&quot;w&quot;</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="cf">if</span> key <span class="op">==</span> <span class="st">&quot;w&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Up&quot;</span>:</span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="bu">print</span>(<span class="st">&quot;奥に進みます&quot;</span>)</span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;a&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Left&quot;</span>:</span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="bu">print</span>(<span class="st">&quot;左に進みます&quot;</span>)</span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;s&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Down&quot;</span>:</span>
+<span id="cb21-7"><a href="#cb21-7"></a>  <span class="bu">print</span>(<span class="st">&quot;手前に進みます&quot;</span>)</span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;d&quot;</span> <span class="kw">or</span> key <span class="op">==</span><span class="st">&quot;Right&quot;</span>:</span>
+<span id="cb21-9"><a href="#cb21-9"></a>  <span class="bu">print</span>(<span class="st">&quot;右に進みます&quot;</span>)</span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="cf">else</span>: </span>
+<span id="cb21-11"><a href="#cb21-11"></a>  <span class="bu">print</span>(<span class="st">&quot;不正な入力です&quot;</span>)</span></code></pre></div>
       <h3 data-number="7.2.1" id="challenge7"><span
       class="header-section-number">7.2.1</span>
       <strong>Challenge7</strong></h3>
@@ -369,14 +435,14 @@ a:1</code></pre>
       <p><strong>アイテム</strong>：丈夫な釣り竿</p>
       <p><strong>価格</strong>：500</p>
       <p><strong>プレイヤーのレベル制限</strong>：20</p>
-      <div class="sourceCode" id="cb15"
+      <div class="sourceCode" id="cb22"
       data-caption="challenge7.py"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>level <span class="op">=</span> <span class="dv">25</span> <span class="co">#プレイヤーのレベル</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>money <span class="op">=</span> <span class="dv">999</span> <span class="co">#所持金</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="cf">if</span> money <span class="op">&gt;=</span> <span class="dv">500</span> <span class="kw">and</span> level <span class="op">&gt;=</span> <span class="dv">20</span>:</span>
-<span id="cb15-5"><a href="#cb15-5"></a>  <span class="bu">print</span>(<span class="st">&quot;丈夫な釣り竿を手に入れた！&quot;</span>)</span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="co"># ここに条件を追加する</span></span></code></pre></div>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a>level <span class="op">=</span> <span class="dv">25</span> <span class="co">#プレイヤーのレベル</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>money <span class="op">=</span> <span class="dv">999</span> <span class="co">#所持金</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="cf">if</span> money <span class="op">&gt;=</span> <span class="dv">500</span> <span class="kw">and</span> level <span class="op">&gt;=</span> <span class="dv">20</span>:</span>
+<span id="cb22-5"><a href="#cb22-5"></a>  <span class="bu">print</span>(<span class="st">&quot;丈夫な釣り竿を手に入れた！&quot;</span>)</span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="co"># ここに条件を追加する</span></span></code></pre></div>
       <p>次の課題に挑戦してください。できたと思ったら<strong>所持金を200に変えて実行してみて</strong>正しく動作するか確認してください。</p>
       <ul>
       <li><p><strong>7-1</strong>
@@ -394,22 +460,26 @@ a:1</code></pre>
       <hr />
       <p><br><br><br><br><br><br><br></p>
       <hr />
-      <div class="sourceCode" id="cb16" data-caption="7-1答え"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>level <span class="op">=</span> <span class="dv">25</span> <span class="co">#プレイヤーのレベル</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>money <span class="op">=</span> <span class="dv">200</span> <span class="co">#所持金</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a></span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="cf">if</span> money <span class="op">&gt;=</span> <span class="dv">500</span> <span class="kw">and</span> level <span class="op">&gt;=</span> <span class="dv">20</span>:</span>
-<span id="cb16-5"><a href="#cb16-5"></a>  <span class="bu">print</span>(<span class="st">&quot;丈夫な釣り竿を手に入れた！&quot;</span>)</span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="cf">elif</span> money <span class="op">&lt;</span> <span class="dv">500</span>:</span>
-<span id="cb16-7"><a href="#cb16-7"></a>  <span class="bu">print</span>(<span class="st">&quot;所持金が足りません&quot;</span>)</span></code></pre></div>
-      <div class="sourceCode" id="cb17" data-caption="7-2答え"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>level <span class="op">=</span> <span class="dv">25</span> <span class="co">#プレイヤーのレベル</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>money <span class="op">=</span> <span class="dv">200</span> <span class="co">#所持金</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="cf">if</span> money <span class="op">&gt;=</span> <span class="dv">500</span> <span class="kw">and</span> level <span class="op">&gt;=</span> <span class="dv">20</span>:</span>
-<span id="cb17-5"><a href="#cb17-5"></a>  <span class="bu">print</span>(<span class="st">&quot;丈夫な釣り竿を手に入れた！&quot;</span>)</span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="cf">elif</span> money <span class="op">&lt;</span> <span class="dv">500</span>:</span>
-<span id="cb17-7"><a href="#cb17-7"></a>  <span class="bu">print</span>(<span class="st">&quot;所持金が&quot;</span><span class="op">+</span><span class="bu">str</span>(<span class="dv">500</span><span class="op">-</span>money)<span class="op">+</span><span class="st">&quot;円足りません&quot;</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb23" data-caption="7-1答え"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>level <span class="op">=</span> <span class="dv">25</span> <span class="co">#プレイヤーのレベル</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>money <span class="op">=</span> <span class="dv">200</span> <span class="co">#所持金</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="cf">if</span> money <span class="op">&gt;=</span> <span class="dv">500</span> <span class="kw">and</span> level <span class="op">&gt;=</span> <span class="dv">20</span>:</span>
+<span id="cb23-5"><a href="#cb23-5"></a>  <span class="bu">print</span>(<span class="st">&quot;丈夫な釣り竿を手に入れた！&quot;</span>)</span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="cf">elif</span> money <span class="op">&lt;</span> <span class="dv">500</span>:</span>
+<span id="cb23-7"><a href="#cb23-7"></a>  <span class="bu">print</span>(<span class="st">&quot;所持金が足りません&quot;</span>)</span></code></pre></div>
+      <div class="sourceCode" id="cb24" data-caption="7-2答え"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a>level <span class="op">=</span> <span class="dv">25</span> <span class="co">#プレイヤーのレベル</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>money <span class="op">=</span> <span class="dv">200</span> <span class="co">#所持金</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="cf">if</span> money <span class="op">&gt;=</span> <span class="dv">500</span> <span class="kw">and</span> level <span class="op">&gt;=</span> <span class="dv">20</span>:</span>
+<span id="cb24-5"><a href="#cb24-5"></a>  <span class="bu">print</span>(<span class="st">&quot;丈夫な釣り竿を手に入れた！&quot;</span>)</span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="cf">elif</span> money <span class="op">&lt;</span> <span class="dv">500</span>:</span>
+<span id="cb24-7"><a href="#cb24-7"></a>  <span class="bu">print</span>(<span class="st">&quot;所持金が&quot;</span><span class="op">+</span><span class="bu">str</span>(<span class="dv">500</span><span class="op">-</span>money)<span class="op">+</span><span class="st">&quot;円足りません&quot;</span>)</span></code></pre></div>
+      <p><br></p>
+      <h1 data-number="8" id="true真とfalse偽"><span
+      class="header-section-number">8</span>
+      「True（真）」と「False（偽）」</h1>
       <!-- ---------------------------------------- -->
     </main>
 
