@@ -130,7 +130,7 @@ for j in range(CHARA_Y):
 
 #マップ座標からキャラをどこに配置するか決める関数
 def getCharaCoord(x,y):
-    return(x*CHIP_SIZE, y*CHIP_SIZE)
+    return(x*CHIP_SIZE, (y-0.5)*CHIP_SIZE)
 
 #キャラクターを再描写する関数
 def setChara(x,y,d):
