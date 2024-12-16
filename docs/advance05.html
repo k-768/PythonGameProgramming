@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon2.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>ゲームづくり編5　ゲームを完成させよう</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#もくじ" id="toc-もくじ"><span
+class="toc-section-number">1</span> もくじ</a></li>
+<li><a href="#jsonとは" id="toc-jsonとは"><span
+class="toc-section-number">2</span> JSONとは</a></li>
+<li><a href="#jsonを書く" id="toc-jsonを書く"><span
+class="toc-section-number">3</span> JSONを書く</a></li>
+<li><a href="#jsonを読み書きする" id="toc-jsonを読み書きする"><span
+class="toc-section-number">4</span> JSONを読み書きする</a></li>
+<li><a href="#全体の組み立て" id="toc-全体の組み立て"><span
+class="toc-section-number">5</span> 全体の組み立て</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>Pythonで釣りゲームを作ろう
+ゲームづくり編5　ゲームを完成させよう</p>
+      <p>2024年12月15日（日）</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <p>今回は、ゲームにとって欠かせないセーブ機能を実装しましょう。そして、釣りのシステムと移動のシステムを組み合わせて、釣りゲームを完成させましょう。</p>
+      <p><br></p>
+      <h1 data-number="1" id="もくじ"><span
+      class="header-section-number">1</span> もくじ</h1>
+      <ul>
+      <li><a href="advance05.html#"></a></li>
+      </ul>
+      <h1 data-number="2" id="jsonとは"><span
+      class="header-section-number">2</span> JSONとは</h1>
+      <p>今回は、ゲームの進行状況を保存するために JSON（JavaScript
+      Object Notation）
+      を用います。釣った魚の情報やキャラクターの位置、レベルなどを保存するのに使います。JSONはPythonで簡単に操作できるため、初心者にも扱いやすいのが特徴です。<strong>リストや辞書型に似た形式で、Pythonのリストや辞書型と相互変換が可能</strong>です。</p>
+      <h1 data-number="3" id="jsonを書く"><span
+      class="header-section-number">3</span> JSONを書く</h1>
+      <p><strong>これがJSONファイルです</strong>。Pythonと同じような感覚で記述することができます。
+      それぞれのデータの意味は以下のようになっています。本来は、イワシの後にサバやアジ、…、タイと続きますが、長くなるので省略します。</p>
+      <div class="sourceCode" id="cb1" data-startFrom="1"
+      data-caption="savedata.json（解説付き）"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="dt">&quot;イワシ&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>        <span class="dt">&quot;count&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> <span class="er">//イワシを釣った回数</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>        <span class="dt">&quot;maxWeight&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> <span class="er">//釣ったイワシの最大重量</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>        <span class="dt">&quot;bronze&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span> <span class="er">//ブロンズランクのイワシを釣ったことがあるか</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>        <span class="dt">&quot;silver&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span> <span class="er">//シルバーランクのイワシを釣ったことがあるか</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>        <span class="dt">&quot;gold&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span> <span class="er">//ゴールドランクのイワシを釣ったことがあるか</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>        <span class="dt">&quot;totalWeight&quot;</span><span class="fu">:</span> <span class="dv">0</span> <span class="er">//釣ったイワシの累計重量</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="fu">},</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="dt">&quot;money&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span><span class="er">//所持金</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="dt">&quot;x&quot;</span><span class="fu">:</span> <span class="dv">3</span><span class="fu">,</span><span class="er">//キャラクターのマップx座標</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>    <span class="dt">&quot;y&quot;</span><span class="fu">:</span> <span class="dv">3</span><span class="fu">,</span><span class="er">//キャラクターのマップy座標</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="dt">&quot;d&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span><span class="er">//キャラクターの向き</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="dt">&quot;lv&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="er">//キャラクターのレベル</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="fu">}</span></span></code></pre></div>
+      <h1 data-number="4" id="jsonを読み書きする"><span
+      class="header-section-number">4</span> JSONを読み書きする</h1>
+      <p><code>save_load.py</code>という名前で新しいファイルを作成してください。</p>
+      <div class="sourceCode" id="cb2" data-startFrom="1"
+      data-caption="save_load.py"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> json</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> os</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>cwd <span class="op">=</span> os.getcwd()  <span class="co"># カレントディレクトリ取得</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="cf">try</span>:</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="cf">with</span> <span class="bu">open</span>(cwd <span class="op">+</span> <span class="st">&quot;/savedata.json&quot;</span>) <span class="im">as</span> f:</span>
+<span id="cb2-8"><a href="#cb2-8"></a>        saveData <span class="op">=</span> json.load(f)</span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="bu">print</span>(<span class="st">&quot;セーブデータを読み込みました:&quot;</span>, saveData)</span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="cf">except</span>:</span>
+<span id="cb2-11"><a href="#cb2-11"></a>    saveData <span class="op">=</span> {</span>
+<span id="cb2-12"><a href="#cb2-12"></a>        <span class="st">&quot;イワシ&quot;</span>: {</span>
+<span id="cb2-13"><a href="#cb2-13"></a>            <span class="st">&quot;count&quot;</span>: <span class="dv">0</span>,</span>
+<span id="cb2-14"><a href="#cb2-14"></a>            <span class="st">&quot;maxWeight&quot;</span>: <span class="dv">0</span>,</span>
+<span id="cb2-15"><a href="#cb2-15"></a>            <span class="st">&quot;bronze&quot;</span>: <span class="va">False</span>,</span>
+<span id="cb2-16"><a href="#cb2-16"></a>            <span class="st">&quot;silver&quot;</span>: <span class="va">False</span>,</span>
+<span id="cb2-17"><a href="#cb2-17"></a>            <span class="st">&quot;gold&quot;</span>: <span class="va">False</span>,</span>
+<span id="cb2-18"><a href="#cb2-18"></a>            <span class="st">&quot;totalWeight&quot;</span>: <span class="dv">0</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>        },</span>
+<span id="cb2-20"><a href="#cb2-20"></a>        <span class="st">&quot;money&quot;</span>: <span class="dv">0</span>,</span>
+<span id="cb2-21"><a href="#cb2-21"></a>        <span class="st">&quot;x&quot;</span>: <span class="dv">3</span>,</span>
+<span id="cb2-22"><a href="#cb2-22"></a>        <span class="st">&quot;y&quot;</span>: <span class="dv">3</span>,</span>
+<span id="cb2-23"><a href="#cb2-23"></a>        <span class="st">&quot;d&quot;</span>: <span class="dv">0</span>,</span>
+<span id="cb2-24"><a href="#cb2-24"></a>        <span class="st">&quot;lv&quot;</span>: <span class="dv">0</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a>    }</span>
+<span id="cb2-26"><a href="#cb2-26"></a>    <span class="bu">print</span>(<span class="st">&quot;新しいセーブデータを作成しました。&quot;</span>)</span></code></pre></div>
+      <p>ここで、新しい構文、<code>try-except構文</code>について説明します。</p>
+      <p>Pythonの<code>try-except構文</code>は、プログラム実行中に発生する<strong>エラーに対処するための仕組み</strong>です。この構文を使うことで、<strong>プログラムがエラーで突然終了するのを防ぎ、エラー時に適切な処理を実行でき</strong>ます。</p>
+      <div class="sourceCode" id="cb3" data-startFrom="1"
+      data-caption="try-except構文"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="cf">try</span>:</span>
+<span id="cb3-2"><a href="#cb3-2"></a>    <span class="co"># エラーが発生する可能性がある処理</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="cf">except</span> エラーの種類:</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="co"># エラーが発生した場合の処理</span></span></code></pre></div>
+      <p>今回の場合は、<code>try:</code>で<code>savedata.json</code>を<strong>開きます</strong>。これにより、もしセーブデータがあれば<strong>セーブデータを読み込み（コンティニュー）</strong>ます。もしセーブデータがなければ、<code>savedata.json</code>ファイルを開くことができず、エラーが発生します。そのとき、ファイルを開くのをやめ、<strong>新しいファイルを作成（ニューゲーム）</strong>します。</p>
+      <h1 data-number="5" id="全体の組み立て"><span
+      class="header-section-number">5</span> 全体の組み立て</h1>
+      <figure>
+      <img src="./figs/105/main.svg" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>新しいpythonファイル<code>game.py</code>を作成してください。<a
+      href="https://github.com/k-768/PythonGameProgramming/blob/main/programs/game.py">ここから</a>プログラムをコピー＆ペーストして実行してみてください。</p>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://k-768.github.io/PythonGameProgramming/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
