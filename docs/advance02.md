@@ -103,12 +103,13 @@ def setChara(x,y,state):
 
 まず、現在どの状態にいるのかを示すために、変数`flag`を用意します。
 
-flag | 意味
-default | 待機中
-wait | 釣り中
-hit | ウキが沈む
-success | 釣り成功
-result | 釣り結果表示
+|flag | 意味|
+------+-----
+|default | 待機中|
+|wait | 釣り中|
+|hit | ウキが沈む|
+|success | 釣り成功|
+|result | 釣り結果表示|
 
 
 <br>

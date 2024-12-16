@@ -161,8 +161,36 @@ class="toc-section-number">9</span> ゲームを改造する</a></li>
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>まず、現在どの状態にいるのかを示すために、変数<code>flag</code>を用意します。</p>
-      <p>flag | 意味 default | 待機中 wait | 釣り中 hit | ウキが沈む
-      success | 釣り成功 result | 釣り結果表示</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>flag</th>
+      <th>意味</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>default</td>
+      <td>待機中</td>
+      </tr>
+      <tr class="even">
+      <td>wait</td>
+      <td>釣り中</td>
+      </tr>
+      <tr class="odd">
+      <td>hit</td>
+      <td>ウキが沈む</td>
+      </tr>
+      <tr class="even">
+      <td>success</td>
+      <td>釣り成功</td>
+      </tr>
+      <tr class="odd">
+      <td>result</td>
+      <td>釣り結果表示</td>
+      </tr>
+      </tbody>
+      </table>
       <p><br></p>
       <p>今回は、この<code>flag</code>の中身を確認することでどの状態にいるのか判定できます。また、状態を遷移する際には<code>flag</code>の中身も忘れずに変更しなければいけません。</p>
       <div class="sourceCode" id="cb2" data-startFrom="1"
