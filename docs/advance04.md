@@ -1,517 +1,98 @@
 ---
 var:
-  header-title: "Pythonで釣りゲームを作ろう ゲームづくり編4　マップ上を移動しよう"
-  header-date: "2024年12月10日（火）"
+  header-title: "Pythonで釣りゲームを作ろう ゲームづくり編4　ゲームを完成させよう"
+  header-date: "2024年12月15日（日）"
 ---
 
-# ゲームづくり編4　マップ上を移動しよう
+# ゲームづくり編4　ゲームを完成させよう
 
-## キャラクタを動かす
-
-マップ画面を表示するプログラムが完成したので、次はキャラクタを操作してマップ上を移動できるようにしましょう。
-今回は、**キャラチップ**と呼ばれる画像を用いてキャラクタの歩行を行います。
+今回は、ゲームにとって欠かせないセーブ機能を実装しましょう。そして、釣りのシステムと移動のシステムを組み合わせて、釣りゲームを完成させましょう。
 
 <br>
 
 ## もくじ
-- [キャラチップとは](advance04.html#キャラチップとは)
-- [キャラクターを表示させて移動する](advance04.html#キャラクターを表示させて移動する)
-- [水の中には入れないようにする](advance04.html#水の中には入れないようにする)
-- [キャラクターをアニメーションさせる](advance04.html#キャラクターをアニメーションさせる)
-- [組み合わせる](advance04.html#組み合わせる)
+- [](advance04.html#)
 
 
-## キャラチップとは
-
-**キャラチップ**とは、ゲーム制作においてキャラクターのアニメーションを表現するための、複数のキャラクター画像が並べられた画像です。キャラクターチップとも呼ばれることがあります。
-
-![img](./figs/104/character.png)
 
 
-ゲーム内では、プログラムでキャラチップの一部を切り出し、画面上に描画します。今回は、「どの方向を向いているか」に応じてキャラチップの行を、「移動の状態」に応じてキャラチップの列を選択して表示します。
 
-上の画像をダウンロードして`character.png`という名前で`img`フォルダに入れておいてください。
+## JSONとは
 
-## キャラクターを表示させて移動する
+今回は、ゲームの進行状況を保存するために JSON（JavaScript Object Notation） を用います。釣った魚の情報やキャラクターの位置、レベルなどを保存するのに使います。JSONはPythonで簡単に操作できるため、初心者にも扱いやすいのが特徴です。**リストや辞書型に似た形式で、Pythonのリストや辞書型と相互変換が可能**です。
 
-新しいpythonファイル`move01.py`を作成してください。[ここから](https://github.com/k-768/PythonGameProgramming/blob/main/programs/move01.py
-)プログラムをコピー＆ペーストして実行してみてください。**WASDでキャラクターが移動します**。このプログラムの要点について解説します。
+## JSONを書く
 
-![img](./figs/104/walk.gif)
+**これがJSONファイルです**。Pythonと同じような感覚で記述することができます。
+それぞれのデータの意味は以下のようになっています。本来は、イワシの後にサバやアジ、...、タイと続きますが、長くなるので省略します。
 
-<br>
-
-
-```python{.numberLines startFrom=76 caption="move01（抜粋）.py"}
-#>>キャラクター>>
-CHARA_WIDTH = 64  #キャラの幅
-CHARA_HEIGHT = 96 #キャラの高さ
-
-#キャラクターのマップ座標
-charaX = 2 
-charaY = 2 
-charaD = 1  #キャラの向き
-flag = "default"
-'''
-default:通常状態
-move:移動中
-'''
+```json{.numberLines startFrom=1 caption="savedata.json（解説付き）"}
+{
+    "イワシ": {
+        "count": 0, //イワシを釣った回数
+        "maxWeight": 0, //釣ったイワシの最大重量
+        "bronze": false, //ブロンズランクのイワシを釣ったことがあるか
+        "silver": false, //シルバーランクのイワシを釣ったことがあるか
+        "gold": false, //ゴールドランクのイワシを釣ったことがあるか
+        "totalWeight": 0 //釣ったイワシの累計重量
+    },
+    "money": 0,//所持金
+    "x": 3,//キャラクターのマップx座標
+    "y": 3,//キャラクターのマップy座標
+    "d": 0,//キャラクターの向き
+    "lv": 0//キャラクターのレベル
+}
 ```
 
-`charaX`と`charaY`は、キャラクターの座標を示す変数です。しかしこれは普通のxy座標ではなく、マップ座標、つまり左上から**何マス目**かを示しています。
-`charaD`はキャラクタの方向を示す変数です。下向きが0、左向きが1、右向きが2、上向きが3と、キャラチップの並びと同じ順番になっています。
+## JSONを読み込む
 
-![img](./figs/104/charaD.png)
+`save_load.py`という名前で新しいファイルを作成してください。
 
-`flag`は、魚を釣るプログラムでも登場した、場面を管理するためのものです。今回は待機中は`default`、移動中は`move`です。**キーボードの入力は待機中のみ受け付け、移動中は受け付けません**。
-
-<br>
-
-```python{.numberLines startFrom=95 caption="move01（抜粋）.py"}
-#移動方向
-moveX = 0
-moveY = 0
-```
-`moveX`、`moveY`は移動するマス目を示しています。たとえば、`moveX = -1`なら、**1マス左に移動する**ということになります。
-
-<br>
-
-
-```python{.numberLines startFrom=99 caption="move01（抜粋）.py"}
-#キャラチップを1毎の画像に並べたキャラシートを読み込む
-CHARA_SHEET = Image.open(cwd+"/img/character.png")
-
-#読み込んだ画像から縦横何枚ずつチップがあるか求める
-CHARA_X = CHARA_SHEET.width // CHARA_WIDTH
-CHARA_Y = CHARA_SHEET.height // CHARA_HEIGHT
-
-
-#キャラチップに分割し2次元配列に格納する
-CHARA_CHIP = []
-#キャラシートの列数だけ繰り返す
-for j in range(CHARA_Y): 
-    #新しい行を作成
-    row = []
-    
-    #キャラシートの行数だけ繰り返す
-    for i in range(CHARA_X): 
-        # キャラクターのチップを切り出して画像を作成
-        image = ImageTk.PhotoImage(CHARA_SHEET.crop((
-            CHARA_WIDTH * i,               # 左上のX座標
-            CHARA_HEIGHT * j,              # 左上のY座標
-            CHARA_WIDTH * (i + 1),         # 右下のX座標
-            CHARA_HEIGHT * (j + 1)         # 右下のY座標
-        )))
-        
-        # 作成した画像を行に追加
-        row.append(image)
-    
-    # 行をCHARA_CHIPに追加
-    CHARA_CHIP.append(row)
-```
-
-`99行目`からはキャラチップの画像を、マップチップとほとんど同じ方法で取得しています。
-ただし、マップチップはリストに格納していましたが、**キャラチップは2次元リストに格納しています**。
-
-
----
-
-- **ChallengeA4-1**　`CHARA_CHIP[1][2]`はどこの部分を指しますか。
-
-![img](./figs/104/character.png)
-
-
-回答はコラムの後にあります。
-
-<div class="note type-tips">
-
-**リストの内包表記**
-
-Pythonの便利な文法の一つに**内包表記**というものがあります。**「リストを簡単に作れる書き方」**です。
-
-```python{.numberLines startFrom=1 caption="リストの内包表記"}
-CHARA_CHIP = [
-    [
-        ImageTk.PhotoImage(CHARA_SHEET.crop((
-            CHARA_WIDTH * i,
-            CHARA_HEIGHT * j,
-            CHARA_WIDTH * (i + 1),
-            CHARA_HEIGHT * (j + 1)
-            ))) for i in range(CHARA_X)
-        ]for j in range(CHARA_Y)
-    ]
-```
-
-```python{.numberLines startFrom=1 caption="リストの内包表記を使わない場合"}
-CHARA_CHIP = []
-#キャラシートの列数だけ繰り返す
-for j in range(CHARA_Y): 
-    #新しい行を作成
-    row = []
-    
-    #キャラシートの行数だけ繰り返す
-    for i in range(CHARA_X): 
-        # キャラクターのチップを切り出して画像を作成
-        image = ImageTk.PhotoImage(CHARA_SHEET.crop((
-            CHARA_WIDTH * i,               # 左上のX座標
-            CHARA_HEIGHT * j,              # 左上のY座標
-            CHARA_WIDTH * (i + 1),         # 右下のX座標
-            CHARA_HEIGHT * (j + 1)         # 右下のY座標
-        )))
-        
-        # 作成した画像を行に追加
-        row.append(image)
-    
-    # 行をCHARA_CHIPに追加
-    CHARA_CHIP.append(row)
-```
-
-このように、同じ処理でも簡単に記述できます。リストの内包表記をざっくり説明すると、ループを使ってリストを作るコードを1行にまとめる方法です。しかし、少し理解が難しいので今回は扱いません。気になった方は自分で調べてみてください。
-
-</div>
-
-**<i class="fa-solid fa-check"></i>解答**
-
-![img](./figs/104/ans.png)
-
-<br>
-
----
-
-プログラムの解説に戻ります。
-
-```python{.numberLines startFrom=150 caption="move01.py（抜粋）"}
-#>>ゲームのメインループ関数>>
-def gameLoop():
-    global charaX,charaY,charaD,moveCount,moveX,moveY,flag,key,currentKey,prevKey
-    
-    if (len(key)> 0):
-        lastKey = key[len(key) - 1] #最後に押されたキー
-    else:
-        lastKey = ""
-    
-    
-    if (flag == "default"): #待機中のとき 
-        
-        if(len(key)): #何かのキーが押されているとき
-            if(lastKey=="s" or lastKey=="Down"):#下入力
-                flag = "move"
-                charaD = 0
-                moveX = 0
-                moveY = 1
-                print("↓")
-            elif(lastKey=="a" or lastKey=="Left"):#左入力
-                flag = "move"
-                charaD = 1
-                moveX = -1
-                moveY = 0
-                print("←")
-            elif(lastKey=="d" or lastKey=="Right"):#右入力
-                flag = "move"
-                charaD = 2
-                moveX = 1
-                moveY = 0
-                print("→")
-            elif(lastKey=="w" or lastKey=="Up"):#上入力
-                flag = "move"
-                charaD = 3
-                moveX = 0
-                moveY = -1
-                print("↑")
-    
-    if (flag == "move"):#移動中のとき
-        flag = "default"#待機中に状態を戻す
-        charaX += moveX
-        charaY += moveY
-        #キャラクター再描写
-        setChara(charaX,charaY,charaD)
-```
-
-ゲームの処理は、関数`gameLoop`内にあります。if文を用いて、**移動用のキーが押されたかを判定**し、**進む方向によって`moveX`と`moveY`を変更**します。また、`flag`を**moveに変更**します。
-キーが押されて移動中になったら、今度はキャラクターの位置を進行方向に一つ進んだ位置に変更し、`flag`を**defaultに戻し**ます。今は`flag`が必要ないように感じると思いますが、アニメーションを行う際に必要になります。
-
-これで、作成したマップの上を、キーボードの操作でキャラクターを移動させることができるようになりました。
-
-しかし、直立不動で移動していたり、水の上を歩いていたりと、このままではおかしなところがたくさんあります。
-
-![img](./figs/104/walk.gif)
-
-まずは水の上には侵入できないようにしましょう。
-
-## 水の中には入れないようにする
-
-はじめに、各マップチップに対して、入れるかどうかを設定しましょう。
-マップのリストの後ろに以下を追加してください。
-
-```python{.numberLines startFrom=67 caption="move02.py（追加）"}
-#通行許可設定
-#0:不可
-#1:可能
-PASSAGE_PERMIT = [0,1,1,0]
-```
-
-この配列は、`CHIP_DATA`の順番と対応しています。
-
-![img](./figs/104/sheet1.png)
-
-つまり、マップチップの左から侵入「不可」「可」「可」「不可」となり、草地と砂地は侵入できることになります。
-
-<br>
-
-この設定を使って、**移動する前に**判定を行います。
-
-**!!!!ここから追加する!!!!**と書かれたところからのプログラムを追加してください。
-追加する際、インデントに注意してください。
-
-```python{.numberLines startFrom=155 caption="move02.py（追加）"}
-def gameLoop():
-    global charaX,charaY,charaD,moveCount,moveX,moveY,flag,key,currentKey,prevKey
-    
-    if (len(key)> 0):
-        lastKey = key[len(key) - 1] #最後に押されたキー
-    else:
-        lastKey = ""
-    
-    
-    if (flag == "default"): #待機中のとき 
-        
-        if(len(key)): #何かのキーが押されているとき
-            if(lastKey=="s" or lastKey=="Down"):#下入力
-                flag = "move"
-                charaD = 0
-                moveX = 0
-                moveY = 1
-                print("↓")
-            elif(lastKey=="a" or lastKey=="Left"):#左入力
-                flag = "move"
-                charaD = 1
-                moveX = -1
-                moveY = 0
-                print("←")
-            elif(lastKey=="d" or lastKey=="Right"):#右入力
-                flag = "move"
-                charaD = 2
-                moveX = 1
-                moveY = 0
-                print("→")
-            elif(lastKey=="w" or lastKey=="Up"):#上入力
-                flag = "move"
-                charaD = 3
-                moveX = 0
-                moveY = -1
-                print("↑")
-            
-            #!!!!ここから追加する!!!#
-
-            #上の処理で移動中フラグが立ったとき
-            if(flag == "move"):
-                #移動先が通行可能でないならば
-                if(not PASSAGE_PERMIT[MAP_DATA[charaY+moveY][charaX+moveX]]):
-                    #移動をやめて向きのみ変える
-                    flag = "default"
-                    moveX = 0
-                    moveY = 0
-                    setChara(charaX,charaY,charaD)
-```
-
-`MAP_DATA[charaY+moveY][charaX+moveX]`が移動する先のマップの情報(1なら草地、2なら砂地...)です。それを`PASSAGE_PERMIT`に入れることで、**移動先のマップチップが、上を歩ける種類かどうか判定できます**
-
-移動先が侵入できない場合、`flag`を**defaultに戻します**。ただし、向きだけは変えたいので関数`setChara()`でキャラクターを更新しています。
-
-
-## キャラクターをアニメーションさせる
-
-次に、キャラクターに歩行アニメーションをつけてみましょう。
-キャラクターが歩いているように見せるためには、図のような順番で表示する必要があります。
-
-![img](./figs/104/walk2.png)
-
-これを**index**で表すと、0→1→2→1となります。そこで`FRAME_LIST = [0,1,2,1]`とおき、これを参照することにします。新しいpythonファイル`move03.py`を作成してください。
-
-```python{.numberLines startFrom=1 caption="move03.py"}
+```python{.numberLines startFrom=1 caption="save_load.py"}
+import json
 import os
-import tkinter as tk
-from PIL import Image,ImageTk
 
-#>>ディレクトリ>>
-cwd = os.getcwd()
+cwd = os.getcwd()  # カレントディレクトリ取得
 
-
-#>>ウィンドウ、キャンバス>>
-CANVAS_WIDTH = 160 #キャンバス幅
-CANVAS_HEIGHT = 200 #キャンバス高さ
-MARGINE_X = 2 #マージン
-MARGINE_Y = 2 #マージン
-CANVAS_SIZE = f"{CANVAS_WIDTH+MARGINE_X}x{CANVAS_HEIGHT+MARGINE_Y}"#キャンバスサイズ
-
-#ウィンドウ設置
-root = tk.Tk()
-root.title("アニメーション")
-root.geometry(CANVAS_SIZE)
-
-#キャンバス設置
-canvas = tk.Canvas(root,width = CANVAS_WIDTH,height = CANVAS_HEIGHT,bg = "skyblue")
-canvas.pack()
-
-
-#>>キャラクター>>
-CHARA_WIDTH = 64  #キャラの幅
-CHARA_HEIGHT = 96 #キャラの高さ
-
-#キャラクターの座標
-charaX = 60 
-charaY = 60 
-charaD = 1  #キャラの向き
-FRAME_LIST = [0,1,2,1]
-
-moveCount = 0    #移動カウンタ 0から3の4段階
-
-#ゲームの基本となる1ティック時間(ms)
-TICK_TIME = 100
-
-#キャラチップを1毎の画像に並べたキャラシートを読み込む
-CHARA_SHEET = Image.open(cwd+"/img/character.png")
-
-#読み込んだ画像から縦横何枚ずつチップがあるか求める
-CHARA_X = CHARA_SHEET.width // CHARA_WIDTH
-CHARA_Y = CHARA_SHEET.height // CHARA_HEIGHT
-
-
-#キャラチップに分割し2次元配列に格納する
-CHARA_CHIP = []
-#キャラシートの列数だけ繰り返す
-for j in range(CHARA_Y): 
-    #新しい行を作成
-    row = []
-    
-    #キャラシートの行数だけ繰り返す
-    for i in range(CHARA_X): 
-        # キャラクターのチップを切り出して画像を作成
-        image = ImageTk.PhotoImage(CHARA_SHEET.crop((
-            CHARA_WIDTH * i,               # 左上のX座標
-            CHARA_HEIGHT * j,              # 左上のY座標
-            CHARA_WIDTH * (i + 1),         # 右下のX座標
-            CHARA_HEIGHT * (j + 1)         # 右下のY座標
-        )))
-        
-        # 作成した画像を行に追加
-        row.append(image)
-    
-    # 行をCHARA_CHIPに追加
-    CHARA_CHIP.append(row)
-
-
-#キャラクターを再描写する関数
-def setChara(x,y,d,frame):
-    """
-    x:キャラのX座標
-    y:キャラのY座標
-    d:キャラの向き
-    frame:コマ数
-    """
-    #キャラの画像を選択
-    img = CHARA_CHIP[d][FRAME_LIST[frame]]
-    
-    #今の画像を消して再描写
-    canvas.delete("chara")
-    canvas.create_image(x,y,image =img ,tag="chara",anchor=tk.NW)
-
-
-#>>ゲームのメインループ関数>>
-def gameLoop():
-    global charaX,charaY,charaD,moveCount
-    
-    setChara(charaX,charaY,charaD,moveCount)
-    
-    if(moveCount==3):#アニメーションが最終コマならば
-        moveCount = 0
-    else:
-        moveCount += 1
-    
-    root.after(TICK_TIME,gameLoop)
-
-setChara(charaX,charaY,charaD,1)
-
-gameLoop()
-print("start!")
-root.mainloop()
+try:
+    with open(cwd + "/savedata.json") as f:
+        saveData = json.load(f)
+    print("セーブデータを読み込みました:", saveData)
+except:
+    saveData = {
+        "イワシ": {
+            "count": 0,
+            "maxWeight": 0,
+            "bronze": False,
+            "silver": False,
+            "gold": False,
+            "totalWeight": 0
+        },
+        "money": 0,
+        "x": 3,
+        "y": 3,
+        "d": 0,
+        "lv": 0
+    }
+    print("新しいセーブデータを作成しました。")
 ```
 
-実行するとキャラクターが歩き出します。
+ここで、新しい構文、`try-except構文`について説明します。
 
-![img](./figs/104/walk_anime.gif)
+Pythonの`try-except構文`は、プログラム実行中に発生する**エラーに対処するための仕組み**です。この構文を使うことで、**プログラムがエラーで突然終了するのを防ぎ、エラー時に適切な処理を実行でき**ます。
 
-<br>
-
-ポイントは、**`moveCount`を1ずつ増やしていき、3まで増えたら0に戻ることです**。`moveCount`は0→1→2→3→0→1→...と繰り返します。
-
-```python{.numberLines startFrom=89 caption="move03.py（抜粋）"}
-#>>ゲームのメインループ関数>>
-def gameLoop():
-    global charaX,charaY,charaD,moveCount
-    
-    setChara(charaX,charaY,charaD,moveCount)
-    
-    if(moveCount==3):#アニメーションが最終コマならば
-        moveCount = 0
-    else:
-        moveCount += 1
-
+```python{.numberLines startFrom=1 caption="try-except構文"}
+try:
+    # エラーが発生する可能性がある処理
+except エラーの種類:
+    # エラーが発生した場合の処理
 ```
 
-<br>
+今回の場合は、`try:`で`savedata.json`を**開きます**。これにより、もしセーブデータがあれば**セーブデータを読み込み（コンティニュー）**ます。もしセーブデータがなければ、`savedata.json`ファイルを開くことができず、エラーが発生します。そのとき、ファイルを開くのをやめ、**新しいファイルを作成（ニューゲーム）**します。
 
-そして`CHARA_CHIP`の2つめの引数に`FRAME_LIST[frame]`を指定することでアニメーションさせます。
+## 全体の組み立て
 
-```python{.numberLines startFrom=73 caption="move03.py（抜粋）"}
-#キャラクターを再描写する関数
-def setChara(x,y,d,frame):
-    """
-    x:キャラのX座標
-    y:キャラのY座標
-    d:キャラの向き
-    frame:コマ数
-    """
-    #キャラの画像を選択
-    img = CHARA_CHIP[d][FRAME_LIST[frame]]
-```
+![img](./figs/104/main.svg)
 
-
-## 組み合わせる
-
-キーボードによる移動とアニメーションを組み合わせてプログラムを完成させましょう。
-新しいpythonファイル`move.py`を作成してください。[ここから](https://github.com/k-768/PythonGameProgramming/blob/main/programs/move.py
-)プログラムをコピー＆ペーストして実行してみてください。WASDでキャラクターが**歩いて移動します**。このプログラムの要点について解説します。
-
-<br>
-
----
-
-```python{.numberLines startFrom=138 caption="move.py（抜粋）"}
-#マップ座標からキャラをどこに配置するか決める関数
-#dx,dy:移動中の微小変化 0,1,2,3,4の4段階
-def getCharaCoord(x,y,dx=0,dy=0):
-    return((x+dx/4)*CHIP_SIZE, (y+dy/4-0.5)*CHIP_SIZE)
-```
-
-`138行目`からは、キャラクタの座標を計算しています。キャラクターが1マス移動する間に表示する`frame`は4コマなので、**1コマにつき1/4マスずつ移動する**ことで滑らかな移動ができます。
-
-<br>
-
-```python{.numberLines startFrom=209 caption="move.py（抜粋）"}
-    if (flag == "move"):#移動中のとき
-        #キャラクター再描写
-        setChara(charaX,charaY,charaD,moveCount)
-        
-        if(moveCount==3):#アニメーションが最終コマならば
-            flag = "default"#待機中に状態を戻す
-            moveCount = 0
-            charaX += moveX
-            charaY += moveY
-        else:
-            moveCount += 1
-```
-
-そして、**`moveCount`が3まで増えたら、一度`flag`をdefaultに戻します**。これにより、キーボード操作によるキャラクターの移動は完成です。
-
-次回はいよいよ、釣りと移動と組み合わせて、釣りゲームを完成させましょう。
+新しいpythonファイル`game.py`を作成してください。[ここから](https://github.com/k-768/PythonGameProgramming/blob/main/programs/game.py
+)プログラムをコピー＆ペーストして実行してみてください。
