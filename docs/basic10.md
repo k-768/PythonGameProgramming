@@ -204,9 +204,9 @@ WASDキーに対応して、以下のような出力を出せたら完成です�
 # 押されたキーを出力する
 def on_key_press(event):
     key = event.keysym # 変数keyに「w」や「a」など、押したキーの名前が格納される
-    if(key == "w"): # 「w」が押されたとき
+    if key == "w": # 「w」が押されたとき
         print("↑")
-    elif(...   #以下省略
+    elif ...   #以下省略
 ```
 ---
 
@@ -237,13 +237,13 @@ canvas.create_rectangle(x,y,x+rect_size,y+rect_size,fill="blue",tag="rect")
 # 何かのキーが押されたときに実行される関数
 def on_key_press(event):
     key = event.keysym # 変数keyに「w」や「a」など、押したキーの名前が格納される
-    if(key == "w"):
+    if key == "w":
         print("↑")
-    elif(key == "a"):
+    elif key == "a":
         print("←")
-    elif(key == "s"):
+    elif key == "s":
         print("↓")
-    elif(key == "d"):
+    elif key == "d":
         print("→")
 
 # メインループ
@@ -266,13 +266,13 @@ root.mainloop()
 # 何かのキーが押されたときに実行される関数
 def on_key_press(event):
     key = event.keysym # 変数keyに「w」や「a」など、押したキーの名前が格納される
-    if(key == "w" or key == "Up"):
+    if key == "w" or key == "Up":
         print("↑")
-    elif(key == "a" or key == "Left"):
+    elif key == "a" or key == "Left":
         print("←")
-    elif(key == "s" or key == "Down"):
+    elif key == "s" or key == "Down":
         print("↓")
-    elif(key == "d" or key == "Right"):
+    elif key == "d" or key == "Right":
         print("→")
 ```
 
@@ -302,16 +302,16 @@ def on_key_press(event):
     global x,y
     speed = 5 # 四角形を一度にずらす大きさ
     key = event.keysym # 変数keyに「w」や「a」など、押したキーの名前が格納される
-    if(key == "w" or key == "Up"):
+    if key == "w" or key == "Up":
         print("↑")
         y = y - speed
-    elif(key == "a" or key == "Left"):
+    elif key == "a" or key == "Left":
         print("←")
         x = x - speed
-    elif(key == "s" or key == "Down"):
+    elif key == "s" or key == "Down":
         print("↓")
         y = y + speed
-    elif(key == "d" or key == "Right"):
+    elif key == "d" or key == "Right":
         print("→")
         x = x + speed
     

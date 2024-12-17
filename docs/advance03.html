@@ -567,41 +567,41 @@ class="toc-section-number">13</span> 組み合わせる</a></li>
 <span id="cb15-151"><a href="#cb15-151"></a><span class="kw">def</span> gameLoop():</span>
 <span id="cb15-152"><a href="#cb15-152"></a>    <span class="kw">global</span> charaX,charaY,charaD,moveCount,moveX,moveY,flag,key,currentKey,prevKey</span>
 <span id="cb15-153"><a href="#cb15-153"></a>    </span>
-<span id="cb15-154"><a href="#cb15-154"></a>    <span class="cf">if</span> (<span class="bu">len</span>(key)<span class="op">&gt;</span> <span class="dv">0</span>):</span>
+<span id="cb15-154"><a href="#cb15-154"></a>    <span class="cf">if</span> <span class="bu">len</span>(key)<span class="op">&gt;</span> <span class="dv">0</span>:</span>
 <span id="cb15-155"><a href="#cb15-155"></a>        lastKey <span class="op">=</span> key[<span class="bu">len</span>(key) <span class="op">-</span> <span class="dv">1</span>] <span class="co">#最後に押されたキー</span></span>
 <span id="cb15-156"><a href="#cb15-156"></a>    <span class="cf">else</span>:</span>
 <span id="cb15-157"><a href="#cb15-157"></a>        lastKey <span class="op">=</span> <span class="st">&quot;&quot;</span></span>
 <span id="cb15-158"><a href="#cb15-158"></a>    </span>
 <span id="cb15-159"><a href="#cb15-159"></a>    </span>
-<span id="cb15-160"><a href="#cb15-160"></a>    <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>): <span class="co">#待機中のとき </span></span>
+<span id="cb15-160"><a href="#cb15-160"></a>    <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>: <span class="co">#待機中のとき </span></span>
 <span id="cb15-161"><a href="#cb15-161"></a>        </span>
-<span id="cb15-162"><a href="#cb15-162"></a>        <span class="cf">if</span>(<span class="bu">len</span>(key)): <span class="co">#何かのキーが押されているとき</span></span>
-<span id="cb15-163"><a href="#cb15-163"></a>            <span class="cf">if</span>(lastKey<span class="op">==</span><span class="st">&quot;s&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Down&quot;</span>):<span class="co">#下入力</span></span>
+<span id="cb15-162"><a href="#cb15-162"></a>        <span class="cf">if</span> <span class="bu">len</span>(key): <span class="co">#何かのキーが押されているとき</span></span>
+<span id="cb15-163"><a href="#cb15-163"></a>            <span class="cf">if</span> lastKey<span class="op">==</span><span class="st">&quot;s&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Down&quot;</span>:<span class="co">#下入力</span></span>
 <span id="cb15-164"><a href="#cb15-164"></a>                flag <span class="op">=</span> <span class="st">&quot;move&quot;</span></span>
 <span id="cb15-165"><a href="#cb15-165"></a>                charaD <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb15-166"><a href="#cb15-166"></a>                moveX <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb15-167"><a href="#cb15-167"></a>                moveY <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb15-168"><a href="#cb15-168"></a>                <span class="bu">print</span>(<span class="st">&quot;↓&quot;</span>)</span>
-<span id="cb15-169"><a href="#cb15-169"></a>            <span class="cf">elif</span>(lastKey<span class="op">==</span><span class="st">&quot;a&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Left&quot;</span>):<span class="co">#左入力</span></span>
+<span id="cb15-169"><a href="#cb15-169"></a>            <span class="cf">elif</span> lastKey<span class="op">==</span><span class="st">&quot;a&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Left&quot;</span>:<span class="co">#左入力</span></span>
 <span id="cb15-170"><a href="#cb15-170"></a>                flag <span class="op">=</span> <span class="st">&quot;move&quot;</span></span>
 <span id="cb15-171"><a href="#cb15-171"></a>                charaD <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb15-172"><a href="#cb15-172"></a>                moveX <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
 <span id="cb15-173"><a href="#cb15-173"></a>                moveY <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb15-174"><a href="#cb15-174"></a>                <span class="bu">print</span>(<span class="st">&quot;←&quot;</span>)</span>
-<span id="cb15-175"><a href="#cb15-175"></a>            <span class="cf">elif</span>(lastKey<span class="op">==</span><span class="st">&quot;d&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Right&quot;</span>):<span class="co">#右入力</span></span>
+<span id="cb15-175"><a href="#cb15-175"></a>            <span class="cf">elif</span> lastKey<span class="op">==</span><span class="st">&quot;d&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Right&quot;</span>:<span class="co">#右入力</span></span>
 <span id="cb15-176"><a href="#cb15-176"></a>                flag <span class="op">=</span> <span class="st">&quot;move&quot;</span></span>
 <span id="cb15-177"><a href="#cb15-177"></a>                charaD <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb15-178"><a href="#cb15-178"></a>                moveX <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb15-179"><a href="#cb15-179"></a>                moveY <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb15-180"><a href="#cb15-180"></a>                <span class="bu">print</span>(<span class="st">&quot;→&quot;</span>)</span>
-<span id="cb15-181"><a href="#cb15-181"></a>            <span class="cf">elif</span>(lastKey<span class="op">==</span><span class="st">&quot;w&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Up&quot;</span>):<span class="co">#上入力</span></span>
+<span id="cb15-181"><a href="#cb15-181"></a>            <span class="cf">elif</span> lastKey<span class="op">==</span><span class="st">&quot;w&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Up&quot;</span>:<span class="co">#上入力</span></span>
 <span id="cb15-182"><a href="#cb15-182"></a>                flag <span class="op">=</span> <span class="st">&quot;move&quot;</span></span>
 <span id="cb15-183"><a href="#cb15-183"></a>                charaD <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb15-184"><a href="#cb15-184"></a>                moveX <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb15-185"><a href="#cb15-185"></a>                moveY <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
 <span id="cb15-186"><a href="#cb15-186"></a>                <span class="bu">print</span>(<span class="st">&quot;↑&quot;</span>)</span>
 <span id="cb15-187"><a href="#cb15-187"></a>    </span>
-<span id="cb15-188"><a href="#cb15-188"></a>    <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;move&quot;</span>):<span class="co">#移動中のとき</span></span>
+<span id="cb15-188"><a href="#cb15-188"></a>    <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;move&quot;</span>:<span class="co">#移動中のとき</span></span>
 <span id="cb15-189"><a href="#cb15-189"></a>        flag <span class="op">=</span> <span class="st">&quot;default&quot;</span><span class="co">#待機中に状態を戻す</span></span>
 <span id="cb15-190"><a href="#cb15-190"></a>        charaX <span class="op">+=</span> moveX</span>
 <span id="cb15-191"><a href="#cb15-191"></a>        charaY <span class="op">+=</span> moveY</span>
@@ -643,34 +643,34 @@ class="toc-section-number">13</span> 組み合わせる</a></li>
       class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 154;"><span id="cb17-155"><a href="#cb17-155"></a><span class="kw">def</span> gameLoop():</span>
 <span id="cb17-156"><a href="#cb17-156"></a>    <span class="kw">global</span> charaX,charaY,charaD,moveCount,moveX,moveY,flag,key,currentKey,prevKey</span>
 <span id="cb17-157"><a href="#cb17-157"></a>    </span>
-<span id="cb17-158"><a href="#cb17-158"></a>    <span class="cf">if</span> (<span class="bu">len</span>(key)<span class="op">&gt;</span> <span class="dv">0</span>):</span>
+<span id="cb17-158"><a href="#cb17-158"></a>    <span class="cf">if</span> <span class="bu">len</span>(key)<span class="op">&gt;</span> <span class="dv">0</span>:</span>
 <span id="cb17-159"><a href="#cb17-159"></a>        lastKey <span class="op">=</span> key[<span class="bu">len</span>(key) <span class="op">-</span> <span class="dv">1</span>] <span class="co">#最後に押されたキー</span></span>
 <span id="cb17-160"><a href="#cb17-160"></a>    <span class="cf">else</span>:</span>
 <span id="cb17-161"><a href="#cb17-161"></a>        lastKey <span class="op">=</span> <span class="st">&quot;&quot;</span></span>
 <span id="cb17-162"><a href="#cb17-162"></a>    </span>
 <span id="cb17-163"><a href="#cb17-163"></a>    </span>
-<span id="cb17-164"><a href="#cb17-164"></a>    <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>): <span class="co">#待機中のとき </span></span>
+<span id="cb17-164"><a href="#cb17-164"></a>    <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>: <span class="co">#待機中のとき </span></span>
 <span id="cb17-165"><a href="#cb17-165"></a>        </span>
-<span id="cb17-166"><a href="#cb17-166"></a>        <span class="cf">if</span>(<span class="bu">len</span>(key)): <span class="co">#何かのキーが押されているとき</span></span>
-<span id="cb17-167"><a href="#cb17-167"></a>            <span class="cf">if</span>(lastKey<span class="op">==</span><span class="st">&quot;s&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Down&quot;</span>):<span class="co">#下入力</span></span>
+<span id="cb17-166"><a href="#cb17-166"></a>        <span class="cf">if</span> <span class="bu">len</span>(key): <span class="co">#何かのキーが押されているとき</span></span>
+<span id="cb17-167"><a href="#cb17-167"></a>            <span class="cf">if</span> lastKey<span class="op">==</span><span class="st">&quot;s&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Down&quot;</span>:<span class="co">#下入力</span></span>
 <span id="cb17-168"><a href="#cb17-168"></a>                flag <span class="op">=</span> <span class="st">&quot;move&quot;</span></span>
 <span id="cb17-169"><a href="#cb17-169"></a>                charaD <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb17-170"><a href="#cb17-170"></a>                moveX <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb17-171"><a href="#cb17-171"></a>                moveY <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb17-172"><a href="#cb17-172"></a>                <span class="bu">print</span>(<span class="st">&quot;↓&quot;</span>)</span>
-<span id="cb17-173"><a href="#cb17-173"></a>            <span class="cf">elif</span>(lastKey<span class="op">==</span><span class="st">&quot;a&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Left&quot;</span>):<span class="co">#左入力</span></span>
+<span id="cb17-173"><a href="#cb17-173"></a>            <span class="cf">elif</span> lastKey<span class="op">==</span><span class="st">&quot;a&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Left&quot;</span>:<span class="co">#左入力</span></span>
 <span id="cb17-174"><a href="#cb17-174"></a>                flag <span class="op">=</span> <span class="st">&quot;move&quot;</span></span>
 <span id="cb17-175"><a href="#cb17-175"></a>                charaD <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb17-176"><a href="#cb17-176"></a>                moveX <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
 <span id="cb17-177"><a href="#cb17-177"></a>                moveY <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb17-178"><a href="#cb17-178"></a>                <span class="bu">print</span>(<span class="st">&quot;←&quot;</span>)</span>
-<span id="cb17-179"><a href="#cb17-179"></a>            <span class="cf">elif</span>(lastKey<span class="op">==</span><span class="st">&quot;d&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Right&quot;</span>):<span class="co">#右入力</span></span>
+<span id="cb17-179"><a href="#cb17-179"></a>            <span class="cf">elif</span> lastKey<span class="op">==</span><span class="st">&quot;d&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Right&quot;</span>:<span class="co">#右入力</span></span>
 <span id="cb17-180"><a href="#cb17-180"></a>                flag <span class="op">=</span> <span class="st">&quot;move&quot;</span></span>
 <span id="cb17-181"><a href="#cb17-181"></a>                charaD <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb17-182"><a href="#cb17-182"></a>                moveX <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb17-183"><a href="#cb17-183"></a>                moveY <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb17-184"><a href="#cb17-184"></a>                <span class="bu">print</span>(<span class="st">&quot;→&quot;</span>)</span>
-<span id="cb17-185"><a href="#cb17-185"></a>            <span class="cf">elif</span>(lastKey<span class="op">==</span><span class="st">&quot;w&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Up&quot;</span>):<span class="co">#上入力</span></span>
+<span id="cb17-185"><a href="#cb17-185"></a>            <span class="cf">elif</span> lastKey<span class="op">==</span><span class="st">&quot;w&quot;</span> <span class="kw">or</span> lastKey<span class="op">==</span><span class="st">&quot;Up&quot;</span>:<span class="co">#上入力</span></span>
 <span id="cb17-186"><a href="#cb17-186"></a>                flag <span class="op">=</span> <span class="st">&quot;move&quot;</span></span>
 <span id="cb17-187"><a href="#cb17-187"></a>                charaD <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb17-188"><a href="#cb17-188"></a>                moveX <span class="op">=</span> <span class="dv">0</span></span>
@@ -680,9 +680,9 @@ class="toc-section-number">13</span> 組み合わせる</a></li>
 <span id="cb17-192"><a href="#cb17-192"></a>            <span class="co">#!!!!ここから追加する!!!#</span></span>
 <span id="cb17-193"><a href="#cb17-193"></a></span>
 <span id="cb17-194"><a href="#cb17-194"></a>            <span class="co">#上の処理で移動中フラグが立ったとき</span></span>
-<span id="cb17-195"><a href="#cb17-195"></a>            <span class="cf">if</span>(flag <span class="op">==</span> <span class="st">&quot;move&quot;</span>):</span>
+<span id="cb17-195"><a href="#cb17-195"></a>            <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;move&quot;</span>:</span>
 <span id="cb17-196"><a href="#cb17-196"></a>                <span class="co">#移動先が通行可能でないならば</span></span>
-<span id="cb17-197"><a href="#cb17-197"></a>                <span class="cf">if</span>(<span class="kw">not</span> PASSAGE_PERMIT[MAP_DATA[charaY<span class="op">+</span>moveY][charaX<span class="op">+</span>moveX]]):</span>
+<span id="cb17-197"><a href="#cb17-197"></a>                <span class="cf">if</span> <span class="kw">not</span> PASSAGE_PERMIT[MAP_DATA[charaY<span class="op">+</span>moveY][charaX<span class="op">+</span>moveX]]:</span>
 <span id="cb17-198"><a href="#cb17-198"></a>                    <span class="co">#移動をやめて向きのみ変える</span></span>
 <span id="cb17-199"><a href="#cb17-199"></a>                    flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
 <span id="cb17-200"><a href="#cb17-200"></a>                    moveX <span class="op">=</span> <span class="dv">0</span></span>
@@ -797,7 +797,7 @@ class="toc-section-number">13</span> 組み合わせる</a></li>
 <span id="cb18-92"><a href="#cb18-92"></a>    </span>
 <span id="cb18-93"><a href="#cb18-93"></a>    setChara(charaX,charaY,charaD,moveCount)</span>
 <span id="cb18-94"><a href="#cb18-94"></a>    </span>
-<span id="cb18-95"><a href="#cb18-95"></a>    <span class="cf">if</span>(moveCount<span class="op">==</span><span class="dv">3</span>):<span class="co">#アニメーションが最終コマならば</span></span>
+<span id="cb18-95"><a href="#cb18-95"></a>    <span class="cf">if</span> moveCount<span class="op">==</span><span class="dv">3</span>:<span class="co">#アニメーションが最終コマならば</span></span>
 <span id="cb18-96"><a href="#cb18-96"></a>        moveCount <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb18-97"><a href="#cb18-97"></a>    <span class="cf">else</span>:</span>
 <span id="cb18-98"><a href="#cb18-98"></a>        moveCount <span class="op">+=</span> <span class="dv">1</span></span>
@@ -824,7 +824,7 @@ class="toc-section-number">13</span> 組み合わせる</a></li>
 <span id="cb19-92"><a href="#cb19-92"></a>    </span>
 <span id="cb19-93"><a href="#cb19-93"></a>    setChara(charaX,charaY,charaD,moveCount)</span>
 <span id="cb19-94"><a href="#cb19-94"></a>    </span>
-<span id="cb19-95"><a href="#cb19-95"></a>    <span class="cf">if</span>(moveCount<span class="op">==</span><span class="dv">3</span>):<span class="co">#アニメーションが最終コマならば</span></span>
+<span id="cb19-95"><a href="#cb19-95"></a>    <span class="cf">if</span> moveCount<span class="op">==</span><span class="dv">3</span>:<span class="co">#アニメーションが最終コマならば</span></span>
 <span id="cb19-96"><a href="#cb19-96"></a>        moveCount <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb19-97"><a href="#cb19-97"></a>    <span class="cf">else</span>:</span>
 <span id="cb19-98"><a href="#cb19-98"></a>        moveCount <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
@@ -860,11 +860,11 @@ class="toc-section-number">13</span> 組み合わせる</a></li>
       <p><br></p>
       <div class="sourceCode" id="cb22" data-startFrom="209"
       data-caption="move.py（抜粋）"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 208;"><span id="cb22-209"><a href="#cb22-209"></a>    <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;move&quot;</span>):<span class="co">#移動中のとき</span></span>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 208;"><span id="cb22-209"><a href="#cb22-209"></a>    <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;move&quot;</span>:<span class="co">#移動中のとき</span></span>
 <span id="cb22-210"><a href="#cb22-210"></a>        <span class="co">#キャラクター再描写</span></span>
 <span id="cb22-211"><a href="#cb22-211"></a>        setChara(charaX,charaY,charaD,moveCount)</span>
 <span id="cb22-212"><a href="#cb22-212"></a>        </span>
-<span id="cb22-213"><a href="#cb22-213"></a>        <span class="cf">if</span>(moveCount<span class="op">==</span><span class="dv">3</span>):<span class="co">#アニメーションが最終コマならば</span></span>
+<span id="cb22-213"><a href="#cb22-213"></a>        <span class="cf">if</span> moveCount<span class="op">==</span><span class="dv">3</span>:<span class="co">#アニメーションが最終コマならば</span></span>
 <span id="cb22-214"><a href="#cb22-214"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span><span class="co">#待機中に状態を戻す</span></span>
 <span id="cb22-215"><a href="#cb22-215"></a>            moveCount <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb22-216"><a href="#cb22-216"></a>            charaX <span class="op">+=</span> moveX</span>

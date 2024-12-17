@@ -523,41 +523,41 @@ for j in range(CHARA_Y):
 def gameLoop():
     global charaX,charaY,charaD,moveCount,moveX,moveY,flag,key,currentKey,prevKey
     
-    if (len(key)> 0):
+    if len(key)> 0:
         lastKey = key[len(key) - 1] #最後に押されたキー
     else:
         lastKey = ""
     
     
-    if (flag == "default"): #待機中のとき 
+    if flag == "default": #待機中のとき 
         
-        if(len(key)): #何かのキーが押されているとき
-            if(lastKey=="s" or lastKey=="Down"):#下入力
+        if len(key): #何かのキーが押されているとき
+            if lastKey=="s" or lastKey=="Down":#下入力
                 flag = "move"
                 charaD = 0
                 moveX = 0
                 moveY = 1
                 print("↓")
-            elif(lastKey=="a" or lastKey=="Left"):#左入力
+            elif lastKey=="a" or lastKey=="Left":#左入力
                 flag = "move"
                 charaD = 1
                 moveX = -1
                 moveY = 0
                 print("←")
-            elif(lastKey=="d" or lastKey=="Right"):#右入力
+            elif lastKey=="d" or lastKey=="Right":#右入力
                 flag = "move"
                 charaD = 2
                 moveX = 1
                 moveY = 0
                 print("→")
-            elif(lastKey=="w" or lastKey=="Up"):#上入力
+            elif lastKey=="w" or lastKey=="Up":#上入力
                 flag = "move"
                 charaD = 3
                 moveX = 0
                 moveY = -1
                 print("↑")
     
-    if (flag == "move"):#移動中のとき
+    if flag == "move":#移動中のとき
         flag = "default"#待機中に状態を戻す
         charaX += moveX
         charaY += moveY
@@ -607,34 +607,34 @@ PASSAGE_PERMIT = [0,1,1,0]
 def gameLoop():
     global charaX,charaY,charaD,moveCount,moveX,moveY,flag,key,currentKey,prevKey
     
-    if (len(key)> 0):
+    if len(key)> 0:
         lastKey = key[len(key) - 1] #最後に押されたキー
     else:
         lastKey = ""
     
     
-    if (flag == "default"): #待機中のとき 
+    if flag == "default": #待機中のとき 
         
-        if(len(key)): #何かのキーが押されているとき
-            if(lastKey=="s" or lastKey=="Down"):#下入力
+        if len(key): #何かのキーが押されているとき
+            if lastKey=="s" or lastKey=="Down":#下入力
                 flag = "move"
                 charaD = 0
                 moveX = 0
                 moveY = 1
                 print("↓")
-            elif(lastKey=="a" or lastKey=="Left"):#左入力
+            elif lastKey=="a" or lastKey=="Left":#左入力
                 flag = "move"
                 charaD = 1
                 moveX = -1
                 moveY = 0
                 print("←")
-            elif(lastKey=="d" or lastKey=="Right"):#右入力
+            elif lastKey=="d" or lastKey=="Right":#右入力
                 flag = "move"
                 charaD = 2
                 moveX = 1
                 moveY = 0
                 print("→")
-            elif(lastKey=="w" or lastKey=="Up"):#上入力
+            elif lastKey=="w" or lastKey=="Up":#上入力
                 flag = "move"
                 charaD = 3
                 moveX = 0
@@ -644,9 +644,9 @@ def gameLoop():
             #!!!!ここから追加する!!!#
 
             #上の処理で移動中フラグが立ったとき
-            if(flag == "move"):
+            if flag == "move":
                 #移動先が通行可能でないならば
-                if(not PASSAGE_PERMIT[MAP_DATA[charaY+moveY][charaX+moveX]]):
+                if not PASSAGE_PERMIT[MAP_DATA[charaY+moveY][charaX+moveX]]:
                     #移動をやめて向きのみ変える
                     flag = "default"
                     moveX = 0
@@ -764,7 +764,7 @@ def gameLoop():
     
     setChara(charaX,charaY,charaD,moveCount)
     
-    if(moveCount==3):#アニメーションが最終コマならば
+    if moveCount==3:#アニメーションが最終コマならば
         moveCount = 0
     else:
         moveCount += 1
@@ -793,7 +793,7 @@ def gameLoop():
     
     setChara(charaX,charaY,charaD,moveCount)
     
-    if(moveCount==3):#アニメーションが最終コマならば
+    if moveCount==3:#アニメーションが最終コマならば
         moveCount = 0
     else:
         moveCount += 1
@@ -841,11 +841,11 @@ def getCharaCoord(x,y,dx=0,dy=0):
 <br>
 
 ```python{.numberLines startFrom=209 caption="move.py（抜粋）"}
-    if (flag == "move"):#移動中のとき
+    if flag == "move":#移動中のとき
         #キャラクター再描写
         setChara(charaX,charaY,charaD,moveCount)
         
-        if(moveCount==3):#アニメーションが最終コマならば
+        if moveCount==3:#アニメーションが最終コマならば
             flag = "default"#待機中に状態を戻す
             moveCount = 0
             charaX += moveX

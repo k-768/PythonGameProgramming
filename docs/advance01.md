@@ -273,10 +273,10 @@ prevKey = [] #前回の処理までに押されたキー
 #何かのキーが押されたときに呼び出される関数
 def press(e):
     keysym = e.keysym
-    if(keysym not in currentKey):#始めて押されたならば
+    if keysym not in currentKey:#始めて押されたならば
         currentKey.append(keysym)
         print(f"pressed:{keysym}")
-    if(keysym not in key):#前回の処理から始めて押されたならば
+    if keysym not in key:#前回の処理から始めて押されたならば
         key.append(keysym)
 
 #何かのキーが離されたときに呼び出される関数
@@ -323,7 +323,7 @@ if キーワード in リスト:
 def gameLoop():
     global key,currentKey,prevKey
     
-    if("space" in key):
+    if "space" in key:
         print("スペースキーが押された！")
     
     prevKey = copy.deepcopy(key)
@@ -341,7 +341,7 @@ def gameLoop():
 
 ```python{caption="押された瞬間だけ判定する方法"}
 # もしスペースキーが押されたなら
-if(("space" in key) and ("space" not in prevKey)):
+if "space" in key and "space" not in prevKey:
 ```
 
 まず、**①**`"space" in key`の部分で**現在の入力（今押されているか）の確認**を行います。
@@ -447,7 +447,7 @@ FISH_WEIGHT = [75,20,5] #排出率
 def gameLoop():
     global key,currentKey,prevKey
     
-    if(("space" in key) and ("space" not in prevKey)):
+    if "space" in key and "space" not in prevKey:
         selectedFish = random.choice(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0])
         print(selectedFish)
 ```
@@ -547,7 +547,7 @@ FISH_WEIGHT = [75,20,5] #排出率
 def gameLoop():
     global key,currentKey,prevKey
     
-    if(("space" in key) and ("space" not in prevKey)):
+    if "space" in key and "space" not in prevKey:
         selectedFish = random.choice(random.choices(FISH_LIST,k=1,weights=FISH_WEIGHT)[0])
         #魚の重さを決定(ランダム 平均の0.5~1.5倍)
         fishWeight = selectedFish["aveWeight"]*random.uniform(0.5, 1.5)
@@ -574,7 +574,7 @@ def gameLoop():
 def gameLoop():
     global key,currentKey,prevKey
 
-    if(("space" in key) and ("space" not in prevKey)):
+    if "space" in key and "space" not in prevKey:
         selectedFish = random.choice((random.choices(FISH_LIST,k=1,weights = FISH_WEIGHT))[0])
         #魚の重さを決定(ランダム 平均の0.5~1.5倍)
         fishWeight = selectedFish["aveWeight"]*random.uniform(0.5, 1.5)
@@ -583,10 +583,10 @@ def gameLoop():
         fishPrice = fishWeight * selectedFish["price"]
         
         #魚のランクを決定、ランクに応じて価格を上方修正
-        if(ここに条件を記入):
+        if ここに条件を記入:
             fishRank = "gold"
             fishPrice *= 1.4
-        elif (ここに条件を記入):
+        elif ここに条件を記入:
             fishRank = "silver"
             fishPrice *= 1.2
         else:
@@ -605,10 +605,10 @@ def gameLoop():
 
 ```python{.numberLines startFrom=107 caption="答え"}
         #魚のランクを決定、ランクに応じて価格を上方修正
-        if(fishWeight > selectedFish["aveWeight"]*1.4):
+        if fishWeight > selectedFish["aveWeight"]*1.4:
             fishRank = "gold"
             fishPrice *= 1.4
-        elif (fishWeight > selectedFish["aveWeight"]*1.2):
+        elif fishWeight > selectedFish["aveWeight"]*1.2:
             fishRank = "silver"
             fishPrice *= 1.2
         else:
@@ -625,9 +625,9 @@ def gameLoop():
 
 
 ```python{.numberLines startFrom=141 caption="game01.py（抜粋）"}
-    if(rank == "silver"):
+    if rank == "silver":
         name = "大物の"+selectedFish["name"]
-    elif(rank == "gold"):
+    elif rank == "gold":
         name = "超大物の"+selectedFish["name"]
     else:
         name = selectedFish["name"]
@@ -740,10 +740,10 @@ def showResultWindow(fish,rank,weight,price):
     canvasFrame.pack(fill = tk.BOTH, pady=0)
     infoFrame.pack(fill = tk.BOTH, pady=10)
     
-    if(rank == "silver"): #ランクに応じて名前や色を変更する
+    if rank == "silver": #ランクに応じて名前や色を変更する
         name = "大物の"+fish #名前の前に追加
         color = "LightBlue4" #魚の名前の文字色を指定
-    elif(rank == "gold"):
+    elif rank == "gold":
         name = "超大物の"+fish
         color = "gold"
     else:

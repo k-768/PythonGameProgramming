@@ -208,16 +208,16 @@ def on_key_press(event):
     global x,y
     speed = 5
     key = event.keysym # 変数keyに「w」や「a」など、押したキーの名前が格納される
-    if(key == "w" or key == "Up"):
+    if key == "w" or key == "Up":
         print("↑")
         y = y - speed
-    elif(key == "a" or key == "Left"):
+    elif key == "a" or key == "Left":
         print("←")
         x = x - speed
-    elif(key == "s" or key == "Down"):
+    elif key == "s" or key == "Down":
         print("↓")
         y = y + speed
-    elif(key == "d" or key == "Right"):
+    elif key == "d" or key == "Right":
         print("→")
         x = x + speed
     
