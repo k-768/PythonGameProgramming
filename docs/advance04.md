@@ -90,6 +90,77 @@ except エラーの種類:
 
 今回の場合は、`try:`で`savedata.json`を**開きます**。これにより、もしセーブデータがあれば**セーブデータを読み込み（コンティニュー）**ます。もしセーブデータがなければ、`savedata.json`ファイルを開くことができず、エラーが発生します。そのとき、ファイルを開くのをやめ、**新しいファイルを作成（ニューゲーム）**します。
 
+<br>
+
+## JSONを書き込む
+
+以下のプログラムを実行すると、`savedata.json`の`money`が100に書き換えられます。
+
+```{.numberLines startFrom=1 caption="save_load.py"}
+import json
+import os
+
+# カレントディレクトリ取得
+cwd = os.getcwd()
+
+# セーブデータを読み込み
+try:
+    with open(cwd + "/savedata.json") as f:
+        saveData = json.load(f)
+    print("セーブデータを読み込みました:", saveData)
+except:
+    # セーブデータがない場合は新しいデータを作成
+    saveData = {
+        "イワシ": {
+            "count": 0,
+            "maxWeight": 0,
+            "bronze": False,
+            "silver": False,
+            "gold": False,
+            "totalWeight": 0
+        },
+        "money": 0,
+        "x": 3,
+        "y": 3,
+        "d": 0,
+        "lv": 0
+    }
+    print("新しいセーブデータを作成しました。")
+
+# セーブ機能を追加
+def saveGame():
+    global saveData
+    # JSONファイルにデータを保存
+    try:
+        with open(cwd + "/savedata.json", 'w') as f:
+            json.dump(saveData, f, indent=2)
+        print("セーブデータを保存しました。")
+
+# データの変更
+saveData["money"] = 100  # moneyを100に変更
+
+# データを保存
+saveGame()
+
+```
+
+```{.numberLines startFrom=1 caption="json_write.py"}
+with open(cwd + "/save/savedata.json", 'w') as f:
+    json.dump(saveData, f, indent=2)
+```
+
+1行目の`cwd+"/savedata.json"`は保存するファイルパスを指定しています。'w'は「書き込みモード」を意味します。既存のファイルがあれば上書きされます。
+
+2行目の`json.dump():`でsaveDataをJSON形式に変換し、ファイルに保存します。indent=2でファイルの内容が見やすくインデントされます。
+
+<br>
+
+
+## 釣りができるか判定する
+
+
+
+
 ## 全体の組み立て
 
 ![img](./figs/104/main.svg)

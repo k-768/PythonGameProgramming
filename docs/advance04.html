@@ -50,8 +50,10 @@ class="toc-section-number">2</span> JSONとは</a></li>
 class="toc-section-number">3</span> JSONを書く</a></li>
 <li><a href="#jsonを読み込む" id="toc-jsonを読み込む"><span
 class="toc-section-number">4</span> JSONを読み込む</a></li>
+<li><a href="#jsonを書き込む" id="toc-jsonを書き込む"><span
+class="toc-section-number">5</span> JSONを書き込む</a></li>
 <li><a href="#全体の組み立て" id="toc-全体の組み立て"><span
-class="toc-section-number">5</span> 全体の組み立て</a></li>
+class="toc-section-number">6</span> 全体の組み立て</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -138,8 +140,65 @@ class="toc-section-number">5</span> 全体の組み立て</a></li>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="cf">except</span> エラーの種類:</span>
 <span id="cb3-4"><a href="#cb3-4"></a>    <span class="co"># エラーが発生した場合の処理</span></span></code></pre></div>
       <p>今回の場合は、<code>try:</code>で<code>savedata.json</code>を<strong>開きます</strong>。これにより、もしセーブデータがあれば<strong>セーブデータを読み込み（コンティニュー）</strong>ます。もしセーブデータがなければ、<code>savedata.json</code>ファイルを開くことができず、エラーが発生します。そのとき、ファイルを開くのをやめ、<strong>新しいファイルを作成（ニューゲーム）</strong>します。</p>
-      <h1 data-number="5" id="全体の組み立て"><span
-      class="header-section-number">5</span> 全体の組み立て</h1>
+      <p><br></p>
+      <h1 data-number="5" id="jsonを書き込む"><span
+      class="header-section-number">5</span> JSONを書き込む</h1>
+      <p>以下のプログラムを実行すると、<code>savedata.json</code>の<code>money</code>が100に書き換えられます。</p>
+      <div class="sourceCode" id="cb4" data-startFrom="1"
+      data-caption="save_load.py"><pre
+      class="sourceCode numberSource numberLines"><code class="sourceCode"><span id="cb4-1"><a href="#cb4-1"></a>import json</span>
+<span id="cb4-2"><a href="#cb4-2"></a>import os</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a># カレントディレクトリ取得</span>
+<span id="cb4-5"><a href="#cb4-5"></a>cwd = os.getcwd()</span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a># セーブデータを読み込み</span>
+<span id="cb4-8"><a href="#cb4-8"></a>try:</span>
+<span id="cb4-9"><a href="#cb4-9"></a>    with open(cwd + &quot;/savedata.json&quot;) as f:</span>
+<span id="cb4-10"><a href="#cb4-10"></a>        saveData = json.load(f)</span>
+<span id="cb4-11"><a href="#cb4-11"></a>    print(&quot;セーブデータを読み込みました:&quot;, saveData)</span>
+<span id="cb4-12"><a href="#cb4-12"></a>except:</span>
+<span id="cb4-13"><a href="#cb4-13"></a>    # セーブデータがない場合は新しいデータを作成</span>
+<span id="cb4-14"><a href="#cb4-14"></a>    saveData = {</span>
+<span id="cb4-15"><a href="#cb4-15"></a>        &quot;イワシ&quot;: {</span>
+<span id="cb4-16"><a href="#cb4-16"></a>            &quot;count&quot;: 0,</span>
+<span id="cb4-17"><a href="#cb4-17"></a>            &quot;maxWeight&quot;: 0,</span>
+<span id="cb4-18"><a href="#cb4-18"></a>            &quot;bronze&quot;: False,</span>
+<span id="cb4-19"><a href="#cb4-19"></a>            &quot;silver&quot;: False,</span>
+<span id="cb4-20"><a href="#cb4-20"></a>            &quot;gold&quot;: False,</span>
+<span id="cb4-21"><a href="#cb4-21"></a>            &quot;totalWeight&quot;: 0</span>
+<span id="cb4-22"><a href="#cb4-22"></a>        },</span>
+<span id="cb4-23"><a href="#cb4-23"></a>        &quot;money&quot;: 0,</span>
+<span id="cb4-24"><a href="#cb4-24"></a>        &quot;x&quot;: 3,</span>
+<span id="cb4-25"><a href="#cb4-25"></a>        &quot;y&quot;: 3,</span>
+<span id="cb4-26"><a href="#cb4-26"></a>        &quot;d&quot;: 0,</span>
+<span id="cb4-27"><a href="#cb4-27"></a>        &quot;lv&quot;: 0</span>
+<span id="cb4-28"><a href="#cb4-28"></a>    }</span>
+<span id="cb4-29"><a href="#cb4-29"></a>    print(&quot;新しいセーブデータを作成しました。&quot;)</span>
+<span id="cb4-30"><a href="#cb4-30"></a></span>
+<span id="cb4-31"><a href="#cb4-31"></a># セーブ機能を追加</span>
+<span id="cb4-32"><a href="#cb4-32"></a>def saveGame():</span>
+<span id="cb4-33"><a href="#cb4-33"></a>    global saveData</span>
+<span id="cb4-34"><a href="#cb4-34"></a>    # JSONファイルにデータを保存</span>
+<span id="cb4-35"><a href="#cb4-35"></a>    try:</span>
+<span id="cb4-36"><a href="#cb4-36"></a>        with open(cwd + &quot;/savedata.json&quot;, &#39;w&#39;) as f:</span>
+<span id="cb4-37"><a href="#cb4-37"></a>            json.dump(saveData, f, indent=2)</span>
+<span id="cb4-38"><a href="#cb4-38"></a>        print(&quot;セーブデータを保存しました。&quot;)</span>
+<span id="cb4-39"><a href="#cb4-39"></a></span>
+<span id="cb4-40"><a href="#cb4-40"></a># データの変更</span>
+<span id="cb4-41"><a href="#cb4-41"></a>saveData[&quot;money&quot;] = 100  # moneyを100に変更</span>
+<span id="cb4-42"><a href="#cb4-42"></a></span>
+<span id="cb4-43"><a href="#cb4-43"></a># データを保存</span>
+<span id="cb4-44"><a href="#cb4-44"></a>saveGame()</span></code></pre></div>
+      <div class="sourceCode" id="cb5" data-startFrom="1"
+      data-caption="json_write.py"><pre
+      class="sourceCode numberSource numberLines"><code class="sourceCode"><span id="cb5-1"><a href="#cb5-1"></a>with open(cwd + &quot;/save/savedata.json&quot;, &#39;w&#39;) as f:</span>
+<span id="cb5-2"><a href="#cb5-2"></a>    json.dump(saveData, f, indent=2)</span></code></pre></div>
+      <p>1行目の<code>cwd+"/savedata.json"</code>は保存するファイルパスを指定しています。’w’は「書き込みモード」を意味します。既存のファイルがあれば上書きされます。</p>
+      <p>2行目の<code>json.dump():</code>でsaveDataをJSON形式に変換し、ファイルに保存します。indent=2でファイルの内容が見やすくインデントされます。</p>
+      <p><br></p>
+      <h1 data-number="6" id="全体の組み立て"><span
+      class="header-section-number">6</span> 全体の組み立て</h1>
       <figure>
       <img src="./figs/104/main.svg" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
