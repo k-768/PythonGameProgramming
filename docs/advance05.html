@@ -50,8 +50,12 @@ class="toc-section-number">2</span> JSONとは</a></li>
 class="toc-section-number">3</span> JSONを書く</a></li>
 <li><a href="#jsonを読み書きする" id="toc-jsonを読み書きする"><span
 class="toc-section-number">4</span> JSONを読み書きする</a></li>
+<li><a href="#釣りができるかどうか判定する"
+id="toc-釣りができるかどうか判定する"><span
+class="toc-section-number">5</span>
+釣りができるかどうか判定する</a></li>
 <li><a href="#全体の組み立て" id="toc-全体の組み立て"><span
-class="toc-section-number">5</span> 全体の組み立て</a></li>
+class="toc-section-number">6</span> 全体の組み立て</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -138,8 +142,73 @@ class="toc-section-number">5</span> 全体の組み立て</a></li>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="cf">except</span> エラーの種類:</span>
 <span id="cb3-4"><a href="#cb3-4"></a>    <span class="co"># エラーが発生した場合の処理</span></span></code></pre></div>
       <p>今回の場合は、<code>try:</code>で<code>savedata.json</code>を<strong>開きます</strong>。これにより、もしセーブデータがあれば<strong>セーブデータを読み込み（コンティニュー）</strong>ます。もしセーブデータがなければ、<code>savedata.json</code>ファイルを開くことができず、エラーが発生します。そのとき、ファイルを開くのをやめ、<strong>新しいファイルを作成（ニューゲーム）</strong>します。</p>
-      <h1 data-number="5" id="全体の組み立て"><span
-      class="header-section-number">5</span> 全体の組み立て</h1>
+      <p><br></p>
+      <h1 data-number="5" id="釣りができるかどうか判定する"><span
+      class="header-section-number">5</span>
+      釣りができるかどうか判定する</h1>
+      <p>そのまま釣りのシステムと移動のシステムを組み合わせると、想定外の動作が発生することがあります。
+      <strong>キャラクターがどこでも釣りをできる状態となり、陸地でも釣りが可能になってしまいます</strong>。</p>
+      <p>そこで、キャラクターの<strong>目の前が水である場合のみ</strong>釣りができるようにしましょう。そのために、<strong>釣りができるか判定する関数</strong>を作成します。</p>
+      <p>新しいpythonファイル<code>move_check.py</code>を作成してください。<a
+      href="https://github.com/k-768/PythonGameProgramming/blob/main/programs/move_check.py">ここから</a>プログラムをコピー＆ペーストして実行してみてください。</p>
+      <p>水辺に到達すると頭上に<strong>釣りアイコン</strong>が表示されます。</p>
+      <figure>
+      <img src="./figs/105/check.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><br></p>
+      <hr />
+      <p>まず、このプログラムにおいて釣りが可能なマップチップを指定するリスト<code>FISHING_PERMIT</code>を用意します。このリストは、各マップチップが釣り可能かどうかを判定するために使用されます。</p>
+      <div class="sourceCode" id="cb4" data-startFrom="72"
+      data-caption="move_check.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 71;"><span id="cb4-72"><a href="#cb4-72"></a><span class="co">#釣り可能設定</span></span>
+<span id="cb4-73"><a href="#cb4-73"></a><span class="co">#0:不可</span></span>
+<span id="cb4-74"><a href="#cb4-74"></a><span class="co">#1:可能</span></span>
+<span id="cb4-75"><a href="#cb4-75"></a>FISHING_PERMIT <span class="op">=</span> [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>]</span></code></pre></div>
+      <p>リストのインデックスは、<code>MAP_DATA</code>
+      の値に対応しています。
+      各インデックスの値が0なら、<strong>このマップチップでは釣りができない</strong>、1なら<strong>このマップチップで釣りが可能</strong>であることを示しています。今回は、<code>FISHING_PERMIT[3]</code>のみ<strong>1</strong>、つまりマップチップIDが3の<strong>水</strong>タイルでのみ釣りが可能だということになります。</p>
+      <hr />
+      <p><code>110行目</code>からの関数で、<strong>キャラクターの目の前のタイルが釣り可能かどうかを判定し、釣りアイコンを表示</strong>します。</p>
+      <div class="sourceCode" id="cb5" data-startFrom="110"
+      data-caption="move_check.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 109;"><span id="cb5-110"><a href="#cb5-110"></a><span class="co">#前のタイルが釣り可能ならば釣りアイコンを表示する関数</span></span>
+<span id="cb5-111"><a href="#cb5-111"></a><span class="kw">def</span> setFishingIcon(x,y,d):</span>
+<span id="cb5-112"><a href="#cb5-112"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb5-113"><a href="#cb5-113"></a><span class="co">    x:キャラのx座標</span></span>
+<span id="cb5-114"><a href="#cb5-114"></a><span class="co">    y:キャラのy座標</span></span>
+<span id="cb5-115"><a href="#cb5-115"></a><span class="co">    d:キャラの向き</span></span>
+<span id="cb5-116"><a href="#cb5-116"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb5-117"><a href="#cb5-117"></a>    <span class="kw">global</span> fishFlag</span>
+<span id="cb5-118"><a href="#cb5-118"></a>    </span>
+<span id="cb5-119"><a href="#cb5-119"></a>    <span class="cf">if</span> d <span class="op">==</span> <span class="dv">0</span>:<span class="co">#下向き</span></span>
+<span id="cb5-120"><a href="#cb5-120"></a>        moveX <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-121"><a href="#cb5-121"></a>        moveY <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb5-122"><a href="#cb5-122"></a>    <span class="cf">elif</span> d <span class="op">==</span> <span class="dv">1</span>:<span class="co">#左向き</span></span>
+<span id="cb5-123"><a href="#cb5-123"></a>        moveX <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb5-124"><a href="#cb5-124"></a>        moveY <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-125"><a href="#cb5-125"></a>    <span class="cf">elif</span> d <span class="op">==</span> <span class="dv">2</span>:<span class="co">#右向き</span></span>
+<span id="cb5-126"><a href="#cb5-126"></a>        moveX <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb5-127"><a href="#cb5-127"></a>        moveY <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-128"><a href="#cb5-128"></a>    <span class="cf">elif</span> d <span class="op">==</span> <span class="dv">3</span>:<span class="co">#上向き</span></span>
+<span id="cb5-129"><a href="#cb5-129"></a>        moveX <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-130"><a href="#cb5-130"></a>        moveY <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb5-131"><a href="#cb5-131"></a>    </span>
+<span id="cb5-132"><a href="#cb5-132"></a>    </span>
+<span id="cb5-133"><a href="#cb5-133"></a>    <span class="co"># 移動先がマップ範囲内ならば</span></span>
+<span id="cb5-134"><a href="#cb5-134"></a>    <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;=</span> y<span class="op">+</span>moveY <span class="op">&lt;</span> <span class="bu">len</span>(MAP_DATA) <span class="kw">and</span> <span class="dv">0</span> <span class="op">&lt;=</span> x<span class="op">+</span>moveX <span class="op">&lt;</span> <span class="bu">len</span>(MAP_DATA[<span class="dv">0</span>]):</span>
+<span id="cb5-135"><a href="#cb5-135"></a>        <span class="co">#前のマスが釣り可能ならば</span></span>
+<span id="cb5-136"><a href="#cb5-136"></a>        <span class="cf">if</span> FISHING_PERMIT[MAP_DATA[y<span class="op">+</span>moveY][x<span class="op">+</span>moveX]]:</span>
+<span id="cb5-137"><a href="#cb5-137"></a>            setIcon(x,y,<span class="st">&quot;fishing&quot;</span>)</span>
+<span id="cb5-138"><a href="#cb5-138"></a>            <span class="bu">print</span>(<span class="ss">f&quot;you can fishing @(</span><span class="sc">{</span>x<span class="op">+</span>moveX<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>y<span class="op">+</span>moveY<span class="sc">}</span><span class="ss">)&quot;</span>)</span>
+<span id="cb5-139"><a href="#cb5-139"></a>            fishFlag <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb5-140"><a href="#cb5-140"></a>        <span class="cf">else</span>:</span>
+<span id="cb5-141"><a href="#cb5-141"></a>            fishFlag <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb5-142"><a href="#cb5-142"></a>    <span class="cf">else</span>:</span>
+<span id="cb5-143"><a href="#cb5-143"></a>        <span class="co"># 移動先がマップ範囲外</span></span>
+<span id="cb5-144"><a href="#cb5-144"></a>        fishFlag <span class="op">=</span> <span class="va">False</span></span></code></pre></div>
+      <h1 data-number="6" id="全体の組み立て"><span
+      class="header-section-number">6</span> 全体の組み立て</h1>
       <figure>
       <img src="./figs/105/main.svg" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
