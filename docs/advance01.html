@@ -318,10 +318,10 @@ class="toc-section-number">9</span> 結果表示ウィンドウをつくる</a><
 <span id="cb8-61"><a href="#cb8-61"></a><span class="co">#何かのキーが押されたときに呼び出される関数</span></span>
 <span id="cb8-62"><a href="#cb8-62"></a><span class="kw">def</span> press(e):</span>
 <span id="cb8-63"><a href="#cb8-63"></a>    keysym <span class="op">=</span> e.keysym</span>
-<span id="cb8-64"><a href="#cb8-64"></a>    <span class="cf">if</span>(keysym <span class="kw">not</span> <span class="kw">in</span> currentKey):<span class="co">#始めて押されたならば</span></span>
+<span id="cb8-64"><a href="#cb8-64"></a>    <span class="cf">if</span> keysym <span class="kw">not</span> <span class="kw">in</span> currentKey:<span class="co">#始めて押されたならば</span></span>
 <span id="cb8-65"><a href="#cb8-65"></a>        currentKey.append(keysym)</span>
 <span id="cb8-66"><a href="#cb8-66"></a>        <span class="bu">print</span>(<span class="ss">f&quot;pressed:</span><span class="sc">{</span>keysym<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb8-67"><a href="#cb8-67"></a>    <span class="cf">if</span>(keysym <span class="kw">not</span> <span class="kw">in</span> key):<span class="co">#前回の処理から始めて押されたならば</span></span>
+<span id="cb8-67"><a href="#cb8-67"></a>    <span class="cf">if</span> keysym <span class="kw">not</span> <span class="kw">in</span> key:<span class="co">#前回の処理から始めて押されたならば</span></span>
 <span id="cb8-68"><a href="#cb8-68"></a>        key.append(keysym)</span>
 <span id="cb8-69"><a href="#cb8-69"></a></span>
 <span id="cb8-70"><a href="#cb8-70"></a><span class="co">#何かのキーが離されたときに呼び出される関数</span></span>
@@ -359,7 +359,7 @@ class="toc-section-number">9</span> 結果表示ウィンドウをつくる</a><
 <span id="cb10-48"><a href="#cb10-48"></a><span class="kw">def</span> gameLoop():</span>
 <span id="cb10-49"><a href="#cb10-49"></a>    <span class="kw">global</span> key,currentKey,prevKey</span>
 <span id="cb10-50"><a href="#cb10-50"></a>    </span>
-<span id="cb10-51"><a href="#cb10-51"></a>    <span class="cf">if</span>(<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key):</span>
+<span id="cb10-51"><a href="#cb10-51"></a>    <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key:</span>
 <span id="cb10-52"><a href="#cb10-52"></a>        <span class="bu">print</span>(<span class="st">&quot;スペースキーが押された！&quot;</span>)</span>
 <span id="cb10-53"><a href="#cb10-53"></a>    </span>
 <span id="cb10-54"><a href="#cb10-54"></a>    prevKey <span class="op">=</span> copy.deepcopy(key)</span>
@@ -372,7 +372,7 @@ class="toc-section-number">9</span> 結果表示ウィンドウをつくる</a><
       <div class="sourceCode" id="cb11"
       data-caption="押された瞬間だけ判定する方法"><pre
       class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># もしスペースキーが押されたなら</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span></code></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey:</span></code></pre></div>
       <p>まず、<strong>①</strong><code>"space" in key</code>の部分で<strong>現在の入力（今押されているか）の確認</strong>を行います。</p>
       <p>そして、<strong>②</strong><code>"space" not in prevKey</code>の部分で<strong>前回の入力(前は押されていなかったか)を確認</strong>します。</p>
       <p><strong>③</strong>両方の条件を満たすとき、プレイヤーは<strong>今回新たにスペースキーを押した</strong>、ということになります。</p>
@@ -458,7 +458,7 @@ class="toc-section-number">9</span> 結果表示ウィンドウをつくる</a><
 <span id="cb14-61"><a href="#cb14-61"></a><span class="kw">def</span> gameLoop():</span>
 <span id="cb14-62"><a href="#cb14-62"></a>    <span class="kw">global</span> key,currentKey,prevKey</span>
 <span id="cb14-63"><a href="#cb14-63"></a>    </span>
-<span id="cb14-64"><a href="#cb14-64"></a>    <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
+<span id="cb14-64"><a href="#cb14-64"></a>    <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey:</span>
 <span id="cb14-65"><a href="#cb14-65"></a>        selectedFish <span class="op">=</span> random.choice(random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights<span class="op">=</span>FISH_WEIGHT)[<span class="dv">0</span>])</span>
 <span id="cb14-66"><a href="#cb14-66"></a>        <span class="bu">print</span>(selectedFish)</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
@@ -545,7 +545,7 @@ released:space</code></pre>
 <span id="cb17-108"><a href="#cb17-108"></a><span class="kw">def</span> gameLoop():</span>
 <span id="cb17-109"><a href="#cb17-109"></a>    <span class="kw">global</span> key,currentKey,prevKey</span>
 <span id="cb17-110"><a href="#cb17-110"></a>    </span>
-<span id="cb17-111"><a href="#cb17-111"></a>    <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
+<span id="cb17-111"><a href="#cb17-111"></a>    <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey:</span>
 <span id="cb17-112"><a href="#cb17-112"></a>        selectedFish <span class="op">=</span> random.choice(random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights<span class="op">=</span>FISH_WEIGHT)[<span class="dv">0</span>])</span>
 <span id="cb17-113"><a href="#cb17-113"></a>        <span class="co">#魚の重さを決定(ランダム 平均の0.5~1.5倍)</span></span>
 <span id="cb17-114"><a href="#cb17-114"></a>        fishWeight <span class="op">=</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span>random.uniform(<span class="fl">0.5</span>, <span class="fl">1.5</span>)</span>
@@ -572,7 +572,7 @@ released:space</code></pre>
 <span id="cb18-108"><a href="#cb18-108"></a><span class="kw">def</span> gameLoop():</span>
 <span id="cb18-109"><a href="#cb18-109"></a>    <span class="kw">global</span> key,currentKey,prevKey</span>
 <span id="cb18-110"><a href="#cb18-110"></a></span>
-<span id="cb18-111"><a href="#cb18-111"></a>    <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
+<span id="cb18-111"><a href="#cb18-111"></a>    <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey:</span>
 <span id="cb18-112"><a href="#cb18-112"></a>        selectedFish <span class="op">=</span> random.choice((random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights <span class="op">=</span> FISH_WEIGHT))[<span class="dv">0</span>])</span>
 <span id="cb18-113"><a href="#cb18-113"></a>        <span class="co">#魚の重さを決定(ランダム 平均の0.5~1.5倍)</span></span>
 <span id="cb18-114"><a href="#cb18-114"></a>        fishWeight <span class="op">=</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span>random.uniform(<span class="fl">0.5</span>, <span class="fl">1.5</span>)</span>
@@ -581,10 +581,10 @@ released:space</code></pre>
 <span id="cb18-117"><a href="#cb18-117"></a>        fishPrice <span class="op">=</span> fishWeight <span class="op">*</span> selectedFish[<span class="st">&quot;price&quot;</span>]</span>
 <span id="cb18-118"><a href="#cb18-118"></a>        </span>
 <span id="cb18-119"><a href="#cb18-119"></a>        <span class="co">#魚のランクを決定、ランクに応じて価格を上方修正</span></span>
-<span id="cb18-120"><a href="#cb18-120"></a>        <span class="cf">if</span>(ここに条件を記入):</span>
+<span id="cb18-120"><a href="#cb18-120"></a>        <span class="cf">if</span> ここに条件を記入:</span>
 <span id="cb18-121"><a href="#cb18-121"></a>            fishRank <span class="op">=</span> <span class="st">&quot;gold&quot;</span></span>
 <span id="cb18-122"><a href="#cb18-122"></a>            fishPrice <span class="op">*=</span> <span class="fl">1.4</span></span>
-<span id="cb18-123"><a href="#cb18-123"></a>        <span class="cf">elif</span> (ここに条件を記入):</span>
+<span id="cb18-123"><a href="#cb18-123"></a>        <span class="cf">elif</span> ここに条件を記入:</span>
 <span id="cb18-124"><a href="#cb18-124"></a>            fishRank <span class="op">=</span> <span class="st">&quot;silver&quot;</span></span>
 <span id="cb18-125"><a href="#cb18-125"></a>            fishPrice <span class="op">*=</span> <span class="fl">1.2</span></span>
 <span id="cb18-126"><a href="#cb18-126"></a>        <span class="cf">else</span>:</span>
@@ -600,10 +600,10 @@ released:space</code></pre>
       <div class="sourceCode" id="cb19" data-startFrom="107"
       data-caption="答え"><pre
       class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 106;"><span id="cb19-107"><a href="#cb19-107"></a>        <span class="co">#魚のランクを決定、ランクに応じて価格を上方修正</span></span>
-<span id="cb19-108"><a href="#cb19-108"></a>        <span class="cf">if</span>(fishWeight <span class="op">&gt;</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span><span class="fl">1.4</span>):</span>
+<span id="cb19-108"><a href="#cb19-108"></a>        <span class="cf">if</span> fishWeight <span class="op">&gt;</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span><span class="fl">1.4</span>:</span>
 <span id="cb19-109"><a href="#cb19-109"></a>            fishRank <span class="op">=</span> <span class="st">&quot;gold&quot;</span></span>
 <span id="cb19-110"><a href="#cb19-110"></a>            fishPrice <span class="op">*=</span> <span class="fl">1.4</span></span>
-<span id="cb19-111"><a href="#cb19-111"></a>        <span class="cf">elif</span> (fishWeight <span class="op">&gt;</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span><span class="fl">1.2</span>):</span>
+<span id="cb19-111"><a href="#cb19-111"></a>        <span class="cf">elif</span> fishWeight <span class="op">&gt;</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span><span class="fl">1.2</span>:</span>
 <span id="cb19-112"><a href="#cb19-112"></a>            fishRank <span class="op">=</span> <span class="st">&quot;silver&quot;</span></span>
 <span id="cb19-113"><a href="#cb19-113"></a>            fishPrice <span class="op">*=</span> <span class="fl">1.2</span></span>
 <span id="cb19-114"><a href="#cb19-114"></a>        <span class="cf">else</span>:</span>
@@ -616,9 +616,9 @@ released:space</code></pre>
       <p>穴埋めを完成させてください。</p>
       <div class="sourceCode" id="cb20" data-startFrom="141"
       data-caption="game01.py（抜粋）"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 140;"><span id="cb20-141"><a href="#cb20-141"></a>    <span class="cf">if</span>(rank <span class="op">==</span> <span class="st">&quot;silver&quot;</span>):</span>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 140;"><span id="cb20-141"><a href="#cb20-141"></a>    <span class="cf">if</span> rank <span class="op">==</span> <span class="st">&quot;silver&quot;</span>:</span>
 <span id="cb20-142"><a href="#cb20-142"></a>        name <span class="op">=</span> <span class="st">&quot;大物の&quot;</span><span class="op">+</span>selectedFish[<span class="st">&quot;name&quot;</span>]</span>
-<span id="cb20-143"><a href="#cb20-143"></a>    <span class="cf">elif</span>(rank <span class="op">==</span> <span class="st">&quot;gold&quot;</span>):</span>
+<span id="cb20-143"><a href="#cb20-143"></a>    <span class="cf">elif</span> rank <span class="op">==</span> <span class="st">&quot;gold&quot;</span>:</span>
 <span id="cb20-144"><a href="#cb20-144"></a>        name <span class="op">=</span> <span class="st">&quot;超大物の&quot;</span><span class="op">+</span>selectedFish[<span class="st">&quot;name&quot;</span>]</span>
 <span id="cb20-145"><a href="#cb20-145"></a>    <span class="cf">else</span>:</span>
 <span id="cb20-146"><a href="#cb20-146"></a>        name <span class="op">=</span> selectedFish[<span class="st">&quot;name&quot;</span>]</span>
@@ -713,10 +713,10 @@ released:space</code></pre>
 <span id="cb24-149"><a href="#cb24-149"></a>    canvasFrame.pack(fill <span class="op">=</span> tk.BOTH, pady<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb24-150"><a href="#cb24-150"></a>    infoFrame.pack(fill <span class="op">=</span> tk.BOTH, pady<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb24-151"><a href="#cb24-151"></a>    </span>
-<span id="cb24-152"><a href="#cb24-152"></a>    <span class="cf">if</span>(rank <span class="op">==</span> <span class="st">&quot;silver&quot;</span>): <span class="co">#ランクに応じて名前や色を変更する</span></span>
+<span id="cb24-152"><a href="#cb24-152"></a>    <span class="cf">if</span> rank <span class="op">==</span> <span class="st">&quot;silver&quot;</span>: <span class="co">#ランクに応じて名前や色を変更する</span></span>
 <span id="cb24-153"><a href="#cb24-153"></a>        name <span class="op">=</span> <span class="st">&quot;大物の&quot;</span><span class="op">+</span>fish <span class="co">#名前の前に追加</span></span>
 <span id="cb24-154"><a href="#cb24-154"></a>        color <span class="op">=</span> <span class="st">&quot;LightBlue4&quot;</span> <span class="co">#魚の名前の文字色を指定</span></span>
-<span id="cb24-155"><a href="#cb24-155"></a>    <span class="cf">elif</span>(rank <span class="op">==</span> <span class="st">&quot;gold&quot;</span>):</span>
+<span id="cb24-155"><a href="#cb24-155"></a>    <span class="cf">elif</span> rank <span class="op">==</span> <span class="st">&quot;gold&quot;</span>:</span>
 <span id="cb24-156"><a href="#cb24-156"></a>        name <span class="op">=</span> <span class="st">&quot;超大物の&quot;</span><span class="op">+</span>fish</span>
 <span id="cb24-157"><a href="#cb24-157"></a>        color <span class="op">=</span> <span class="st">&quot;gold&quot;</span></span>
 <span id="cb24-158"><a href="#cb24-158"></a>    <span class="cf">else</span>:</span>

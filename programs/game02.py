@@ -149,10 +149,10 @@ def showResultWindow(fish,rank,weight,price):
     canvasFrame.pack(fill = tk.BOTH, pady=0)
     infoFrame.pack(fill = tk.BOTH, pady=10)
     
-    if(rank == "silver"):
+    if rank == "silver":
         name = "大物の"+fish
         color = "LightBlue4"
-    elif(rank == "gold"):
+    elif rank == "gold":
         name = "超大物の"+fish
         color = "gold"
     else:
@@ -177,7 +177,7 @@ def showResultWindow(fish,rank,weight,price):
 def gameLoop():
     global key,currentKey,prevKey
     
-    if(("space" in key) and ("space" not in prevKey)):
+    if ("space" in key) and ("space" not in prevKey):
         selectedFish = random.choice((random.choices(FISH_LIST,k=1,weights = FISH_WEIGHT))[0])
         #魚の重さを決定(ランダム 平均の0.5~1.5倍)
         fishWeight = selectedFish["aveWeight"]*random.uniform(0.5, 1.5)
@@ -186,10 +186,10 @@ def gameLoop():
         fishPrice = fishWeight * selectedFish["price"]
         
         #魚のランクを決定、ランクに応じて価格を上方修正
-        if(fishWeight > selectedFish["aveWeight"]*1.4):
+        if fishWeight > selectedFish["aveWeight"]*1.4:
             fishRank = "gold"
             fishPrice *= 1.4
-        elif (fishWeight > selectedFish["aveWeight"]*1.2):
+        elif fishWeight > selectedFish["aveWeight"]*1.2:
             fishRank = "silver"
             fishPrice *= 1.2
         else:
@@ -212,10 +212,10 @@ prevKey = [] #前回の処理までに押されたキー
 #何かのキーが押されたときに呼び出される関数
 def press(e):
     keysym = e.keysym
-    if(keysym not in currentKey):#始めて押されたならば
+    if keysym not in currentKey:#始めて押されたならば
         currentKey.append(keysym)
         print(f"pressed:{keysym}")
-    if(keysym not in key):#前回の処理から始めて押されたならば
+    if keysym not in key:#前回の処理から始めて押されたならば
         key.append(keysym)
 
 #何かのキーが離されたときに呼び出される関数

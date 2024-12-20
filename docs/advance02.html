@@ -197,11 +197,11 @@ class="toc-section-number">9</span> ゲームを改造する</a></li>
       data-caption="flagによる判定"><pre
       class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>: <span class="co">#待機中のとき</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>    待機中の処理を記述</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey:</span>
 <span id="cb2-4"><a href="#cb2-4"></a>        待機中にスペースキーが押されたときの処理（釣りを開始する）</span>
 <span id="cb2-5"><a href="#cb2-5"></a>        flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span></span>
 <span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>): <span class="co">#魚釣り中のとき</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>: <span class="co">#魚釣り中のとき</span></span>
 <span id="cb2-8"><a href="#cb2-8"></a>    魚釣り中の処理を記述</span>
 <span id="cb2-9"><a href="#cb2-9"></a>    ・・・</span></code></pre></div>
       <p><a
@@ -217,36 +217,36 @@ class="toc-section-number">9</span> ゲームを改造する</a></li>
 <span id="cb3-219"><a href="#cb3-219"></a><span class="kw">def</span> gameLoop():</span>
 <span id="cb3-220"><a href="#cb3-220"></a>    <span class="kw">global</span> charaX,charaY,flag,key,currentKey,prevKey,waitTick,fishingCount,resultWindow</span>
 <span id="cb3-221"><a href="#cb3-221"></a>    </span>
-<span id="cb3-222"><a href="#cb3-222"></a>    <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>): <span class="co">#待機中のとき </span></span>
+<span id="cb3-222"><a href="#cb3-222"></a>    <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>: <span class="co">#待機中のとき </span></span>
 <span id="cb3-223"><a href="#cb3-223"></a>        setChara(charaX,charaY,<span class="st">&quot;default&quot;</span>)</span>
-<span id="cb3-224"><a href="#cb3-224"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
+<span id="cb3-224"><a href="#cb3-224"></a>        <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey:</span>
 <span id="cb3-225"><a href="#cb3-225"></a>            canvas.delete(<span class="st">&quot;icon&quot;</span>)<span class="co">#釣りアイコン削除</span></span>
 <span id="cb3-226"><a href="#cb3-226"></a>            flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span> <span class="co">#魚釣り中に遷移</span></span>
 <span id="cb3-227"><a href="#cb3-227"></a>            waitTick <span class="op">=</span> random.randint(<span class="bu">round</span>(<span class="dv">3000</span><span class="op">/</span>TICK_TIME),<span class="bu">round</span>(<span class="dv">7000</span><span class="op">/</span>TICK_TIME))<span class="co">#3-7秒</span></span>
 <span id="cb3-228"><a href="#cb3-228"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span> <span class="co">#待ち時間をランダムに決定</span></span>
 <span id="cb3-229"><a href="#cb3-229"></a>    </span>
-<span id="cb3-230"><a href="#cb3-230"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):<span class="co">#魚釣り中のとき</span></span>
-<span id="cb3-231"><a href="#cb3-231"></a>        <span class="cf">if</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb3-230"><a href="#cb3-230"></a>    <span class="cf">elif</span> flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>:<span class="co">#魚釣り中のとき</span></span>
+<span id="cb3-231"><a href="#cb3-231"></a>        <span class="cf">if</span> fishingCount <span class="op">==</span> <span class="dv">0</span>:<span class="co">#初回なら</span></span>
 <span id="cb3-232"><a href="#cb3-232"></a>            <span class="co">#キャラクター再描写</span></span>
 <span id="cb3-233"><a href="#cb3-233"></a>            setChara(charaX,charaY,<span class="st">&quot;wait&quot;</span>)</span>
-<span id="cb3-234"><a href="#cb3-234"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb3-234"><a href="#cb3-234"></a>        <span class="cf">elif</span> fishingCount <span class="op">&gt;=</span> waitTick:<span class="co">#待ち時間を終えたとき</span></span>
 <span id="cb3-235"><a href="#cb3-235"></a>            flag <span class="op">=</span> <span class="st">&quot;hit&quot;</span> <span class="co">#「ウキ沈む」に遷移</span></span>
 <span id="cb3-236"><a href="#cb3-236"></a>            waitTick <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb3-237"><a href="#cb3-237"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb3-238"><a href="#cb3-238"></a>        </span>
-<span id="cb3-239"><a href="#cb3-239"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):</span>
+<span id="cb3-239"><a href="#cb3-239"></a>        <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>:</span>
 <span id="cb3-240"><a href="#cb3-240"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span> <span class="co">#待機カウンタを増やす</span></span>
 <span id="cb3-241"><a href="#cb3-241"></a>    </span>
-<span id="cb3-242"><a href="#cb3-242"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>): <span class="co">#魚がかかったとき</span></span>
-<span id="cb3-243"><a href="#cb3-243"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
+<span id="cb3-242"><a href="#cb3-242"></a>    <span class="cf">elif</span> flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>: <span class="co">#魚がかかったとき</span></span>
+<span id="cb3-243"><a href="#cb3-243"></a>        <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey:  <span class="co">#スペースキー押下されたとき</span></span>
 <span id="cb3-244"><a href="#cb3-244"></a>            flag <span class="op">=</span> <span class="st">&quot;success&quot;</span></span>
 <span id="cb3-245"><a href="#cb3-245"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb3-246"><a href="#cb3-246"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb3-246"><a href="#cb3-246"></a>        <span class="cf">elif</span> fishingCount <span class="op">==</span> <span class="dv">0</span>:<span class="co">#初回なら</span></span>
 <span id="cb3-247"><a href="#cb3-247"></a>            <span class="co">#キャラクター再描写</span></span>
 <span id="cb3-248"><a href="#cb3-248"></a>            setChara(charaX,charaY,<span class="st">&quot;fight&quot;</span>)</span>
 <span id="cb3-249"><a href="#cb3-249"></a>            <span class="bu">print</span>(<span class="st">&quot;ビク！&quot;</span>)</span>
 <span id="cb3-250"><a href="#cb3-250"></a>        </span>
-<span id="cb3-251"><a href="#cb3-251"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>):</span>
+<span id="cb3-251"><a href="#cb3-251"></a>        <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>:</span>
 <span id="cb3-252"><a href="#cb3-252"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span>
 <span id="cb3-253"><a href="#cb3-253"></a>    </span></code></pre></div>
       <p><br></p>
@@ -276,39 +276,39 @@ class="toc-section-number">9</span> ゲームを改造する</a></li>
       <p><strong><i class="fa-solid fa-check"></i>解答例</strong></p>
       <div class="sourceCode" id="cb4" data-startFrom="230"
       data-caption="Challenge A2-1"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 229;"><span id="cb4-230"><a href="#cb4-230"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):<span class="co">#魚釣り中のとき</span></span>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 229;"><span id="cb4-230"><a href="#cb4-230"></a>    <span class="cf">elif</span> flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>:<span class="co">#魚釣り中のとき</span></span>
 <span id="cb4-231"><a href="#cb4-231"></a>        <span class="co">#!!!!!!!!!!!!ここから!!!!!!!!!!!!!</span></span>
-<span id="cb4-232"><a href="#cb4-232"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)): </span>
+<span id="cb4-232"><a href="#cb4-232"></a>        <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey: </span>
 <span id="cb4-233"><a href="#cb4-233"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
 <span id="cb4-234"><a href="#cb4-234"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
 <span id="cb4-235"><a href="#cb4-235"></a>        <span class="co">#!!!!!!!!!!!!ここまで!!!!!!!!!!!!!</span></span>
-<span id="cb4-236"><a href="#cb4-236"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb4-236"><a href="#cb4-236"></a>        <span class="cf">elif</span> fishingCount <span class="op">==</span> <span class="dv">0</span>:<span class="co">#初回なら</span></span>
 <span id="cb4-237"><a href="#cb4-237"></a>            <span class="co">#キャラクター再描写</span></span>
 <span id="cb4-238"><a href="#cb4-238"></a>            setChara(charaX,charaY,<span class="st">&quot;wait&quot;</span>)</span>
-<span id="cb4-239"><a href="#cb4-239"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb4-239"><a href="#cb4-239"></a>        <span class="cf">elif</span> fishingCount <span class="op">&gt;=</span> waitTick:<span class="co">#待ち時間を終えたとき</span></span>
 <span id="cb4-240"><a href="#cb4-240"></a>            flag <span class="op">=</span> <span class="st">&quot;hit&quot;</span> <span class="co">#「ウキ沈む」に遷移</span></span>
 <span id="cb4-241"><a href="#cb4-241"></a>            waitTick <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb4-242"><a href="#cb4-242"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb4-243"><a href="#cb4-243"></a></span>
-<span id="cb4-244"><a href="#cb4-244"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):</span>
+<span id="cb4-244"><a href="#cb4-244"></a>        <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>:</span>
 <span id="cb4-245"><a href="#cb4-245"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span> <span class="co">#待機カウンタを増やす</span></span></code></pre></div>
       <div class="sourceCode" id="cb5" data-startFrom="247"
       data-caption="Challenge A2-2"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 246;"><span id="cb5-247"><a href="#cb5-247"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>): <span class="co">#魚がかかったとき</span></span>
-<span id="cb5-248"><a href="#cb5-248"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 246;"><span id="cb5-247"><a href="#cb5-247"></a>    <span class="cf">elif</span> flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>: <span class="co">#魚がかかったとき</span></span>
+<span id="cb5-248"><a href="#cb5-248"></a>        <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey:  <span class="co">#スペースキー押下されたとき</span></span>
 <span id="cb5-249"><a href="#cb5-249"></a>            flag <span class="op">=</span> <span class="st">&quot;success&quot;</span></span>
 <span id="cb5-250"><a href="#cb5-250"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb5-251"><a href="#cb5-251"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb5-251"><a href="#cb5-251"></a>        <span class="cf">elif</span> fishingCount <span class="op">==</span> <span class="dv">0</span>:<span class="co">#初回なら</span></span>
 <span id="cb5-252"><a href="#cb5-252"></a>            <span class="co">#キャラクター再描写</span></span>
 <span id="cb5-253"><a href="#cb5-253"></a>            setChara(charaX,charaY,<span class="st">&quot;fight&quot;</span>)</span>
 <span id="cb5-254"><a href="#cb5-254"></a>            <span class="bu">print</span>(<span class="st">&quot;ビク！&quot;</span>)</span>
 <span id="cb5-255"><a href="#cb5-255"></a>        <span class="co">#!!!!!!!!!!!!ここから!!!!!!!!!!!!!</span></span>
-<span id="cb5-256"><a href="#cb5-256"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb5-256"><a href="#cb5-256"></a>        <span class="cf">elif</span> fishingCount <span class="op">&gt;=</span> waitTick:<span class="co">#待ち時間を終えたとき</span></span>
 <span id="cb5-257"><a href="#cb5-257"></a>            <span class="bu">print</span>(<span class="st">&quot;遅すぎた！&quot;</span>)</span>
 <span id="cb5-258"><a href="#cb5-258"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
 <span id="cb5-259"><a href="#cb5-259"></a>        <span class="co">#!!!!!!!!!!!!ここまで!!!!!!!!!!!!!</span></span>
 <span id="cb5-260"><a href="#cb5-260"></a></span>
-<span id="cb5-261"><a href="#cb5-261"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>):</span>
+<span id="cb5-261"><a href="#cb5-261"></a>        <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>:</span>
 <span id="cb5-262"><a href="#cb5-262"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
       <h1 data-number="8"
       id="ウキが少しだけ沈むイベントを実装する"><span
@@ -323,16 +323,16 @@ class="toc-section-number">9</span> ゲームを改造する</a></li>
       <p>まず、「釣り中」に一定時間経過したらウキがピクピクするか沈むかはランダムで決定するように書き換えます。</p>
       <div class="sourceCode" id="cb6" data-startFrom="279"
       data-caption="game06"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 278;"><span id="cb6-279"><a href="#cb6-279"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):<span class="co">#魚釣り中のとき</span></span>
-<span id="cb6-280"><a href="#cb6-280"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)): </span>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 278;"><span id="cb6-279"><a href="#cb6-279"></a>    <span class="cf">elif</span> flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>:<span class="co">#魚釣り中のとき</span></span>
+<span id="cb6-280"><a href="#cb6-280"></a>        <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey: </span>
 <span id="cb6-281"><a href="#cb6-281"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
 <span id="cb6-282"><a href="#cb6-282"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
-<span id="cb6-283"><a href="#cb6-283"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb6-283"><a href="#cb6-283"></a>        <span class="cf">elif</span> fishingCount <span class="op">==</span> <span class="dv">0</span>:<span class="co">#初回なら</span></span>
 <span id="cb6-284"><a href="#cb6-284"></a>            <span class="co">#キャラクター再描写</span></span>
 <span id="cb6-285"><a href="#cb6-285"></a>            setChara(charaX,charaY,<span class="st">&quot;wait&quot;</span>)</span>
-<span id="cb6-286"><a href="#cb6-286"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb6-286"><a href="#cb6-286"></a>        <span class="cf">elif</span> fishingCount <span class="op">&gt;=</span> waitTick:<span class="co">#待ち時間を終えたとき</span></span>
 <span id="cb6-287"><a href="#cb6-287"></a>            <span class="co">#!!!!!!!!!!!!!ここから!!!!!!!!!!!!!!!!</span></span>
-<span id="cb6-288"><a href="#cb6-288"></a>            <span class="cf">if</span>(random.randint(<span class="dv">1</span>,<span class="dv">3</span>)<span class="op">!=</span><span class="dv">1</span>):<span class="co">#2/3の確率で</span></span>
+<span id="cb6-288"><a href="#cb6-288"></a>            <span class="cf">if</span> random.randint(<span class="dv">1</span>,<span class="dv">3</span>)<span class="op">!=</span><span class="dv">1</span>:<span class="co">#2/3の確率で</span></span>
 <span id="cb6-289"><a href="#cb6-289"></a>                flag <span class="op">=</span> <span class="st">&quot;hit&quot;</span></span>
 <span id="cb6-290"><a href="#cb6-290"></a>                waitTick <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb6-291"><a href="#cb6-291"></a>                fishingCount <span class="op">=</span> <span class="dv">0</span></span>
@@ -346,20 +346,20 @@ class="toc-section-number">9</span> ゲームを改造する</a></li>
       少し時間が経過したら<code>"default"</code>に戻るようになっています。</p>
       <div class="sourceCode" id="cb7" data-startFrom="302"
       data-caption="game06"><pre
-      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 301;"><span id="cb7-302"><a href="#cb7-302"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>): <span class="co">#魚が少し喰いついたとき</span></span>
-<span id="cb7-303"><a href="#cb7-303"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 301;"><span id="cb7-302"><a href="#cb7-302"></a>    <span class="cf">elif</span> flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>: <span class="co">#魚が少し喰いついたとき</span></span>
+<span id="cb7-303"><a href="#cb7-303"></a>        <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey:  <span class="co">#スペースキー押下されたとき</span></span>
 <span id="cb7-304"><a href="#cb7-304"></a>            setIcon(charaX,charaY,<span class="st">&quot;miss&quot;</span>)<span class="co">#アイコン描写</span></span>
 <span id="cb7-305"><a href="#cb7-305"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
 <span id="cb7-306"><a href="#cb7-306"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
-<span id="cb7-307"><a href="#cb7-307"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb7-307"><a href="#cb7-307"></a>        <span class="cf">elif</span> fishingCount <span class="op">==</span> <span class="dv">0</span>:<span class="co">#初回なら</span></span>
 <span id="cb7-308"><a href="#cb7-308"></a>            setChara(charaX,charaY,<span class="st">&quot;bite&quot;</span>)</span>
 <span id="cb7-309"><a href="#cb7-309"></a>            <span class="bu">print</span>(<span class="st">&quot;ピク...&quot;</span>)</span>
-<span id="cb7-310"><a href="#cb7-310"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb7-310"><a href="#cb7-310"></a>        <span class="cf">elif</span> fishingCount <span class="op">&gt;=</span> waitTick:<span class="co">#待ち時間を終えたとき</span></span>
 <span id="cb7-311"><a href="#cb7-311"></a>            flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span></span>
 <span id="cb7-312"><a href="#cb7-312"></a>            waitTick <span class="op">=</span> random.randint(<span class="bu">round</span>(<span class="dv">200</span><span class="op">/</span>TICK_TIME),<span class="bu">round</span>(<span class="dv">2000</span><span class="op">/</span>TICK_TIME))</span>
 <span id="cb7-313"><a href="#cb7-313"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb7-314"><a href="#cb7-314"></a>        </span>
-<span id="cb7-315"><a href="#cb7-315"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>):</span>
+<span id="cb7-315"><a href="#cb7-315"></a>        <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>:</span>
 <span id="cb7-316"><a href="#cb7-316"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
       <h1 data-number="9" id="ゲームを改造する"><span
       class="header-section-number">9</span> ゲームを改造する</h1>
@@ -599,10 +599,10 @@ class="toc-section-number">9</span> ゲームを改造する</a></li>
 <span id="cb8-227"><a href="#cb8-227"></a>    canvasFrame.pack(fill <span class="op">=</span> tk.BOTH, pady<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb8-228"><a href="#cb8-228"></a>    infoFrame.pack(fill <span class="op">=</span> tk.BOTH, pady<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb8-229"><a href="#cb8-229"></a>    </span>
-<span id="cb8-230"><a href="#cb8-230"></a>    <span class="cf">if</span>(rank <span class="op">==</span> <span class="st">&quot;silver&quot;</span>):</span>
+<span id="cb8-230"><a href="#cb8-230"></a>    <span class="cf">if</span> rank <span class="op">==</span> <span class="st">&quot;silver&quot;</span>:</span>
 <span id="cb8-231"><a href="#cb8-231"></a>        name <span class="op">=</span> <span class="st">&quot;大物の&quot;</span><span class="op">+</span>fish</span>
 <span id="cb8-232"><a href="#cb8-232"></a>        color <span class="op">=</span> <span class="st">&quot;LightBlue4&quot;</span></span>
-<span id="cb8-233"><a href="#cb8-233"></a>    <span class="cf">elif</span>(rank <span class="op">==</span> <span class="st">&quot;gold&quot;</span>):</span>
+<span id="cb8-233"><a href="#cb8-233"></a>    <span class="cf">elif</span> rank <span class="op">==</span> <span class="st">&quot;gold&quot;</span>:</span>
 <span id="cb8-234"><a href="#cb8-234"></a>        name <span class="op">=</span> <span class="st">&quot;超大物の&quot;</span><span class="op">+</span>fish</span>
 <span id="cb8-235"><a href="#cb8-235"></a>        color <span class="op">=</span> <span class="st">&quot;gold&quot;</span></span>
 <span id="cb8-236"><a href="#cb8-236"></a>    <span class="cf">else</span>:</span>
@@ -627,25 +627,25 @@ class="toc-section-number">9</span> ゲームを改造する</a></li>
 <span id="cb8-255"><a href="#cb8-255"></a><span class="kw">def</span> gameLoop():</span>
 <span id="cb8-256"><a href="#cb8-256"></a>    <span class="kw">global</span> charaX,charaY,flag,key,currentKey,prevKey,waitTick,fishingCount,resultWindow</span>
 <span id="cb8-257"><a href="#cb8-257"></a>    </span>
-<span id="cb8-258"><a href="#cb8-258"></a>    <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>): <span class="co">#待機中のとき </span></span>
+<span id="cb8-258"><a href="#cb8-258"></a>    <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;default&quot;</span>: <span class="co">#待機中のとき </span></span>
 <span id="cb8-259"><a href="#cb8-259"></a>        setChara(charaX,charaY,<span class="st">&quot;default&quot;</span>)</span>
-<span id="cb8-260"><a href="#cb8-260"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):</span>
+<span id="cb8-260"><a href="#cb8-260"></a>        <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey:</span>
 <span id="cb8-261"><a href="#cb8-261"></a>            canvas.delete(<span class="st">&quot;icon&quot;</span>)<span class="co">#釣りアイコン削除</span></span>
 <span id="cb8-262"><a href="#cb8-262"></a>            flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span></span>
 <span id="cb8-263"><a href="#cb8-263"></a>            waitTick <span class="op">=</span> random.randint(<span class="bu">round</span>(<span class="dv">3000</span><span class="op">/</span>TICK_TIME),<span class="bu">round</span>(<span class="dv">5000</span><span class="op">/</span>TICK_TIME))<span class="co">#3-5秒</span></span>
 <span id="cb8-264"><a href="#cb8-264"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb8-265"><a href="#cb8-265"></a>    </span>
-<span id="cb8-266"><a href="#cb8-266"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):<span class="co">#魚釣り中のとき</span></span>
+<span id="cb8-266"><a href="#cb8-266"></a>    <span class="cf">elif</span> flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>:<span class="co">#魚釣り中のとき</span></span>
 <span id="cb8-267"><a href="#cb8-267"></a>        <span class="co"># スペースキーが再び押された時</span></span>
-<span id="cb8-268"><a href="#cb8-268"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)): </span>
+<span id="cb8-268"><a href="#cb8-268"></a>        <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey: </span>
 <span id="cb8-269"><a href="#cb8-269"></a>            setIcon(charaX,charaY,<span class="st">&quot;miss&quot;</span>)<span class="co">#アイコン描写</span></span>
 <span id="cb8-270"><a href="#cb8-270"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
 <span id="cb8-271"><a href="#cb8-271"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
-<span id="cb8-272"><a href="#cb8-272"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb8-272"><a href="#cb8-272"></a>        <span class="cf">elif</span> fishingCount <span class="op">==</span> <span class="dv">0</span>:<span class="co">#初回なら</span></span>
 <span id="cb8-273"><a href="#cb8-273"></a>            <span class="co">#キャラクター再描写</span></span>
 <span id="cb8-274"><a href="#cb8-274"></a>            setChara(charaX,charaY,<span class="st">&quot;wait&quot;</span>)</span>
-<span id="cb8-275"><a href="#cb8-275"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
-<span id="cb8-276"><a href="#cb8-276"></a>            <span class="cf">if</span>(random.randint(<span class="dv">1</span>,<span class="dv">3</span>)<span class="op">!=</span><span class="dv">1</span>):<span class="co">#2/3の確率で</span></span>
+<span id="cb8-275"><a href="#cb8-275"></a>        <span class="cf">elif</span> fishingCount <span class="op">&gt;=</span> waitTick:<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb8-276"><a href="#cb8-276"></a>            <span class="cf">if</span> random.randint(<span class="dv">1</span>,<span class="dv">3</span>)<span class="op">!=</span><span class="dv">1</span>:<span class="co">#2/3の確率で</span></span>
 <span id="cb8-277"><a href="#cb8-277"></a>                flag <span class="op">=</span> <span class="st">&quot;hit&quot;</span></span>
 <span id="cb8-278"><a href="#cb8-278"></a>                waitTick <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb8-279"><a href="#cb8-279"></a>                fishingCount <span class="op">=</span> <span class="dv">0</span></span>
@@ -654,46 +654,46 @@ class="toc-section-number">9</span> ゲームを改造する</a></li>
 <span id="cb8-282"><a href="#cb8-282"></a>                waitTick <span class="op">=</span> random.randint(<span class="dv">2</span>,<span class="dv">10</span>)</span>
 <span id="cb8-283"><a href="#cb8-283"></a>                fishingCount <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb8-284"><a href="#cb8-284"></a>            </span>
-<span id="cb8-285"><a href="#cb8-285"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>):</span>
+<span id="cb8-285"><a href="#cb8-285"></a>        <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;wait&quot;</span>:</span>
 <span id="cb8-286"><a href="#cb8-286"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span>
 <span id="cb8-287"><a href="#cb8-287"></a>    </span>
-<span id="cb8-288"><a href="#cb8-288"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>): <span class="co">#魚が少し喰いついたとき</span></span>
-<span id="cb8-289"><a href="#cb8-289"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
+<span id="cb8-288"><a href="#cb8-288"></a>    <span class="cf">elif</span> flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>: <span class="co">#魚が少し喰いついたとき</span></span>
+<span id="cb8-289"><a href="#cb8-289"></a>        <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey:  <span class="co">#スペースキー押下されたとき</span></span>
 <span id="cb8-290"><a href="#cb8-290"></a>            setIcon(charaX,charaY,<span class="st">&quot;miss&quot;</span>)<span class="co">#アイコン描写</span></span>
 <span id="cb8-291"><a href="#cb8-291"></a>            <span class="bu">print</span>(<span class="st">&quot;早すぎた！&quot;</span>)</span>
 <span id="cb8-292"><a href="#cb8-292"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
-<span id="cb8-293"><a href="#cb8-293"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb8-293"><a href="#cb8-293"></a>        <span class="cf">elif</span> fishingCount <span class="op">==</span> <span class="dv">0</span>:<span class="co">#初回なら</span></span>
 <span id="cb8-294"><a href="#cb8-294"></a>            setChara(charaX,charaY,<span class="st">&quot;bite&quot;</span>)</span>
 <span id="cb8-295"><a href="#cb8-295"></a>            <span class="bu">print</span>(<span class="st">&quot;ピク...&quot;</span>)</span>
-<span id="cb8-296"><a href="#cb8-296"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb8-296"><a href="#cb8-296"></a>        <span class="cf">elif</span> fishingCount <span class="op">&gt;=</span> waitTick:<span class="co">#待ち時間を終えたとき</span></span>
 <span id="cb8-297"><a href="#cb8-297"></a>            flag <span class="op">=</span> <span class="st">&quot;wait&quot;</span></span>
 <span id="cb8-298"><a href="#cb8-298"></a>            waitTick <span class="op">=</span> random.randint(<span class="bu">round</span>(<span class="dv">200</span><span class="op">/</span>TICK_TIME),<span class="bu">round</span>(<span class="dv">2000</span><span class="op">/</span>TICK_TIME))</span>
 <span id="cb8-299"><a href="#cb8-299"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb8-300"><a href="#cb8-300"></a>        </span>
-<span id="cb8-301"><a href="#cb8-301"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>):</span>
+<span id="cb8-301"><a href="#cb8-301"></a>        <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;bite&quot;</span>:</span>
 <span id="cb8-302"><a href="#cb8-302"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span>
 <span id="cb8-303"><a href="#cb8-303"></a>    </span>
-<span id="cb8-304"><a href="#cb8-304"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>): <span class="co">#魚がかかったとき</span></span>
-<span id="cb8-305"><a href="#cb8-305"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
+<span id="cb8-304"><a href="#cb8-304"></a>    <span class="cf">elif</span> flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>: <span class="co">#魚がかかったとき</span></span>
+<span id="cb8-305"><a href="#cb8-305"></a>        <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey:  <span class="co">#スペースキー押下されたとき</span></span>
 <span id="cb8-306"><a href="#cb8-306"></a>            flag <span class="op">=</span> <span class="st">&quot;fight&quot;</span></span>
 <span id="cb8-307"><a href="#cb8-307"></a>            setIcon(charaX,charaY,<span class="st">&quot;fight&quot;</span>)<span class="co">#アイコン描写</span></span>
 <span id="cb8-308"><a href="#cb8-308"></a>            fishingCount <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb8-309"><a href="#cb8-309"></a>        <span class="cf">elif</span>(fishingCount <span class="op">==</span> <span class="dv">0</span>):<span class="co">#初回なら</span></span>
+<span id="cb8-309"><a href="#cb8-309"></a>        <span class="cf">elif</span> fishingCount <span class="op">==</span> <span class="dv">0</span>:<span class="co">#初回なら</span></span>
 <span id="cb8-310"><a href="#cb8-310"></a>            <span class="co">#キャラクター再描写</span></span>
 <span id="cb8-311"><a href="#cb8-311"></a>            setChara(charaX,charaY,<span class="st">&quot;fight&quot;</span>)</span>
 <span id="cb8-312"><a href="#cb8-312"></a>            setIcon(charaX,charaY,<span class="st">&quot;hit&quot;</span>)<span class="co">#アイコン描写</span></span>
 <span id="cb8-313"><a href="#cb8-313"></a>            <span class="bu">print</span>(<span class="st">&quot;ビク！&quot;</span>)</span>
-<span id="cb8-314"><a href="#cb8-314"></a>        <span class="cf">elif</span>(fishingCount <span class="op">&gt;=</span> waitTick):<span class="co">#待ち時間を終えたとき</span></span>
+<span id="cb8-314"><a href="#cb8-314"></a>        <span class="cf">elif</span> fishingCount <span class="op">&gt;=</span> waitTick:<span class="co">#待ち時間を終えたとき</span></span>
 <span id="cb8-315"><a href="#cb8-315"></a>            <span class="bu">print</span>(<span class="st">&quot;遅すぎた！&quot;</span>)</span>
 <span id="cb8-316"><a href="#cb8-316"></a>            setIcon(charaX,charaY,<span class="st">&quot;miss&quot;</span>)<span class="co">#アイコン描写</span></span>
 <span id="cb8-317"><a href="#cb8-317"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
 <span id="cb8-318"><a href="#cb8-318"></a>        </span>
-<span id="cb8-319"><a href="#cb8-319"></a>        <span class="cf">if</span> (flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>):</span>
+<span id="cb8-319"><a href="#cb8-319"></a>        <span class="cf">if</span> flag <span class="op">==</span> <span class="st">&quot;hit&quot;</span>:</span>
 <span id="cb8-320"><a href="#cb8-320"></a>            fishingCount <span class="op">+=</span> <span class="dv">1</span></span>
 <span id="cb8-321"><a href="#cb8-321"></a>    </span>
-<span id="cb8-322"><a href="#cb8-322"></a>    <span class="cf">elif</span> (flag <span class="op">==</span> <span class="st">&quot;fight&quot;</span>): <span class="co">#かかった魚を釣り上げているとき</span></span>
-<span id="cb8-323"><a href="#cb8-323"></a>        <span class="cf">if</span>(fishingCount <span class="op">&lt;</span> <span class="dv">20</span>):</span>
-<span id="cb8-324"><a href="#cb8-324"></a>            <span class="cf">if</span>(fishingCount<span class="op">%</span><span class="dv">4</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">or</span> fishingCount<span class="op">%</span><span class="dv">4</span> <span class="op">==</span> <span class="dv">1</span> ):</span>
+<span id="cb8-322"><a href="#cb8-322"></a>    <span class="cf">elif</span> flag <span class="op">==</span> <span class="st">&quot;fight&quot;</span>: <span class="co">#かかった魚を釣り上げているとき</span></span>
+<span id="cb8-323"><a href="#cb8-323"></a>        <span class="cf">if</span> fishingCount <span class="op">&lt;</span> <span class="dv">20</span>:</span>
+<span id="cb8-324"><a href="#cb8-324"></a>            <span class="cf">if</span> fishingCount<span class="op">%</span><span class="dv">4</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">or</span> fishingCount<span class="op">%</span><span class="dv">4</span> <span class="op">==</span> <span class="dv">1</span> :</span>
 <span id="cb8-325"><a href="#cb8-325"></a>                setChara(charaX,charaY,<span class="st">&quot;hit&quot;</span>)</span>
 <span id="cb8-326"><a href="#cb8-326"></a>            <span class="cf">else</span>:</span>
 <span id="cb8-327"><a href="#cb8-327"></a>                setChara(charaX,charaY,<span class="st">&quot;fight&quot;</span>)</span>
@@ -701,7 +701,7 @@ class="toc-section-number">9</span> ゲームを改造する</a></li>
 <span id="cb8-329"><a href="#cb8-329"></a>        <span class="cf">else</span>:</span>
 <span id="cb8-330"><a href="#cb8-330"></a>            flag <span class="op">=</span> <span class="st">&quot;success&quot;</span></span>
 <span id="cb8-331"><a href="#cb8-331"></a>    </span>
-<span id="cb8-332"><a href="#cb8-332"></a>    <span class="cf">elif</span>(flag <span class="op">==</span> <span class="st">&quot;success&quot;</span>): <span class="co">#釣りに成功したとき</span></span>
+<span id="cb8-332"><a href="#cb8-332"></a>    <span class="cf">elif</span> flag <span class="op">==</span> <span class="st">&quot;success&quot;</span>: <span class="co">#釣りに成功したとき</span></span>
 <span id="cb8-333"><a href="#cb8-333"></a>        <span class="co">#ランダムな魚を選択</span></span>
 <span id="cb8-334"><a href="#cb8-334"></a>        selectedFish <span class="op">=</span> random.choice((random.choices(FISH_LIST,k<span class="op">=</span><span class="dv">1</span>,weights <span class="op">=</span> (<span class="dv">75</span>,<span class="dv">20</span>,<span class="dv">5</span>)))[<span class="dv">0</span>])</span>
 <span id="cb8-335"><a href="#cb8-335"></a>        <span class="bu">print</span>(selectedFish[<span class="st">&quot;name&quot;</span>])</span>
@@ -713,10 +713,10 @@ class="toc-section-number">9</span> ゲームを改造する</a></li>
 <span id="cb8-341"><a href="#cb8-341"></a>        fishPrice <span class="op">=</span> fishWeight <span class="op">*</span> selectedFish[<span class="st">&quot;price&quot;</span>]</span>
 <span id="cb8-342"><a href="#cb8-342"></a>        </span>
 <span id="cb8-343"><a href="#cb8-343"></a>        <span class="co">#魚のランクを決定、ランクに応じて価格を上方修正</span></span>
-<span id="cb8-344"><a href="#cb8-344"></a>        <span class="cf">if</span>(fishWeight <span class="op">&gt;</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span><span class="fl">1.4</span>):</span>
+<span id="cb8-344"><a href="#cb8-344"></a>        <span class="cf">if</span> fishWeight <span class="op">&gt;</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span><span class="fl">1.4</span>:</span>
 <span id="cb8-345"><a href="#cb8-345"></a>            fishRank <span class="op">=</span> <span class="st">&quot;gold&quot;</span></span>
 <span id="cb8-346"><a href="#cb8-346"></a>            fishPrice <span class="op">*=</span> <span class="fl">1.4</span></span>
-<span id="cb8-347"><a href="#cb8-347"></a>        <span class="cf">elif</span> (fishWeight <span class="op">&gt;</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span><span class="fl">1.2</span>):</span>
+<span id="cb8-347"><a href="#cb8-347"></a>        <span class="cf">elif</span> fishWeight <span class="op">&gt;</span> selectedFish[<span class="st">&quot;aveWeight&quot;</span>]<span class="op">*</span><span class="fl">1.2</span>:</span>
 <span id="cb8-348"><a href="#cb8-348"></a>            fishRank <span class="op">=</span> <span class="st">&quot;silver&quot;</span></span>
 <span id="cb8-349"><a href="#cb8-349"></a>            fishPrice <span class="op">*=</span> <span class="fl">1.2</span></span>
 <span id="cb8-350"><a href="#cb8-350"></a>        <span class="cf">else</span>:</span>
@@ -732,8 +732,8 @@ class="toc-section-number">9</span> ゲームを改造する</a></li>
 <span id="cb8-360"><a href="#cb8-360"></a>        showResultWindow(selectedFish[<span class="st">&quot;name&quot;</span>],fishRank,fishWeight,fishPrice)</span>
 <span id="cb8-361"><a href="#cb8-361"></a>        flag <span class="op">=</span> <span class="st">&quot;result&quot;</span></span>
 <span id="cb8-362"><a href="#cb8-362"></a>        </span>
-<span id="cb8-363"><a href="#cb8-363"></a>    <span class="cf">elif</span>(flag <span class="op">==</span> <span class="st">&quot;result&quot;</span>): <span class="co">#結果表示中のとき</span></span>
-<span id="cb8-364"><a href="#cb8-364"></a>        <span class="cf">if</span>((<span class="st">&quot;space&quot;</span> <span class="kw">in</span> key) <span class="kw">and</span> (<span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey)):  <span class="co">#スペースキー押下されたとき</span></span>
+<span id="cb8-363"><a href="#cb8-363"></a>    <span class="cf">elif</span> flag <span class="op">==</span> <span class="st">&quot;result&quot;</span>: <span class="co">#結果表示中のとき</span></span>
+<span id="cb8-364"><a href="#cb8-364"></a>        <span class="cf">if</span> <span class="st">&quot;space&quot;</span> <span class="kw">in</span> key <span class="kw">and</span> <span class="st">&quot;space&quot;</span> <span class="kw">not</span> <span class="kw">in</span> prevKey:  <span class="co">#スペースキー押下されたとき</span></span>
 <span id="cb8-365"><a href="#cb8-365"></a>            flag <span class="op">=</span> <span class="st">&quot;default&quot;</span></span>
 <span id="cb8-366"><a href="#cb8-366"></a>            setIcon(charaX,charaY,<span class="st">&quot;fishing&quot;</span>)</span>
 <span id="cb8-367"><a href="#cb8-367"></a>            resultWindow.destroy()</span>
@@ -750,10 +750,10 @@ class="toc-section-number">9</span> ゲームを改造する</a></li>
 <span id="cb8-378"><a href="#cb8-378"></a><span class="co">#何かのキーが押されたときに呼び出される関数</span></span>
 <span id="cb8-379"><a href="#cb8-379"></a><span class="kw">def</span> press(e):</span>
 <span id="cb8-380"><a href="#cb8-380"></a>    keysym <span class="op">=</span> e.keysym</span>
-<span id="cb8-381"><a href="#cb8-381"></a>    <span class="cf">if</span>(keysym <span class="kw">not</span> <span class="kw">in</span> currentKey):<span class="co">#始めて押されたならば</span></span>
+<span id="cb8-381"><a href="#cb8-381"></a>    <span class="cf">if</span> keysym <span class="kw">not</span> <span class="kw">in</span> currentKey:<span class="co">#始めて押されたならば</span></span>
 <span id="cb8-382"><a href="#cb8-382"></a>        currentKey.append(keysym)</span>
 <span id="cb8-383"><a href="#cb8-383"></a>        <span class="bu">print</span>(<span class="ss">f&quot;pressed:</span><span class="sc">{</span>keysym<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb8-384"><a href="#cb8-384"></a>    <span class="cf">if</span>(keysym <span class="kw">not</span> <span class="kw">in</span> key):<span class="co">#前回の処理から始めて押されたならば</span></span>
+<span id="cb8-384"><a href="#cb8-384"></a>    <span class="cf">if</span> keysym <span class="kw">not</span> <span class="kw">in</span> key:<span class="co">#前回の処理から始めて押されたならば</span></span>
 <span id="cb8-385"><a href="#cb8-385"></a>        key.append(keysym)</span>
 <span id="cb8-386"><a href="#cb8-386"></a></span>
 <span id="cb8-387"><a href="#cb8-387"></a><span class="co">#何かのキーが離されたときに呼び出される関数</span></span>

@@ -275,16 +275,16 @@ class="toc-section-number">7</span> 参考文献</a></li>
 <span id="cb3-20"><a href="#cb3-20"></a>    <span class="kw">global</span> x,y</span>
 <span id="cb3-21"><a href="#cb3-21"></a>    speed <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb3-22"><a href="#cb3-22"></a>    key <span class="op">=</span> event.keysym <span class="co"># 変数keyに「w」や「a」など、押したキーの名前が格納される</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a>    <span class="cf">if</span>(key <span class="op">==</span> <span class="st">&quot;w&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Up&quot;</span>):</span>
+<span id="cb3-23"><a href="#cb3-23"></a>    <span class="cf">if</span> key <span class="op">==</span> <span class="st">&quot;w&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Up&quot;</span>:</span>
 <span id="cb3-24"><a href="#cb3-24"></a>        <span class="bu">print</span>(<span class="st">&quot;↑&quot;</span>)</span>
 <span id="cb3-25"><a href="#cb3-25"></a>        y <span class="op">=</span> y <span class="op">-</span> speed</span>
-<span id="cb3-26"><a href="#cb3-26"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;a&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Left&quot;</span>):</span>
+<span id="cb3-26"><a href="#cb3-26"></a>    <span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;a&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Left&quot;</span>:</span>
 <span id="cb3-27"><a href="#cb3-27"></a>        <span class="bu">print</span>(<span class="st">&quot;←&quot;</span>)</span>
 <span id="cb3-28"><a href="#cb3-28"></a>        x <span class="op">=</span> x <span class="op">-</span> speed</span>
-<span id="cb3-29"><a href="#cb3-29"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;s&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Down&quot;</span>):</span>
+<span id="cb3-29"><a href="#cb3-29"></a>    <span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;s&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Down&quot;</span>:</span>
 <span id="cb3-30"><a href="#cb3-30"></a>        <span class="bu">print</span>(<span class="st">&quot;↓&quot;</span>)</span>
 <span id="cb3-31"><a href="#cb3-31"></a>        y <span class="op">=</span> y <span class="op">+</span> speed</span>
-<span id="cb3-32"><a href="#cb3-32"></a>    <span class="cf">elif</span>(key <span class="op">==</span> <span class="st">&quot;d&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Right&quot;</span>):</span>
+<span id="cb3-32"><a href="#cb3-32"></a>    <span class="cf">elif</span> key <span class="op">==</span> <span class="st">&quot;d&quot;</span> <span class="kw">or</span> key <span class="op">==</span> <span class="st">&quot;Right&quot;</span>:</span>
 <span id="cb3-33"><a href="#cb3-33"></a>        <span class="bu">print</span>(<span class="st">&quot;→&quot;</span>)</span>
 <span id="cb3-34"><a href="#cb3-34"></a>        x <span class="op">=</span> x <span class="op">+</span> speed</span>
 <span id="cb3-35"><a href="#cb3-35"></a>    </span>
