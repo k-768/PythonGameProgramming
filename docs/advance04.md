@@ -155,11 +155,133 @@ with open(cwd + "/save/savedata.json", 'w') as f:
 
 <br>
 
+## 釣りができるかどうか判定する
 
-## 釣りができるか判定する
+そのまま釣りのシステムと移動のシステムを組み合わせると、想定外の動作が発生することがあります。 **キャラクターがどこでも釣りをできる状態となり、陸地でも釣りが可能になってしまいます**。
+
+そこで、キャラクターの**目の前が水である場合のみ**釣りができるようにしましょう。そのために、**釣りができるか判定する関数**を作成します。
+
+新しいpythonファイル`move_check.py`を作成してください。[ここから](https://github.com/k-768/PythonGameProgramming/blob/main/programs/move_check.py
+)プログラムをコピー＆ペーストして実行してみてください。
+
+水辺に到達すると頭上に**釣りアイコン**が表示されます。
+
+![img](./figs/104/check.png)
+
+<br>
+
+---
+
+まず、このプログラムにおいて釣りが可能なマップチップを指定するリスト`FISHING_PERMIT`を用意します。このリストは、各マップチップが釣り可能かどうかを判定するために使用されます。
+
+```python{.numberLines startFrom=72 caption="move_check.py（抜粋）"}
+#釣り可能設定
+#0:不可
+#1:可能
+FISHING_PERMIT = [0,0,0,1]
+```
+
+リストのインデックスは、`MAP_DATA` の値に対応しています。
+各インデックスの値が0なら、**このマップチップでは釣りができない**、1なら**このマップチップで釣りが可能**であることを示しています。今回は、`FISHING_PERMIT[3]`のみ**1**、つまりマップチップIDが3の**水**タイルでのみ釣りが可能だということになります。
+
+---
+
+`110行目`からの関数で、**キャラクターの目の前のタイルが釣り可能かどうかを判定し、釣りアイコンを表示**します。
+
+```python{.numberLines startFrom=110 caption="move_check.py（抜粋）"}
+#前のタイルが釣り可能ならば釣りアイコンを表示する関数
+def setFishingIcon(x,y,d):
+    """
+    x:キャラのx座標
+    y:キャラのy座標
+    d:キャラの向き
+    """
+    global fishFlag
+    
+    if d == 0:#下向き
+        moveX = 0
+        moveY = 1
+    elif d == 1:#左向き
+        moveX = -1
+        moveY = 0
+    elif d == 2:#右向き
+        moveX = 1
+        moveY = 0
+    elif d == 3:#上向き
+        moveX = 0
+        moveY = -1
+    
+    
+    # 移動先がマップ範囲内ならば
+    if 0 <= y+moveY < len(MAP_DATA) and 0 <= x+moveX < len(MAP_DATA[0]):
+        #前のマスが釣り可能ならば
+        if FISHING_PERMIT[MAP_DATA[y+moveY][x+moveX]]:
+            setIcon(x,y,"fishing")
+            print(f"you can fishing @({x+moveX},{y+moveY})")
+            fishFlag = True
+        else:
+            fishFlag = False
+    else:
+        # 移動先がマップ範囲外
+        fishFlag = False
+```
+
+順を追って解説します。
+
+---
+
+まず、キャラクターの目の前のタイルを計算します。
+
+```python{.numberLines startFrom=119 caption="move_check.py（抜粋）"}
+if d == 0:  # 下向き
+    moveX = 0
+    moveY = 1
+elif d == 1:  # 左向き
+    moveX = -1
+    moveY = 0
+elif d == 2:  # 右向き
+    moveX = 1
+    moveY = 0
+elif d == 3:  # 上向き
+    moveX = 0
+    moveY = -1
+```
+
+キャラクターの向き (d) に応じて、目の前のタイルの相対座標 (moveX, moveY) を決定します。例えば、右向き(d == 2)の場合、moveX = 1, moveY = 0 となり、目の前は x+1, y のタイルとなります。
+
+---
+
+```python{.numberLines startFrom=134 caption="move_check.py（抜粋）"}
+if 0 <= y + moveY < len(MAP_DATA) and 0 <= x + moveX < len(MAP_DATA[0]):
+```
+目の前のタイルがマップ範囲内であることを確認します。範囲外の場合は何もしません。
+
+---
+
+次の行で釣り可能なタイルか判定しています。
+
+```python{.numberLines startFrom=135 caption="move_check.py（抜粋）"}
+if FISHING_PERMIT[MAP_DATA[y + moveY][x + moveX]]:
+    setIcon(x, y, "fishing")
+    print(f"you can fishing @({x+moveX},{y+moveY})")
+    fishFlag = True
+else:
+    fishFlag = False
+```
+
+`MAP_DATA[y + moveY][x + moveX]`で目の前のマップチップのID（種類）を取得しています。
+このタイルIDに対応する`FISHING_PERMIT`の値を確認し、`1`なら釣りが可能だということになります。
+
+<br>
+
+釣り可能であれば釣りアイコンを表示します。また、状態フラグ`fishFlag`を**True**に設定します。後に**このフラグがTrueのときのみ釣りを開始できる**ようにします。
+
+目の前のタイルが釣り不可、または範囲外の場合は`fishFlag`を**False**に設定します。
 
 
+**移動するたびにこの関数を呼び出して、釣りができるかどうかを判定しています。**
 
+<br>
 
 ## 全体の組み立て
 

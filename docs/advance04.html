@@ -52,8 +52,12 @@ class="toc-section-number">3</span> JSONを書く</a></li>
 class="toc-section-number">4</span> JSONを読み込む</a></li>
 <li><a href="#jsonを書き込む" id="toc-jsonを書き込む"><span
 class="toc-section-number">5</span> JSONを書き込む</a></li>
+<li><a href="#釣りができるかどうか判定する"
+id="toc-釣りができるかどうか判定する"><span
+class="toc-section-number">6</span>
+釣りができるかどうか判定する</a></li>
 <li><a href="#全体の組み立て" id="toc-全体の組み立て"><span
-class="toc-section-number">6</span> 全体の組み立て</a></li>
+class="toc-section-number">7</span> 全体の組み立て</a></li>
 </ul> 
         <!-- ---------------------------------------- -->
       </div>
@@ -197,8 +201,114 @@ class="toc-section-number">6</span> 全体の組み立て</a></li>
       <p>1行目の<code>cwd+"/savedata.json"</code>は保存するファイルパスを指定しています。’w’は「書き込みモード」を意味します。既存のファイルがあれば上書きされます。</p>
       <p>2行目の<code>json.dump():</code>でsaveDataをJSON形式に変換し、ファイルに保存します。indent=2でファイルの内容が見やすくインデントされます。</p>
       <p><br></p>
-      <h1 data-number="6" id="全体の組み立て"><span
-      class="header-section-number">6</span> 全体の組み立て</h1>
+      <h1 data-number="6" id="釣りができるかどうか判定する"><span
+      class="header-section-number">6</span>
+      釣りができるかどうか判定する</h1>
+      <p>そのまま釣りのシステムと移動のシステムを組み合わせると、想定外の動作が発生することがあります。
+      <strong>キャラクターがどこでも釣りをできる状態となり、陸地でも釣りが可能になってしまいます</strong>。</p>
+      <p>そこで、キャラクターの<strong>目の前が水である場合のみ</strong>釣りができるようにしましょう。そのために、<strong>釣りができるか判定する関数</strong>を作成します。</p>
+      <p>新しいpythonファイル<code>move_check.py</code>を作成してください。<a
+      href="https://github.com/k-768/PythonGameProgramming/blob/main/programs/move_check.py">ここから</a>プログラムをコピー＆ペーストして実行してみてください。</p>
+      <p>水辺に到達すると頭上に<strong>釣りアイコン</strong>が表示されます。</p>
+      <figure>
+      <img src="./figs/104/check.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><br></p>
+      <hr />
+      <p>まず、このプログラムにおいて釣りが可能なマップチップを指定するリスト<code>FISHING_PERMIT</code>を用意します。このリストは、各マップチップが釣り可能かどうかを判定するために使用されます。</p>
+      <div class="sourceCode" id="cb6" data-startFrom="72"
+      data-caption="move_check.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 71;"><span id="cb6-72"><a href="#cb6-72"></a><span class="co">#釣り可能設定</span></span>
+<span id="cb6-73"><a href="#cb6-73"></a><span class="co">#0:不可</span></span>
+<span id="cb6-74"><a href="#cb6-74"></a><span class="co">#1:可能</span></span>
+<span id="cb6-75"><a href="#cb6-75"></a>FISHING_PERMIT <span class="op">=</span> [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>]</span></code></pre></div>
+      <p>リストのインデックスは、<code>MAP_DATA</code>
+      の値に対応しています。
+      各インデックスの値が0なら、<strong>このマップチップでは釣りができない</strong>、1なら<strong>このマップチップで釣りが可能</strong>であることを示しています。今回は、<code>FISHING_PERMIT[3]</code>のみ<strong>1</strong>、つまりマップチップIDが3の<strong>水</strong>タイルでのみ釣りが可能だということになります。</p>
+      <hr />
+      <p><code>110行目</code>からの関数で、<strong>キャラクターの目の前のタイルが釣り可能かどうかを判定し、釣りアイコンを表示</strong>します。</p>
+      <div class="sourceCode" id="cb7" data-startFrom="110"
+      data-caption="move_check.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 109;"><span id="cb7-110"><a href="#cb7-110"></a><span class="co">#前のタイルが釣り可能ならば釣りアイコンを表示する関数</span></span>
+<span id="cb7-111"><a href="#cb7-111"></a><span class="kw">def</span> setFishingIcon(x,y,d):</span>
+<span id="cb7-112"><a href="#cb7-112"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb7-113"><a href="#cb7-113"></a><span class="co">    x:キャラのx座標</span></span>
+<span id="cb7-114"><a href="#cb7-114"></a><span class="co">    y:キャラのy座標</span></span>
+<span id="cb7-115"><a href="#cb7-115"></a><span class="co">    d:キャラの向き</span></span>
+<span id="cb7-116"><a href="#cb7-116"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb7-117"><a href="#cb7-117"></a>    <span class="kw">global</span> fishFlag</span>
+<span id="cb7-118"><a href="#cb7-118"></a>    </span>
+<span id="cb7-119"><a href="#cb7-119"></a>    <span class="cf">if</span> d <span class="op">==</span> <span class="dv">0</span>:<span class="co">#下向き</span></span>
+<span id="cb7-120"><a href="#cb7-120"></a>        moveX <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-121"><a href="#cb7-121"></a>        moveY <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-122"><a href="#cb7-122"></a>    <span class="cf">elif</span> d <span class="op">==</span> <span class="dv">1</span>:<span class="co">#左向き</span></span>
+<span id="cb7-123"><a href="#cb7-123"></a>        moveX <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb7-124"><a href="#cb7-124"></a>        moveY <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-125"><a href="#cb7-125"></a>    <span class="cf">elif</span> d <span class="op">==</span> <span class="dv">2</span>:<span class="co">#右向き</span></span>
+<span id="cb7-126"><a href="#cb7-126"></a>        moveX <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-127"><a href="#cb7-127"></a>        moveY <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-128"><a href="#cb7-128"></a>    <span class="cf">elif</span> d <span class="op">==</span> <span class="dv">3</span>:<span class="co">#上向き</span></span>
+<span id="cb7-129"><a href="#cb7-129"></a>        moveX <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-130"><a href="#cb7-130"></a>        moveY <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb7-131"><a href="#cb7-131"></a>    </span>
+<span id="cb7-132"><a href="#cb7-132"></a>    </span>
+<span id="cb7-133"><a href="#cb7-133"></a>    <span class="co"># 移動先がマップ範囲内ならば</span></span>
+<span id="cb7-134"><a href="#cb7-134"></a>    <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;=</span> y<span class="op">+</span>moveY <span class="op">&lt;</span> <span class="bu">len</span>(MAP_DATA) <span class="kw">and</span> <span class="dv">0</span> <span class="op">&lt;=</span> x<span class="op">+</span>moveX <span class="op">&lt;</span> <span class="bu">len</span>(MAP_DATA[<span class="dv">0</span>]):</span>
+<span id="cb7-135"><a href="#cb7-135"></a>        <span class="co">#前のマスが釣り可能ならば</span></span>
+<span id="cb7-136"><a href="#cb7-136"></a>        <span class="cf">if</span> FISHING_PERMIT[MAP_DATA[y<span class="op">+</span>moveY][x<span class="op">+</span>moveX]]:</span>
+<span id="cb7-137"><a href="#cb7-137"></a>            setIcon(x,y,<span class="st">&quot;fishing&quot;</span>)</span>
+<span id="cb7-138"><a href="#cb7-138"></a>            <span class="bu">print</span>(<span class="ss">f&quot;you can fishing @(</span><span class="sc">{</span>x<span class="op">+</span>moveX<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>y<span class="op">+</span>moveY<span class="sc">}</span><span class="ss">)&quot;</span>)</span>
+<span id="cb7-139"><a href="#cb7-139"></a>            fishFlag <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb7-140"><a href="#cb7-140"></a>        <span class="cf">else</span>:</span>
+<span id="cb7-141"><a href="#cb7-141"></a>            fishFlag <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb7-142"><a href="#cb7-142"></a>    <span class="cf">else</span>:</span>
+<span id="cb7-143"><a href="#cb7-143"></a>        <span class="co"># 移動先がマップ範囲外</span></span>
+<span id="cb7-144"><a href="#cb7-144"></a>        fishFlag <span class="op">=</span> <span class="va">False</span></span></code></pre></div>
+      <p>順を追って解説します。</p>
+      <hr />
+      <p>まず、キャラクターの目の前のタイルを計算します。</p>
+      <div class="sourceCode" id="cb8" data-startFrom="119"
+      data-caption="move_check.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 118;"><span id="cb8-119"><a href="#cb8-119"></a><span class="cf">if</span> d <span class="op">==</span> <span class="dv">0</span>:  <span class="co"># 下向き</span></span>
+<span id="cb8-120"><a href="#cb8-120"></a>    moveX <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-121"><a href="#cb8-121"></a>    moveY <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb8-122"><a href="#cb8-122"></a><span class="cf">elif</span> d <span class="op">==</span> <span class="dv">1</span>:  <span class="co"># 左向き</span></span>
+<span id="cb8-123"><a href="#cb8-123"></a>    moveX <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb8-124"><a href="#cb8-124"></a>    moveY <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-125"><a href="#cb8-125"></a><span class="cf">elif</span> d <span class="op">==</span> <span class="dv">2</span>:  <span class="co"># 右向き</span></span>
+<span id="cb8-126"><a href="#cb8-126"></a>    moveX <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb8-127"><a href="#cb8-127"></a>    moveY <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-128"><a href="#cb8-128"></a><span class="cf">elif</span> d <span class="op">==</span> <span class="dv">3</span>:  <span class="co"># 上向き</span></span>
+<span id="cb8-129"><a href="#cb8-129"></a>    moveX <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-130"><a href="#cb8-130"></a>    moveY <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span></code></pre></div>
+      <p>キャラクターの向き (d) に応じて、目の前のタイルの相対座標
+      (moveX, moveY) を決定します。例えば、右向き(d == 2)の場合、moveX =
+      1, moveY = 0 となり、目の前は x+1, y のタイルとなります。</p>
+      <hr />
+      <div class="sourceCode" id="cb9" data-startFrom="134"
+      data-caption="move_check.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 133;"><span id="cb9-134"><a href="#cb9-134"></a><span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;=</span> y <span class="op">+</span> moveY <span class="op">&lt;</span> <span class="bu">len</span>(MAP_DATA) <span class="kw">and</span> <span class="dv">0</span> <span class="op">&lt;=</span> x <span class="op">+</span> moveX <span class="op">&lt;</span> <span class="bu">len</span>(MAP_DATA[<span class="dv">0</span>]):</span></code></pre></div>
+      <p>目の前のタイルがマップ範囲内であることを確認します。範囲外の場合は何もしません。</p>
+      <hr />
+      <p>次の行で釣り可能なタイルか判定しています。</p>
+      <div class="sourceCode" id="cb10" data-startFrom="135"
+      data-caption="move_check.py（抜粋）"><pre
+      class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 134;"><span id="cb10-135"><a href="#cb10-135"></a><span class="cf">if</span> FISHING_PERMIT[MAP_DATA[y <span class="op">+</span> moveY][x <span class="op">+</span> moveX]]:</span>
+<span id="cb10-136"><a href="#cb10-136"></a>    setIcon(x, y, <span class="st">&quot;fishing&quot;</span>)</span>
+<span id="cb10-137"><a href="#cb10-137"></a>    <span class="bu">print</span>(<span class="ss">f&quot;you can fishing @(</span><span class="sc">{</span>x<span class="op">+</span>moveX<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>y<span class="op">+</span>moveY<span class="sc">}</span><span class="ss">)&quot;</span>)</span>
+<span id="cb10-138"><a href="#cb10-138"></a>    fishFlag <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb10-139"><a href="#cb10-139"></a><span class="cf">else</span>:</span>
+<span id="cb10-140"><a href="#cb10-140"></a>    fishFlag <span class="op">=</span> <span class="va">False</span></span></code></pre></div>
+      <p><code>MAP_DATA[y + moveY][x + moveX]</code>で目の前のマップチップのID（種類）を取得しています。
+      このタイルIDに対応する<code>FISHING_PERMIT</code>の値を確認し、<code>1</code>なら釣りが可能だということになります。</p>
+      <p><br></p>
+      <p>釣り可能であれば釣りアイコンを表示します。また、状態フラグ<code>fishFlag</code>を<strong>True</strong>に設定します。後に<strong>このフラグがTrueのときのみ釣りを開始できる</strong>ようにします。</p>
+      <p>目の前のタイルが釣り不可、または範囲外の場合は<code>fishFlag</code>を<strong>False</strong>に設定します。</p>
+      <p><strong>移動するたびにこの関数を呼び出して、釣りができるかどうかを判定しています。</strong></p>
+      <p><br></p>
+      <h1 data-number="7" id="全体の組み立て"><span
+      class="header-section-number">7</span> 全体の組み立て</h1>
       <figure>
       <img src="./figs/104/main.svg" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
