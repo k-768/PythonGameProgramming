@@ -285,7 +285,22 @@ else:
 
 ## 全体の組み立て
 
+今までのプログラムを組み合わせて、いよいよゲームの完成です。
+
+釣りシステムの作成では、キャラクタの向きは固定でした。しかし、今度は釣りをする画像も4方向分が必要になります。以下の`rod.png`と`character_wait.png`を`img`フォルダに保存してください。
+
+![img](./figs/104/rod.png)
+![img](./figs/104/character_wait.png)
+
+---
+
+システム全体の状態遷移図は以下のようになります。プログラムと照らし合わせながら動作を確認してみてください。
+
 ![img](./figs/104/main.svg)
+
+---
 
 新しいpythonファイル`game.py`を作成してください。[ここから](https://github.com/k-768/PythonGameProgramming/blob/main/programs/game.py
 )プログラムをコピー＆ペーストして実行してみてください。
+
+
