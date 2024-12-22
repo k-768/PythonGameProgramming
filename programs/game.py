@@ -828,10 +828,12 @@ root.bind("<KeyRelease>", release)
 mapping()
 canvas.create_image(getCharaCoord(charaX,charaY),image = CHARA_CHIP[0][1],tag="chara",anchor=tk.NW)
 
-#>>情報表示
+#>>情報表示>>>
+# 右上にレベルを表示する
 lv = tk.StringVar(root,"Lv. "+str(saveData["lv"]))
 lv.trace_add('write', onLvChange)
 lv_text = canvas.create_text(CHIP_SIZE*(X_MAPSIZE-1),30, fill = "brown",font = ("System",24), text = lv.get(), tag = "lv")
+# 右上に所持金を表示する
 money = tk.StringVar(root,str(saveData["money"])+"G")
 money.trace_add('write', onMoneyChange)
 money_text = canvas.create_text(CHIP_SIZE*(X_MAPSIZE-1),80, fill = "brown",font = ("System",24), text = money.get(), tag = "money")
