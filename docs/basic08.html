@@ -91,13 +91,14 @@ class="toc-section-number">5.2</span> グローバル変数</a></li>
       <p><code>1行目</code>の<code>lv_up</code>の部分を<strong>関数名</strong>といい、好きに名前をつけることができます。
       <code>2～3行目</code>のように、複数の処理を実行するにはそれらの行を<strong>インデント</strong>(<a
       href="basic04.html#インデント">参照</a>)する必要があります。</p>
-      <p>ここで注意する必要があるのは、上のコードは<strong>あくまで関数を定義しただけ</strong>ということです。先ほどのコードを実行してみてください。<strong>レベルが上がった！！」とは出力されません。</strong></p>
+      <p>ここで注意する必要があるのは、上のコードは<strong>あくまで関数を定義しただけ</strong>ということです。先ほどのコードを実行してみてください。<strong>「レベルが上がった！！」とは出力されません。</strong></p>
       <p>定義した関数を実行するには、関数を呼び出す必要があります。次のプログラムをコピー＆ペーストして実行してみてください。</p>
       <div class="sourceCode" id="cb2" data-caption="関数の実行"><pre
       class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> lv_up():</span>
 <span id="cb2-2"><a href="#cb2-2"></a>  <span class="bu">print</span>(<span class="st">&quot;テレテレッテッテテー&quot;</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>  <span class="bu">print</span>(<span class="st">&quot;レベルが上がった！！&quot;</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a>lv_up()</span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a>lv_up()</span></code></pre></div>
       <p><strong><i class="fa-solid fa-terminal"></i>
       実行結果</strong></p>
       <pre><code>テレテレッテッテテー
@@ -180,7 +181,7 @@ class="toc-section-number">5.2</span> グローバル変数</a></li>
       class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">global</span> 変数名<span class="dv">1</span>,変数名<span class="dv">2</span>,...,変数名n</span></code></pre></div>
       <p>これを用れば、うまく変数の中身を受け渡せるようになります。</p>
       <div class="sourceCode" id="cb14"
-      data-caption="グローバル変数（失敗例）"><pre
+      data-caption="グローバル変数（成功例）"><pre
       class="sourceCode numberSource python numberLines"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>result <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="kw">def</span> add(a,b):</span>
 <span id="cb14-3"><a href="#cb14-3"></a>  <span class="kw">global</span> result</span>
